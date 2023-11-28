@@ -39,7 +39,7 @@ After the wizard closes, the score should look like this:
 Don't forget to click _File_ > _Save_ to save your newly created score. MuseScore will provide a default filename based on the title of the score, replacing spaces with underscores&mdash;in our case, that will be "Bass_Line".
 
 > __NOTE__
-> If you are not happy with the page size, this can be changed by going to _Format_ > _Page Settings_ and picking the desired page size from the _Page Size_ drop down box
+> If you are not happy with the page size, this can be changed by going to _Format_ > _Page Settings_ and picking the desired page size from the _Page Size_ drop down box.
 
 We are now ready to start entering music.
 
@@ -56,7 +56,7 @@ For our purposes, the first option&mdash;_Note Input_&mdash;is good enough. Note
 Now, if you can easily enter notes by typing their letters on the keyboard, that is fine. But we will first try a more __visual__ method: we will use the onscreen keyboard. Typing _P_ on the keyboard opens a piano keyboard at the bottom of the score screen.
 
 > __WARNING__
-> We will not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
+> This topic does not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
 
 ![Onscreen keyboard](onscreen-keyboard.png)
 
