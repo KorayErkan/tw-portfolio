@@ -56,7 +56,7 @@ For our purposes, the first option&mdash;_Note Input_&mdash;is good enough. Note
 Now, if you can easily enter notes by typing their letters on the keyboard, that is fine. But we will first try a more __visual__ method: we will use the onscreen keyboard. Typing _P_ on the keyboard opens a piano keyboard at the bottom of the score screen.
 
 > __WARNING__
-> We will not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
+> This topic does not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
 
 ![Onscreen keyboard](onscreen-keyboard.png)
 
