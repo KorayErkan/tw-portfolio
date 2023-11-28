@@ -36,10 +36,34 @@ After the wizard closes, the score should look like this:
 
 ![Created score](created-score.png)
 
-Don't forget to click _File_ > _Save_ to save your newly created score. MuseScore will provide a default filename based on the title of the score, replacing spaces with underscores&mdash;in our case, "Bass_Line".
+Don't forget to click _File_ > _Save_ to save your newly created score. MuseScore will provide a default filename based on the title of the score, replacing spaces with underscores&mdash;in our case, that will be "Bass_Line".
 
 We are now ready to start entering music.
 
 ## Entering The Music
 
-We will assume you will be entering the notes using your mouse and keyboard.
+We will assume you will enter the notes using your mouse and keyboard. To start entering notes, click on the note entry drow down box (the _N_ shaped one) at the beginning of the lower toolbar.
+
+![Note entry button](note-entry-button.png)
+
+For our purposes, the first option&mdash;_Note Input_&mdash;is good enough. Note that this command can be accessed by simply typing _N_ on your keyboard. Clicking this option activates the note entry process which is indicated on the staff with a transparent blue vertical rectangle.
+
+![Activate note entry](activate-note-entry.png)
+
+Now, if you can easily enter notes by typing their letters on the keyboard, that is fine. But we will first try a more __visual__ method: we will use the onscreen keyboard. Typing _P_ on the keyboard opens a piano keyboard at the bottom of the score screen.
+
+![Onscreen keyboard](onscreen-keyboard.png)
+
+By clicking on the notes while note entry is activated, we can enter the notes of our bass line. For time values, the second toolbar provides options for whole, half, quarter, etc. notes. By default, the quarter note is selected.
+
+You can see the first few bars of our line entered below:
+
+![First few measures](first-few-measures.png)
+
+To enter "ties"&mdash;i.e. to connect note heads to extend their duration&mdash;you can use the _Tie_ button on the second toolbar.
+
+![Tie button](tie-button.png)
+
+When you're done entering your notes, you can press the _Play_ button to play back the score you have entered until then. If you want to hear the underlying beat, you can press the metronome button in the second red box.
+
+![Play button](play-button.png)
