@@ -38,6 +38,9 @@ After the wizard closes, the score should look like this:
 
 Don't forget to click _File_ > _Save_ to save your newly created score. MuseScore will provide a default filename based on the title of the score, replacing spaces with underscores&mdash;in our case, that will be "Bass_Line".
 
+> __NOTE__
+> If you are not happy with the page size, this can be changed by going to _Format_ > _Page Settings_ and picking the desired page size from the _Page Size_ drop down box
+
 We are now ready to start entering music.
 
 ## Entering The Music
@@ -52,9 +55,15 @@ For our purposes, the first option&mdash;_Note Input_&mdash;is good enough. Note
 
 Now, if you can easily enter notes by typing their letters on the keyboard, that is fine. But we will first try a more __visual__ method: we will use the onscreen keyboard. Typing _P_ on the keyboard opens a piano keyboard at the bottom of the score screen.
 
+> __WARNING__
+> We will not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
+
 ![Onscreen keyboard](onscreen-keyboard.png)
 
 By clicking on the notes while note entry is activated, we can enter the notes of our bass line. For time values, the second toolbar provides options for whole, half, quarter, etc. notes. By default, the quarter note is selected.
+
+> __NOTE__
+> The entry process might get tedious and frustrating. Try to be patient and always pick the time value first, and then either press the relevant key on the keyboard or click the corresponding line or space on the staff.
 
 You can see the first few bars of our line entered below:
 
@@ -63,6 +72,8 @@ You can see the first few bars of our line entered below:
 To enter "ties"&mdash;i.e. to connect note heads to extend their duration&mdash;you can use the _Tie_ button on the second toolbar.
 
 ![Tie button](tie-button.png)
+
+The rests are placed to the right of the tie button, along with accidentals such as sharp, flat, etc.
 
 When you're done entering your notes, you can press the _Play_ button to play back the score you have entered until then. If you want to hear the underlying beat, you can press the metronome button in the second red box.
 
