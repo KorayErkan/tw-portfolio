@@ -14,7 +14,7 @@ Users can enter music parts by using a mouse, a computer keyboard, a digital mus
 
 Below, you can see a sample generated output:
 
-![A sample score](score-sample.png)
+![A sample score](pictures/score-sample.png)
 
 The installation files of the program for Windows, Mac OS, and Linux can be downloaded from the official [MuseScore](https://www.musescore.com) site.
 
