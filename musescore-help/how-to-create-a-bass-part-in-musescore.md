@@ -1,4 +1,4 @@
-# How To Enter A Bass Line In MuseScore
+# How To Create A Bass Part In MuseScore
 
 By [John Saysitall](mailto:john.saysitall@great-documents.com)
 
