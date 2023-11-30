@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="portfolio.css">
+</head>
+
+<body>
+<h1 id="modify-files-in batch-using-powershell">Managing Files With PowerShell</h1>
+<p id="mail-address"><a href="mailto:john.saysitall@goodcode.com"><i>John Saysitall</i></a></p>
+
+<div>
+	<h2 id="table-of-contents">Table of Contents</h2>
+	<ul>
+		<li><a href="#introduction">Introduction</a></li>
+		<li><a href="#common-commands-for-managing-files">Common commands for managing files</a></li>
+		<li><a href="#searching-and-finding">Searching and finding</a></li>
+		<li><a href="#updating-a-batch-of-files">Updating a batch of files</a></li>
+	</ul>
+</div>
+
+<h2 id="introduction">Introduction</h2>
+<p>This document explains how some <i>PowerShell</i> commandlets can be used to manage files in batch.</p>
+
+<p>Command line use may not be popular among ordinary users, but once mastered, it <em>does</em> provides quite a few advantages the biggest one of which can be to avoid the tedium of manually managing large numbers of files.</p>
+
+<p>A simple command such as <code>Get-ChildItem</code>, when used with judiciously selected parameters and piped through a formatting cmdlet, can quickly get the types of documents we want:</p>
+
+<pre id="command-line">
+C:>\Users\john\Documents\Get-ChildItem -Recurse *.docx | Format-Table Fullname
+
+Fullname
+--------
+C:\Users\john\Documents\Budget-2023.docx
+C:\Users\john\Documents\Personal\Career\CV.docx
+C:\Users\john\Documents\Personal\School\College\Alumni.docx
+C:\Users\john\Documents\Recipes\Vegetarian\Mediterranean.docx
+C:\Users\john\Documents\Reports\Annual-2019.docx
+C:\Users\john\Documents\Reports\Quarterly-2021-1.docx
+C:\Users\john\Documents\Reports\Quarterly-2020-4.docx
+</pre>
+
+<blockquote id="sidebar">
+	<span id="note-byline">
+		This can be achieved using <i>File Explorer</i>, as well. However, we have to navigate to the top folder, then enter the regular expression "*.docx" in a drop-down box, and&mdash;once the documents are located&mdash;stay in that pane.
+	</span>
+</blockquote>
+
+<hr>
+
+<blockquote id="sidebar">
+	<span id="warning-byline">
+		Be careful when you are updating multiple files, and make sure that the modifications to be made apply to all of them uniformly.
+	</span>
+</blockquote>
+
+</body>
+</html>
