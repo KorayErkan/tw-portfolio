@@ -1,6 +1,6 @@
-# How To Enter A Bass Line In MuseScore
+# How To Create A Bass Part In MuseScore
 
-By [John Saysitall](mailto:john.saysitall@great-documents.com)
+[John Saysitall](mailto:john.saysitall@great-documents.com)
 
 In this topic, we will show you how to enter a bass line in a MuseScore document. As of this writing [MuseScore](https://musescore.org/) is at version 4.1.1, but here we will use the previous version of 3.6.2.
 
