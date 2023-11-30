@@ -6,7 +6,7 @@ In this topic, we will show you how to enter a music part in a MuseScore documen
 
 For creating the score file in which you will enter the part, see [Creating A Score File](creating-a-score-file.md).
 
-## Entering the notes
+## Entering notes
 
 We will assume you will enter the notes using your mouse and keyboard.
 
@@ -18,11 +18,11 @@ For our purposes, the first option&mdash;_Note Input_&mdash;is good enough. Note
 
 ![Activate note entry](pictures/activate-note-entry.png)
 
-## The onscreen keyboard
+## Onscreen keyboard
 
 If entering the notes by typing their letters on the keyboard is not intuitive enough for you, you can try a more __visual__ method: using the onscreen keyboard. Typing _P_ on the keyboard opens a piano keyboard at the bottom of the score screen.
 
-> __WARNING__
+> __NOTE__
 > This topic does not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
 
 ![Onscreen keyboard](pictures/onscreen-keyboard.png)
