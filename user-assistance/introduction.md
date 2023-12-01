@@ -22,4 +22,4 @@ In the following pages, we will illustrate how the program is used to create mus
 
 The installation files of the program for Windows, Mac OS, and Linux can be downloaded from the official [MuseScore](https://www.musescore.com) site.
 
-As of this writing [MuseScore](https://musescore.org/) is at version 4.1.1, but in the following pages we will use version 3.6.2.
+As of this writing MuseScore is at version 4.1.1, but in this documentation we will use version 3.6.2.
