@@ -15,7 +15,18 @@ Instruments|_Edit_ > _Instruments_|__I__|
 
 MuseScore also provides various symbols for articulation, dynamics, barlines, etc. under various __palettes__ that can be found on the left hand panel.
 
-The music entry process may also require use of keys and key combinations for note duration values, phrasing symbols, etc.
+|Feature|Palette|
+|---|---|
+|Dynamics from __ppp__ to __fff__|_Dynamics_|
+|Staccator and legato|_Articulations_|
+|Repetition symbols|_Repeats & Jumps_|
+|Various bar symbols|_Barlines_|
+Hairpins, voltas, and pedal symbols|_Lines_|
+|Clefs|_Clefs_|
+|Time indications|_Time Signatures_|
+|Keys in circle of 5ths|_Key Signatures_|
+
+The music entry process may require use of the following keys and key combinations for note duration values, phrasing symbols, etc.
 
 |Element|Key|
 |---|---|
