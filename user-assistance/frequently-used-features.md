@@ -14,3 +14,14 @@ Instruments|_Edit_ > _Instruments_|__I__|
 |Editing elements|_View_ > _Master Palette..._|__Shift__ __F9__|
 
 MuseScore also provides various symbols for articulation, dynamics, barlines, etc. under various __palettes__ that can be found on the left hand panel.
+
+The music entry process may also require use of keys and key combinations for note duration values, phrasing symbols, etc.
+
+|Element|Key|
+|---|---|
+|Tie|__+__|
+|Duration values|__1__&ndash;__9__|
+|Rests|__0__|
+|Tuples|__Ctrl__ <__1__&ndash;__9__>|
+|Slurs|__S__|
+|Transposing note|_Up_ and _Down_ arrow keys|
