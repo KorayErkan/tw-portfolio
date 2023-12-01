@@ -13,7 +13,7 @@ Instruments|_Edit_ > _Instruments_|__I__|
 |Inserting bars|_Add_ > _Bars_|__Ins__ or __Ctrl__ __Ins__|
 |Editing elements|_View_ > _Master Palette..._|__Shift__ __F9__|
 
-MuseScore also provides various symbols for articulation, dynamics, barlines, etc. under various __palettes__ that can be found on the left hand panel.
+Various symbols for articulation, dynamics, barlines, etc. can be found under various __palettes__ on the left hand panel.
 
 |Feature|Palette|
 |---|---|
@@ -26,7 +26,7 @@ Hairpins, voltas, and pedal symbols|_Lines_|
 |Time indications|_Time Signatures_|
 |Keys in circle of 5ths|_Key Signatures_|
 
-The music entry process may require use of the following keys and key combinations for note duration values, phrasing symbols, etc.
+The note entry process may require use of the following keys and key combinations for note duration values, phrasing symbols, etc.
 
 |Element|Key|
 |---|---|
