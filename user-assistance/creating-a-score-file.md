@@ -7,13 +7,15 @@ In order to create score files, you should have downloaded and installed the pro
 
    ![New Score wizard](pictures/new-score-wizard.png)
 
-   Here you can enter a title for the document&mdash;here, our title is simply "Love Song"&mdash;after which you click _Next_.
+   In this screen, you can enter text to be placed in the score such as _Title_, _Composer_, _Copyright_ for the score. Our title will be simply "Love Song."
+
+   Once these are entered, click _Next_.
 
 3. In the next screen, double click on _Choose Instruments_.
 
    ![Choose instruments](pictures/choose-instruments.png)
 
-4. A list of instruments will appear. Here, expand the _Keyboards_ branch and select _Piano_.   Once you've selected it, you can either double click the instrument's name or click the _Add to score_ button to add the instrument to the right pane.
+   A list of instruments will appear in the left pane. Expand the _Keyboards_ branch and select _Piano_. Once you've selected an instrument, you can either double click its name or click the _Add to score_ button to add it to the right pane.
 
    ![Add keyboards to instruments](pictures/keyboards-piano.png)
 
@@ -23,19 +25,21 @@ In order to create score files, you should have downloaded and installed the pro
 
    Click _Next_ again.
 
-5. One the next screen, you can pick a key signature:
+4. On the next screen, you can pick a key signature:
 
    ![Choose key signature](pictures/choose-key-signature.png)
 
-   Here, we will pick the single-sharp (#) _E minor_ as our key and click _Next_.
+   Here, we will pick the single-sharp (#) _E minor_ as our key.
 
-6. We have arrived at the final screen of the wizard where we can pick a time signature, number of bars, and tempo.
+   Click _Next_.
+
+5. We have arrived at the final screen of the wizard where we can pick a time signature, number of bars, and tempo.
 
    ![Chose time signature and tempo](pictures/choose-time-signature-and-tempo.png)
 
    Pick the defaults and click _Finish_ to complete the wizard:
 
-7. After the wizard closes, the score should look like this:
+6. After the wizard closes, the score should look like this:
 
    ![Created score](pictures/created-score.png)
 
@@ -46,3 +50,5 @@ Don't forget to click _File_ > _Save_ to save your newly created score. MuseScor
 
 > __WARNING__
 > By default, MuseScore files have the __.mscz__ extension. Although this is actually a __zip__ file, it should not be modified as MuseScore will not recognize any other extension.
+
+You are now ready to enter the notes of your score.

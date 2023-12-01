@@ -2,7 +2,7 @@
 
 ## What is MuseScore?
 
-MuseScore is an open-source program to create music scores. In the following pages, we will illustrate how the program can be used to create music parts.
+MuseScore is an open-source program to create music scores. Scores for an extensive palette of classical, jazz, rock, popular, and other traditional and modern ensembles as well as a rich variety of solo instruments can be created easily and accurately with all the required symbols for clefs, keys, accidentals, dynamics, articulation, phrasing, and interpretation for various comtemporary page sizes.
 
 ## Overview
 
@@ -12,10 +12,15 @@ MuseScore is probably one of the best available on the market. And it's free.
 
 Users can enter music parts by using a mouse, a computer keyboard, a digital music keyboard, etc. The entered information conforms to the MIDI standard, and is stored in files structured in an XML-based format. The parts can then be played back on the computer, on MIDI-compliant music instruments, or printed on paper-based media.
 
-Below, you can see a sample generated output:
+Below, you can see a small example of the generated output:
 
 ![A sample score](pictures/score-sample.png)
+
+In the following pages, we will illustrate how the program is used to create music parts.
+
+---
 
 The installation files of the program for Windows, Mac OS, and Linux can be downloaded from the official [MuseScore](https://www.musescore.com) site.
 
 As of this writing [MuseScore](https://musescore.org/) is at version 4.1.1, but in the following pages we will use version 3.6.2.
+

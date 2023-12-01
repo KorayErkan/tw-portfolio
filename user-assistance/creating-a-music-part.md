@@ -4,11 +4,14 @@ In this topic, we will show you how to enter a music part in a MuseScore documen
 
 ## Creating the file
 
-For creating the score file in which you will enter the part, see [Creating A Score File](creating-a-score-file.md).
+For the process of creating the score file, see [Creating A Score File](creating-a-score-file.md).
 
 ## Entering notes
 
 We will assume you will enter the notes using your mouse and keyboard.
+
+> __NOTE__
+> This topic does not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
 
 To start entering notes, click on the note entry drow down box (the _N_ shaped one) at the beginning of the lower toolbar.
 
@@ -22,14 +25,9 @@ For our purposes, the first option&mdash;_Note Input_&mdash;is good enough. Note
 
 If entering the notes by typing their letters on the keyboard is not intuitive enough for you, you can try a more __visual__ method: using the onscreen keyboard. Typing _P_ on the keyboard opens a piano keyboard at the bottom of the score screen.
 
-> __NOTE__
-> This topic does not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
-
 ![Onscreen keyboard](pictures/onscreen-keyboard.png)
 
 By clicking on the onscreen piano keys while note entry is activated, you can enter the line.
-
----
 
 For time values, the second toolbar provides options for whole, half, quarter, etc. notes. By default, the quarter note is selected.
 
@@ -48,6 +46,6 @@ The rests are placed to the right of the tie button, along with accidentals such
 
 ## Playing the part
 
-If you want to hear the notes you have entered, you can press the _Play_ button to play back the score part. If you want to hear the underlying tempo as a beat, you can press the metronome button in the second red box.
+If you want to hear the notes you have entered so far, you can press the _Play_ button to play back the created part. If you want to hear the underlying tempo as a beat, you can press the metronome button to its right.
 
 ![Play and metronome buttons](pictures/play-and-metronome-buttons.png)
