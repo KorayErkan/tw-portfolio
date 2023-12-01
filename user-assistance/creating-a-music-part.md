@@ -11,7 +11,7 @@ For the process of creating the score file, see [Creating A Score File](creating
 We will assume you will enter the notes using your mouse and keyboard.
 
 > __NOTE__
-> This topic does not show the MIDI-based method of using an external keyboard&mdash;such as a synthesizer&mdash;for note entry.
+> This topic does not cover the MIDI-based method of using an external instrument for note entry&mdash;such as a synthesizer keyboard.
 
 To start entering notes, click on the note entry drow down box (the _N_ shaped one) at the beginning of the lower toolbar.
 
@@ -34,11 +34,11 @@ For time values, the second toolbar provides options for whole, half, quarter, e
 > __NOTE__
 > The entry process may get tedious and frustrating. Try to be patient and always pick the time value first, and then either press the letter of the relevant note on the keyboard or click the corresponding line or space on the staff with your mouse pointer.
 
-You can see the first few bars of our line entered below:
+You can see the first few bars of the line entered below:
 
 ![First few measures](pictures/first-few-measures.png)
 
-To enter "ties"&mdash;i.e. to connect note heads to extend their duration&mdash;you can use the _Tie_ button on the second toolbar.
+To enter "ties" and "slurs"&mdash;to connect note heads in order to extend their duration or to group them for phrasing&mdash;you can use the _Tie_ button on the second toolbar.
 
 ![Tie button](pictures/tie-button.png)
 

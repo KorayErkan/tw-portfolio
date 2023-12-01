@@ -23,6 +23,8 @@ In order to create score files, you should have downloaded and installed the pro
 
    ![Selected instruments](pictures/selected-instruments.png)
 
+   The arrows on the right hand side can be used to change the position of the instrument on the score.
+
    Click _Next_ again.
 
 4. On the next screen, you can pick a key signature:
