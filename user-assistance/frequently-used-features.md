@@ -13,7 +13,7 @@ Instruments|_Edit_ > _Instruments_|__I__|
 |Inserting bars|_Add_ > _Bars_|__Ins__ or __Ctrl__ __Ins__|
 |Editing elements|_View_ > _Master Palette..._|__Shift__ __F9__|
 
-Various symbols for articulation, dynamics, barlines, etc. can be found under various __palettes__ on the left hand panel.
+Symbols for articulation, dynamics, barlines, etc. can be found under various __palettes__ on the left hand panel.
 
 |Feature|Palette|
 |---|---|
