@@ -51,6 +51,6 @@ In order to create score files, you should have downloaded and installed the pro
 Don't forget to click _File_ > _Save_ to save your newly created score. MuseScore will suggest a filename based on the title of the score, replacing spaces with underscores&mdash;in our case, that will be "Love_Song".
 
 > __WARNING__
-> By default, MuseScore files have the __.mscz__ extension. Although this is actually a __zip__ file, it should not be modified as MuseScore will not recognize any other extension.
+> By default, MuseScore files have the __.mscz__ extension. Although this is actually a __zip__ file it should not be tampered with or modified as MuseScore will not recognize any other file type or extension.
 
 You are now ready to enter the notes of your score.
