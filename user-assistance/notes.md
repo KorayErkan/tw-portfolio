@@ -1,6 +1,6 @@
 # User Assistance Samples
 
-This section is based on advice from [Jordan Stanched](mailto:jordan.stanchev@jpdocu.com) delivered through a [Udemy](https://www.udemy.com) course
+This section is based on advice from [Jordan Stanched](mailto:jordan.stanchev@jpdocu.com) delivered through a [Udemy](https://www.udemy.com) course. I bear the sole responsibility for the documents, and the aforementioned individual is mentioned only for courtesy.
 
 ## Three types of document
 
