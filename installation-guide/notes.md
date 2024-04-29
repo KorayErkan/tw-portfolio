@@ -1,6 +1,6 @@
 # Installation Guide Notes
 
-This section is based on advice that can be found on a [Technical Communication Center article](https://technicalcommunicationcenter.com/2009/09/09/how-to-write-a-software-installation-guide/). I bear the sole responsibility for the document, and the aforementioned site is mentioned only for courtesy.
+This section is based on advice that can be found in a [Technical Communication Center article](https://technicalcommunicationcenter.com/2009/09/09/how-to-write-a-software-installation-guide/). I bear the sole responsibility for the document, and that article is mentioned only for courtesy.
 
 ## General info
 
