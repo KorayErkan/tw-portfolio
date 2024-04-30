@@ -2,6 +2,16 @@
 
 This document provides information about the system requirements of ProSoft v5.3.14, as well as the procedure for installing it.
 
+## Table of Contents
+
+* [Introduction](#introduction)
+* [System Requirements](#system-requirements)
+  * [Hardware](#hardware)
+  * [Dependencies](#dependencies)
+* [Installation](#installation)
+* [Configuration](#configuration)
+* [License Terms](#license-terms)
+
 ## Introduction
 
 __ProSoft__&trade; is an engineering solution for managing CI/CD pipeline automation in software development. The system keeps track of the modifications and additions made to the codebase&mdash;including acceptance, unit, and integration tests&mdash;and the commits to source control, creates an automated pipeline for building release candidates, updates version numbers using *semantic versioning*, calculates *technical debt* based on targets, and charts the progress of various aspects of the project to provide a global picture.
@@ -50,3 +60,7 @@ After the installation process completes
 ## License Terms
 
 This software is valid for one major upgrade amd all the minor upgrades in between. The limitation of seats is 25 programmers for the *Professional* and 50 seats for the *Enterprise* versions. In order to renew licenses or add seats, please visit our [licensing page](https://www.profost.com/licensing).
+
+---
+
+This document was published by __ProSoft__&copy; 2024, and is subject to change without prior notice.
