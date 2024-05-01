@@ -22,18 +22,18 @@ The system is compliant with the requirements and logic of CI/CD as it has been 
 
 ### Hardware
 
-For an average team of 20-15 developers, the system requires at least 5 x 2.5GHz quadcore 7i processors, 64GB of RAM, and 1TB of disk space.
+For an average team of 25 developers, the system requires at least 5 x 2.5GHz quadcore 7i processors, 64GB of RAM, and 1TB of disk space.
 
 Also, a 100Base-TX Ethernet network connection is recommended for effective use.
 
 ### Dependencies
 
-The installer checks the presence of the following components:
+The installer checks the presence of the following components, and in case any of them is not in place it terminates the installation process:
 
 * Microsoft Visual C++ Redistributable: this is required for the MSVC libraries
-* An ANSI SQL compliant server (such as PostgreSQL 14.5 and above, Microsoft SQL Server 2018 and above, Oracle DBMS 2016 and above, etc.): the system keeps significant amounts of data in a relational database
-* Microsoft .NET Framework 5 or higher
-* Microsoft IIS 11.4 or higher
+* An ANSI SQL compliant database server (such as PostgreSQL 14.5 and above, Microsoft SQL Server 2018 and above, Oracle DBMS 2016 and above, etc.): the system keeps significant amounts of data in a relational database
+* Microsoft .NET Framework 5 or higher: the system was developed with .NET and the runtime requires the presence of certain libraries
+* Microsoft IIS 11.4 or higher: the system requires an internet connection for managing cloud storage and connecting to our servers for patches and updates
 
 The system locale is *en-us* by default but can be set to any locale.
 
@@ -59,8 +59,8 @@ After the installation process completes
 
 ## License Terms
 
-This software is valid for one major upgrade amd all the minor upgrades in between. The limitation of seats is 25 programmers for the *Professional* and 50 seats for the *Enterprise* versions. In order to renew licenses or add seats, please visit our [licensing page](https://www.profost.com/licensing).
+This software is valid for one major upgrade amd all the minor upgrades in between. The number of seats is limited 25 for the *Professional* and 50 for the *Enterprise* versions. In order to renew licenses or add more seats, please visit our [licensing page](https://www.profost.com/licensing).
 
 ---
 
-This document was published by __ProSoft__&copy; 2024, and is subject to change without prior notice.
+This document is __ProSoft__&copy; 2024 and its contents is subject to change without prior notice.

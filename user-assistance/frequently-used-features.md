@@ -1,10 +1,10 @@
 # Frequently Used Features
 
-MuseScore users may need to access the following features&mdash;either via menus of by keyboard shortcuts&mdash;when they are creating scores:
+MuseScore users may need to access the following features&mdash;either via menus or by using keyboard shortcuts&mdash;when they are creating scores:
 
 |Feature|Menu Location|Shortcut Key|
 |---|---|---|
-Instruments|_Edit_ > _Instruments_|__I__|
+|Instruments|_Edit_ > _Instruments_|__I__|
 |Onscreen keyboard|_View_ > _Piano Keyboard_|__P__|
 |Transposing|_Tools_ > _Transpose_|-|
 |Sound mixer|_View_ > _Mixer_|__F10__|
@@ -21,7 +21,7 @@ Symbols for articulation, dynamics, barlines, etc. can be found under various __
 |Staccator and legato|_Articulations_|
 |Repetition symbols|_Repeats & Jumps_|
 |Various bar symbols|_Barlines_|
-Hairpins, voltas, and pedal symbols|_Lines_|
+|Hairpins, voltas, and pedal symbols|_Lines_|
 |Clefs|_Clefs_|
 |Time indications|_Time Signatures_|
 |Keys in circle of 5ths|_Key Signatures_|

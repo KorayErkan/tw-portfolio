@@ -2,7 +2,7 @@
 
 This section is based on advice from [this web article](https://frill.co/blog/posts/how-to-write-release-notes), and [this web article](https://technicalcommunicationcenter.com/2021/01/03/how-to-write-a-software-release-notes-document/). I bear the sole responsibility of the documents, and the aforementioned are mentioned only for courtesy.
 
-## The reason and purposes
+## The reason and purpose
 
 Release Notes are published to address the following:
 
