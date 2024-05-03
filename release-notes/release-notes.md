@@ -2,11 +2,10 @@
 
 ## What to include
 
-* release version and release date
-* brief summary of all necessary product updates
-* the changes
-  * new features
-  * bug fixes
-  * known issues
-  * deprecations
-* any upgrades the end user requires
+* Release version and release date
+* A brief summary of all the updates/upgrades the end user needs to make
+* The changes, i.e.:
+  * New features
+  * Bug fixes
+  * Deprecations
+  * Known issues

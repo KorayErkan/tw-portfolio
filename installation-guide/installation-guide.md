@@ -1,6 +1,18 @@
 # __ProSoft__&trade; Installation Guide
 
-This document provides information about the system requirements of ProSoft v5.3.14, as well as the procedure for installing it.
+This document provides information about the system requirements of ProSoft v8.4.11, as well as the procedure for installing it.
+
+## Legal Notice
+
+NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT REGARDING INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL PROSOFT BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.
+
+## Copyright
+
+__ProSoft__ is registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners. This document is is subject to change without prior notice.
+
+&copy; ProSoft 2024.
+
+---
 
 ## Table of Contents
 
@@ -60,7 +72,3 @@ After the installation process completes
 ## License Terms
 
 This software is valid for one major upgrade amd all the minor upgrades in between. The number of seats is limited 25 for the *Professional* and 50 for the *Enterprise* versions. In order to renew licenses or add more seats, please visit our [licensing page](https://www.profost.com/licensing).
-
----
-
-This document is __ProSoft__&copy; 2024 and its contents is subject to change without prior notice.
