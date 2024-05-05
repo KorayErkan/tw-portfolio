@@ -33,8 +33,8 @@ The response will return the standard status code, along with the parameters in 
 > Code: 200 OK
 >
 > JSON:
->
-`
+
+```{JSON}
 {
     "object": "balance",
     "available": [
@@ -57,7 +57,7 @@ The response will return the standard status code, along with the parameters in 
         }
     ]
 }
-`
+```
 
 #### Parameters
 
