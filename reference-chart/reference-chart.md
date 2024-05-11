@@ -21,7 +21,6 @@ The following chart lists the built-in operators, constants, and data structures
 |Logical|conjunction|`a and b`|
 ||disjunction|`a or b`|
 ||equivalence|`a eqv b`|
-||nonequivalence|`a neqv b`|
 ||implication|`a imp b`|
 ||negation|`not a`|
 |Bitwise|and|`a & b`|
@@ -78,4 +77,4 @@ The following operations are available for built-in data structures
 ||Append|`{a} ++ b`|
 ||Prepend|`b ++ {a}`|
 
-__Kozmos__ does not support operator *overloading*. Instead, it supports operator *extension*: operators can be extended for certain types (known as `record`s) only on the condition that the operation reduces to one of the built-in ones.
+__Kozmos__ does __not__ support operator *overloading*. Instead, it supports operator *extension*: operators can be extended for a certain type (i.e. a `record`, a `trait`, or a `class`) only on the condition that the it reduces to one of the built-in ones.
