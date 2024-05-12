@@ -1,6 +1,6 @@
 # __ProSoft__&trade; v8.4.11 Release Notes
 
-This document contains information about the current release of Prosoft&trade;.
+This document contains information about the current release of ProSoft&trade;.
 
 ## Table of contents
 
@@ -14,7 +14,7 @@ This document contains information about the current release of Prosoft&trade;.
 
 ## About this release
 
-The current release of ProSoft&trade; contains many bugfixes, removes some inconsistencies in the semantic versioning and ownership tracking facilities, and improves storage management; compatibility with various source, configuration, and log file types; and CI/CD-compatible source file marshalling functionality.
+The current release contains many bugfixes, removes some inconsistencies in the semantic versioning and ownership tracking facilities, and improves storage management, compatibility with various source, configuration, and log file types, and CI/CD-compatible source file marshalling functionality.
 
 ## End-user requirements
 
@@ -33,7 +33,10 @@ There are some important new features designed to ease management of large code 
 
 ### Bugfixes
 
-There are many bugfixes, particularly related to the handling of parsing of configuration files and formats with nested structure.
+There are many bugfixes, particularly related to the handling of configuration files and formats with nested structures.
+
+* RINI files can now contain single-quoted tokens within double quoted strings
+* GAML files now do not have to quote string values
 
 ### Deprecations
 
@@ -41,9 +44,16 @@ Some functions of the semantic versioning system have been deprecated in favor o
 
 ## Known issues
 
-There are known issues with the ownership tracking functionality:
+There are known issues with the system regarding
 
-* When the owner of a source file changes his name, id, or e-mail address, the system cannot update the database accordingly and loses track of the owner, orphaning the source files.
-* When the owner wants to delegate the ownership of a source file, the future owner has to exist in the database. Otherwise, even though the tracking system displays the delegated owner's id, the source file becomes orphaned.
+* Ownership tracking functionality:
+  * When the owner of a source file changes his name, id, or e-mail address, the system cannot update the database accordingly and loses track of the owner, orphaning the source files (BUG ID: #1234)
+  * When the owner wants to delegate the ownership of a source file, the future owner has to exist in the database. Otherwise, even though the tracking system displays the delegated owner's id, the source file becomes orphaned without any warning (BUG ID: #1235)
+  * Once the ownership of a resource has been delegated, it is not possible to re-delegate it to another user (BUG ID: #1236)
+  * When a delegated source gets deleted without a commit, the previously existing versions of the resource remain in the system, and it is not possible to remove them from the trunk (BUG ID: #1237)
+* File format recognition:
+  * The system can parse JSON, TOML, and INI configuration files but it does not recognize XML-based formats (BUG ID: #2345)
+  * JSON files must enclose all values in double quotes, otherwise the system assumes the unquoted token is a stop word (BUG ID: #2346)
+  * INI files must quote string values. Otherwise they will be terminated at the first white space (BUG ID: #2347)
 
 We will try to address these issues in future releases.
