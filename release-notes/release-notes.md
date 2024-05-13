@@ -18,11 +18,11 @@ The current release contains many bugfixes, removes some inconsistencies in the 
 
 ## End-user requirements
 
-Users will have to backup their log and configuration files, uninstall their existing system, update their IIS to include bugfixes listed [here](https://www.bogus-bugfixes.com), and then install the current release.
+Users will have to backup their log and configuration files, uninstall their existing system, update their CMX server to include bugfixes listed [here](https://www.bogus-bugfixes.com), and then install the current release.
 
 ## Summary of changes
 
-Below are the summary of the changes in this version.
+Below are the changes in this version.
 
 ### New features
 
@@ -30,21 +30,28 @@ There are some important new features designed to ease management of large code 
 
 * The system can now handle up to 64GB of repository resources, significantly increasing the project's development capability
 * The semantic versioning system can now be directly synchronized with the version control mechanisms, and thereby never loses track of builds, published APIs, and backward compatibility status
+* PDF files can now be directly viewed from within the ProSoft management console
 
 ### Bugfixes
 
 There are many bugfixes, particularly related to the handling of configuration files and formats with nested structures.
 
-* RINI files can now contain single-quoted tokens within double quoted strings
-* GAML files now do not have to quote string values
+* CFGX files can now process enumerated constants using the dot syntax (e.g. "_enumName.Constant_") (BUG ID: #4321)
+* CFGX files no longer require _admin_ privileges to be edited (BUG ID: #4322)
+* GAML files now support nested properties enclosed in square brackets (BUG ID: #5321)
+* You can now assign a viewer application for specific file types in GAML files&mdash;for example Microsoft Word for _*.docx_ files (BUG ID: #5323)
 
 ### Deprecations
 
-Some functions of the semantic versioning system have been deprecated in favor of the newly released ones.
+Some features of the system have been deprecated in favor of the newly developed ones:
+
+* User grouping for creation of teams are now supported at the top level, and there is no need to assign team members to a pre-determined team lead
+* Using a single hierarchy for project directories is now replaced with clustering of modules at any desired level
+* Group identity assignment is now done automatically at the top level and is hierarchical; regrouping of lower level modules based on group identity is no longer available
 
 ## Known issues
 
-There are known issues with the system regarding
+There are some known issues with the system regarding
 
 * Ownership tracking functionality:
   * When the owner of a source file changes his name, id, or e-mail address, the system cannot update the database accordingly and loses track of the owner, orphaning the source files (BUG ID: #1234)
@@ -52,8 +59,8 @@ There are known issues with the system regarding
   * Once the ownership of a resource has been delegated, it is not possible to re-delegate it to another user (BUG ID: #1236)
   * When a delegated source gets deleted without a commit, the previously existing versions of the resource remain in the system, and it is not possible to remove them from the trunk (BUG ID: #1237)
 * File format recognition:
-  * The system can parse JSON, TOML, and INI configuration files but it does not recognize XML-based formats (BUG ID: #2345)
-  * JSON files must enclose all values in double quotes, otherwise the system assumes the unquoted token is a stop word (BUG ID: #2346)
-  * INI files must quote string values. Otherwise they will be terminated at the first white space (BUG ID: #2347)
+  * The system can parse GAML, POML, and CFGX configuration files but it does not recognize XML-based formats (BUG ID: #2345)
+  * POML files must enclose all values in double quotes, otherwise the system assumes the unquoted token is a stop word (BUG ID: #2346)
+  * CFGX files must quote alphanumeric values. Otherwise they will be terminated at the first white space (BUG ID: #2347)
 
 We will try to address these issues in future releases.
