@@ -77,4 +77,4 @@ The following operations are available for built-in data structures
 ||Append|`{a} ++ b`|
 ||Prepend|`b ++ {a}`|
 
-__Kozmos__ does __not__ support operator *overloading*. Instead, it supports operator *extension*: operators can be extended for a certain type (i.e. a `record`, a `trait`, or a `class`) only on the condition that the it reduces to one of the built-in ones.
+__Kozmos__ does __not__ support operator *overloading*. Instead, it supports operator *extension*: operators can be extended for a certain type (i.e. a `record`, a `trait`, or a `class`) only on the condition that the expression reduces to the built-in use.

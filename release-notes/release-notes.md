@@ -18,7 +18,7 @@ The current release contains many bugfixes, removes some inconsistencies in the 
 
 ## End-user requirements
 
-Users will have to back up their log and configuration files, uninstall their existing system, update their __CMX__ server to include bugfixes listed [here](https://www.bogus-bugfixes.com), and then install the current release.
+Users will have to back up their log and configuration files, uninstall their existing system, update their __CMX Server&trade;__ to include the bugfixes listed [here](https://www.bogus-bugfixes.com), and then install the current release.
 
 ## Summary of changes
 
