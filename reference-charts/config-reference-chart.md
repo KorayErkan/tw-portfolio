@@ -1,29 +1,35 @@
-# Configuration File Reference Chart
+# System Configuration Files
 
-The system configuration files have the __*.scf__ extension, and they use the following basic syntax:
+The system configuration files (__*.scf__) use the following basic syntax&mdash;expressed in EBNF:
 
 ```CONFIG
-<parameter> ::= "["<identifier>"]" "=" <parameter-options>
-<property> ::= "{"<identifier>"}" "=" <property-options>
+parameter ::= "[" identifier "=" (option | "{" property "}" "]")+
+option ::= (Default | System | User)
+property ::= identifier ":" option+
 
-<parameter-options> ::= (<Init> | <Default> | <User> | <System>)
-<property-options> ::= (<Default> | <User>)
+Default ::= "DEFAULT" ":" definition
+System ::= "SYSTEM" ":" definition
+User ::= "USER" ":" definition
 
-<Init> ::= "INIT" identifier
-<Default> ::= "DEFAULT" identifier
-<User> ::= "USER" identifier
-<System> ::= "SYSTEM" identifier
+definition ::= (String | Integer | Boolean)
+identifier ::= letter | (number | letter)*
 
-<identifier> ::= <letter> | (<numbers> | <letters>)*
-<letters> ::= <letter>+
-<letter> ::= "a" .. "z" | "A" .. "Z"
-<numbers> ::= <number>+
-<number> ::= 0 .. 9
+String ::= (letter | number)+
+Integer ::= number+
+Boolean ::= (true | false)
+
+letter ::= "a" .. "z" | "A" .. "Z"
+number ::= 0 .. 9
 ```
 
-Below is a quick reference table detailing the syntax of the __*.scf__ files.
+## Reference Chart
 
-|Item|Purpose|Use|
-|---|---|---|
-|[\<_key_>]=\<_value_>|Parameter declaration and definition|[disk_size]=4096|
-|{\<_key_>}=\<_value_>|Property declaration and definition|{block_aligned}=true|
+Below you can find the details of the typical uses of __*.scf__ entries.
+
+|Item|Purpose|Typical Use|
+|-|-|-|
+|[_identifier_ = _value_]|Parameter declaration|[block_size = 4096]|
+|||[default_user_count = 100|
+|{_identifier_ = _value_}|Property declaration|{block_aligned = true}|
+|||{cloud_use = DEFAULT: Local; USER: Local}|
+|<_identifier_ = _value_>|Option definition|<owner = "Hijack_Inc">|
