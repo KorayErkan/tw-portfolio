@@ -1,35 +1,26 @@
 # System Configuration Files
 
-The system configuration files (__*.scf__) use the following basic syntax&mdash;expressed in EBNF:
+System configuration files (__*.scf__) use the following basic syntax&mdash;expressed in EBNF:
 
 ```CONFIG
-parameter ::= "[" identifier "=" (option | "{" property "}" "]")+
-option ::= (Default | System | User)
-property ::= identifier ":" option+
+component ::= "[" identifier "]"
+property ::= "{" identifier "=" option (";" option)* "}"
+option ::= (Default | User | Disabled)
 
 Default ::= "DEFAULT" ":" definition
-System ::= "SYSTEM" ":" definition
 User ::= "USER" ":" definition
+Disabled ::= "DISABLED"
 
-definition ::= (String | Integer | Boolean)
-identifier ::= letter | (number | letter)*
-
-String ::= (letter | number)+
-Integer ::= number+
-Boolean ::= (true | false)
-
-letter ::= "a" .. "z" | "A" .. "Z"
-number ::= 0 .. 9
+comment ::= ";" text
 ```
 
-## Reference Chart
+## Typical Uses
 
-Below you can find the details of the typical uses of __*.scf__ entries.
+System components are identified by square brackets, and the settings of the component properties are specified between braces under that section.
 
-|Item|Purpose|Typical Use|
-|-|-|-|
-|[_identifier_ = _value_]|Parameter declaration|[block_size = 4096]|
-|||[default_user_count = 100|
-|{_identifier_ = _value_}|Property declaration|{block_aligned = true}|
-|||{cloud_use = DEFAULT: Local; USER: Local}|
-|<_identifier_ = _value_>|Option definition|<owner = "Hijack_Inc">|
+The following table provides a few typical examples.
+
+|Type|Examples|
+|-|-|
+|Component definition|```[system]```<br/>```[database]```|
+|Property definition|```{blocksize = SYSTEM: 4096; USER: 1024}```<br/>```{user_count = DEFAULT: 50; USER: 150}```<br/>```{disks_aligned = true}```<br/>```{cloud_use = DEFAULT: Local}```<br/>```{self_certificate_use = DISABLED}```|

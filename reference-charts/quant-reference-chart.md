@@ -1,6 +1,8 @@
-# Modern Mathematical Quantifiers
+# Modern Quantifiers
 
 All quantification expressions start with an operator used in the quantification, followed by a pair of angle brackets to delineate the scope of the expression enclosed. The first section within the quantifier is used to describe the range. This is followed by a right arrow after which comes the term.
+
+## Operators
 
 The operators used are:
 
@@ -26,9 +28,35 @@ In the following table, $A$ is the domain, $n$ represents its cardinality, and $
 |$\downarrow\langle 0\le i<n\rightarrow A_i\rangle$|The _minimum_ quantifier. Starts with a down arrow symbol, so the term is numeric.<br/>The example is the minimum of the set|
 |$\#\langle 0\le i<n\rightarrow A_i<0\rangle$<br/>$\#\langle x:int\rightarrow x\in A_i\rangle$|The _count_ quantifier. Starts with a _number of_ symbol, and the term is boolean: every _true_ case is represented with a 1, and every _false_ case is represented with a 0.<br/>The first example is the number of negative values in the set.<br/>The second example indicates that $A$ is a subset of integers, and is essentially the cardinality of the set|
 
-The quantifiers can be used inductively with terms of the same type. This is known as _range splitting_.
+## Range Definitions
 
-|Expression</div>|After range split|
+Range definitions have to be valid mathematical expressions that denote membership in a set. The following table provides some typical examples.
+
+|<div style="width:200px">Example</div>|Description|
+|-|-|
+|$\land\langle 0\le i<n\rightarrow A_i\le m\rangle$|The variable $i$ ranges between $0$ and $n$ with upper bound not inclusive|
+|$+\langle k\rightarrow x\times{n\choose k}\rangle$|No range is specified for $k$ since by convention the "n choose k" expression is assumed to be zero for $k$ outside $0\ldots n$|
+|$\#\langle v:int\rightarrow v\in f[p..q)\rangle$|The variable $v$ is an integer, and count quantifier returns 1 only if it is in the range of the function specified by $p$ and $q$|
+|$+\langle 0\le d<n \land a\le x\le b\rightarrow x\rangle$|The sum of values in the $[0..n)$ range that are between $a$ and $b$|
+|$\uparrow\langle x\in S\land d\ \|\ x\rightarrow x\rangle$|The largest of all values in $S$ that are divisible by $d$|
+
+Quantifiers with _empty_ ranges return the following values by default:
+
+|Quantifier|Default Result|
+|-|-|
+|$\land\langle\rightarrow\rangle$|$T$|
+|$\lor\langle\rightarrow\rangle$|$F$|
+|$+\langle\rightarrow\rangle$|$0$|
+|$\times\langle\rightarrow\rangle$|$1$|
+|$\uparrow\langle\rightarrow\rangle$|$-\infty$|
+|$\downarrow\langle\rightarrow\rangle$|$+\infty$|
+|$\#\langle\rightarrow\rangle$|$0$|
+
+## Range Splitting
+
+Quantifiers can be used inductively with terms of the same type. This is known as _range splitting_. The following table illustrates this use.
+
+|Expression|After range split|
 |-|-|
 |$\land\langle 0\le i<n+1\rightarrow p.i\rangle$|$\land\langle 0\le i<n\rightarrow p.i\rangle\land p.n$|
 |$\lor\langle 0\le i<n+1\rightarrow p.i\rangle$|$\lor\langle 0\le i<n\rightarrow p.i\rangle\lor p.n$|
@@ -36,3 +64,11 @@ The quantifiers can be used inductively with terms of the same type. This is kno
 |$\times\langle 0\le i<n+1\rightarrow f.i\rangle$|$\times\langle 0\le i<n\rightarrow f.i\rangle\times p.n$|
 |$\uparrow\langle 0\le i<n+1\rightarrow f.i\rangle$|$\uparrow\langle 0\le i<n\rightarrow f.i\rangle\uparrow p.n$|
 |$\downarrow\langle 0\le i<n+1\rightarrow f.i\rangle$|$\downarrow\langle 0\le i<n\rightarrow f.i\rangle\downarrow p.n$|
+
+Quantifier ranges also have specific relations with their terms. Moving the range definition to the terms is known as _trading_.
+
+|Expression|After trading|
+|-|-|
+|$\land\langle x\in S\rightarrow P(x)\rangle$|$\land\langle x\rightarrow x\in S\implies P(x)\rangle$|
+|$\lor\langle x\in S\rightarrow P(x)\rangle$|$\lor\langle x\rightarrow x\in S\land P(x)\rangle$|
+|$+\langle x\in S\rightarrow f(x)\rangle$|$+\langle x\rightarrow \#\langle y\in S\rightarrow y=x\rangle\times f(x)\rangle$|
