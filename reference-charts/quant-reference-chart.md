@@ -65,10 +65,13 @@ Quantifiers can be used inductively with terms of the same type. This is known a
 |$\uparrow\langle 0\le i<n+1\rightarrow f.i\rangle$|$\uparrow\langle 0\le i<n\rightarrow f.i\rangle\uparrow p.n$|
 |$\downarrow\langle 0\le i<n+1\rightarrow f.i\rangle$|$\downarrow\langle 0\le i<n\rightarrow f.i\rangle\downarrow p.n$|
 
-Quantifier ranges also have specific relations with their terms. Moving the range definition to the terms is known as _trading_.
+## Trading
+
+Quantifier ranges also have specific relations with the terms. Moving the range definition to the term section is known as _trading_, and the relation with the term has to be stated based on predicate calculus.
 
 |Expression|After trading|
 |-|-|
 |$\land\langle x\in S\rightarrow P(x)\rangle$|$\land\langle x\rightarrow x\in S\implies P(x)\rangle$|
 |$\lor\langle x\in S\rightarrow P(x)\rangle$|$\lor\langle x\rightarrow x\in S\land P(x)\rangle$|
 |$+\langle x\in S\rightarrow f(x)\rangle$|$+\langle x\rightarrow \#\langle y\in S\rightarrow y=x\rangle\times f(x)\rangle$|
+|$\#\langle x\in S\rightarrow P(x)\rangle$|$\#\langle x\rightarrow x\in S\land P(x)\rangle$|
