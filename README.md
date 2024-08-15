@@ -6,7 +6,7 @@ There are 7 document categories included here:
 
 * API Documentation
 * Installation Guide
-* Reference Chart
+* Reference Charts
 * Release Notes
 * System Configuration Guide
 * User Assistance
