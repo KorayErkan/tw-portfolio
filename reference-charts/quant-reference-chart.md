@@ -48,8 +48,8 @@ Range definitions have to be valid mathematical expressions that denote membersh
 |-|-|
 |$\langle \land i:0\le i<n: A_i\le m\rangle$|The variable $i$ ranges between $0$ and $n$ with upper bound not inclusive|
 |$\langle + k:: {n\choose k}\times x\rangle$|No range is specified for $k$ since by convention the "n choose k" expression is assumed to be zero for $k$ outside $0\ldots n$|
-|$\langle\# v:: v\in f[p..q)\rangle$|The variable $v$ is an integer, and count quantifier returns 1 only if it is in the range of the function specified by $p$ and $q$|
-|$\langle + x: 0\le x<n \land a\le x\le b: x\rangle$|The sum of values in the $[0..n)$ range that are between $a$ and $b$|
+|$\langle\# v:: v\in f[p..q)\rangle$|The number of distinct values between the indices of $p$ and $q-1$ in $f$|
+|$\langle+ x: x\in S\land a\le x\le b: x\rangle$|The sum of values in $S$ that are between $a$ and $b$|
 |$\langle\uparrow x: x\in S\land d\|x: x\rangle$|The largest of all values in $S$ that are divisible by $d$|
 
 ## Empty Range
@@ -72,7 +72,7 @@ Multiple quantifiers of the same type can be merged if their ranges are adjusted
 
 |Qauntifiers|After range merging|
 |-|-|
-|$\langle\land x:x\in S: P(x)\rangle\land\langle\land x: x\in T: P(x)\rangle$|$\\landlangle x:x\in S\cup T: P(x)\rangle$<br/>$\langle\land x: x\in S\lor x\in T: P(x)$|
+|$\langle\land x:x\in S: P(x)\rangle\land\langle\land x: x\in T: P(x)\rangle$|$\langle\land x:x\in S\cup T: P(x)\rangle$<br/>$\langle\land x: x\in S\lor x\in T: P(x)$|
 |$\langle\land x: x\in S: P(x)\rangle\lor\langle\land x: x\in T: P(x)\rangle$|$\langle\land x: x\in S\cap T: P(x)\rangle$<br/>$\langle\land x: x\in S\land x\in T: P(x)\rangle$|
 |$\langle\lor x: x\in S: P(x)\rangle\lor\langle\lor x: x\in T: P(x)\rangle$|$\langle\lor x: x\in S\cup T: P(x)\rangle$<br/>$\langle\lor x: x\in S\lor x\in T: P(x)\rangle$|
 |$\langle\lor x: x\in S: P(x)\rangle\land\langle\lor x: x\in T: P(x)\rangle$|$\langle\lor x: x\in S\cap T: P(x)\rangle$<br/>$\langle\lor x: x\in S\land x\in T: P(x)\rangle$|
