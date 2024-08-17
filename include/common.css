@@ -18,10 +18,16 @@ th {
 	background-color: #F0F0F0;
 }
 code, pre {
-	font-family: "Consolas";
-	font-size: 10pt;
-	color: black
+	font-family: "Monaco";
+	font-size: 14px;
+	font-style: "color: #000000;";
+	color: black;
 }
+
+code.font-style, pre.font-style {
+	color: #000000;
+}
+
 pre, div {
 	border: 1px solid;
 	border-color: #7F7F7F;
