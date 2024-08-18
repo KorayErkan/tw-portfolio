@@ -3,15 +3,14 @@
 The following chart lists the built-in operators, constants, and data structures of the __Kozmos__ programming language:
 
 |Category|Purpose|Operator|
-|---|---|---|
+|-|-|-|
 |Arithmetic|addition|`a + b`|
 ||subtraction|`a - b`|
 ||multiplication|`a * b`|
 ||division|`a / b`|
 |||`a div b`|
 ||modulus|`a mod b`|
-||extrema|`a min b` -or- `min(a, b, c, ...)`|
-|||`a max b` -or- `max(a, b, c, ...)`|
+||extrema|`a min b` -or- `min(a, b, c, ...)`<br/>`a max b` -or- `max(a, b, c, ...)`|
 |Relational|equals|`a = b`|
 ||not equals|`a <> b`|
 ||less than|`a < b`|

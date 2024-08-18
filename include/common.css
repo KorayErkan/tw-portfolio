@@ -2,30 +2,30 @@ body {
 	font-family: "Calibri";
 	font-size: 12pt;
 }
+
 a, b, h1, h2, h3, h4, th {
 	color: #1566A8;
 }
+
 table {
 	margin-left: 50px;
 }
+
 table, th, td {
 	padding: 5px;
 	border: 1px solid;
 	border-collapse: collapse;
 	border-color: #7F7F7F;
 }
+
 th {
 	background-color: #F0F0F0;
 }
-code, pre {
-	font-family: "Monaco";
-	font-size: 14px;
-	font-style: "color: #000000;";
-	color: black;
-}
 
-code.font-style, pre.font-style {
-	color: #000000;
+code, pre {
+	font-family: "Consolas";
+	font-size: 14px;
+	color: black;
 }
 
 pre, div {
@@ -36,44 +36,58 @@ pre, div {
 	margin-bottom: 10px;
 	padding: 10px;
 }
+
+#ebnf-text {
+	font-style: italic;
+	padding-left: 25px;
+}
+
+#config-text {
+	padding-left: 25px;
+}
+
 #table-of-contents {
 	margin-top: 10px;
 	margin-left: 25px;
 	margin-bottom: 5px;
 }
+
 #mail-address {
 	margin-left: 50px;
 }
-#ebnf-text {
-	font-style: italic;
-	padding-left: 25px;
-}
+
 #url-component {
 	font-style: italic;
 }
+
 #url-segment {
 	font-family: "Consolas";
 	font-size: 10pt;
 }
+
 #method-name {
 	text-indent: 50px;
 	font-style: italic;
 }
+
 #code-sample, #command-line {
 	padding-left: 25px;
 }
+
 #sidebar {
 	background-color: #F0F0F0;
 	border-left: 4px solid #1566A8;
 	margin-left: 10px;
 	padding: 10px;
 }
+
 #note-byline::before {
 	font-weight: bold;
 	color: #1566A8;
 	margin-right: 5px;
 	content: "NOTE";
 }
+
 #warning-byline::before {
 	font-weight: bold;
 	color: #1566A8;
