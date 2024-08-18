@@ -59,7 +59,7 @@ __Kozmos__ has the following built-in data structures:
 |Priority Queue|`Queue<T>`|
 |Minima Heap|`Heap<T>`|
 
-> __NOTE__: __Kozmos__ does not support general-purpose *generics*. Instead, it has *trait compliance* where the type parameter has to be with one of the built-in root traits such as `Eq`, `Ord`, `Sync`, etc., or a user designed trait that implements those root traits.
+> <span id="note-byline"></span> __Kozmos__ does not support general-purpose *generics*. Instead, it has *trait compliance* where the type parameter has to be with one of the built-in root traits such as `Eq`, `Ord`, `Sync`, etc., or a user designed trait that implements those root traits.
 > In a data structure declaration, the type parameter has to be a known trait, e.g. `<Ord>`; a descendant of a trait, e.g. `<T: Ord>`; or a descendant of multiple traits (i.e. a *union* of them), e.g. `<T: Ord | Sync>`.
 
 The following operations are available for built-in data structures
@@ -76,4 +76,4 @@ The following operations are available for built-in data structures
 ||Append|`{a} ++ b`|
 ||Prepend|`b ++ {a}`|
 
-__Kozmos__ does __not__ support operator *overloading*. Instead, it supports operator *extension*: operators can be extended for a certain type (i.e. a `record`, a `trait`, or a `class`) only on the condition that the expression reduces to one of the built-in uses.
+> <span id="note-byline"></span> __Kozmos__ does __not__ support operator *overloading*. Instead, it supports operator *extension*: operators can be extended for a certain type (i.e. a `record`, a `trait`, or a `class`) only on the condition that the expression reduces to one of the built-in uses.
