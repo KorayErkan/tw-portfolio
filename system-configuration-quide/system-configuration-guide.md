@@ -71,38 +71,51 @@ The system's configuration involves making the correct settings required by the 
 
 This involves using the application's Administration Console.
 
-* Double-click the __ProSoft__ icon on the desktop to launch the console
+* Double click the __ProSoft__ icon on the desktop to launch the console
 * In the console window, pick the __Tools > Settings__ menu item. A window will pop up
-* In __Settings__ window, various settings can be found grouped according to the functionality they are related to:
+* In the __Settings__ window, various settings can be found grouped according to the functionality they are related to:
   * The __Users__ group on the left is where you can add or remove users, set their credentials and the security groups they belong to, and assign them the directories under which the resources managed by __ProSoft&copy;__ are located
   * The __Resources__ group in the middle is for setting the directories the system uses to store various resources it generates and manages
   * The __System__ group on the right is for assigning the various values the system uses as defaults for marshalling and managing its data
 
 ### Using the CLI
 
-This involves running certain scripts&mdash;found in the `./admin` directory under the root&mdash;through the command line. The script to be run depends on the settings to be configured.
+This involves running certain scripts&mdash;found in the `.\admin` directory under the root&mdash;through the command line. The script to be run depends on the settings to be configured.
 
 * Launch a terminal with elevated (i.e. __admin__) privileges
 * On the command line, navigate to the root directory
 
-```CLI
-C:\> cd \ProSoft\admin
-```
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>
+</pre>
 
-* Run the script named `init_config.ps` and check the output messages
+* At this point, you should have the licenses (the `*.lic` files) under the root&mdash;i.e. the `C:\ProSoft\` directory&mdash;and the certificates (the `*.cert` files) under the `C:\ProSoft\admin\` directory. Run the script named `sys_config.ps` and check the output messages
 
-```CLI
-C:\>ProSoft\admin\init_config.ps
-Configuring system...
-```
+<pre id="cmdnln-text">
+C:\>ProSoft\admin\sys_config.ps
+>> Configuring system...
+>> Licenses discovered...
+>> Certificates discovered...
+>> Disks partitioned: 100%
+>> Indexes created
+>> Done
+C:\>ProSoft\admin
+</pre>
+
+* If any of these messages do not appear, you should suspend the configuration procedure and troubleshoot. For this, see the [Troubleshooting](#troubleshooting) section below
+* After the script has completed, you can exit the terminal
 
 ## System initialization
 
 The system has to be initialized as follows.
 
+* Open a terminal with elevated privileges and navigate to the root directory
+* Run the `sys_init.ps` script
+
 ## System administration
 
-The system can be administered by the... sys-admin... duh!
+The system provides a number of facilities some of which cannot be offered unattended. For this, the system administrator has to perform the following tasks.
 
 ### Availability and provisioning
 
@@ -132,8 +145,8 @@ Troublingshooting is an essential part of system maintanence. All troubleshootin
 
 If for some reason the system fails to meet your needs, there are a number of steps to decommission the system:
 
-* Running the `./admin/decomm_sys.ps` script to gather the necessary information on what should be backed up
-* Backing up the legacy data based the generated report
+* Running the `.\admin\decomm_sys.ps` script to gather information on what should be backed up
+* Backing up the legacy data based on the generated report
 * Releasing the certificates
-* Removing the license
+* Removing the licenses
 * Uninstalling the software
