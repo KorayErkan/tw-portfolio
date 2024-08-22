@@ -170,11 +170,12 @@ To provide seats to users, the following procedure must be used:
 
 ### Troubleshooting
 
-Troublingshooting is an essential part of system maintanence. All troubleshooting must be done with the following general procedure:
+Troublingshooting is an essential part of system administration and maintanence. All troubleshooting must be done using the following general procedure:
 
-* Check the error code, error message, and core-dump if any
+* Check the error code and the error message
 * Find the error code in the lookup table attached to this guide
 * Follow the instructions for diagnosing the root cause of the problem
+* Eliminate the problem
 
 ### Decommissioning
 
