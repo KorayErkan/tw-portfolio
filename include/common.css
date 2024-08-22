@@ -1,10 +1,14 @@
 body {
 	font-family: "Calibri";
-	font-size: 12pt;
+	font-size: 14pt;
 }
 
 a, b, h1, h2, h3, h4, th {
 	color: #1566A8;
+}
+
+h1, h2, h3 {
+	display: inline-block;
 }
 
 table {
@@ -23,7 +27,7 @@ th {
 }
 
 code, pre {
-	font-family: "Consolas";
+	font-family: "Monaco";
 	font-size: 14px;
 	color: black;
 }
@@ -55,10 +59,12 @@ blockquote {
 
 #config-text {
 	padding-left: 25px;
+	min-width: 500px;
 }
 
 #cmdln-text {
 	padding-left: 25px;
+	min-width: 500px;
 }
 
 #table-of-contents {

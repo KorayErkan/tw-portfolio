@@ -26,6 +26,7 @@ __ProSoft__ is registered trademark of ProSoft Corporation. Other products menti
 * [Configuration](#configuration)
   * [Using the GUI](#using-the-gui)
   * [Using a CLI](#using-the-cli)
+* [System initialization](#system-initialization)
 * [System administration](#system-administration)
   * [Availability and provisioning](#availability-and-provisioning)
   * [Troubleshooting](#troubleshooting)
@@ -33,11 +34,11 @@ __ProSoft__ is registered trademark of ProSoft Corporation. Other products menti
 
 ## About this guide
 
-This guide was prepared to aid administrators in installing, configuring, administrating, and troubleshooting the software system.
+This guide was prepared to aid administrators in configuring, administrating, and troubleshooting the software system. It is assumed that the software system has been installed previously with the required hadrware configuration and networking infrastructure.
 
 ## Preliminary tasks
 
-In order for the installation procedure to continue without any errors or interruption, the servers to be used for the installation, the network devices to be used to access the server and the clients, and the licenses and certificates required to use the software system must be ready. To meet these prerequisites, follow the instructions below.
+In order for the configuration procedure to continue without any errors or interruption, the servers where the system was installed, the network devices to be used to access the server and the clients, and the licenses and certificates required to use the software system must be ready and in place. To meet these prerequisites, follow the instructions below.
 
 ### Server requirements
 
@@ -50,7 +51,7 @@ The system has to be installed on a server that meets the following minimum hard
 
 ### Networking
 
-Since the system will be accessed over a network, the following must be in place:
+Since the system will be accessed over a network, the following networking hardware must be in place and in working condition:
 
 * A 1000BASE-T (i.e. gigabit) Ethernet
 * A proxy to manage the server traffic listening on port 9595
@@ -58,7 +59,7 @@ Since the system will be accessed over a network, the following must be in place
 
 ### Licenses and certificates
 
-During the installation of the system, licenses and certificates will be required for the system to validate the installation and give access to administrative users. Make sure
+During the configuration of the system, licenses and certificates will be required for the system to validate the installation and give access to administrative users. Make sure
 
 * the licenses (i.e. the 2 `*.lic` files) are in the root directory where the server is to be installed
 * the authentification certificates are in the `./cert` directory under the root
@@ -92,7 +93,7 @@ C:\ProSoft\admin>
 
 * At this point, you should have the licenses (the `*.lic` files) under the root&mdash;i.e. the `C:\ProSoft\` directory&mdash;and the certificates (the `*.cert` files) under the `C:\ProSoft\admin\` directory. Run the script named `sys_config.ps` and check the output messages
 
-<pre id="cmdnln-text">
+<pre id="cmdln-text">
 C:\>ProSoft\admin\sys_config.ps
 >> Configuring system...
 >> Licenses discovered...
@@ -110,8 +111,42 @@ C:\>ProSoft\admin
 
 The system has to be initialized as follows.
 
-* Open a terminal with elevated privileges and navigate to the root directory
-* Run the `sys_init.ps` script
+* Open a terminal with elevated privileges and navigate to the admin directory
+* Run the `sys_init.ps` script and check the output
+
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps
+>> Initializing system...
+C:\ProSoft\admin>
+</pre>
+
+As the system proceeds with initialization, the status is reported on the command prompt:
+
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps
+>> Initializing system...
+>> Admin module initialized: 100%
+>> Users module initializing: \ 97%
+C:\ProSoft\admin>
+</pre>
+
+If any of the required files&mdash;e.g. certificates&mdash;are missing, the initialization procedure halts and prompts what needs to be done:
+
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps
+>> Initializing system...
+>> Admin module initialized: Done
+>> Users module initializing: Done
+>> Networking module initializing: 24% -> ERROR
+>> -- Certificate(s) required to initialize the module missing.
+>> -- Place a valid certificate in the "..\cert" directory: Done? [Y/N]
+C:\ProSoft\admin>
+</pre>
+
+In that case, follow the instructions and resume the process by typing `Y` at the prompt.
 
 ## System administration
 
@@ -123,15 +158,15 @@ Availability is measured based on the following criteria:
 
 * The purchased number of seats with the license
 * How many seats have been provisioned
-* Whether the provisioned seat and the resources available to it are accessible via the network and using the assigned credentials
+* Whether the seat and the resources available to it are accessible via the network using the assigned credentials
 
 To provide seats to users, the following procedure must be used:
 
 * Using the __Properties__ menu, open the __Seats__ window
 * Check the number of seats used on the left panel. If there are none left, you have to purchase additional seats
-* Check the group the user is a member of to see whether it matches the use properties of the available seats
+* Check the group the user is a member of to see whether it matches that of the available seat
 * Assign the user to the seat by filling in his credentials in the middle panel
-* Finally, click on the __Provision__ button on the bottom right of the window
+* Finally, click on the __Provision__ button on the bottom right
 
 ### Troubleshooting
 
