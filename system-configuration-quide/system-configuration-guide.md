@@ -2,7 +2,7 @@
 
 This document includes ProSoft proprietary or confidential information and may not be redistributed or disclosed without prior written permission.
 
-All information herein is provide "*AS IS*" based on the state of the ProSoft system as of the release date. ProSoft reserves the right to make changes to this document without prior notice.
+All information contained herein is provided "*AS IS*" based on the state of the ProSoft system as of the release date. ProSoft reserves the right to make changes to this document without prior notice.
 
 ## Disclaimer
 
@@ -10,7 +10,7 @@ NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS
 
 ## Copyright
 
-__ProSoft__ is registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners.
+__ProSoft__ is a registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners.
 
 &copy; ProSoft 2024.
 
@@ -24,8 +24,6 @@ __ProSoft__ is registered trademark of ProSoft Corporation. Other products menti
   * [Networking](#networking)
   * [Licenses and certificates](#licenses-and-certificates)
 * [Configuration](#configuration)
-  * [Using the GUI](#using-the-gui)
-  * [Using a CLI](#using-the-cli)
 * [System initialization](#system-initialization)
 * [System administration](#system-administration)
   * [Availability and provisioning](#availability-and-provisioning)
@@ -68,9 +66,9 @@ During the configuration of the system, licenses and certificates will be requir
 
 The system's configuration involves making the correct settings required by the server. This can be done either through the GUI or the CLI.
 
-### Using the GUI
+<span id="gui-byline">
 
-This involves using the application's Administration Console.
+This involves using the application's __Administration Console__.
 
 * Double click the __ProSoft__ icon on the desktop to launch the console
 * In the console window, pick the __Tools > Settings__ menu item. A window will pop up
@@ -78,8 +76,9 @@ This involves using the application's Administration Console.
   * The __Users__ group on the left is where you can add or remove users, set their credentials and the security groups they belong to, and assign them the directories under which the resources managed by __ProSoft&copy;__ are located
   * The __Resources__ group in the middle is for setting the directories the system uses to store various resources it generates and manages
   * The __System__ group on the right is for assigning the various values the system uses as defaults for marshalling and managing its data
+</span>
 
-### Using the CLI
+<span id="cli-byline">
 
 This involves running certain scripts&mdash;found in the `.\admin` directory under the root&mdash;through the command line. The script to be run depends on the settings to be configured.
 
@@ -95,94 +94,130 @@ C:\ProSoft\admin>
 
 <pre id="cmdln-text">
 C:\>ProSoft\admin\sys_config.ps
->> Configuring system...
->> Licenses discovered...
->> Certificates discovered...
->> Disks partitioned: 100%
->> Indexes created
->> Done
+>>> Configuring system...
+>>> Licenses discovered
+>>> Certificates discovered
+>>> Disks partitioned: 100%
+>>> Indexes created
+>>> Done
 C:\>ProSoft\admin
 </pre>
 
 * If any of these messages do not appear, you should suspend the configuration procedure and troubleshoot. For this, see the [Troubleshooting](#troubleshooting) section below
 * After the script has completed, you can exit the terminal
+</span>
 
 ## System initialization
 
-The system has to be initialized as follows.
+Before it can be used, the system has to be initialized to verify that its configured state is intact and that all the resources and connections it needs are in place and accessible. The initialization process is carried out as follows.
+
+<span id="cli-byline">
+
+To carry out system initialization using the command line,
 
 * Open a terminal with elevated privileges and navigate to the admin directory
-* Run the `sys_init.ps` script and check the output
+* Run the `sys_init.ps` script entering the required directories, and check the output
 
 <pre id="cmdln-text">
 C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps
->> Initializing system...
-C:\ProSoft\admin>
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Looking for licenses...
 </pre>
 
 As the system proceeds with initialization, the status is reported on the command prompt:
 
 <pre id="cmdln-text">
 C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps
->> Initializing system...
->> Admin module initialized: 100%
->> Users module initializing: \ 97%
-C:\ProSoft\admin>
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Licenses: Found
+>>> Admin module: OK
+>>> Users module initializing: \ 97%
 </pre>
 
-If any of the required files&mdash;e.g. certificates&mdash;are missing, the initialization procedure halts and prompts what needs to be done:
+If any of the required files&mdash;e.g. certificates&mdash;are missing, the initialization procedure halts, and prompts what needs to be done:
 
 <pre id="cmdln-text">
 C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps
->> Initializing system...
->> Admin module initialized: Done
->> Users module initializing: Done
->> Networking module initializing: 24% -> ERROR
->> -- Certificate(s) required to initialize the module missing.
->> -- Place a valid certificate in the "..\cert" directory: Done? [Y/N]
-C:\ProSoft\admin>
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Licenses: Found
+>>> Admin module: OK
+>>> Users module: OK
+>>> Networking module initializing: 24% -> ERROR
+    Certificate(s) required to initialize the module missing.
+    Place a valid certificate in the "..\cert" directory: Resume? [Y/N]
 </pre>
 
-In that case, follow the instructions and resume the process by typing `Y` at the prompt.
+In that case, follow the instructions to resolve the issue, and resume the process by typing `Y` at the prompt.
+
+After the errors are resolved and the system initialization is completed, the process prompts the user with a status:
+
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Licenses: Found
+>>> Admin module: OK
+>>> Users module: OK
+>>> Networking module initializing: 24% -> ERROR
+    Certificate(s) required to initialize the module missing.
+    Place a valid certificate in the "..\cert" directory: Resume? [Y/N] Y
+>>> Networking module: OK
+>>> PROCESS COMPLETED!
+C:\ProSoft\admin>
+</pre>
+</span>
 
 ## System administration
 
-The system provides a number of facilities some of which cannot be offered unattended. For this, the system administrator has to perform the following tasks.
+The system has a number of facilities which cannot be offered unattended. To provide them, the system administrator has to perform the following tasks.
 
 ### Availability and provisioning
 
 Availability is measured based on the following criteria:
 
 * The purchased number of seats with the license
-* How many seats have been provisioned
-* Whether the seat and the resources available to it are accessible via the network using the assigned credentials
+* The number of seats that have already been provisioned
+* Whether the seat and the resources available to it are accessible via the network and using the assigned roles
 
-To provide seats to users, the following procedure must be used:
+To provide seats to users, the following procedure must be performed:
 
-* Using the __Properties__ menu, open the __Seats__ window
-* Check the number of seats used on the left panel. If there are none left, you have to purchase additional seats
-* Check the group the user is a member of to see whether it matches that of the available seat
+<span id="gui-byline">
+
+To carry out this task using the graphical interface,
+
+* From the __Properties__ menu, open the __Seats__ window
+* Check the number of seats already in use in the left panel. If there are no seats left, you have to purchase additional seats
+* Check the group that the user is a member of to see whether it matches that of any of the available seats
 * Assign the user to the seat by filling in his credentials in the middle panel
 * Finally, click on the __Provision__ button on the bottom right
+</span>
+
+<span id="cli-byline">
+
+To carry out this task using the command line,
+
+* Open a terminal with elevated privileges
+* Navigate to the root directory
+</span>
 
 ### Troubleshooting
 
-Troublingshooting is an essential part of system administration and maintanence. All troubleshooting must be done using the following general procedure:
+An essential part of system administration and maintanence is diagnosing the root causes of issues and resolving them. All troubleshooting must be done using the following general procedure:
 
-* Check the error code and the error message
-* Find the error code in the lookup table attached to this guide
-* Follow the instructions for diagnosing the root cause of the problem
-* Eliminate the problem
+* Check the __error code__ and the __error message__: Every error report provides a specific error id and a message explaining the exceptional that has been raised. The message will provide hints on how to proceed
+* Find the __error code__ in the lookup table attached to this guide: The list of error codes contain useful hints about the source and possible causes of the error
+* Follow the instructions for diagnosing the root cause of the problem: The error code table provides possible actions and workarounds to resolve the issue
+* If the error persists, consult the hot line for expert advice from __ProSoft__
 
 ### Decommissioning
 
-If for some reason the system fails to meet your needs, there are a number of steps to decommission the system:
+If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it. These are:
 
-* Running the `.\admin\decomm_sys.ps` script to gather information on what should be backed up
-* Backing up the legacy data based on the generated report
+* Running the `.\admin\decomm_sys.ps` script to gather information about the current state of the resources the system has been using in order to generate a report
+* Backing up all this legacy data based on the report generated
 * Releasing the certificates
 * Removing the licenses
 * Uninstalling the software

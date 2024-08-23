@@ -39,7 +39,6 @@ pre, div {
 	margin-left: 50px;
 	margin-bottom: 10px;
 	padding: 10px;
-	display: inline-block;
 }
 
 blockquote {
@@ -49,6 +48,10 @@ blockquote {
 	margin-left: 10px;
 	margin-bottom: 10px;
 	padding: 10px;
+	display: inline-block;
+}
+
+#keep-with-next {
 	display: inline-block;
 }
 
@@ -114,4 +117,20 @@ blockquote {
 	color: #1566A8;
 	margin-right: 5px;
 	content: "WARNING";
+}
+
+#gui-byline::before {
+	font-weight: bold;
+	color: #1566A8;
+	margin-right: 5px;
+	display: inline-block;
+	content: "Using the GUI";
+}
+
+#cli-byline::before {
+	font-weight: bold;
+	color: #1566A8;
+	margin-right: 5px;
+	display: inline-block;
+	content: "Using the CLI";
 }
