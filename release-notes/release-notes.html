@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>release-notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="prosoft%E2%84%A2-v8411-release-notes"><strong>ProSoft</strong>™ v8.4.11 Release Notes</h1>
+<p>This document contains information about the current release of <strong>ProSoft™</strong>.</p>
+<h2 id="table-of-contents">Table of contents</h2>
+<ul>
+<li><a href="#about-this-release">About this release</a></li>
+<li><a href="#end-user-requirements">End-user requirements</a></li>
+<li><a href="#summary-of-changes">Summary of changes</a>
+<ul>
+<li><a href="#new-features">New features</a></li>
+<li><a href="#bugfixes">Bugfixes</a></li>
+<li><a href="#deprecations">Deprecations</a></li>
+</ul>
+</li>
+<li><a href="#known-issues">Known issues</a></li>
+</ul>
+<h2 id="about-this-release">About this release</h2>
+<p>The current release contains many bugfixes, removes some inconsistencies in the semantic versioning and ownership tracking facilities, and improves storage management, compatibility with various source, configuration, and log file types, and CI/CD-compatible source file marshalling functionality.</p>
+<h2 id="end-user-requirements">End-user requirements</h2>
+<p>Users will have to back up their log and configuration files, uninstall their existing system, update their <strong>CMX Server™</strong> to include the bugfixes listed <a href="https://www.bogus-bugfixes.com">here</a>, and then install the current release.</p>
+<h2 id="summary-of-changes">Summary of changes</h2>
+<p>This version brings a number of important changes. These include the following.</p>
+<h3 id="new-features">New features</h3>
+<p>There are some important new features designed to ease management of large code bases.</p>
+<ul>
+<li>The system can now handle up to 64GB of repository resources, significantly increasing the project's development capability</li>
+<li>The semantic versioning system can now be directly synchronized with the version control mechanisms, and thereby never loses track of builds, published APIs, and backward compatibility status</li>
+<li>PDF files can now be directly viewed from within the ProSoft management console</li>
+</ul>
+<h3 id="bugfixes">Bugfixes</h3>
+<p>There are many bugfixes, particularly related to the handling of configuration files and formats with nested structures.</p>
+<ul>
+<li>CFGX files can now process enumerated constants using the dot syntax (e.g. &quot;<em>enumName.Constant</em>&quot;) (BUG ID: #4321)</li>
+<li>CFGX files no longer require <em>admin</em> privileges to be edited (BUG ID: #4322)</li>
+<li>GAML files now support nested properties enclosed in square brackets (BUG ID: #5321)</li>
+<li>You can now assign a viewer application for specific file types in GAML files—for example Microsoft Word for <em>*.docx</em> files (BUG ID: #5323)</li>
+</ul>
+<h3 id="deprecations">Deprecations</h3>
+<p>Some features of the system have been deprecated in favor of the newly developed ones:</p>
+<ul>
+<li>User grouping for creation of teams are now supported at the top level, and there is no need to assign team members to a pre-determined team lead</li>
+<li>Using a single hierarchy for project directories is now replaced with clustering of modules at any desired level</li>
+<li>Group identity assignment is now done automatically at the top level and is hierarchical; regrouping of lower level modules based on group identity is no longer available</li>
+</ul>
+<h2 id="known-issues">Known issues</h2>
+<p>There are some known issues with the system regarding</p>
+<ul>
+<li>Ownership tracking functionality:
+<ul>
+<li>When the owner of a source file changes his name, id, or e-mail address, the system cannot update the database accordingly and loses track of the owner, orphaning the source files (BUG ID: #1234)</li>
+<li>When the owner wants to delegate the ownership of a source file, the future owner has to exist in the database. Otherwise, even though the tracking system displays the delegated owner's id, the source file becomes orphaned without any warning (BUG ID: #1235)</li>
+<li>Once the ownership of a resource has been delegated, it is not possible to re-delegate it to another user (BUG ID: #1236)</li>
+<li>When a delegated source gets deleted without a commit, the previously existing versions of the resource remain in the system, and it is not possible to remove them from the trunk (BUG ID: #1237)</li>
+</ul>
+</li>
+<li>File format recognition:
+<ul>
+<li>The system can parse GAML, POML, and CFGX configuration files but it does not recognize XML-based formats (BUG ID: #2345)</li>
+<li>POML files must enclose all values in double quotes, otherwise the system assumes the unquoted token is a stop word (BUG ID: #2346)</li>
+<li>CFGX files must quote alphanumeric values. Otherwise they will be terminated at the first white space (BUG ID: #2347)</li>
+</ul>
+</li>
+</ul>
+<p>We will try to address these issues in future releases.</p>
+
+</body>
+</html>

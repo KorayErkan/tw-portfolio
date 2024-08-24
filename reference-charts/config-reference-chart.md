@@ -54,7 +54,7 @@ If a component specified does not exist or the value set for a property is not w
 |Setting|Error|
 |-|-|
 |`[bicycles]`|The component doesn't exist|
-|`frizzles = {DEFAULT: anything; USER: honky-dory}`|The property doesn't exist, and the settings are not recognized|
+|`frizzles = {DEFAULT: anything; USER: hunky-dory}`|The property doesn't exist, and the settings are not recognized|
 |`disk_size = {ADMIN: sys_admin}`|The option does not exist|
 
 ## Configurable Settings

@@ -1,6 +1,6 @@
 # __ProSoft__&trade; v8.4.11 Release Notes
 
-This document contains information about the current release of ProSoft&trade;.
+This document contains information about the current release of __ProSoft&trade;__.
 
 ## Table of contents
 
