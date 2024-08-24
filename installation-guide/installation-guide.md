@@ -21,8 +21,6 @@ __ProSoft__ is registered trademark of ProSoft Corporation. Other products menti
   * [Hardware](#hardware)
   * [Dependencies](#dependencies)
 * [Installation](#installation)
-  * [GUI Installation](#gui-installation)
-  * [CLI Installation](#cli-installation)
 * [Configuration](#configuration)
 * [License Terms](#license-terms)
 
@@ -57,7 +55,7 @@ The following steps are based on the 64-bit version, but they are identical for 
 
 Before beginning the installation, from the __ProSoft__ [downloads](https://www.prosoft.com/downloads) page, download the `prosoft_x64.msi` file to the `C:\Users\<admin-name>\Downloads` directory of your server.
 
-### GUI Installation
+<span id="gui-byline">
 
 * Open __Explorer__ and navigate to the __Downloads__ folder.
 * Double-click the `prosoft_x64.msi` file to start the installation and follow the on-screen instructions
@@ -65,52 +63,54 @@ Before beginning the installation, from the __ProSoft__ [downloads](https://www.
 * Confirm the settings on the configuration page of the installer. It is recommend that the default values for cache size, disk size, API endpoints, communication ports, and others are left as they are unless you have a good reason to change them
 * If you need to change the locale setting, you will be prompted to select one on the next page of the installer
 * Finally, click `Ok` to start the installation process. Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.
+</span>
 
-### CLI Installation
+<span id="cli-byline">
 
 * Open a terminal window with elevated (i.e. __admin__) privileges. If you haven't downloaded the installation (i.e. __*.msi__) file, you can do so on the command line by typing
 
-```CLI
-winget www.prosoft.com/downloads/prosoft_x64.msi
-```
+<pre id="cmdln-text">
+C:\> winget www.prosoft.com/downloads/prosoft_x64.msi
+</pre>
 
 * Navigate (i.e. `cd`) to the __Downloads__ directory of your server by typing:
 
-```CLI
+<pre id="cmdln-text">
 C:\> cd \Users\<admin-name>\Downloads
-```
+</pre>
 
 * Start the installation by typing `prosoft_x64.msi`. You must specify the installation directory. By default, this is `C:\Programs\ProSoft` and It is strongly recommended that this directory is *not* changed. Follow the on-screen instructions
 
-```CLI
+<pre id="cmdln-text">
 C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
 >>> Installing...
-```
+</pre>
 
 * It is recommend that the default values for cache size, disk size, API endpoints, communication ports, and others are left as they are unless you have a good reason to change them. To confirm these settings, type `Y` (for __Yes__) for each when prompted on the command line
 
-```CLI
+<pre id="cmdln-text">
 >>> cache_size=4096KB? [Y/N]: Y
 >>> disk_size=50MB? [Y/N]: Y
 >>> api_endpoints=prosoft_api_server? [Y/N]: Y
 >>> communications_port=6060? [Y/N]: Y
 >>> default_user_count=50? [Y/N]: Y
-```
+</pre>
 
-* You will be prompted to confirm or change the locale setting:
+You will be prompted to confirm or change the locale setting:
 
-```CLI
+<pre id="cmdln-text">
 >>> locale=en_US? [Y/N]: N
 >>> Please specify the locale: en-GB
-```
+</pre>
 
 * Finally, confirm the settings by typing `Y` to start the installation process.
 
-```CLI
+<pre id="cmdln-text">
 >>> Please confirm the settings to start the installation [Y/N]:
-```
+</pre>
 
 Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.
+</span>
 
 ## Configuration
 
@@ -119,7 +119,7 @@ After the installation process completes,
 * Copy the `prosoft.lic` file sent to you via e-mail to the `bin` subdirectory of the installation folder. You will be prompted the first time you launch the program to point to this file for activation
 * Install the security certificates the system needs under the `cert` subdirectory of the installation folder
 * Make sure that your proxy server, if any, is configured to allow traffic at ProSoft's default communication ports: 4096 and 6650
-* Check the security settings of the server before starting to add users that will have access to the system. The users should have Read, Write, and Execute privileges
+* Check the security settings of the server before starting to add users that will have access to the system. The users should have *Read*, *Write*, and *Execute* privileges
 
 ## License Terms
 

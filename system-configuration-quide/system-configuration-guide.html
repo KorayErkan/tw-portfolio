@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>system-configuration-guide.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="prosoft-v8411-system-configuration-guide">ProSoft v8.4.11 System Configuration Guide</h1>
+<p>This document includes ProSoft proprietary or confidential information and may not be redistributed or disclosed without prior written permission.</p>
+<p>All information contained herein is provided &quot;<em>AS IS</em>&quot; based on the state of the ProSoft system as of the release date. ProSoft reserves the right to make changes to this document without prior notice.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT REGARDING INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL PROSOFT BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.</p>
+<h2 id="copyright">Copyright</h2>
+<p><strong>ProSoft</strong> is a registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners.</p>
+<p>© ProSoft 2024.</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#about-this-guide">About this guide</a></li>
+<li><a href="#preliminary-tasks">Preliminary tasks</a>
+<ul>
+<li><a href="#server-requirements">Server requirements</a></li>
+<li><a href="#networking">Networking</a></li>
+<li><a href="#licenses-and-certificates">Licenses and certificates</a></li>
+</ul>
+</li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#system-initialization">System initialization</a></li>
+<li><a href="#system-administration">System administration</a>
+<ul>
+<li><a href="#availability-and-provisioning">Availability and provisioning</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#decommissioning">Decommissioning</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="about-this-guide">About this guide</h2>
+<p>This guide was prepared to aid administrators in configuring, administrating, and troubleshooting the software system. It is assumed that the software system has been installed previously with the required hadrware configuration and networking infrastructure.</p>
+<h2 id="preliminary-tasks">Preliminary tasks</h2>
+<p>In order for the configuration procedure to continue without any errors or interruption, the servers where the system was installed, the network devices to be used to access the server and the clients, and the licenses and certificates required to use the software system must be ready and in place. To meet these prerequisites, follow the instructions below.</p>
+<h3 id="server-requirements">Server requirements</h3>
+<p>The system has to be installed on a server that meets the following minimum hardware requirements:</p>
+<ul>
+<li>7 quad-core 64-bit AMD processors</li>
+<li>128 GB RAM</li>
+<li>A 2 TB SSD</li>
+<li>2 x 1 TB SCSI hard drives for redundancy</li>
+</ul>
+<h3 id="networking">Networking</h3>
+<p>Since the system will be accessed over a network, the following networking hardware must be in place and in working condition:</p>
+<ul>
+<li>A 1000BASE-T (i.e. gigabit) Ethernet</li>
+<li>A proxy to manage the server traffic listening on port 9595</li>
+<li>TCP/IP protocol in place on the server</li>
+</ul>
+<h3 id="licenses-and-certificates">Licenses and certificates</h3>
+<p>During the configuration of the system, licenses and certificates will be required for the system to validate the installation and give access to administrative users. Make sure</p>
+<ul>
+<li>the licenses (i.e. the 2 <code>*.lic</code> files) are in the root directory where the server is to be installed</li>
+<li>the authentification certificates are in the <code>./cert</code> directory under the root</li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>The system's configuration involves making the correct settings required by the server. This can be done either through the GUI or the CLI.</p>
+<span id="gui-byline">
+<p>This involves using the application's <strong>Administration Console</strong>.</p>
+<ul>
+<li>Double click the <strong>ProSoft</strong> icon on the desktop to launch the console</li>
+<li>In the console window, pick the <strong>Tools &gt; Settings</strong> menu item. A window will pop up</li>
+<li>In the <strong>Settings</strong> window, various settings can be found grouped according to the functionality they are related to:
+<ul>
+<li>The <strong>Users</strong> group on the left is where you can add or remove users, set their credentials and the security groups they belong to, and assign them the directories under which the resources managed by <strong>ProSoft©</strong> are located</li>
+<li>The <strong>Resources</strong> group in the middle is for setting the directories the system uses to store various resources it generates and manages</li>
+<li>The <strong>System</strong> group on the right is for assigning the various values the system uses as defaults for marshalling and managing its data<br>
+</span></li>
+</ul>
+</li>
+</ul>
+<span id="cli-byline">
+<p>This involves running certain scripts—found in the <code>.\admin</code> directory under the root—through the command line. The script to be run depends on the settings to be configured.</p>
+<ul>
+<li>Launch a terminal with elevated (i.e. <strong>admin</strong>) privileges</li>
+<li>On the command line, navigate to the root directory</li>
+</ul>
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>
+</pre>
+<ul>
+<li>At this point, you should have the licenses (the <code>*.lic</code> files) under the root—i.e. the <code>C:\ProSoft\</code> directory—and the certificates (the <code>*.cert</code> files) under the <code>C:\ProSoft\admin\</code> directory. Run the script named <code>sys_config.ps</code> and check the output messages</li>
+</ul>
+<pre id="cmdln-text">
+C:\>ProSoft\admin\sys_config.ps
+>>> Configuring system...
+>>> Licenses discovered
+>>> Certificates discovered
+>>> Disks partitioned: 100%
+>>> Indexes created
+>>> Done
+C:\>ProSoft\admin
+</pre>
+<ul>
+<li>If any of these messages do not appear, you should suspend the configuration procedure and troubleshoot. For this, see the <a href="#troubleshooting">Troubleshooting</a> section below</li>
+<li>After the script has completed, you can exit the terminal<br>
+</span></li>
+</ul>
+<h2 id="system-initialization">System initialization</h2>
+<p>Before it can be used, the system has to be initialized to verify that its configured state is intact and that all the resources and connections it needs are in place and accessible. The initialization process is carried out as follows.</p>
+<span id="cli-byline">
+<p>To carry out system initialization using the command line,</p>
+<ul>
+<li>Open a terminal with elevated privileges and navigate to the admin directory</li>
+<li>Run the <code>sys_init.ps</code> script entering the required directories, and check the output</li>
+</ul>
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Looking for licenses...
+</pre>
+<p>As the system proceeds with initialization, the status is reported on the command prompt:</p>
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Licenses: Found
+>>> Admin module: OK
+>>> Users module initializing: \ 97%
+</pre>
+<p>If any of the required files—e.g. certificates—are missing, the initialization procedure halts, and prompts what needs to be done:</p>
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Licenses: Found
+>>> Admin module: OK
+>>> Users module: OK
+>>> Networking module initializing: 24% -> ERROR
+    Certificate(s) required to initialize the module missing.
+    Place a valid certificate in the "..\cert" directory: Resume? [Y/N]
+</pre>
+<p>In that case, follow the instructions to resolve the issue, and resume the process by typing <code>Y</code> at the prompt.</p>
+<p>After the errors are resolved and the system initialization is completed, the process prompts the user with a status:</p>
+<pre id="cmdln-text">
+C:\>cd \ProSoft\admin
+C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
+>>> Initializing system...
+>>> Licenses: Found
+>>> Admin module: OK
+>>> Users module: OK
+>>> Networking module initializing: 24% -> ERROR
+    Certificate(s) required to initialize the module missing.
+    Place a valid certificate in the "..\cert" directory: Resume? [Y/N] Y
+>>> Networking module: OK
+>>> PROCESS COMPLETED!
+C:\ProSoft\admin>
+</pre>
+</span>
+<h2 id="system-administration">System administration</h2>
+<p>The system has a number of facilities which cannot be offered unattended. To provide them, the system administrator has to perform the following tasks.</p>
+<h3 id="availability-and-provisioning">Availability and provisioning</h3>
+<p>Availability is measured based on the following criteria:</p>
+<ul>
+<li>The purchased number of seats with the license</li>
+<li>The number of seats that have already been provisioned</li>
+<li>Whether the seat and the resources available to it are accessible via the network and using the assigned roles</li>
+</ul>
+<p>To provide seats to users, the following procedure must be performed:</p>
+<span id="gui-byline">
+<p>To carry out this task using the graphical interface,</p>
+<ul>
+<li>From the <strong>Properties</strong> menu, open the <strong>Seats</strong> window</li>
+<li>Check the number of seats already in use in the left panel. If there are no seats left, you have to purchase additional seats</li>
+<li>Check the group that the user is a member of to see whether it matches that of any of the available seats</li>
+<li>Assign the user to the seat by filling in his credentials in the middle panel</li>
+<li>Finally, click on the <strong>Provision</strong> button on the bottom right<br>
+</span></li>
+</ul>
+<span id="cli-byline">
+<p>To carry out this task using the command line,</p>
+<ul>
+<li>Open a terminal with elevated privileges</li>
+<li>Navigate to the root directory<br>
+</span></li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>An essential part of system administration and maintanence is diagnosing the root causes of issues and resolving them. All troubleshooting must be done using the following general procedure:</p>
+<ul>
+<li>Check the <strong>error code</strong> and the <strong>error message</strong>: Every error report provides a specific error id and a message explaining the exceptional that has been raised. The message will provide hints on how to proceed</li>
+<li>Find the <strong>error code</strong> in the lookup table attached to this guide: The list of error codes contain useful hints about the source and possible causes of the error</li>
+<li>Follow the instructions for diagnosing the root cause of the problem: The error code table provides possible actions and workarounds to resolve the issue</li>
+<li>If the error persists, consult the hot line for expert advice from <strong>ProSoft</strong></li>
+</ul>
+<h3 id="decommissioning">Decommissioning</h3>
+<p>If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it. These are:</p>
+<ul>
+<li>Running the <code>.\admin\decomm_sys.ps</code> script to gather information about the current state of the resources the system has been using in order to generate a report</li>
+<li>Backing up all this legacy data based on the report generated</li>
+<li>Releasing the certificates</li>
+<li>Removing the licenses</li>
+<li>Uninstalling the software</li>
+</ul>
+
+</body>
+</html>
