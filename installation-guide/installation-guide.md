@@ -63,6 +63,7 @@ Before beginning the installation, from the __ProSoft__ [downloads](https://www.
 * Confirm the settings on the configuration page of the installer. It is recommend that the default values for cache size, disk size, API endpoints, communication ports, and others are left as they are unless you have a good reason to change them
 * If you need to change the locale setting, you will be prompted to select one on the next page of the installer
 * Finally, click `Ok` to start the installation process. Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.
+
 </span>
 
 <span id="cli-byline">
@@ -96,11 +97,11 @@ C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
 >>> default_user_count=50? [Y/N]: Y
 </pre>
 
-You will be prompted to confirm or change the locale setting:
+* You will be prompted to confirm or change the locale setting:
 
 <pre id="cmdln-text">
 >>> locale=en_US? [Y/N]: N
->>> Please specify the locale: en-GB
+    Please specify the locale: en-GB
 </pre>
 
 * Finally, confirm the settings by typing `Y` to start the installation process.
@@ -109,7 +110,8 @@ You will be prompted to confirm or change the locale setting:
 >>> Please confirm the settings to start the installation [Y/N]:
 </pre>
 
-Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.
+Because the system creates partitions for more efficient marshalling of data, it may take up to 15 minutes for this stage to complete.
+
 </span>
 
 ## Configuration

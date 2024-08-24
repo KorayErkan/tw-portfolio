@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>config-reference-chart.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="system-configuration-files">System Configuration Files</h1>
+<p>All the configurable parameters of the system are set using <em>system configuration files</em> (<strong>*.scf</strong>). These are plain text files, and they use the following basic syntax—formulated in EBNF:</p>
+<pre id=ebnf-text>
+component ::= "[" identifier ("." identifier)* "]"
+property ::= identifier "=" (constant | "{" option (";" option)* "}")
+option ::= (Default | User)
+
+Default ::= "DEFAULT" ":" definition
+User ::= "USER" ":" definition
+
+comment ::= "--" text
+</pre>
+<h2 id="typical-uses">Typical Uses</h2>
+<p>System components are identified by square brackets, and the settings of the component properties are specified between braces under that section.</p>
+<p>The following table provides a few typical examples.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Component definition</td>
+<td><code>[system]</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>[database]</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>[database.tables]</code></td>
+</tr>
+<tr>
+<td>Property definition</td>
+<td><code>block_size = {SYSTEM: 4096; USER: 1024}</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>users.count = {USER: 150}</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>aligned = true</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>cloud_use = {DEFAULT: Local}</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>self_certificate = false</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each component or property has to be on a separate line, and line breaks are assumed to terminate the definition.</p>
+<p>The following is an example of a <strong>valid</strong> layout:</p>
+<pre id="config-text">
+[database]
+table_count = 50
+record_size = {DEFAULT: 1024; USER: 4096}
+</pre>
+<p>The following is an example of an <strong>invalid</strong> layout: a section id and a property name are on the same line, and the settings of the ğroperties are on the next lines.</p>
+<pre id="config-text">
+[disks] block_size
+= 2048
+replicated =
+true
+</pre>
+<p>If a component specified does not exist or the value set for a property is not within a valid range or one of the predefined constants, the definition is ignored.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[bicycles]</code></td>
+<td>The component doesn't exist</td>
+</tr>
+<tr>
+<td><code>frizzles = {DEFAULT: anything; USER: honky-dory}</code></td>
+<td>The property doesn't exist, and the settings are not recognized</td>
+</tr>
+<tr>
+<td><code>disk_size = {ADMIN: sys_admin}</code></td>
+<td>The option does not exist</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configurable-settings">Configurable Settings</h2>
+<p>The following table enumerates the components that exist in the system and their properties along with the setting data types and allowable values. Each property can get a <em>default</em> value which then can be overridden with a <em>user</em> value, as stated in the above EBNF specification for options.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Property</th>
+<th>Type</th>
+<th>Acceptable Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>system</em></td>
+<td><em>id</em></td>
+<td>string</td>
+<td>Any arbitrary identifier assigned by the user</td>
+</tr>
+<tr>
+<td></td>
+<td><em>locale</em></td>
+<td>string</td>
+<td>Valid locale settings are identical to those of all operating systems, e.g. <em>en-US</em>, <em>fr-FR</em>, <em>it-IT</em>, etc.</td>
+</tr>
+<tr>
+<td></td>
+<td><em>cloud_use</em></td>
+<td>enumerated</td>
+<td>Specifies whether the system will use cloud as storage. Can be either <em>Local</em> or <em>Global</em>. If <em>Local</em>, cloud access and certificates have to be managed locally. If <em>Global</em>, the system will manage the certificates from a pool</td>
+</tr>
+<tr>
+<td><em>system.databases</em></td>
+<td><em>count</em></td>
+<td>integer</td>
+<td>The number of databases in the system</td>
+</tr>
+<tr>
+<td></td>
+<td><em>backup</em></td>
+<td>boolean</td>
+<td>Whether the system databases will be backed up</td>
+</tr>
+<tr>
+<td></td>
+<td><em>auto_resize</em></td>
+<td>boolean</td>
+<td>Whether the system databases will be resized automatically. If false, then the resize logic has to be specified with the next property</td>
+</tr>
+<tr>
+<td></td>
+<td><em>resize_by</em></td>
+<td>integer</td>
+<td>The resize value. Has to be a multiple of 1024</td>
+</tr>
+<tr>
+<td><em>database</em></td>
+<td><em>id</em></td>
+<td>string</td>
+<td>Any arbitrary identifier assigned by the user. Has to be the name of a specific database</td>
+</tr>
+<tr>
+<td></td>
+<td><em>type</em></td>
+<td>enumerated</td>
+<td>Type of the database. Has to be either <em>Flat</em> or <em>Relational</em>. If <em>Flat</em>, no database keys are maintained by the system</td>
+</tr>
+<tr>
+<td></td>
+<td><em>replicated</em></td>
+<td>boolean</td>
+<td>Specifies whether the databases will be replicated on multiple sites</td>
+</tr>
+<tr>
+<td></td>
+<td><em>user_count</em></td>
+<td>integer</td>
+<td>The number of users that will be accessing the database</td>
+</tr>
+<tr>
+<td><em>database.tables</em></td>
+<td><em>count</em></td>
+<td>integer</td>
+<td>Number of tables in the database</td>
+</tr>
+<tr>
+<td></td>
+<td><em>block_aligned</em></td>
+<td>boolean</td>
+<td>Whether the table will be aligned on the disk for faster access. If <em>true</em> is specificed the next value must also be set</td>
+</tr>
+<tr>
+<td></td>
+<td><em>block_size</em></td>
+<td>integer</td>
+<td>The block size to be used to align the records in the table. Must be a multiple of 1024</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

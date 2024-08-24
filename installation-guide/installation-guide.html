@@ -62,9 +62,9 @@
 <li>By default, the server is installed in the <code>C:\Programs\ProSoft</code> directory. It is strongly recommended that this directory is <em>not</em> changed</li>
 <li>Confirm the settings on the configuration page of the installer. It is recommend that the default values for cache size, disk size, API endpoints, communication ports, and others are left as they are unless you have a good reason to change them</li>
 <li>If you need to change the locale setting, you will be prompted to select one on the next page of the installer</li>
-<li>Finally, click <code>Ok</code> to start the installation process. Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.<br>
-</span></li>
+<li>Finally, click <code>Ok</code> to start the installation process. Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.</li>
 </ul>
+</span>
 <span id="cli-byline">
 <ul>
 <li>Open a terminal window with elevated (i.e. <strong>admin</strong>) privileges. If you haven't downloaded the installation (i.e. <strong>*.msi</strong>) file, you can do so on the command line by typing</li>
@@ -95,10 +95,12 @@ C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
 >>> communications_port=6060? [Y/N]: Y
 >>> default_user_count=50? [Y/N]: Y
 </pre>
-<p>You will be prompted to confirm or change the locale setting:</p>
+<ul>
+<li>You will be prompted to confirm or change the locale setting:</li>
+</ul>
 <pre id="cmdln-text">
 >>> locale=en_US? [Y/N]: N
->>> Please specify the locale: en-GB
+    Please specify the locale: en-GB
 </pre>
 <ul>
 <li>Finally, confirm the settings by typing <code>Y</code> to start the installation process.</li>
@@ -106,8 +108,8 @@ C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
 <pre id="cmdln-text">
 >>> Please confirm the settings to start the installation [Y/N]:
 </pre>
-<p>Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.<br>
-</span></p>
+<p>Because the system creates partitions for more efficient marshalling of data, it may take up to 15 minutes for this stage to complete.</p>
+</span>
 <h2 id="configuration">Configuration</h2>
 <p>After the installation process completes,</p>
 <ul>

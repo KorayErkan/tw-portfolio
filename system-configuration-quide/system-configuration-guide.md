@@ -76,6 +76,7 @@ This involves using the application's __Administration Console__.
   * The __Users__ group on the left is where you can add or remove users, set their credentials and the security groups they belong to, and assign them the directories under which the resources managed by __ProSoft&copy;__ are located
   * The __Resources__ group in the middle is for setting the directories the system uses to store various resources it generates and manages
   * The __System__ group on the right is for assigning the various values the system uses as defaults for marshalling and managing its data
+
 </span>
 
 <span id="cli-byline">
@@ -105,6 +106,7 @@ C:\>ProSoft\admin
 
 * If any of these messages do not appear, you should suspend the configuration procedure and troubleshoot. For this, see the [Troubleshooting](#troubleshooting) section below
 * After the script has completed, you can exit the terminal
+
 </span>
 
 ## System initialization
@@ -168,6 +170,7 @@ C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
 >>> PROCESS COMPLETED!
 C:\ProSoft\admin>
 </pre>
+
 </span>
 
 ## System administration
@@ -193,6 +196,7 @@ To carry out this task using the graphical interface,
 * Check the group that the user is a member of to see whether it matches that of any of the available seats
 * Assign the user to the seat by filling in his credentials in the middle panel
 * Finally, click on the __Provision__ button on the bottom right
+
 </span>
 
 <span id="cli-byline">
@@ -201,6 +205,7 @@ To carry out this task using the command line,
 
 * Open a terminal with elevated privileges
 * Navigate to the root directory
+
 </span>
 
 ### Troubleshooting
