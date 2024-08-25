@@ -213,9 +213,9 @@ To carry out this task using the command line,
 An essential part of system administration and maintanence is diagnosing the root causes of issues and resolving them. All troubleshooting must be done using the following general procedure:
 
 * Check the __error code__ and the __error message__: Every error report provides a specific error id and a message explaining the exceptional that has been raised. The message will provide hints on how to proceed
-* Find the __error code__ in the lookup table attached to this guide: The list of error codes contain useful hints about the source and possible causes of the error
-* Follow the instructions for diagnosing the root cause of the problem: The error code table provides possible actions and workarounds to resolve the issue
-* If the error persists, consult the hot line for expert advice from __ProSoft__
+* Find the __error code__ in the lookup table attached to this guide. It contains useful hints about the possible sources of the error
+* Follow the instructions for diagnosing the root cause of the problem. The table provides possible actions and workarounds to resolve the issue
+* If the error persists, consult the [__ProSoft__ hotline](#prosoft-hotline) for expert advice
 
 ### Decommissioning
 
@@ -226,3 +226,10 @@ If for some reason the system fails to meet your needs, there are a number of st
 * Releasing the certificates
 * Removing the licenses
 * Uninstalling the software
+
+## __ProSoft__ Hotline
+
+You can reach __ProSoft__ for expert advice through
+
+Phone : 850-555-6677
+E-mail: [support@prosoft.com](support@prosoft.com)
