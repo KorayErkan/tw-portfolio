@@ -51,11 +51,15 @@
 <h3 id="server-requirements">Server requirements</h3>
 <p>The system has to be installed on a server that meets the following minimum hardware requirements:</p>
 <ul>
-<li>7 quad-core 64-bit AMD processors</li>
+<li>2 blades with 8 quad-core 64-bit AMD processors each</li>
 <li>128 GB RAM</li>
 <li>A 2 TB SSD</li>
 <li>2 x 1 TB SCSI hard drives for redundancy</li>
 </ul>
+<blockquote>
+<p><span id="note-byline">To maintain a robust level of security while managing the traffic, it is strongly advised that the server be placed behind a proxy<br>
+</span></p>
+</blockquote>
 <h3 id="networking">Networking</h3>
 <p>Since the system will be accessed over a network, the following networking hardware must be in place and in working condition:</p>
 <ul>
@@ -63,12 +67,48 @@
 <li>A proxy to manage the server traffic listening on port 9595</li>
 <li>TCP/IP protocol in place on the server</li>
 </ul>
+<blockquote>
+<p><span id="note-byline">All wireless access must be monitored with cybersecurity software as once access is is given to the server system, the software does <strong>not</strong> perform any further security checks.<br>
+</span></p>
+</blockquote>
 <h3 id="licenses-and-certificates">Licenses and certificates</h3>
-<p>During the configuration of the system, licenses and certificates will be required for the system to validate the installation and give access to administrative users. Make sure</p>
+<p>During the configuration of the system, licenses (i.e. the <code>*.lic</code> files) and certificates (i.e. the <code>*.cert</code> files) will be required for the system to validate the installation and give access to users with various roles. Make sure that</p>
 <ul>
-<li>the licenses (i.e. the 2 <code>*.lic</code> files) are in the root directory where the server is to be installed</li>
-<li>the authentification certificates are in the <code>./cert</code> directory under the root</li>
+<li><em>Licenses</em> are in the root directory where the server is to be installed—assuming the default is not changed, that will be <code>C:\ProSoft</code></li>
+<li><em>Authentification Certificates</em> are in the <code>.\cert</code> directory under the root</li>
 </ul>
+<p>The licensing scheme used by <strong>ProSoft</strong> is as follows:</p>
+<table>
+<thead>
+<tr>
+<th>License</th>
+<th>Duration</th>
+<th>Number of Users</th>
+<th>Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Enterprise</em></td>
+<td>1 Year</td>
+<td>250</td>
+<td><em>Admin</em>, <em>Auditor</em>, <em>Supervisor</em>, <em>Client</em></td>
+</tr>
+<tr>
+<td><em>Professional</em></td>
+<td>1 Year</td>
+<td>100</td>
+<td><em>Admin</em>, <em>Supervisor</em>, <em>Client</em></td>
+</tr>
+<tr>
+<td><em>SMB</em></td>
+<td>1 Year</td>
+<td>50</td>
+<td><em>Admin</em>,<em>Client</em></td>
+</tr>
+</tbody>
+</table>
+<p>Certificates must be digitally signed by a recognized CA, and must be renewed after expiry dates.</p>
 <h2 id="configuration">Configuration</h2>
 <p>The system's configuration involves making the correct settings required by the server. This can be done either through the GUI or the CLI.</p>
 <span id="gui-byline">
@@ -201,16 +241,34 @@ C:\ProSoft\admin>
 <li>If the error persists, consult the <a href="#prosoft-hotline"><strong>ProSoft</strong> hotline</a> for expert advice</li>
 </ul>
 <h3 id="decommissioning">Decommissioning</h3>
-<p>If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it. These are:</p>
+<p>If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it.</p>
+<span id="cli-byline">
+<p>To decommission the system,</p>
 <ul>
-<li>Running the <code>.\admin\decomm_sys.ps</code> script to gather information about the current state of the resources the system has been using in order to generate a report</li>
-<li>Backing up all this legacy data based on the report generated</li>
-<li>Releasing the certificates</li>
-<li>Removing the licenses</li>
-<li>Uninstalling the software</li>
+<li>Open a terminal window with elevated privileges</li>
+<li>Navigate to <code>C:\ProSoft\admin</code></li>
+<li>Run the <code>.\decomm_sys.ps</code> script to gather information about the current state of the resources the system uses. This script will then generate a report named <code>res_info.csv</code> under the <code>.\admin</code> directory</li>
+<li>Using this report, back up all the legacy data. These are the <code>*.dat</code>, <code>*.dbx</code>, <code>*.idx</code>, <code>*.cfg</code>, <code>*.ps</code>, and <code>*.md</code> files</li>
+<li>Release the certificates by running the <code>cert_rel.ps</code> script</li>
+<li>Remove the licenses by running the <code>uninst_lic.ps</code> script</li>
 </ul>
+<blockquote>
+<p><span id="note-byline">Keep the certificates and licenses in a safe place in case the system needs to be reinstalled in the future<br>
+</span></p>
+</blockquote>
+<ul>
+<li>Finally, uninstall the software by running the <code>uninst_sys.ps</code> script</li>
+</ul>
+<p>After the uninstall process completes, the <code>C:\ProSoft</code> root directory and the <code>.\admin</code> and <code>.\cert</code> directories under it will remain. You can delete these manually.</p>
+<blockquote>
+<p><span id="note-byline">It is advised that you back up the <code>C:\ProSoft</code>, <code>C:\ProSoft\admin</code>, and the <code>C:\ProSoft\cert</code> directories before you delete them.<br>
+</span></p>
+</blockquote>
+<p>We also recommend that the directory structure of the resources at the time of decommissioning is not tampered with during or after the back up process.</p>
+</span>
+<hr>
 <h2 id="prosoft-hotline"><strong>ProSoft</strong> Hotline</h2>
-<p>You can reach <strong>ProSoft</strong> for expert advice through</p>
+<p>In case there are issues you are unable to resolve using available <em>User Assistance</em> material, you can reach <strong>ProSoft</strong> free of charge for expert advice through:</p>
 <p>Phone : 850-555-6677<br>
 E-mail: <a href="support@prosoft.com">support@prosoft.com</a></p>
 

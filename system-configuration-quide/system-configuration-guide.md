@@ -42,10 +42,13 @@ In order for the configuration procedure to continue without any errors or inter
 
 The system has to be installed on a server that meets the following minimum hardware requirements:
 
-* 7 quad-core 64-bit AMD processors
+* 2 blades with 8 quad-core 64-bit AMD processors each
 * 128 GB RAM
 * A 2 TB SSD
 * 2 x 1 TB SCSI hard drives for redundancy
+
+> <span id="note-byline">To maintain a robust level of security while managing the traffic, it is strongly advised that the server be placed behind a proxy
+> </span>
 
 ### Networking
 
@@ -55,12 +58,25 @@ Since the system will be accessed over a network, the following networking hardw
 * A proxy to manage the server traffic listening on port 9595
 * TCP/IP protocol in place on the server
 
+> <span id="note-byline">All wireless access must be monitored with cybersecurity software as once access is is given to the server system, the software does __not__ perform any further security checks.
+> </span>
+
 ### Licenses and certificates
 
-During the configuration of the system, licenses and certificates will be required for the system to validate the installation and give access to administrative users. Make sure
+During the configuration of the system, licenses (i.e. the `*.lic` files) and certificates (i.e. the `*.cert` files) will be required for the system to validate the installation and give access to users with various roles. Make sure that
 
-* the licenses (i.e. the 2 `*.lic` files) are in the root directory where the server is to be installed
-* the authentification certificates are in the `./cert` directory under the root
+* *Licenses* are in the root directory where the server is to be installed&mdash;assuming the default is not changed, that will be `C:\ProSoft`
+* *Authentification Certificates* are in the `.\cert` directory under the root
+
+The licensing scheme used by __ProSoft__ is as follows:
+
+|License|Duration|Number of Users|Types|
+|-|-|-|-|
+|*Enterprise*|1 Year|250|*Admin*, *Auditor*, *Supervisor*, *Client*|
+|*Professional*|1 Year|100|*Admin*, *Supervisor*, *Client*|
+|*SMB*|1 Year|50|*Admin*,*Client*|
+
+Certificates must be digitally signed by a recognized CA, and must be renewed after expiry dates.
 
 ## Configuration
 
@@ -219,17 +235,38 @@ An essential part of system administration and maintanence is diagnosing the roo
 
 ### Decommissioning
 
-If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it. These are:
+If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it.
 
-* Running the `.\admin\decomm_sys.ps` script to gather information about the current state of the resources the system has been using in order to generate a report
-* Backing up all this legacy data based on the report generated
-* Releasing the certificates
-* Removing the licenses
-* Uninstalling the software
+<span id="cli-byline">
+
+To decommission the system,
+
+* Open a terminal window with elevated privileges
+* Navigate to `C:\ProSoft\admin`
+* Run the `.\decomm_sys.ps` script to gather information about the current state of the resources the system uses. This script will then generate a report named `res_info.csv` under the `.\admin` directory
+* Using this report, back up all the legacy data. These are the `*.dat`, `*.dbx`, `*.idx`, `*.cfg`, `*.ps`, and `*.md` files
+* Release the certificates by running the `cert_rel.ps` script
+* Remove the licenses by running the `uninst_lic.ps` script
+
+> <span id="note-byline">Keep the certificates and licenses in a safe place in case the system needs to be reinstalled in the future
+> </span>
+
+* Finally, uninstall the software by running the `uninst_sys.ps` script
+
+After the uninstall process completes, the `C:\ProSoft` root directory and the `.\admin` and `.\cert` directories under it will remain. You can delete these manually.
+
+> <span id="note-byline">It is advised that you back up the `C:\ProSoft`, `C:\ProSoft\admin`, and the `C:\ProSoft\cert` directories before you delete them.
+> </span>
+
+We also recommend that the directory structure of the resources at the time of decommissioning is not tampered with during or after the back up process.
+
+</span>
+
+---
 
 ## __ProSoft__ Hotline
 
-You can reach __ProSoft__ for expert advice through
+In case there are issues you are unable to resolve using available *User Assistance* material, you can reach __ProSoft__ free of charge for expert advice through:
 
 Phone : 850-555-6677
 E-mail: [support@prosoft.com](support@prosoft.com)

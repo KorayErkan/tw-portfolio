@@ -7,7 +7,7 @@
 
 <body>
 <h1 id="modify-files-in batch-using-powershell">Managing Files With PowerShell</h1>
-<p id="mail-address"><a href="mailto:john.saysitall@goodcode.com"><i>John Saysitall</i></a></p>
+<p id="mail-address"><a href="mailto:John.saysitall@goodcode.com"><i>John Saysitall</i></a></p>
 
 <div>
 	<h2 id="table-of-contents">Table of Contents</h2>
@@ -27,22 +27,22 @@
 <p>A simple command such as <code>Get-ChildItem</code>, when used with judiciously selected parameters and piped through a formatting cmdlet, can quickly get the types of documents we want:</p>
 
 <pre id="command-line">
-C:>\Users\john\Documents\Get-ChildItem -Recurse *.docx | Format-Table Fullname
+C:\Users\John\Documents>Get-ChildItem -Recurse *.docx | Format-Table Fullname
 
 Fullname
 --------
-C:\Users\john\Documents\Budget-2023.docx
-C:\Users\john\Documents\Personal\Career\CV.docx
-C:\Users\john\Documents\Personal\School\College\Alumni.docx
-C:\Users\john\Documents\Recipes\Vegetarian\Mediterranean.docx
-C:\Users\john\Documents\Reports\Annual-2019.docx
-C:\Users\john\Documents\Reports\Quarterly-2021-1.docx
-C:\Users\john\Documents\Reports\Quarterly-2020-4.docx
+C:\Users\John\Documents\Budget-2023.docx
+C:\Users\John\Documents\Personal\Career\CV.docx
+C:\Users\John\Documents\Personal\School\College\Alumni.docx
+C:\Users\John\Documents\Recipes\Vegetarian\Mediterranean.docx
+C:\Users\John\Documents\Reports\Annual-2019.docx
+C:\Users\John\Documents\Reports\Quarterly-2021-1.docx
+C:\Users\John\Documents\Reports\Quarterly-2020-4.docx
 </pre>
 
 <blockquote id="sidebar">
 	<span id="note-byline">
-		This can be achieved using <i>File Explorer</i>, as well. However, we have to navigate to the top folder, then enter the regular expression "*.docx" in a drop-down box, and&mdash;once the documents are located&mdash;stay in that pane.
+		This can also be achieved using <i>File Explorer</i>. However, we have to navigate to the top folder, then enter the regular expression "*.docx" in a drop-down box, and&mdash;once the documents are located&mdash;stay in that pane to carry out whatever planned tasks we have.
 	</span>
 </blockquote>
 
@@ -51,7 +51,7 @@ C:\Users\john\Documents\Reports\Quarterly-2020-4.docx
 
 <blockquote id="sidebar">
 	<span id="warning-byline">
-		Be careful when you are updating multiple files, and make sure that the modifications you intend to make are valid for all of them.
+		Be careful when you are updating multiple files, and make sure that the modifications you intend to make are valid for all of them. It is strongly advised that you back them up before making any changes
 	</span>
 </blockquote>
 

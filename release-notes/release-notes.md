@@ -64,3 +64,7 @@ There are some known issues with the system regarding
   * CFGX files must quote alphanumeric values. Otherwise they will be terminated at the first white space (BUG ID: #2347)
 
 We will try to address these issues in future releases.
+
+---
+
+This document is ProSoft&copy;, 2024. All information contained herein is provided 'AS IS', and although ProSoft is committed to make sure such information is up-to-date and accurate, we make no claims or representations in any of these regards.

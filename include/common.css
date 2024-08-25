@@ -7,10 +7,6 @@ a, b, h1, h2, h3, h4, th {
 	color: #1566A8;
 }
 
-h1, h2, h3, h4 {
-	display: inline-block;
-}
-
 table {
 	margin-left: 50px;
 }
