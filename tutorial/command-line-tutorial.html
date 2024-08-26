@@ -1,33 +1,139 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<link rel="stylesheet" href="../include/common.css">
+<title>command-line-tutorial.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
 </head>
-
 <body>
-<h1 id="modify-files-in batch-using-powershell">Managing Files With PowerShell</h1>
-<p id="mail-address"><a href="mailto:John.saysitall@goodcode.com"><i>John Saysitall</i></a></p>
-
-<div>
-	<h2 id="table-of-contents">Table of Contents</h2>
-	<ul>
-		<li><a href="#introduction">Introduction</a></li>
-		<li><a href="#common-commands-for-managing-files">Common commands for managing files</a></li>
-		<li><a href="#searching-and-finding">Searching and finding</a></li>
-		<li><a href="#updating-a-collection-of-files">Updating a collection of files</a></li>
-	</ul>
-</div>
-
-<h2 id="introduction" class="keep-with-next">Introduction</h2>
-<p>This document explains how some <i>PowerShell</i> cmdlets&mdash;i.e. objects you can run from a terminal as commands&mdash;can be used to manage files in batch.</p>
-
-<p>Command line use may not be popular among ordinary users, but once mastered, it <em>does</em> provides quite a few advantages the biggest one of which can be to avoid the tedium of manually managing large numbers of files.</p>
-
-<p>A simple command such as <code>Get-ChildItem</code>, when used with judiciously selected parameters and piped through a formatting cmdlet, can quickly get the types of documents we want:</p>
-
-<pre id="command-line">
-C:\Users\John\Documents>Get-ChildItem -Recurse *.docx | Format-Table Fullname
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="managing-files-with-powershell">Managing Files With PowerShell</h1>
+<p><a href="mailto:John.saysitall@goodcode.com"><em>John Saysitall</em></a></p>
+<p>This document explains how some <em>PowerShell</em> cmdlets—i.e. programs you can run from a terminal as commands—can be used to manage files in batch.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#common-commands-for-managing-files">Common Commands for Managing Files</a></li>
+<li><a href="#searching-and-finding">Searching and Finding</a></li>
+<li><a href="#formatting-output">Formatting Output</a></li>
+<li><a href="#updating-a-collection-of-files">Updating a Collection of Files</a></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Command line use may not be popular among ordinary users, but once mastered, it <em>does</em> provide quite a few advantages the biggest one of which can be to avoid the tedium of manually managing large numbers of files. A simple command, when used with judiciously selected parameters and piped through a formatting cmdlet, can quickly get the types of documents we want.</p>
+<p>The reason the command line is not as popular as the graphical user interface is we have to remember the specific names of various commands, their <em>switches</em>, and their <em>parameter types</em>. With the GUI, you just try to find your way around just by using the visual cues the graphical objects on the screen provide. However, using the command line for a few weeks makes it apparent that it is more powerful because you can set the granularity of what you are seeking to do more precisely. And once you get the hang of specific commands (i.e. what their output looks like, what can be garnered from that output, etc.), you can carry out multiple tasks with just a few lines in one place.</p>
+<p>We will try to illustrate these points with file management tasks.</p>
+<h2 id="common-commands-for-managing-files">Common Commands for Managing Files</h2>
+<p>We will summarize the cmdlets (read as &quot;commandlets&quot;) used for searching the contents of directories, filtering them based on certain criteria, looking for certain strings in them, updating their contents in batch, etc. Those we will cover are:</p>
+<table>
+<thead>
+<tr>
+<th>Cmdlet</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Get-ChildItem</code></td>
+<td>List the objects in directories</td>
+</tr>
+<tr>
+<td><code>Where-Object</code></td>
+<td>Filter object based on various criteria</td>
+</tr>
+<tr>
+<td><code>Select-String</code></td>
+<td>Look for a specific piece of text in a file</td>
+</tr>
+<tr>
+<td><code>Get-Content</code></td>
+<td>Print the contents of a file on the screen</td>
+</tr>
+<tr>
+<td><code>Set-Content</code></td>
+<td>Update the contents of a file</td>
+</tr>
+<tr>
+<td><code>Format-Table</code></td>
+<td>Format the output of a command's output for easier reading on the screen</td>
+</tr>
+<tr>
+<td><code>Measure-Object</code></td>
+<td>Gather information like number of objects, their sizes, etc.</td>
+</tr>
+</tbody>
+</table>
+<p>We will take a closer look at each of these below.</p>
+<h2 id="searching-and-finding">Searching and Finding</h2>
+<p>One of the most commonly used cmdlets of PowerShell is <code>Get-ChildItem</code> which lists the contents of the current directory. Its most basic use is as follows:</p>
+<pre id="cmdln-byline">
+C:\Users\John\Documents>Get-ChildItem .
+</pre>
+<p>Here, the &quot;.&quot; after the command represents the current directory. The default output is like this:</p>
+<pre id="cmdln-byline">
+C:\Users\John\Documents>Get-ChildItem .
+d-----        24/12/2022     12:03                PowerShell
+d-r---        07/12/2020     11:58                Links
+-a----        21/10/2023     14:59           2365 Notes.txt
+</pre>
+<p>The first column, where we either have letters or dashes (6 in total), indicates what is known as the <em>attributes</em> of the objects. A dash indicates that the object does not have that attribute:</p>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Attribute</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d-----</code></td>
+<td>Directory</td>
+</tr>
+<tr>
+<td><code>-a----</code></td>
+<td>Archive</td>
+</tr>
+<tr>
+<td><code>--r---</code></td>
+<td>Read Only</td>
+</tr>
+<tr>
+<td><code>---h--</code></td>
+<td>Hidden</td>
+</tr>
+<tr>
+<td><code>----s-</code></td>
+<td>System</td>
+</tr>
+<tr>
+<td><code>-----l</code></td>
+<td>Link</td>
+</tr>
+</tbody>
+</table>
+<p>The above output indicates that <code>PowerShell</code> is a directory, <code>Links</code> is a read-only directory, and <code>Notes.txt</code> (a text file) is an archive. By default, hidden and system directories and files are <em>not</em> listed. If we wanted to see, for example, the hidden directories under the current directory, we use the <code>-Attributes</code> switch of this cmdlet.</p>
+<pre id="cmdln-byline">
+C:\Users\John\Documents>Get-ChildItem . -Attributes Hidden
+d--hsl        07/12/2020     07:39                Music
+d--hsl        07/12/2020     07:39                Pictures
+</pre>
+<p>The first column indicates that these two are <strong>d</strong>irectories, they are <strong>h</strong>idden, they are <strong>s</strong>ystem directories, and they are <strong>l</strong>inks.</p>
+<p>To look for files of a specific type, a common technique is to use the file extension. The following looks for <em>Microsoft Word</em> documents. Note that we are using the regular expression &quot;*.docx&quot; for this:</p>
+<pre id="cmdln-byline">
+C:\Users\John\Documents>Get-ChildItem . "*.docx"
+-a----        01/08/2023     16:15          17510 Drafts.docx
+-a----        21/08/2023     10:36          16803 Tutoring.docx
+</pre>
+<h2 id="formatting-output">Formatting Output</h2>
+<pre id="cmdln-byline">
+C:\Users\John\Documents>Get-ChildItem -Recurse \*.docx | Format-Table Fullname
 
 Fullname
 --------
@@ -39,20 +145,13 @@ C:\Users\John\Documents\Reports\Annual-2019.docx
 C:\Users\John\Documents\Reports\Quarterly-2021-1.docx
 C:\Users\John\Documents\Reports\Quarterly-2020-4.docx
 </pre>
-
-<blockquote id="sidebar">
-	<span id="note-byline">
-		This can also be achieved using <i>File Explorer</i>. However, we have to navigate to the top folder, then enter the regular expression "*.docx" in a drop-down box, and&mdash;once the documents are located&mdash;stay in that pane to carry out whatever planned tasks we have.
-	</span>
+<blockquote>
+<p><span id="note-byline">This can also be achieved using <em>Explorer</em>. However, we have to navigate to the top folder, then enter the regular expression &quot;*.docx&quot; in a drop-down box, and—once the documents are located-stay in that pane to carry out the planned tasks we have</span></p>
 </blockquote>
-
-<h2 id="updating-a-collection-of-files" class="keep-with-next">Updating a collection of files</h2>
-<p>Updating files in batch&mdash;for example to change or remove a phrase in a group of files, to update the names of the files in a directory, to move them collectively to another directory, etc.&mdash; is a task that is frequently well-suited to command-line use. In this section, we will show you how to carry out those tasks with ease.</p>
-
-<blockquote id="sidebar">
-	<span id="warning-byline">
-		Be careful when you are updating multiple files, and make sure that the modifications you intend to make are valid for all of them. It is strongly advised that you back them up before making any changes
-	</span>
+<h2 id="updating-a-collection-of-files">Updating a Collection of Files</h2>
+<p>Updating files in batch—for example to change or remove a phrase in a group of files, to update the names of the files in a directory, to move them collectively to another directory, etc.— is a task that is frequently well-suited to command-line use. In this section, we will show you how to carry out those tasks with ease.</p>
+<blockquote>
+<p><span id="note-byline">Be careful when you are updating multiple files, and make sure that the modifications you intend to make are valid for all of them. It is strongly advised that you back them up before making any changes</span></p>
 </blockquote>
 
 </body>
