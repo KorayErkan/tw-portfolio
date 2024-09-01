@@ -52,7 +52,7 @@ blockquote {
 }
 
 #ebnf-text {
-	font-style: italic;
+	/* font-style: italic; */
 	padding-left: 25px;
 }
 

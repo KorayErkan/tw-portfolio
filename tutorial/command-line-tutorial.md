@@ -1,4 +1,4 @@
-# Managing Files With PowerShell
+# Searching Files With PowerShell
 
 [_John Saysitall_](mailto:John.saysitall@goodcode.com)
 
@@ -11,12 +11,13 @@ This document explains how some _PowerShell_ cmdlets—i.e. programs you can run
 * [Listing Directory Objects](#listing-directory-objects)
 * [Listing Subdirectories](#listing-subdirectories)
 * [Searching By File Type](#searching-by-file-type)
-* [Piping](#piping)
+* [Composing Cmdlets](#composing-cmdlets)
 * [Formatting Output](#formatting-output)
-* [Use of Variables](#use-of-variables)
+* [Using Variables](#using-variables)
 * [Refining Queries](#refining-queries)
-* [Advanced Searching and Finding](#advanced-searching-and-finding)
-* [Updating a Collection of Files](#updating-a-collection-of-files)
+* [Displaying Contents](#displaying-contents)
+* [Advanced Text Search](#advanced-text-search)
+* [Conclusion](#conclusion)
 
 ## Introduction
 
@@ -34,20 +35,21 @@ We will summarize the cmdlets (read as "commandlets") used for searching the con
 |-|-|
 |`Get-ChildItem`|List the objects in directories|
 |`Format-Table`|Format the output of a command's output for easier reading on the screen|
-|`Where-Object`|Filter object based on various criteria|
-|`Select-String`|Look for a specific piece of text in a file|
-|`Measure-Object`|Gather information like number of objects, their sizes, etc.|
+|`Where-Object`|Filter objects based on various criteria|
 |`Get-Content`|Print the contents of a file on the screen|
-|`Set-Content`|Update the contents of a file|
+|`Select-String`|Look for a specific piece of text in a file|
 
 We will take a closer look at each of these below.
 
 ## Listing Directory Objects
 
-One of the most commonly used cmdlets of PowerShell is `Get-ChildItem` which lists the contents of the current directory. Its most basic use is as follows:
+One of the most commonly used cmdlets of PowerShell is `Get-ChildItem` which lists the contents of the current directory. Its basic syntax (i.e. its most frequently-used switches and parameters) is as follows:
 
-<pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem .
+<pre id="ebnf-text">
+get-childitem-statement ::= 'Get-ChildItem' [-Recurse]
+    '-Path' &lt;path&gt;
+    [(-Include | -Exclude) &lt;file-types&gt;]
+    [-Directory]
 </pre>
 
 Here, the dot (".") after the command is a shorthand for specifying the current directory. The cmdlet assumes that this is the parameter for its `Path` switch. Using that switch, any arbitrary directory&mdash;including those on other drives&mdash;can be listed. For example:
@@ -193,12 +195,12 @@ Mode                 LastWriteTime         Length Name
 -a----        01/08/2023     16:15          17510 Drafts.docx
 -a----        21/08/2023     10:36          16803 Tutoring.docx
 -a----        02/07/2021     12:24          17510 Proposal.docx
--a----        01/06/2021     11:34          16803 Proposal.csv
+-a----        01/06/2021     11:34          16803 Survey.csv
 </pre>
 
 Here, we see every file under the current directory except for those with the "*.html" extension.
 
-## Piping
+## Composing Cmdlets
 
 At this point, we will mention a technique known as _piping_. This is a technique used to _compose_ the functionality of multiple commands. It is achieved by placing a '|' character after the command and its parameters to feed the output to another command:
 
@@ -264,12 +266,12 @@ C:\Users\john\Documents\Reports\Q3-2021.docx
 
    Directory: C:\Users\John\Documents\Minutes
 
-C:\Users\john\Documents\Minutes\Q3-2021.docx
+C:\Users\john\Documents\Minutes\Q2-2021.docx
 </pre>
 
 Experimenting with various combinations of the two commands should yield results closer to what you would like to see reported on the screen.
 
-## Use of Variables
+## Using Variables
 
 At this point, we should mention one of the very useful features of PowerShell: being able to use variables.
 
@@ -278,8 +280,34 @@ As our command line entries become more complicated, they may become unwieldy an
 The basic syntax is very simple:
 
 <pre id="ebnf-text">
-"$"&lt;variable-name&gt; "=" &lt;value&gt;
+'$'&lt;variable-name&gt; '=' &lt;expression&gt;
 </pre>
+
+Defining variables in order to avoid typing the same lengthy pieces of text&mdash;paths, properties, phrases to be found in files, etc&mdash;is always good practice when using complicated use of the command line.
+
+For example, if we're searching things in multiple directories, it makes sense to declare a variable for this:
+
+<pre id="cmdln-text">
+C:\Users\John\Documents>$directories = "Reports", "Minutes"
+C:\Users\John\Documents>Get-ChildItem $directories
+
+   Directory: C:\Users\John\Documents\Reports
+
+C:\Users\john\Documents\Reports\Q1-2021.txt
+C:\Users\john\Documents\Reports\Q3-2021.docx
+
+   Directory: C:\Users\John\Documents\Minutes
+
+C:\Users\john\Documents\Minutes\Q2-2021.docx
+</pre>
+
+Here, we have specified only two directories to look for items in, and calling that list was enough to get the items in those directories.
+
+> <span id="warning-byline">When storing a list of values such as two or more directory names in a variable, each of these items must be quoted, and they must be separated by commas. That is because in order for what is stored in variables to be correctly interpreted by _PowerShell_, the value stored in the variable must be an _expression_.
+>
+> This can get confusing because a string is also an expression. However, a string is interpreted only as a value. If an expression involving switches or other cmdlets are entered as a string, those will _not_ be evaluated.</span>
+
+We will see what other types of variables we can create to streamline our work below.
 
 ## Refining Queries
 
@@ -288,10 +316,15 @@ It is frequently not enough to list objects by their name and type. We may want 
 This cmdlet makes it possible to specify qualifies that the object should possess with the following syntax:
 
 <pre id="ebnf-text">
-Where-Object "{" "$_."&lt;property&gt; ("-like" | "-ge" | "-lt" | "-eq" | "-neq") &lt;parameter&gt; "}"
+where-statement ::= 'Where-Object' { $_.&lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt; }
+                  | 'Where-Object' -Property &lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt;
+comparison ::= '-match' | '-notmatch'
+             | '-like' | '-notlike'
+             | '-contains'
+             | '-gt' | '-ge' | '-lt' | '-le' | '-eq' | '-neq'
 </pre>
 
-Let us illustrate its use with an example:
+Let's illustrate its use with an example:
 
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem . "*.docx" | Where-Object {$_.Name -like "Tutor"}
@@ -317,28 +350,139 @@ Mode                 LastWriteTime         Length Name
 
 This time, we queried for _Microsoft Word_ documents that are _greater than or equal to_ (which is what _-ge_ stands for) 17500 bytes.
 
-## Advanced Searching and Finding
-
-Now we will look into making a wider scoped search to find objects whose specific locations we may not know or remember.
+The _-match_ comparison operator is for regular expressions. We can use it, for example, to select multiple types of files:
 
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem -Recurse \*.docx | Format-Table Fullname
+C:\Users\John\Documents>Get-ChildItem . | Where-Object -Property Extension -match "(docx|html)"
 
-Fullname
---------
-C:\Users\John\Documents\Budget-2023.docx
-C:\Users\John\Documents\Personal\Career\CV.docx
-C:\Users\John\Documents\Personal\School\College\Alumni.docx
-C:\Users\John\Documents\Recipes\Vegetarian\Mediterranean.docx
-C:\Users\John\Documents\Reports\Annual-2019.docx
-C:\Users\John\Documents\Reports\Quarterly-2021-1.docx
-C:\Users\John\Documents\Reports\Quarterly-2020-4.docx
+    Directory: C:\Users\john\Documents
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        01/08/2021     16:15          17510 Drafts.docx
+-a----        21/05/2021     10:36          16803 Tutoring.docx
+-a----        02/09/2023     16:15           2580 ToC.html
 </pre>
 
-> <span id="note-byline">This can also be achieved using _Explorer_. However, we have to navigate to the top folder, then enter the regular expression "*.docx" in a drop-down box, and—once the documents are located-stay in that pane to carry out the planned tasks we have</span>
+As you might have guessed, we can further narrow down our search by using piping.
 
-## Updating a Collection of Files
+<pre id="cmdln-text">
+C:\Users\John\Documents>Get-ChildItem . |
+    Where-Object -Property Extension -match "(docx|html) |
+    Where-Object -Property LastWriteTime -ge 5/1/2022"
 
-Updating files in batch—for example to change or remove a phrase in a group of files, to update the names of the files in a directory, to move them collectively to another directory, etc.— is a task that is frequently well-suited to command-line use. In this section, we will show you how to carry out those tasks with ease.
+    Directory: C:\Users\john\Documents
 
-> <span id="note-byline">Be careful when you are updating multiple files, and make sure that the modifications you intend to make are valid for all of them. It is strongly advised that you back them up before making any changes</span>
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        02/09/2023     16:15           2580 ToC.html
+</pre>
+
+We have queried for all _Microsoft Word_ documents and HTML files, then we selected only those that were created or updated after May 1, 2022.
+
+Let's use variables to streamline our work:
+
+<pre id="cmdln-text">
+C:\Users\John\Documents>$directories = "Reports", "Minutes"
+C:\Users\John\Documents>$only_word_files = {$_.Extension -match 'docx'}
+C:\Users\John\Documents>$only_newest = {$_.LastWriteTime -ge '1/1/2021'}
+
+C:\Users\John\Documents>Get-ChildItem $directories | Where-Object $only_word_files | Where-Object $only_newest
+
+   Directory: C:\Users\John\Documents\Reports
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        01/08/2021     16:15          17510 Drafts.docx
+
+   Directory: C:\Users\John\Documents\Minutes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        02/05/2021     13:07          14750 Q2-2021.docx
+</pre>
+
+Very clean and easy to follow. To further refine our search, we have to query what is inside the files.
+
+## Displaying Contents
+
+Frequently, you may want to have an idea on some random file in case it contains what you are looking for. If the file is in a text format, PowerShell offers a convenient cmdlet named `Get-Content` to display the contents of the file on the terminal.
+
+Assuming you know the name of the file whose contents you want to display, the syntax is:
+
+<pre id="ebnf-text">
+get-content-statement ::= 'Get-Content' '-Path' &lt;file-name&gt;
+</pre>
+
+The use of the cmdlet in this form is very simple and straightforward:
+
+<pre id="cmdln-text">
+C:\Users\John\Documents>Get-Content -Path .\Reports\Q1-2020.txt
+2020 QUARTERLY REPORT
+
+This is the report for the 1st quarter of 2020. We will provide
+a brief summary of all the events that have been organized
+and carried out.
+...
+</pre>
+
+However, the cmdlet is much more flexible, and as it can read the so-called standard input you can use it with piping after looking for specific files:
+
+<pre id="cmdln-text">
+C:\Users\John\Documents>Get-ChildItem .\Reports | Where-Object {$_.Name -like "Q1"} | Get-Content
+2020 QUARTERLY REPORT
+
+This is the report for the 1st quarter of 2020. We will provide
+a brief summary of all the events that have been organized
+and carried out.
+...
+</pre>
+
+If you do not want to manually check the contents of the files, however, there's an even more powerful cmdlet to find what you are looking for.
+
+## Advanced Text Search
+
+The cmdlet in question is `Select-String`, and it can be used to query the text data inside the files we have discovered in a directory.
+
+This commandlet searches for phrases and patterns in text files, and its basic syntax is:
+
+<pre id="ebnf-text">
+select-string-statement ::= 'Select-String'
+    '-Pattern' (&lt;regular-expression&gt; | &lt;plain-expression&gt; '-SimpleMatch')
+    '-Path' &lt;filename&gt;
+    ['-CaseSensitive']
+</pre>
+
+As can be seen from the syntax, we specify a pattern which is assumed to be a regular expression by default&mdash;if we want a verbatim match, we override the default by using the `-SimpğleMatch` switch&mdash; then we enter the path of the file.
+
+The use of the cmdlet is straightforward:
+
+<pre id="cmdln-text">
+C:\Users\John\Documents>Select-String -Pattern "QUARTERLY" -SimpleMatch -Path .\Reports\Q1-2020.txt
+2020 QUARTERLY REPORT
+
+This is the report for the 1st quarter of 2020. We will provide
+a brief summary of all the events that have been organized
+and carried out.
+...
+</pre>
+
+Like `Get-Content`, this cmdlet also reads the standard input so it can be used with piping.
+
+<pre id="cmdln-text">
+C:\Users\John\Documents>Get-ChildItem .\Reports | Select-String -Pattern "QUARTERLY"
+2020 QUARTERLY REPORT
+
+This is the report for the 1st quarter of 2020. We will provide
+a brief summary of all the events that have been organized
+and carried out.
+...
+</pre>
+
+## Conclusion
+
+The commands we have presented above, when combined imaginatively, should make it very easy to find what you are looking for.
+
+<hr>
+
+_Copyright&copy; 2024, John Saysitall_
