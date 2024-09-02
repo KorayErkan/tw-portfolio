@@ -220,7 +220,48 @@ To carry out this task using the graphical interface,
 To carry out this task using the command line,
 
 * Open a terminal with elevated privileges
-* Navigate to the root directory
+* Navigate to `users` directory under the root, i.e. `C:\ProSoft\users`, and list the files in the directory
+
+<pre id="cmdln-text">
+C:\ProSoft\users>ls * | ft Name
+
+adm-3c47db38aa86f032.seat
+adm-78fc4496f3aa5b3f.seat
+cli-4a83c96fe68dfea5.seat
+cli-d6407ede475985f0.seat
+cli-58c8dab0dd8c8fce.seat
+cli-869861562d411ee1.seat
+cli-fc586256b8cbf654.seat
+cli-fb6985abc41894f4.seat
+sup-b51ae4a5c25e1658.seat
+prov_seat.ps
+prov_config.cfg
+</pre>
+
+* The seats already in use are the ones listed as `*.seat` files with hexadecimal numbers in their names. The file named `prov_config.cfg` contains the relevant data for seat allocation. Find the line in it with the entry `MAX_USER` using `Select-String` to learn the maximum seats available for the license. If the number of `*.seat` files is less than that number, you can provision a seat. If not, you need to purchase additional seats.
+
+<pre id="cmdln-text">
+C:\ProSoft\users>Select-String -Pattern "MAX_USER" -Path provision.cfg
+
+provision.cfg:18:MAX_USER=50
+</pre>
+
+* The script named `prov_seat.ps` can be run to do this automatically. Running the script with the required parameters will either provision the seat, or, in case there are no available seats, report an error.
+
+<pre id="cmdln-text">
+C:\ProSoft\users>prov_seat.cfg --user-type=client
+>>> Checking availability ...
+>>> Provisioning ...
+>>> The seat with the id '747ba03cab6fe9c' was provisioned
+</pre>
+
+* If a seat was successfully provisioned, listing the id will show that a new seat file has been created in the directory.
+
+<pre id="cmdln-text">
+C:\ProSoft\users>ls '*747ba03cab6fe9c*' | ft Name
+
+cli-747ba03cab6fe9c.seat
+</pre>
 
 </span>
 
@@ -228,7 +269,7 @@ To carry out this task using the command line,
 
 An essential part of system administration and maintanence is diagnosing the root causes of issues and resolving them. All troubleshooting must be done using the following general procedure:
 
-* Check the __error code__ and the __error message__: Every error report provides a specific error id and a message explaining the exceptional that has been raised. The message will provide hints on how to proceed
+* Check the __error code__ and the __error message__: the error dialog provides a specific error number to identify the error, and a message explaining the exception that has been raised. The message will provide hints as to how to proceed
 * Find the __error code__ in the lookup table attached to this guide. It contains useful hints about the possible sources of the error
 * Follow the instructions for diagnosing the root cause of the problem. The table provides possible actions and workarounds to resolve the issue
 * If the error persists, consult the [__ProSoft__ hotline](#prosoft-hotline) for expert advice
@@ -242,20 +283,45 @@ If for some reason the system fails to meet your needs, there are a number of st
 To decommission the system,
 
 * Open a terminal window with elevated privileges
-* Navigate to `C:\ProSoft\admin`
-* Run the `.\decomm_sys.ps` script to gather information about the current state of the resources the system uses. This script will then generate a report named `res_info.csv` under the `.\admin` directory
-* Using this report, back up all the legacy data. These are the `*.dat`, `*.dbx`, `*.idx`, `*.cfg`, `*.ps`, and `*.md` files
+* Navigate to `C:\ProSoft\admin` with using `cd`
+* Run the `.\decomm_sys.ps` script to gather information about the current state of the resources the system uses. This script will generate a report named `res_info.csv` under the `.\admin` directory
+
+<pre id="cmdln-text">
+C:\ProSoft\users>decomm_sys.ps
+>>> Initializing decommissioning system ...
+>>> Resource list is being generated ...
+>>> Done
+
+C:\ProSoft\users>ls *csv | ft Name
+
+sys_res.csv
+</pre>
+
+* Using the report, back up all the legacy data. These are the `*.dat`, `*.dbx`, `*.idx`, `*.cfg`, `*.ps`, and `*.md` files
 * Release the certificates by running the `cert_rel.ps` script
+
+<pre id="cmdln-text">
+C:\ProSoft\users>cert_rel.ps
+>>> Releasing certificates ...
+>>> Done
+</pre>
+
 * Remove the licenses by running the `uninst_lic.ps` script
 
-> <span id="note-byline">Keep the certificates and licenses in a safe place in case the system needs to be reinstalled in the future
+<pre id="cmdln-text">
+C:\ProSoft\users>uninst_lic.ps
+>>> Uninstalling license ...
+>>> Done
+</pre>
+
+> <span id="warning-byline">Keep the certificates and licenses in a safe place in case the system needs to be reinstalled in the future
 > </span>
 
 * Finally, uninstall the software by running the `uninst_sys.ps` script
 
 After the uninstall process completes, the `C:\ProSoft` root directory and the `.\admin` and `.\cert` directories under it will remain. You can delete these manually.
 
-> <span id="note-byline">It is advised that you back up the `C:\ProSoft`, `C:\ProSoft\admin`, and the `C:\ProSoft\cert` directories before you delete them.
+> <span id="warning-byline">It is strongly advised that you back up the `C:\ProSoft`, `C:\ProSoft\admin`, and the `C:\ProSoft\cert` directories before you delete them.
 > </span>
 
 We also recommend that the directory structure of the resources at the time of decommissioning is not tampered with during or after the back up process.

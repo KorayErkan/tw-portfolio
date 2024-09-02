@@ -437,7 +437,7 @@ and carried out.
 However, the cmdlet is much more flexible, and as it can read the so-called standard input you can use it with piping after looking for specific files:
 
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem .\Reports | Where-Object {$_.Name -like "Q1"} | Get-Content
+C:\Users\John\Documents>Get-ChildItem .\Reports | Where-Object {$_.Name -like "*Q1*"} | Get-Content
 2020 QUARTERLY REPORT
 
 This is the report for the 1st quarter of 2020. We will provide

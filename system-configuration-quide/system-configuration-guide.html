@@ -229,13 +229,53 @@ C:\ProSoft\admin>
 <p>To carry out this task using the command line,</p>
 <ul>
 <li>Open a terminal with elevated privileges</li>
-<li>Navigate to the root directory</li>
+<li>Navigate to <code>users</code> directory under the root, i.e. <code>C:\ProSoft\users</code>, and list the files in the directory</li>
 </ul>
+<pre id="cmdln-text">
+C:\ProSoft\users>ls * | ft Name
+
+adm-3c47db38aa86f032.seat
+adm-78fc4496f3aa5b3f.seat
+cli-4a83c96fe68dfea5.seat
+cli-d6407ede475985f0.seat
+cli-58c8dab0dd8c8fce.seat
+cli-869861562d411ee1.seat
+cli-fc586256b8cbf654.seat
+cli-fb6985abc41894f4.seat
+sup-b51ae4a5c25e1658.seat
+prov_seat.ps
+prov_config.cfg
+</pre>
+<ul>
+<li>The seats already in use are the ones listed as <code>*.seat</code> files with hexadecimal numbers in their names. The file named <code>prov_config.cfg</code> contains the relevant data for seat allocation. Find the line in it with the entry <code>MAX_USER</code> using <code>Select-String</code> to learn the maximum seats available for the license. If the number of <code>*.seat</code> files is less than that number, you can provision a seat. If not, you need to purchase additional seats.</li>
+</ul>
+<pre id="cmdln-text">
+C:\ProSoft\users>Select-String -Pattern "MAX_USER" -Path provision.cfg
+
+provision.cfg:18:MAX_USER=50
+</pre>
+<ul>
+<li>The script named <code>prov_seat.ps</code> can be run to do this automatically. Running the script with the required parameters will either provision the seat, or, in case there are no available seats, report an error.</li>
+</ul>
+<pre id="cmdln-text">
+C:\ProSoft\users>prov_seat.cfg --user-type=client
+>>> Checking availability ...
+>>> Provisioning ...
+>>> The seat with the id '747ba03cab6fe9c' was provisioned
+</pre>
+<ul>
+<li>If a seat was successfully provisioned, listing the id will show that a new seat file has been created in the directory.</li>
+</ul>
+<pre id="cmdln-text">
+C:\ProSoft\users>ls '*747ba03cab6fe9c*' | ft Name
+
+cli-747ba03cab6fe9c.seat
+</pre>
 </span>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <p>An essential part of system administration and maintanence is diagnosing the root causes of issues and resolving them. All troubleshooting must be done using the following general procedure:</p>
 <ul>
-<li>Check the <strong>error code</strong> and the <strong>error message</strong>: Every error report provides a specific error id and a message explaining the exceptional that has been raised. The message will provide hints on how to proceed</li>
+<li>Check the <strong>error code</strong> and the <strong>error message</strong>: the error dialog provides a specific error number to identify the error, and a message explaining the exception that has been raised. The message will provide hints as to how to proceed</li>
 <li>Find the <strong>error code</strong> in the lookup table attached to this guide. It contains useful hints about the possible sources of the error</li>
 <li>Follow the instructions for diagnosing the root cause of the problem. The table provides possible actions and workarounds to resolve the issue</li>
 <li>If the error persists, consult the <a href="#prosoft-hotline"><strong>ProSoft</strong> hotline</a> for expert advice</li>
@@ -246,14 +286,38 @@ C:\ProSoft\admin>
 <p>To decommission the system,</p>
 <ul>
 <li>Open a terminal window with elevated privileges</li>
-<li>Navigate to <code>C:\ProSoft\admin</code></li>
-<li>Run the <code>.\decomm_sys.ps</code> script to gather information about the current state of the resources the system uses. This script will then generate a report named <code>res_info.csv</code> under the <code>.\admin</code> directory</li>
-<li>Using this report, back up all the legacy data. These are the <code>*.dat</code>, <code>*.dbx</code>, <code>*.idx</code>, <code>*.cfg</code>, <code>*.ps</code>, and <code>*.md</code> files</li>
+<li>Navigate to <code>C:\ProSoft\admin</code> with using <code>cd</code></li>
+<li>Run the <code>.\decomm_sys.ps</code> script to gather information about the current state of the resources the system uses. This script will generate a report named <code>res_info.csv</code> under the <code>.\admin</code> directory</li>
+</ul>
+<pre id="cmdln-text">
+C:\ProSoft\users>decomm_sys.ps
+>>> Initializing decommissioning system ...
+>>> Resource list is being generated ...
+>>> Done
+
+C:\ProSoft\users>ls *csv | ft Name
+
+sys_res.csv
+</pre>
+<ul>
+<li>Using the report, back up all the legacy data. These are the <code>*.dat</code>, <code>*.dbx</code>, <code>*.idx</code>, <code>*.cfg</code>, <code>*.ps</code>, and <code>*.md</code> files</li>
 <li>Release the certificates by running the <code>cert_rel.ps</code> script</li>
+</ul>
+<pre id="cmdln-text">
+C:\ProSoft\users>cert_rel.ps
+>>> Releasing certificates ...
+>>> Done
+</pre>
+<ul>
 <li>Remove the licenses by running the <code>uninst_lic.ps</code> script</li>
 </ul>
+<pre id="cmdln-text">
+C:\ProSoft\users>uninst_lic.ps
+>>> Uninstalling license ...
+>>> Done
+</pre>
 <blockquote>
-<p><span id="note-byline">Keep the certificates and licenses in a safe place in case the system needs to be reinstalled in the future<br>
+<p><span id="warning-byline">Keep the certificates and licenses in a safe place in case the system needs to be reinstalled in the future<br>
 </span></p>
 </blockquote>
 <ul>
@@ -261,7 +325,7 @@ C:\ProSoft\admin>
 </ul>
 <p>After the uninstall process completes, the <code>C:\ProSoft</code> root directory and the <code>.\admin</code> and <code>.\cert</code> directories under it will remain. You can delete these manually.</p>
 <blockquote>
-<p><span id="note-byline">It is advised that you back up the <code>C:\ProSoft</code>, <code>C:\ProSoft\admin</code>, and the <code>C:\ProSoft\cert</code> directories before you delete them.<br>
+<p><span id="warning-byline">It is strongly advised that you back up the <code>C:\ProSoft</code>, <code>C:\ProSoft\admin</code>, and the <code>C:\ProSoft\cert</code> directories before you delete them.<br>
 </span></p>
 </blockquote>
 <p>We also recommend that the directory structure of the resources at the time of decommissioning is not tampered with during or after the back up process.</p>
