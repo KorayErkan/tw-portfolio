@@ -78,18 +78,22 @@ get-childitem-statement ::= 'Get-ChildItem' [-Recurse]
     [(-Include | -Exclude) &lt;file-types&gt;]
     [-Directory]
 </pre>
-<p>Here, the dot (&quot;.&quot;) after the command is a shorthand for specifying the current directory. The cmdlet assumes that this is the parameter for its <code>Path</code> switch. Using that switch, any arbitrary directory—including those on other drives—can be listed. For example:</p>
+<p>Its common use is pretty straightforward:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem -Path H:\Backup\Reports
+C:\Users\John\Documents>Get-ChildItem .
 </pre>
-<p>It is also possible to list multiple directories by separating their names with a comma:</p>
+<p>Here, the dot after the command is a shorthand for specifying the directory we are in. The cmdlet assumes that this is the parameter for its <code>Path</code> switch.</p>
 <blockquote>
-<p><span id="note-byline">Certain switches of cmdlets allow multiple values if it is reasonable to do so. The values should be specified as a comma-separated list, and although it is not necessary to place them in quotes (single or double), it is a good practice to do so for readability</span></p>
+<p><span id="note-byline">In most command line implementations on various operating systems, it is a common convention to represent the current directory with '<code>.</code>' and the parent directory with '<code>..</code>'</span></p>
 </blockquote>
+<p>Using that switch, any arbitrary directory—including those on other drives—can be listed regardless of what the current directory is. It is also possible to list multiple directories by separating their names with a comma:</p>
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem -Path ".\Documents", ".\Reports"
 </pre>
-<p>Here, the &quot;.&quot; before the directory names tells the cmdlet to look for these directories under the current one.</p>
+<blockquote>
+<p><span id="note-byline">Certain switches of cmdlets allow multiple values if it is reasonable to do so. The values should be specified as a comma-separated list, and although it is not necessary to place them in quotes (single or double), it is a good practice to do so for readability</span></p>
+</blockquote>
+<p>Here, the '<code>.\</code>' before the directory names tells the cmdlet to look for these directories under the current one. You can omit it since it is the default.</p>
 <p>Getting back to our example of listing the contents of the current directory, here's a typical output:</p>
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem .
@@ -161,8 +165,9 @@ dar--l        29/07/2024     23:43                OneDrive
 d--hsl        07/12/2020     07:39                PrintHood
 d--hsl        07/12/2020     07:39                Recent
 </pre>
+<p>We are not limited with seeing only what is inside the directory we have specified, though. We can use that directory as a starting point for a search.</p>
 <h2 id="listing-subdirectories">Listing Subdirectories</h2>
-<p>Our directory listing command is not limited to listing only the current directory. Using its <code>-Recurse</code> switch, we can check what is inside the current directory as well as all its subdirectories.</p>
+<p>It is possible to list everything under the current directory including the nested ones. Using its <code>-Recurse</code> switch, we can check what is inside the current directory as well as all its subdirectories.</p>
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem -Recurse .
 
@@ -188,9 +193,9 @@ Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----        09/05/2020     16:24                Q3-2021.txt
 </pre>
-<p>The command first lists the objects under the current directory, then those under each of the directories specified with the <code>Path</code> switch in turn.</p>
+<p>The command first lists the objects under the current directory, then those under each those under it, repeating the same process for each directory in turn. It terminates when there are no more subdirectories to look into.</p>
 <h2 id="searching-by-file-type">Searching By File Type</h2>
-<p>One of the primary uses of enumerating the objects in directories, other than seeing what is in them, is to look for files of a specific type. A common technique to search them is to use the file extension. The following looks for <em>Microsoft Word</em> documents. Note that we are using the regular expression &quot;*.docx&quot; for this:</p>
+<p>One of the primary uses of enumerating the objects in directories is to look for files of a specific type, disregarding the rest. A common technique to search them is to use the file extension. The following looks for <em>Microsoft Word</em> documents. Note that we are using the regular expression &quot;<code>*.docx</code>&quot; for this:</p>
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem . "*.docx"
 
@@ -201,7 +206,7 @@ Mode                 LastWriteTime         Length Name
 -a----        01/08/2023     16:15          17510 Drafts.docx
 -a----        21/08/2023     10:36          16803 Tutoring.docx
 </pre>
-<p>The cmdlet assumes that the <code>&quot;*.docx&quot;</code> parameter specified is for the <code>-Include</code> switch. Using this, we can look for multiple file types by specifying their extensions:</p>
+<p>The cmdlet assumes that the &quot;<code>*.docx</code>&quot; parameter specified is for the <code>-Include</code> switch. Using this switch, we can look for multiple file types by specifying their extensions:</p>
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem . -Include "*.docx", "*.html"
 
@@ -226,7 +231,8 @@ Mode                 LastWriteTime         Length Name
 -a----        02/07/2021     12:24          17510 Proposal.docx
 -a----        01/06/2021     11:34          16803 Survey.csv
 </pre>
-<p>Here, we see every file under the current directory except for those with the &quot;*.html&quot; extension.</p>
+<p>Here, we see every file under the current directory except for those with the &quot;<code>*.html</code>&quot; extension.</p>
+<p>Finally, we can also specify that we're only looking for directories in our search without specifying their names:</p>
 <h2 id="composing-cmdlets">Composing Cmdlets</h2>
 <p>At this point, we will mention a technique known as <em>piping</em>. This is a technique used to <em>compose</em> the functionality of multiple commands. It is achieved by placing a '|' character after the command and its parameters to feed the output to another command:</p>
 <pre -id="ebnf-text">
@@ -431,7 +437,7 @@ C:\Users\John\Documents>Select-String -Pattern "QUARTERLY" -SimpleMatch -Path .\
 2020 QUARTERLY REPORT
 
 This is the report for the 1st quarter of 2020. We will provide
-a brief summary of all the events that have been organized
+a brief summary of all the activities that have been organized
 and carried out.
 ...
 </pre>
@@ -441,12 +447,30 @@ C:\Users\John\Documents>Get-ChildItem .\Reports | Select-String -Pattern "QUARTE
 2020 QUARTERLY REPORT
 
 This is the report for the 1st quarter of 2020. We will provide
-a brief summary of all the events that have been organized
+a brief summary of all the activities that have been organized
 and carried out.
 ...
 </pre>
+<p>Finally, using the powerful syntax of regular expressions, we can specify multiple pieces of text, and <code>Select-String</code> will spot it for you.</p>
+<pre id="cmdln-text">
+C:\Users\John\Documents>Get-ChildItem -Path ".\Reports", ".\Minutes" | Select-String -Pattern "(report|events)"
+2020 QUARTERLY REPORT
+
+This is the report for the 1st quarter of 2020. We will provide
+a brief summary of all the activites that have been organized
+and carried out.
+...
+
+2021 QUARTERLY MEETING MINUTES
+
+These minutes were recorded to report the results of the events
+that were organized this quarter.
+...
+</pre>
+<p>Here, PowerShell found two files one of them containing '<code>report</code>' the other '<code>event</code>', and printed the files on the screen.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>The commands we have presented above, when combined imaginatively, should make it very easy to find what you are looking for.</p>
+<p>The commands we have presented above, when combined imaginatively, should make it very easy to find what you are looking for. Whether it is the directories specified, whether it is certain file properties such as file type, date of creation, or size, and whether it is certain pieces of text data they contain, PowerShell can spot what you are looking for and list them on the terminal. It all depends on how concise and precise you are in specifying the data you are searching.</p>
+<p>Good luck learning to use these very powerfull cmdlets.</p>
 <hr>
 <p><em>Copyright© 2024, John Saysitall</em></p>
 
