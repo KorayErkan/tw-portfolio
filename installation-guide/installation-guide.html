@@ -86,7 +86,7 @@ C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
 >>> Installing...
 </pre>
 <ul>
-<li>It is recommend that the default values for cache size, disk size, API endpoints, communication ports, and others are left as they are unless you have a good reason to change them. To confirm these settings, type <code>Y</code> (for <strong>Yes</strong>) for each when prompted on the command line</li>
+<li>It is recommended that the default values for cache size, disk size, API endpoints, communication ports, and others are <em>not</em> changed unless you have a good reason to do so. To confirm these settings, type <code>Y</code> (for <strong>Yes</strong>) for each when prompted on the command line</li>
 </ul>
 <pre id="cmdln-text">
 >>> cache_size=4096KB? [Y/N]: Y
@@ -111,15 +111,49 @@ C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
 <p>Because the system creates partitions for more efficient marshalling of data, it may take up to 15 minutes for this stage to complete.</p>
 </span>
 <h2 id="configuration">Configuration</h2>
-<p>After the installation process completes,</p>
+<p>After the installation process is completed, the basic configuration needs to be made, and this has to be done through the command line. The process is as follows:</p>
+<span id="cli-byline">
 <ul>
-<li>Copy the <code>prosoft.lic</code> file sent to you via e-mail to the <code>bin</code> subdirectory of the installation folder. You will be prompted the first time you launch the program to point to this file for activation</li>
-<li>Install the security certificates the system needs under the <code>cert</code> subdirectory of the installation folder</li>
-<li>Make sure that your proxy server, if any, is configured to allow traffic at ProSoft's default communication ports: 4096 and 6650</li>
-<li>Check the security settings of the server before starting to add users that will have access to the system. The users should have <em>Read</em>, <em>Write</em>, and <em>Execute</em> privileges</li>
+<li>Copy the <code>prosoft.lic</code> file sent to you via e-mail to the <code>bin</code> subdirectory of the installation folder. It is advised that you rename this file using the name of your company. Here, we will use <code>company-name</code> for this.</li>
 </ul>
+<pre id="cmdln-text">
+C:\Downloads>mv prosoft.lic company-name.lic
+C:\Downloads>copy company-name.lic \ProSoft\bin
+</pre>
+<ul>
+<li>Navigate to the <code>admin</code> directory of the root, and install the license by running the <code>install_lic.ps</code> script</li>
+</ul>
+<pre id="cmdln-text">
+C:\Downloads>cd \ProSoft\admin
+C:\ProSoft\admin>install_lic.ps --license-file=company-name.lic
+>>> Installing license ...
+>>> Done
+</pre>
+<blockquote>
+<p><span id="note-byline">If you do not introduce the license through the command line, you will be prompted the first time you launch the program to point to this file for activation.<br>
+</span></p>
+</blockquote>
+<ul>
+<li>Copy the security certificates (which we will call in our example <code>company-cert</code>) the system needs to the <code>cert</code> directory of the root, and instaşll them by running the <code>install_cert.ps</code> script:</li>
+</ul>
+<pre id="cmdln-text">
+C:\ProSoft\admin>copy \Users\&lt;admin-name&gt;\company-cert-1.ca company-cert-2.ca ..\cert
+C:\ProSoft\admin>install_cert.ps --install-dir=..\cert --certificates=..\cert\*.ca
+>>> Installing certificates ...
+>>> Done
+</pre>
+<ul>
+<li>
+<p>Make sure that your proxy server, if any, is configured to allow traffic at ProSoft's default communication ports: 4096 and 6650</p>
+</li>
+<li>
+<p>Check the security settings of the server before starting to add users that will have access to the system. The users should have <em>Read</em>, <em>Write</em>, and <em>Execute</em> privileges</p>
+</li>
+</ul>
+</span>
+<hr>
 <h2 id="license-terms">License Terms</h2>
-<p>This software is valid for one major upgrade amd all the minor upgrades in between. The number of seats is limited 25 for the <em>Professional</em> and 50 for the <em>Enterprise</em> versions. In order to renew licenses or add more seats, please visit our <a href="https://www.profost.com/licensing">licensing page</a>.</p>
+<p>This software is valid for one major upgrade amd all the minor upgrades in between. The number of seats is limited to 25 for the <em>Professional</em> and 50 for the <em>Enterprise</em> versions. In order to renew licenses or add more seats, please visit our <a href="https://www.profost.com/licensing">licensing page</a>.</p>
 
 </body>
 </html>

@@ -87,7 +87,7 @@ C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
 >>> Installing...
 </pre>
 
-* It is recommend that the default values for cache size, disk size, API endpoints, communication ports, and others are left as they are unless you have a good reason to change them. To confirm these settings, type `Y` (for __Yes__) for each when prompted on the command line
+* It is recommended that the default values for cache size, disk size, API endpoints, communication ports, and others are *not* changed unless you have a good reason to do so. To confirm these settings, type `Y` (for __Yes__) for each when prompted on the command line
 
 <pre id="cmdln-text">
 >>> cache_size=4096KB? [Y/N]: Y
@@ -116,13 +116,46 @@ Because the system creates partitions for more efficient marshalling of data, it
 
 ## Configuration
 
-After the installation process completes,
+After the installation process is completed, the basic configuration needs to be made, and this has to be done through the command line. The process is as follows:
 
-* Copy the `prosoft.lic` file sent to you via e-mail to the `bin` subdirectory of the installation folder. You will be prompted the first time you launch the program to point to this file for activation
-* Install the security certificates the system needs under the `cert` subdirectory of the installation folder
+<span id="cli-byline">
+
+* Copy the `prosoft.lic` file sent to you via e-mail to the `bin` subdirectory of the installation folder. It is advised that you rename this file using the name of your company. Here, we will use `company-name` for this.
+
+<pre id="cmdln-text">
+C:\Downloads>mv prosoft.lic company-name.lic
+C:\Downloads>copy company-name.lic \ProSoft\bin
+</pre>
+
+* Navigate to the `admin` directory of the root, and install the license by running the `install_lic.ps` script
+
+<pre id="cmdln-text">
+C:\Downloads>cd \ProSoft\admin
+C:\ProSoft\admin>install_lic.ps --license-file=company-name.lic
+>>> Installing license ...
+>>> Done
+</pre>
+
+> <span id="note-byline">If you do not introduce the license through the command line, you will be prompted the first time you launch the program to point to this file for activation.
+> </span>
+
+* Copy the security certificates (which we will call in our example `company-cert`) the system needs to the `cert` directory of the root, and instaşll them by running the `install_cert.ps` script:
+
+<pre id="cmdln-text">
+C:\ProSoft\admin>copy \Users\&lt;admin-name&gt;\company-cert-1.ca company-cert-2.ca ..\cert
+C:\ProSoft\admin>install_cert.ps --install-dir=..\cert --certificates=..\cert\*.ca
+>>> Installing certificates ...
+>>> Done
+</pre>
+
 * Make sure that your proxy server, if any, is configured to allow traffic at ProSoft's default communication ports: 4096 and 6650
+
 * Check the security settings of the server before starting to add users that will have access to the system. The users should have *Read*, *Write*, and *Execute* privileges
+
+</span>
+
+---
 
 ## License Terms
 
-This software is valid for one major upgrade amd all the minor upgrades in between. The number of seats is limited 25 for the *Professional* and 50 for the *Enterprise* versions. In order to renew licenses or add more seats, please visit our [licensing page](https://www.profost.com/licensing).
+This software is valid for one major upgrade amd all the minor upgrades in between. The number of seats is limited to 25 for the *Professional* and 50 for the *Enterprise* versions. In order to renew licenses or add more seats, please visit our [licensing page](https://www.profost.com/licensing).
