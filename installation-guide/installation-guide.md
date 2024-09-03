@@ -6,6 +6,8 @@ This document provides information about the system requirements of ProSoft v8.4
 
 NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT REGARDING INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL PROSOFT BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.
 
+---
+
 ## Copyright
 
 __ProSoft__ is registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners. This document is is subject to change without prior notice.
@@ -23,6 +25,8 @@ __ProSoft__ is registered trademark of ProSoft Corporation. Other products menti
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [License Terms](#license-terms)
+
+---
 
 ## Introduction
 

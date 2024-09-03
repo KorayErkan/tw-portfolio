@@ -12,6 +12,8 @@ This document contains information about the current release of __ProSoft&trade;
   * [Deprecations](#deprecations)
 * [Known issues](#known-issues)
 
+---
+
 ## About this release
 
 The current release contains many bugfixes, removes some inconsistencies in the semantic versioning and ownership tracking facilities, and improves storage management, compatibility with various source, configuration, and log file types, and CI/CD-compatible source file marshalling functionality.

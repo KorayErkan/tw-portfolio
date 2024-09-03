@@ -4,9 +4,13 @@ This document includes ProSoft proprietary or confidential information and may n
 
 All information contained herein is provided "*AS IS*" based on the state of the ProSoft system as of the release date. ProSoft reserves the right to make changes to this document without prior notice.
 
+---
+
 ## Disclaimer
 
 NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT REGARDING INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL PROSOFT BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.
+
+---
 
 ## Copyright
 
@@ -29,6 +33,8 @@ __ProSoft__ is a registered trademark of ProSoft Corporation. Other products men
   * [Availability and provisioning](#availability-and-provisioning)
   * [Troubleshooting](#troubleshooting)
   * [Decommissioning](#decommissioning)
+
+---
 
 ## About this guide
 
@@ -321,10 +327,10 @@ C:\ProSoft\users>uninst_lic.ps
 
 After the uninstall process completes, the `C:\ProSoft` root directory and the `.\admin` and `.\cert` directories under it will remain. You can delete these manually.
 
-> <span id="warning-byline">It is strongly advised that you back up the `C:\ProSoft`, `C:\ProSoft\admin`, and the `C:\ProSoft\cert` directories before you delete them.
+> <span id="warning-byline">It is strongly recommended that you back up the `C:\ProSoft`, `C:\ProSoft\admin`, and the `C:\ProSoft\cert` directories before you delete them.
+>
+> It is also recommended that the directory structure of the resources at the time of decommissioning is not tampered with during or after the back up process.
 > </span>
-
-We also recommend that the directory structure of the resources at the time of decommissioning is not tampered with during or after the back up process.
 
 </span>
 
@@ -334,5 +340,8 @@ We also recommend that the directory structure of the resources at the time of d
 
 In case there are issues you are unable to resolve using available *User Assistance* material, you can reach __ProSoft__ free of charge for expert advice through:
 
-Phone : 850-555-6677
-E-mail: [support@prosoft.com](support@prosoft.com)
+*Phone*: 850-555-6677
+
+*E-mail*: [support@prosoft.com](support@prosoft.com)
+
+---
