@@ -36,7 +36,7 @@ The system is compliant with the requirements and logic of CI/CD as it has been 
 
 For an average team of 25 developers, the system requires at least 5 x 2.5GHz quadcore 7i processors, 64GB of RAM, and 1TB of disk space.
 
-Also, a 100Base-TX Ethernet network connection is recommended for effective use.
+Also, a 1000Base-TX Ethernet network connection is recommended for effective and efficient use.
 
 ### Dependencies
 
