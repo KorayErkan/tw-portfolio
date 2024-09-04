@@ -64,7 +64,7 @@ Since the system will be accessed over a network, the following networking hardw
 * A proxy to manage the server traffic listening on port 9595
 * TCP/IP protocol in place on the server
 
-> <span id="note-byline">All wireless access must be monitored with cybersecurity software as once access is is given to the server system, the software does __not__ perform any further security checks.
+> <span id="note-byline">All wireless access must be monitored with cybersecurity software as once access is given to the server system, the software does __not__ perform any further security checks.
 > </span>
 
 ### Licenses and certificates
@@ -78,7 +78,7 @@ The licensing scheme used by __ProSoft__ is as follows:
 
 |License|Duration|Number of Users|Types|
 |-|-|-|-|
-|*Enterprise*|1 Year|250|*Admin*, *Auditor*, *Supervisor*, *Client*|
+|*Enterprise*|1 Year|250|*Auditor*, *Admin*, *Supervisor*, *Client*|
 |*Professional*|1 Year|100|*Admin*, *Supervisor*, *Client*|
 |*SMB*|1 Year|50|*Admin*,*Client*|
 
@@ -247,9 +247,9 @@ prov_config.cfg
 * The seats already in use are the ones listed as `*.seat` files with hexadecimal numbers in their names. The file named `prov_config.cfg` contains the relevant data for seat allocation. Find the line in it with the entry `MAX_USER` using `Select-String` to learn the maximum seats available for the license. If the number of `*.seat` files is less than that number, you can provision a seat. If not, you need to purchase additional seats.
 
 <pre id="cmdln-text">
-C:\ProSoft\users>Select-String -Pattern "MAX_USER" -Path provision.cfg
+C:\ProSoft\users>Select-String -Pattern "MAX_USER" -Path prov_config_.cfg
 
-provision.cfg:18:MAX_USER=50
+prov_config_.cfg:18:MAX_USER=50
 </pre>
 
 * The script named `prov_seat.ps` can be run to do this automatically. Running the script with the required parameters will either provision the seat, or, in case there are no available seats, report an error.
@@ -258,7 +258,7 @@ provision.cfg:18:MAX_USER=50
 C:\ProSoft\users>prov_seat.cfg --user-type=client
 >>> Checking availability ...
 >>> Provisioning ...
->>> The seat with the id '747ba03cab6fe9c' was provisioned
+>>> The seat was provisioned with id cli-'747ba03cab6fe9c'
 </pre>
 
 * If a seat was successfully provisioned, listing the id will show that a new seat file has been created in the directory.
@@ -279,6 +279,14 @@ An essential part of system administration and maintanence is diagnosing the roo
 * Find the __error code__ in the lookup table attached to this guide. It contains useful hints about the possible sources of the error
 * Follow the instructions for diagnosing the root cause of the problem. The table provides possible actions and workarounds to resolve the issue
 * If the error persists, consult the [__ProSoft__ hotline](#prosoft-hotline) for expert advice
+
+The error table provided has the following format:
+
+|Error Id|Error Message|Possible Root Cause|Recommended Action|
+|-|-|-|-|
+|1122|No certificates found|*There was no registered certificate for the seat type*|*Install the required type of certificate*|
+|2244|Certificate invalid|*The installed certificate is not recognized by an authority as valid*|*Replace the certificate with a valid one*|
+|3344|Certificate invalid|*The installed certificate has expired*|*Renew the certificate*|
 
 ### Decommissioning
 

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>lang-reference-chart.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="kozmos-operators-constants-and-data-structures"><strong>Kozmos</strong> Operators,  Constants, and Data Structures</h1>
+<p>The following chart lists the built-in operators, constants, and data structures of the <strong>Kozmos</strong> programming language:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Purpose</th>
+<th>Operator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arithmetic</td>
+<td>addition</td>
+<td><code>a + b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>subtraction</td>
+<td><code>a - b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>multiplication</td>
+<td><code>a * b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>division</td>
+<td><code>a / b</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>a div b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>modulus</td>
+<td><code>a mod b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>extrema</td>
+<td><code>a min b</code> -or- <code>min(a, b, c, ...)</code><br/><code>a max b</code> -or- <code>max(a, b, c, ...)</code></td>
+</tr>
+<tr>
+<td>Relational</td>
+<td>equals</td>
+<td><code>a = b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>not equals</td>
+<td><code>a &lt;&gt; b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>less than</td>
+<td><code>a &lt; b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>greater than</td>
+<td><code>a &gt; b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>at least</td>
+<td><code>a &gt;= b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>at most</td>
+<td><code>a &lt;= b</code></td>
+</tr>
+<tr>
+<td>Logical</td>
+<td>conjunction</td>
+<td><code>a and b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>disjunction</td>
+<td><code>a or b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>equivalence</td>
+<td><code>a eqv b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>implication</td>
+<td><code>a imp b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>negation</td>
+<td><code>not a</code></td>
+</tr>
+<tr>
+<td>Bitwise</td>
+<td>and</td>
+<td><code>a &amp; b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>inclusive or</td>
+<td><code>a \| b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>exclusive or</td>
+<td><code>a ! b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>not</td>
+<td><code>~a</code></td>
+</tr>
+<tr>
+<td></td>
+<td>left shift</td>
+<td><code>a &lt;&lt; b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>right shift</td>
+<td><code>a &gt;&gt; b</code></td>
+</tr>
+</tbody>
+</table>
+<p>The following are the assignment operators:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple</td>
+<td><code>a := b</code></td>
+</tr>
+<tr>
+<td>Compound</td>
+<td><code>A[i] :&lt;operator&gt;= v</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>{l:_} :&lt;operator&gt;= v</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kozmos</strong> provides the following built-in constants:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Constant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arithmetic</td>
+<td><code>+Inf</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>-Inf</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>NaN</code></td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>Reference</td>
+<td><code>Nil</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kozmos</strong> has the following built-in data structures:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Declaration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Array</td>
+<td><code>Array&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td>Linked list</td>
+<td><code>List&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td>Hash Map</td>
+<td><code>Map&lt;K -&gt; V&gt;</code></td>
+</tr>
+<tr>
+<td>Hash Set</td>
+<td><code>Set&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td>Priority Queue</td>
+<td><code>Queue&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td>Minima Heap</td>
+<td><code>Heap&lt;T&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><span id="note-byline"></span> <strong>Kozmos</strong> does not support general-purpose <em>generics</em>. Instead, it has <em>trait compliance</em> where the type parameter has to be with one of the built-in root traits such as <code>Eq</code>, <code>Ord</code>, <code>Sync</code>, etc., or a user designed trait that implements those root traits.<br>
+In a data structure declaration, the type parameter has to be a known trait, e.g. <code>&lt;Ord&gt;</code>; a descendant of a trait, e.g. <code>&lt;T: Ord&gt;</code>; or a descendant of multiple traits (i.e. a <em>union</em> of them), e.g. <code>&lt;T: Ord | Sync&gt;</code>.</p>
+</blockquote>
+<p>The following operations are available for built-in data structures</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Subcategory</th>
+<th>Operator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Catenation</td>
+<td>Two arrays (Strings incl.)</td>
+<td><code>a ++ b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Array with single item</td>
+<td><code>a ++ [b]</code></td>
+</tr>
+<tr>
+<td>Slicing</td>
+<td></td>
+<td><code>a[i .. j]</code></td>
+</tr>
+<tr>
+<td>Range</td>
+<td></td>
+<td><code>[a .. b]</code></td>
+</tr>
+<tr>
+<td>Indexing</td>
+<td></td>
+<td><code>a[i]</code></td>
+</tr>
+<tr>
+<td>List access</td>
+<td>Head</td>
+<td><code>{l:_}</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Tail</td>
+<td><code>{_:l}</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Append</td>
+<td><code>{a} ++ b</code></td>
+</tr>
+<tr>
+<td></td>
+<td>Prepend</td>
+<td><code>b ++ {a}</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><span id="note-byline"></span> <strong>Kozmos</strong> does <strong>not</strong> support operator <em>overloading</em>. Instead, it supports operator <em>extension</em>: operators can be extended for a certain type (i.e. a <code>record</code>, a <code>trait</code>, or a <code>class</code>) only on the condition that the expression reduces to one of the built-in uses.</p>
+</blockquote>
+
+</body>
+</html>

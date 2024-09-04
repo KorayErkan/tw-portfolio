@@ -71,7 +71,7 @@
 <li>TCP/IP protocol in place on the server</li>
 </ul>
 <blockquote>
-<p><span id="note-byline">All wireless access must be monitored with cybersecurity software as once access is is given to the server system, the software does <strong>not</strong> perform any further security checks.<br>
+<p><span id="note-byline">All wireless access must be monitored with cybersecurity software as once access is given to the server system, the software does <strong>not</strong> perform any further security checks.<br>
 </span></p>
 </blockquote>
 <h3 id="licenses-and-certificates">Licenses and certificates</h3>
@@ -95,7 +95,7 @@
 <td><em>Enterprise</em></td>
 <td>1 Year</td>
 <td>250</td>
-<td><em>Admin</em>, <em>Auditor</em>, <em>Supervisor</em>, <em>Client</em></td>
+<td><em>Auditor</em>, <em>Admin</em>, <em>Supervisor</em>, <em>Client</em></td>
 </tr>
 <tr>
 <td><em>Professional</em></td>
@@ -253,9 +253,9 @@ prov_config.cfg
 <li>The seats already in use are the ones listed as <code>*.seat</code> files with hexadecimal numbers in their names. The file named <code>prov_config.cfg</code> contains the relevant data for seat allocation. Find the line in it with the entry <code>MAX_USER</code> using <code>Select-String</code> to learn the maximum seats available for the license. If the number of <code>*.seat</code> files is less than that number, you can provision a seat. If not, you need to purchase additional seats.</li>
 </ul>
 <pre id="cmdln-text">
-C:\ProSoft\users>Select-String -Pattern "MAX_USER" -Path provision.cfg
+C:\ProSoft\users>Select-String -Pattern "MAX_USER" -Path prov_config_.cfg
 
-provision.cfg:18:MAX_USER=50
+prov_config_.cfg:18:MAX_USER=50
 </pre>
 <ul>
 <li>The script named <code>prov_seat.ps</code> can be run to do this automatically. Running the script with the required parameters will either provision the seat, or, in case there are no available seats, report an error.</li>
@@ -264,7 +264,7 @@ provision.cfg:18:MAX_USER=50
 C:\ProSoft\users>prov_seat.cfg --user-type=client
 >>> Checking availability ...
 >>> Provisioning ...
->>> The seat with the id '747ba03cab6fe9c' was provisioned
+>>> The seat was provisioned with id cli-'747ba03cab6fe9c'
 </pre>
 <ul>
 <li>If a seat was successfully provisioned, listing the id will show that a new seat file has been created in the directory.</li>
@@ -283,6 +283,37 @@ cli-747ba03cab6fe9c.seat
 <li>Follow the instructions for diagnosing the root cause of the problem. The table provides possible actions and workarounds to resolve the issue</li>
 <li>If the error persists, consult the <a href="#prosoft-hotline"><strong>ProSoft</strong> hotline</a> for expert advice</li>
 </ul>
+<p>The error table provided has the following format:</p>
+<table>
+<thead>
+<tr>
+<th>Error Id</th>
+<th>Error Message</th>
+<th>Possible Root Cause</th>
+<th>Recommended Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1122</td>
+<td>No certificates found</td>
+<td><em>There was no registered certificate for the seat type</em></td>
+<td><em>Install the required type of certificate</em></td>
+</tr>
+<tr>
+<td>2244</td>
+<td>Certificate invalid</td>
+<td><em>The installed certificate is not recognized by an authority as valid</em></td>
+<td><em>Replace the certificate with a valid one</em></td>
+</tr>
+<tr>
+<td>3344</td>
+<td>Certificate invalid</td>
+<td><em>The installed certificate has expired</em></td>
+<td><em>Renew the certificate</em></td>
+</tr>
+</tbody>
+</table>
 <h3 id="decommissioning">Decommissioning</h3>
 <p>If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it.</p>
 <span id="cli-byline">
