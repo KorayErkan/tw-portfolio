@@ -4,10 +4,12 @@
 
 This document explains how some _PowerShell_ cmdlets—i.e. programs you can run from a terminal as commands—can be used to manage files in batch.
 
+---
+
 ## Table of Contents
 
 * [Introduction](#introduction)
-* [Common Commands for Managing Files](#common-commands-for-managing-files)
+* [Some Commonly Used Cmdlets](#some-commonly-used-cmdlets)
 * [Listing Directory Objects](#listing-directory-objects)
 * [Listing Subdirectories](#listing-subdirectories)
 * [Searching By File Type](#searching-by-file-type)
@@ -19,17 +21,25 @@ This document explains how some _PowerShell_ cmdlets—i.e. programs you can run
 * [Advanced Text Search](#advanced-text-search)
 * [Conclusion](#conclusion)
 
+---
+
 ## Introduction
 
 Command line use may not be popular among ordinary users, but once mastered, it _does_ provide quite a few advantages the biggest one of which can be to avoid the tedium of manually managing large numbers of files. A simple command, when used with judiciously selected parameters and piped through a formatting cmdlet, can quickly get the types of documents we want.
 
-The reason the command line is not as popular as the graphical user interface is the necessity to remember the specific (and frequently cryptic) _names_ of various commands, their _switches_, and their _parameter types_, etc. With the GUI, you just try to find your way around just by using the visual cues the graphical objects on the screen provide. However, using the command line for a few weeks may reveal that that because you can adjust the granularity of what you intend to do. That is, you can set the parameters with a very concise syntax to express the details of the task to be carried. Once you get the hang of specific commands (i.e. what their output looks like, what can be garnered from that output, etc.), you can carry out multiple tasks with just a few lines in one place.
+The reason the command line is not as popular as the graphical user interface is the necessity to remember the specific (and frequently cryptic) _names_ of various commands, their _switches_, and their _parameter types_, etc. No doubt, there is a learning curve. With the GUI, you find your way around just by using the visual cues the graphical layout on the screen provides, which is much simpler and intuitive in the beginning.
 
-We will try to illustrate these points with some common file management tasks.
+However, using the command line for a few weeks may reveal that because you can adjust the granularity of what you intend to do at every level, it is much more powerful. You can set the parameters with a very concise syntax to express the details of what you want to achieve. Once you get the hang of the specifics of the commands involved (i.e. what their output looks like, what can be garnered from that output, etc.), you can carry out multiple tasks with just a few lines.
 
-## Common Commands for Managing Files
+We will try to illustrate these points below.
 
-We will summarize the cmdlets (read as "commandlets") used for searching the contents of directories, filtering them based on certain criteria, looking for certain strings in them, updating their contents in batch, etc. Those we will cover are:
+> <span id="note-byline">We will touch upon only the aspects of the PowerShell cmdlets (pronounced '_command-let_') that are relevant to the task at hand. We will _not_ do a thorough investigation of each of them. </span>
+
+## Some Commonly Used Cmdlets
+
+Before we begin, make sure you have opened a _Windows Terminal_ and navigated to a typical folder such as `Documents` with the `cd` command.
+
+The list of cmdlets we will learn are quite small, but they are most commonly used for searching the contents of directories, filtering them based on certain criteria, looking for certain strings in them, updating their contents in batch, etc.:
 
 |Cmdlet|Purpose|
 |-|-|
@@ -39,7 +49,9 @@ We will summarize the cmdlets (read as "commandlets") used for searching the con
 |`Get-Content`|Print the contents of a file on the screen|
 |`Select-String`|Look for a specific piece of text in a file|
 
-We will take a closer look at each of these below.
+Each of these, except `Where-Object`, can be used independently or in combination with the others. We will take a closer look at each of these below and explain them in isolation. Later on, we will learn how to combine them for more accurate results.
+
+We will start with the first which is also the simplest.
 
 ## Listing Directory Objects
 
@@ -52,7 +64,7 @@ get-childitem-statement ::= 'Get-ChildItem' [-Recurse]
     [-Directory]
 </pre>
 
-Its common use is pretty straightforward:
+Its typical use is pretty straightforward:
 
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem .
@@ -60,12 +72,18 @@ C:\Users\John\Documents>Get-ChildItem .
 
 Here, the dot after the command is a shorthand for specifying the directory we are in. The cmdlet assumes that this is the parameter for its `Path` switch.
 
-> <span id="note-byline">In most command line implementations on various operating systems, it is a common convention to represent the current directory with '`.`' and the parent directory with '`..`'</span>
+> <span id="note-byline">In most command line interpreter implementations on various operating systems, it is a widely-adopted convention to represent the current directory with '`.`' and the parent directory with '`..`'</span>
 
 Using that switch, any arbitrary directory&mdash;including those on other drives&mdash;can be listed regardless of what the current directory is. It is also possible to list multiple directories by separating their names with a comma:
 
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem -Path ".\Documents", ".\Reports"
+C:\Users\John\Documents>Get-ChildItem -Path ".\Documents", ".\Reports", "H:\Backup\Reports"
+</pre>
+
+You can also list the contents of the directories above the current one equally easily by typing:
+
+<pre id="cmdln-text">
+C:\Users\John\Documents>Get-ChildItem ..
 </pre>
 
 > <span id="note-byline">Certain switches of cmdlets allow multiple values if it is reasonable to do so. The values should be specified as a comma-separated list, and although it is not necessary to place them in quotes (single or double), it is a good practice to do so for readability</span>
@@ -98,6 +116,8 @@ The first column (the one with the heading `Mode`) where we have either certain 
 |`-----l`|Link -or- ReparsePoint|
 
 The above output indicates that `PowerShell` is a directory, `Links` is a read-only directory, and `Notes.txt` (a text file) is an archive. By default, hidden and system directories and files are _not_ listed. If we wanted to see, for example, the hidden directories under the current directory, we use the `-Attributes` switch of this cmdlet.
+
+> <span id="note-byline">A `ReparsePoint` in _Windows_ is known as a _hard link_ in UNIX operating systems. It is a direct link to a directory, and nagivating to and from it as simple as a typical `cd` call</span>
 
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem . -Attributes Hidden
@@ -220,9 +240,9 @@ The purpose of this is to avoid having to manually manipulate the output of a co
 
 <pre id="cmdln-text">
 C:\Users\John\Documents>Get-ChildItem -Recurse . -Include "Notes.txt" | Get-Content
-TODO: Don't forget to write the report for Q1-2022
+Reports\Notes.txt:1:Don't forget to write the report for Q1-2022
 
-TODO: The minutes for the Q3-2021 meeting must be summarized.
+Minutes\Notes.txt:1:The minutes for the Q3-2021 meeting must be summarized.
 </pre>
 
 Here, we have iterated through the subdirectories of the current one to spot files named "Notes.txt" (which means there may be multiple files in different directories name "Notes.txt"), and printed their contents to the terminal window too see what is inside them

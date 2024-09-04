@@ -17,4 +17,6 @@ Each of these document types is used for a specific purpose, and the samples wer
 
 All software entities, products, and services referred to in the text is intended to be imaginary, and any similarities with real life instances can only be coincidental. The mail addresses, phone numbers, etc. are also meant to be fake.
 
-The files are available in __pdf__, __html__, and __md__ formats. The text-based files (\*.md and \*.html) were developed with __Visual Studio Code__, and the PDFs were generated with __Scribus__.
+The files are available in Markdown, HTML, and PDF formats. The Markdown files allowed basic editing and layout, the HTML files allowed using stylesheet for Web presentation, and the PDF files allowed pagination and indexing. The text-based files (\*.md and \*.html) were developed with __Visual Studio Code__, and the PDFs were generated with __Scribus__.
+
+Finally, I'm indebted to [Ugur Akinci](https://technicalcommunicationcenter.com) for informing me on the fundamentals of technical writing, as well as on the structure, components, and layout of the documents here, and I'd like to express my gratitude to him.
