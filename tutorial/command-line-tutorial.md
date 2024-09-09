@@ -58,10 +58,10 @@ We will start with the first which is also the simplest.
 One of the most commonly used cmdlets of PowerShell is `Get-ChildItem` which lists the contents of the current directory. Its basic syntax (i.e. its most frequently-used switches and parameters) is as follows:
 
 <pre id="ebnf-text">
-get-childitem-statement ::= 'Get-ChildItem' [-Recurse]
-    '-Path' &lt;path&gt;
+get-childitem-statement ::= Get-ChildItem [-Recurse]
+    [-Path] &lt;path&gt;
     [(-Include | -Exclude) &lt;file-types&gt;]
-    [-Directory]
+    [(-Fıle | -Directory) &lt;regular-expression&gt;]
 </pre>
 
 Its typical use is pretty straightforward:
@@ -344,12 +344,12 @@ It is frequently not enough to list objects by their name and type. We may want 
 This cmdlet makes it possible to specify qualifies that the object should possess with the following syntax:
 
 <pre id="ebnf-text">
-where-statement ::= 'Where-Object' { $_.&lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt; }
-                  | 'Where-Object' -Property &lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt;
-comparison ::= '-match' | '-notmatch'
-             | '-like' | '-notlike'
-             | '-contains'
-             | '-gt' | '-ge' | '-lt' | '-le' | '-eq' | '-neq'
+where-statement ::= Where-Object { $_.&lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt; }
+                  | Where-Object -Property &lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt;
+comparison ::= -match | -notmatch
+             | -like | -notlike
+             | -contains
+             | -gt | -ge | -lt | -le | -eq | -neq
 </pre>
 
 Let's illustrate its use with an example:
@@ -439,7 +439,7 @@ Frequently, you may want to have an idea on some random file in case it contains
 Assuming you know the name of the file whose contents you want to display, the syntax is:
 
 <pre id="ebnf-text">
-get-content-statement ::= 'Get-Content' '-Path' &lt;file-name&gt;
+get-content-statement ::= Get-Content -Path &lt;file-name&gt;
 </pre>
 
 The use of the cmdlet in this form is very simple and straightforward:
@@ -475,10 +475,10 @@ The cmdlet in question is `Select-String`, and it can be used to query the text 
 This commandlet searches for phrases and patterns in text files, and its basic syntax is:
 
 <pre id="ebnf-text">
-select-string-statement ::= 'Select-String'
-    '-Pattern' (&lt;regular-expression&gt; | &lt;plain-expression&gt; '-SimpleMatch')
-    '-Path' &lt;filename&gt;
-    ['-CaseSensitive']
+select-string-statement ::= Select-String
+    -Pattern (&lt;regular-expression&gt; | &lt;plain-expression&gt; -SimpleMatch)
+    -Path &lt;filename&gt;
+    [-CaseSensitive]
 </pre>
 
 As can be seen from the syntax, we specify a pattern which is assumed to be a regular expression by default&mdash;if we want a verbatim match, we override the default by using the `-SimpğleMatch` switch&mdash; then we enter the path of the file.
@@ -529,7 +529,7 @@ Here, PowerShell found two files one of them containing '`report`' the other '`e
 
 ## Conclusion
 
-The commands we have presented above, when combined imaginatively, should make it very easy to find what you are looking for. Whether it is the directories specified, whether it is certain file properties such as file type, date of creation, or size, and whether it is certain pieces of text data they contain, PowerShell can spot what you are looking for and list them on the terminal. It all depends on how concise and precise you are in specifying the data you are searching.
+The commands we have presented above, when combined imaginatively, should make it very easy to find what you are looking for. Whether it is the directories that are likely to contain the files you are looking for, whether it is properties such as extension, date of creation, or size that is likely to identify the file, or whether it is certain pieces of text that they may contain, PowerShell can spot what you are looking for and enumerate them on the terminal. It all depends on how concise and precise you are in specifying what you are searching for.
 
 Good luck learning to use these very powerfull cmdlets.
 
