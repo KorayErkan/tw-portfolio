@@ -470,9 +470,9 @@ If you do not want to manually check the contents of the files, however, there's
 
 ## Advanced Text Search
 
-The cmdlet in question is `Select-String`, and it can be used to query the text data inside the files we have discovered in a directory.
+If you want to be able to check the files directly to find what you are looking for, the cmdlet you need is `Select-String`, and it can be used to query the text data inside the files we have discovered in a directory.
 
-This commandlet searches for phrases and patterns in text files, and its basic syntax is:
+This cmdlet searches for phrases and patterns in text files (although with some extra work it can do that in binary ones, too), and its basic syntax is:
 
 <pre id="ebnf-text">
 select-string-statement ::= Select-String
@@ -521,11 +521,12 @@ and carried out.
 2021 QUARTERLY MEETING MINUTES
 
 These minutes were recorded to report the results of the events
-that were organized this quarter.
+that were organized this quarter that were discussed in the
+meeting.
 ...
 </pre>
 
-Here, PowerShell found two files one of them containing '`report`' the other '`event`', and printed the files on the screen.
+Here, PowerShell found two files, one of them containing '`report`' the other '`event`', and printed the files on the screen.
 
 ## Conclusion
 

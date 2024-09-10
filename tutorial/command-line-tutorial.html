@@ -437,8 +437,8 @@ and carried out.
 </pre>
 <p>If you do not want to manually check the contents of the files, however, there's an even more powerful cmdlet to find what you are looking for.</p>
 <h2 id="advanced-text-search">Advanced Text Search</h2>
-<p>The cmdlet in question is <code>Select-String</code>, and it can be used to query the text data inside the files we have discovered in a directory.</p>
-<p>This commandlet searches for phrases and patterns in text files, and its basic syntax is:</p>
+<p>If you want to be able to check the files directly to find what you are looking for, the cmdlet you need is <code>Select-String</code>, and it can be used to query the text data inside the files we have discovered in a directory.</p>
+<p>This cmdlet searches for phrases and patterns in text files (although with some extra work it can do that in binary ones, too), and its basic syntax is:</p>
 <pre id="ebnf-text">
 select-string-statement ::= Select-String
     -Pattern (&lt;regular-expression&gt; | &lt;plain-expression&gt; -SimpleMatch)
@@ -479,10 +479,11 @@ and carried out.
 2021 QUARTERLY MEETING MINUTES
 
 These minutes were recorded to report the results of the events
-that were organized this quarter.
+that were organized this quarter that were discussed in the
+meeting.
 ...
 </pre>
-<p>Here, PowerShell found two files one of them containing '<code>report</code>' the other '<code>event</code>', and printed the files on the screen.</p>
+<p>Here, PowerShell found two files, one of them containing '<code>report</code>' the other '<code>event</code>', and printed the files on the screen.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>The commands we have presented above, when combined imaginatively, should make it very easy to find what you are looking for. Whether it is the directories that are likely to contain the files you are looking for, whether it is properties such as extension, date of creation, or size that is likely to identify the file, or whether it is certain pieces of text that they may contain, PowerShell can spot what you are looking for and enumerate them on the terminal. It all depends on how concise and precise you are in specifying what you are searching for.</p>
 <p>Good luck learning to use these very powerfull cmdlets.</p>
