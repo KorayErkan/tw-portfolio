@@ -1,5 +1,7 @@
 {
 	"hr-style": false,
 	"line-length": false,
-	"no-inline-html": false
+	"no-inline-html": false,
+	"no-hard-tabs": false,
+	"no-bare-urls": false
 }
