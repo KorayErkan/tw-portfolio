@@ -1,4 +1,4 @@
-# Parsing Web Request Strings
+# Parsing Web Requests With _GoodWeb_&trade; API
 
 [_John Saysitall_](mailto:john.saysitall@goodcode.com)
 
@@ -63,7 +63,7 @@ The URL need not include all of these components except for the first two, but i
 | Root Domain | This is the domain through which all subdomains and endpoints of the site are accessed.  <br>For example, in the URL `https://www.goodfood.com` the root domain is _goodfood.com_.  <br>  <br>This is also used by the browser to look up the IP address of the site from a DNS server. |
 | Subdomains | Subdomains are domains which can only be accessed via the root domain. For example, in the URLs `https://diabetic.goodfood.com` and `https://dietary.goodfood.com`, the bits _diabetic_ and _dietary_ are subdomains.  <br>  <br>The server of the site accessed uses this to find the local IP address to be used to serve pages. |
 | Endpoints | These are the paths of the site used to receive requests and respond to them. It is the last portion of the URL before the query string, if any, and is part of the site that responds to a specific type of request. For example, in the URL `https://www.goodfood.com/vegetarian/products`, _products_ is the endpoint. |
-| Query String | This contains the parameters sent to the site to return specific information. The query starts at the question mark ("?"), the parameters are sent as key-value pairs—with the parameter name followed by a relational operator ("=", ">", "<", ">=", "<=;") followed by a value—and are separated by ampersands ("&"). In the URL `https://www.goodfood.com/vegetarian/products?brand=elite&price=15&home-delivery=true`, the query string is `?brand=elite&price=15&home-delivery=true`. |
+| Query String | This contains the parameters sent to the site to return specific information. The query starts at the question mark ("?"), the parameters are sent as key-value pairs—with the parameter name followed by a relational operator ('`=`', '`>`', '`<`', '`>=`', and '`<=`') followed by a value—and are separated by ampersands ('`&`'). In the URL `https://www.goodfood.com/vegetarian/products?brand=elite&price=15&home-delivery=true`, the query string is `?brand=elite&price=15&home-delivery=true`. |
 
 ## Functions for Parsing URLs
 
@@ -73,7 +73,7 @@ The library provides the functions documented below for parsing URLs, but before
 
 The first responder for the URL. This method does the preliminary work of parsing and validating the URL.
 
-WebServer.CreateRequest(url: String): WebServer.Request
+	WebServer.CreateRequest(url: String): WebServer.Request
 
 If the URL is empty no request object is created, and if it is malformed the server raises an exception. Otherwise, a request object is returned from which the other methods can be called to return the parts indicated by the method names.
 
@@ -97,7 +97,7 @@ Typical use:
 
 Returns the protocol used to access the site. This determines whether the access is secure or whether the user wants to view pages on the site or download files, etc. The protocol cannot be empty, and if it is not supported an exception is raised.
 
-WebServer.Request.GetProtocol(): String
+	WebServer.Request.GetProtocol(): String
 
 The table below indicates the protocols that can be parsed from a URL:
 
@@ -131,7 +131,7 @@ Typical use:
 
 Returns the root domain of the URL. This can be used to check whether the user is trying to access the landing page of the site.
 
-WebServer.Request.GetRootDomain(): String
+	WebServer.Request.GetRootDomain(): String
 
 The table below indicates what domain names can be returned from a URL:
 
@@ -160,7 +160,7 @@ Typical use:
 
 Returns the subdomain in the URL. If the subdomain is part of the site, the user can then be redirected to it.
 
-WebServer.Request.GetSubdomain(): String
+	WebServer.Request.GetSubdomain(): String
 
 The table below indicates what subdomains can be returned from a URL:
 
@@ -184,7 +184,7 @@ Typical use:
 
 Returns the endpoint the URL addresses. Can be used to verify that the endpoint exists. In order for the site to respond to the request, the query string must be routed to the correct endpoint.
 
-WebServer.Request.GetEndPoint(): String
+	WebServer.Request.GetEndPoint(): String
 
 The table below indicates what domain names can be returned from various URLs:
 
@@ -212,7 +212,7 @@ If there are parameters that the endpoint cannot recognize (for example, due to 
 
 If the dictionary is created, the server can then proceed to display the results from the site database.
 
-WebServer.Request.GetQueryParameters(): Dictionary
+	WebServer.Request.GetQueryParameters(): Dictionary
 
 The table below indicates the parameters and the values contained in the created dictionary:
 
