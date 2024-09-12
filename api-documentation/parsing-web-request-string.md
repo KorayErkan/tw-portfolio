@@ -21,13 +21,13 @@
 
 This document provides detailed information about the functions in the **GoodWeb** API. These methods are used to parse request strings to create objects that can respond to the user to send them the information they want.
 
-### The Purpose of The API
+## The Purpose of The API
 
 Users interact with web sites by sending requests. These are sent in the form of _Uniform Resource Locater_ or _URL_ strings. When they arrive at the site, the server parses that URL string and creates a request object. The request object interprets various parts of this string to determine what information is being requested, whether they exist or not, and if they do on which pages of the site they can be found in order to direct the user to those pages.
 
 The purpose of this API is provide the functionality necessary to carry out this process.
 
-### Structure of URLs
+## Structure of URLs
 
 The syntax of a request URL can be summarized in _EBNF_ (Extended Backus-Naur Form) as follows:
 
@@ -65,11 +65,11 @@ The URL need not include all of these components except for the first two, but i
 | Endpoints | These are the paths of the site used to receive requests and respond to them. It is the last portion of the URL before the query string, if any, and is part of the site that responds to a specific type of request. For example, in the URL `https://www.goodfood.com/vegetarian/products`, _products_ is the endpoint. |
 | Query String | This contains the parameters sent to the site to return specific information. The query starts at the question mark ("?"), the parameters are sent as key-value pairs—with the parameter name followed by a relational operator ("=", ">", "<", ">=", "<=;") followed by a value—and are separated by ampersands ("&"). In the URL `https://www.goodfood.com/vegetarian/products?brand=elite&price=15&home-delivery=true`, the query string is `?brand=elite&price=15&home-delivery=true`. |
 
-### Functions for Parsing URLs
+## Functions for Parsing URLs
 
 The library provides the functions documented below for parsing URLs, but before calling any of these methods, the URL has to be passed to the server's " CreateRequest" method.
 
-#### CreateRequest
+### CreateRequest
 
 The first responder for the URL. This method does the preliminary work of parsing and validating the URL.
 
@@ -93,7 +93,7 @@ Typical use:
 		server.DisplayErrorPage(exception.Message)
 	}
 
-#### GetProtocol
+### GetProtocol
 
 Returns the protocol used to access the site. This determines whether the access is secure or whether the user wants to view pages on the site or download files, etc. The protocol cannot be empty, and if it is not supported an exception is raised.
 
@@ -127,7 +127,7 @@ Typical use:
 		server.DisplayErrorPage(exception.Message)
 	}
 
-#### GetRootDomain
+### GetRootDomain
 
 Returns the root domain of the URL. This can be used to check whether the user is trying to access the landing page of the site.
 
@@ -156,7 +156,7 @@ Typical use:
 		// etc.
 	}
 
-#### GetSubdomain
+### GetSubdomain
 
 Returns the subdomain in the URL. If the subdomain is part of the site, the user can then be redirected to it.
 
@@ -180,7 +180,7 @@ Typical use:
 	}
 	// ... etc.
 
-#### GetEndpoint
+### GetEndpoint
 
 Returns the endpoint the URL addresses. Can be used to verify that the endpoint exists. In order for the site to respond to the request, the query string must be routed to the correct endpoint.
 
@@ -204,7 +204,7 @@ Typical use:
 		// ... etc.
 	}
 
-#### GetQueryParameters
+### GetQueryParameters
 
 Returns the query string at the end of the URL as a dictionary. The names in the query string are used as keys and the actual parameters are used as values. Before the creation of the dictionary, the parameter names are checked to verify that the endpoint can respond to them.
 
@@ -247,7 +247,7 @@ Typical use:
 
 ---
 
-### References
+## References
 
 * The **GoodWeb** API Handbook, pp. 18–22
 * The [GoodWeb Server](www.goodweb-server.com) API discussion thread
