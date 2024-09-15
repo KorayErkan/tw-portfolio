@@ -218,8 +218,8 @@ The table below indicates the parameters and the values contained in the created
 
 | URL | Query String | Parameter Names | Parameter Values |
 | --- | --- | --- | --- |
-| `https://www.goodfood.com/vegetarian/products?brand=elite&price=15&home-delivery=true` | brand=elite&price=15&home-delivery=true | _brand_, _price_, _home-delivery_ | _elite_, _15_, _true_ |
-| `https://www.goodfood.com/products?brand=elist` | brand=elist | _brand_ | Unknown value: the brand _elist_ does not exist. Raises an exception |
+| `https://www.goodfood.com/vegetarian/products?brand=elite&price=15&home-delivery=true` | `brand=elite&price=15&home-delivery=true` | _brand_, _price_, _home-delivery_ | _elite_, _15_, _true_ |
+| `https://www.goodfood.com/products?brand=elist` | `brand=elist` | _brand_ | Unknown value: the brand _elist_ does not exist. Raises an exception |
 | `https://www.goodfood.com/products` | N/A | N/A | Undefined: empty query string |
 | `https://www.goodfood.com` | N/A | N/A | Undefined: empty query string |
 

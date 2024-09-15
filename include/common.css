@@ -82,8 +82,8 @@ blockquote {
 }
 
 #url-segment {
-	font-family: "Consolas";
-	font-size: 10pt;
+	font-family: "Monaco";
+	font-size: 14px;
 }
 
 #method-name {
