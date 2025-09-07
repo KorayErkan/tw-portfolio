@@ -1,0 +1,38 @@
+= Installation & Setup Guide (SaaS + Optional Self‑Hosted Agents)
+:toc:
+:icons: font
+:sectnums:
+
+[abstract]
+--
+Purpose: Ensure a smooth first‑time setup. Audience: Admins/IT. Scope: prerequisites, installation, configuration, validation, rollback.
+--
+
+== Prerequisites
+* Supported browsers / OS
+* Network allowlist / ports
+* Identity provider (SAML/OIDC)
+* Required roles/permissions
+
+== Installation (Cloud)
+. Sign up / org creation
+. Domain verification
+. Billing & plan selection (optional)
+. Initial admin configuration
+
+== Optional: Self‑Hosted Connector / Agent
+* System requirements
+* Package download
+* Install commands
+* Health checks
+
+== Configuration
+* SSO (SAML/OIDC) steps
+* SCIM provisioning
+* API keys & webhooks
+
+== Validation & Smoke Tests
+Checklist/table: action → expected result.
+
+== Troubleshooting
+Symptom → probable cause → resolution.

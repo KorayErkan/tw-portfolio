@@ -1,0 +1,21 @@
+= SaaS Guides
+:doctype: book
+:toc: left
+:toclevels: 3
+:icons: font
+:sectanchors:
+:source-highlighter: rouge
+
+A curated set of **portfolio-ready** document templates for SaaS products. Each file is designed for quick tailoring and export.
+
+== Contents
+* link:saas-user-manual.adoc[User Manual]
+* link:saas-installation-setup-guide.adoc[Installation & Setup Guide]
+* link:saas-release-notes-template.adoc[Release Notes / Changelog]
+* link:saas-reference-quick-chart.adoc[Reference Chart / Quick Ref]
+* link:saas-maintenance-troubleshooting.adoc[Maintenance & Troubleshooting]
+* link:saas-conceptual-architecture.adoc[Conceptual / Architecture]
+* link:saas-security-compliance.adoc[Security & Compliance]
+
+== Usage
+Copy this folder into your portfolio repo (e.g., `tw-portfolio/saas-guides/`) and edit each template with a **specific product scenario**.
