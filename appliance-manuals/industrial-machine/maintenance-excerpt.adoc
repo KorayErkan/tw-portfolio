@@ -168,10 +168,15 @@ Do **not** clear and restart repeatedly without investigation. Recurrent or inte
 image::cnc-exploded.png[Exploded view with numbered parts, width=70%]
 
 .Callouts
-. Spindle assembly
-. Way covers
-. Hydraulic unit
-. Coolant tank
+. Spindle assembly — lubrication points A/B; monitor temperature trend after service.
+. Way covers — inspect for tears/binding; verify smooth travel across full stroke.
+. Hydraulic unit — replace filter per schedule; verify pressure within spec at idle and load.
+. Coolant tank — clean intake screen; check return baffles; maintain 6–8% concentration.
+
+[NOTE]
+====
+Replace this placeholder with the OEM exploded view when available. Keep diagram revision/date in the controlled footer.
+====
 
 == Recordkeeping
 
