@@ -1,21 +1,13 @@
-# Release Notes Sample
+# Release Notes (Portfolio Sample)
 
-This sample document is based on advice from [this](https://frill.co/blog/posts/how-to-write-release-notes) blog post and [this](https://technicalcommunicationcenter.com/2021/01/03/how-to-write-a-software-release-notes-document/) article. Note that I bear the sole responsibility of the documents included here, and these articles are mentioned only for courtesy.
+**Audience:** Product managers, engineering teams, customers  
+**Purpose:** Summarize changes, compatibility, and upgrade considerations.
 
-## Reason and Purpose
+## What's Inside
+- **Release Notes** — features, fixes, deprecations, known issues  
+  - [Markdown](./release-notes.md) · [HTML](./release-notes.html)
 
-Release Notes are published to address the following:
-
-- Improving product utilization (by streamlining the features)
-- Reducing *churn* (re-editing of developed code)
-- Engaging new customers for conversion (by adding features likely to appeal to a wider audience)
-- Reduce support tickets (by removing errors and flaws in design and functionality)
-
-## Document Requirements
-
-The document should meet the following requirements:
-
-- Have a release title
-- Have a description of what the release entails
-- Cater to the technical knowledge of potential users
-- Include associated user submissions
+## Highlights
+- Executive summary and callouts
+- Links to related docs (guides, tutorials)
+- Upgrade/migration checklist
