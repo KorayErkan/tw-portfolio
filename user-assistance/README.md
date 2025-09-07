@@ -1,11 +1,17 @@
-# User Assistance Samples
+# User Assistance (Portfolio Samples)
 
-This section is based on advice from [Jordan Stanched](mailto:jordan.stanchev@jpdocu.com) delivered through a [Udemy](https://www.udemy.com) course. I bear the sole responsibility for the documents, and the aforementioned individual is mentioned only for courtesy.
+**Audience:** End users (GUI tasks)  
+**Purpose:** Short, screenshot‑driven task guides.
 
-## Three Types of Documents
+## What's Inside
+- **Introduction** — scope and approach ([Markdown](./introduction.md))
+- **Creating a Score File** — step‑by‑step ([Markdown](./creating-a-score-file.md))
+- **Creating a Music Part** — task guide ([Markdown](./creating-a-music-part.md))
+- **Frequently Used Features** — quick tips ([Markdown](./frequently-used-features.md))
 
-The following are the imaginary sections of a piece of software:
+Images: see [`./pictures/`](./pictures/)
 
-* [Introduction](introduction.md): this is the _Concept_ section explaining what the software is for and its intended audience
-* [Creating A Score File](creating-a-score-file.md) and [Creating a Music Part](creating-a-music-part.md): these two are _Task_ sections, demonstrating how the software is used to carry out certain tasks
-* [Frequently Used Features](frequently-used-features.md): this is a _Reference_ section intended for experienced users to the find shortcuts of some commands
+## Highlights
+- Task‑oriented steps with screenshots
+- Notes/tips inline for faster success
+- Friendly, concise tone
