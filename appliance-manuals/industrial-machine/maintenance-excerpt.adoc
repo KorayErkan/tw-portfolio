@@ -24,20 +24,32 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 
 [WARNING]
 ====
-Perform lockout/tagout (LOTO) before any service. Failure to comply may result in serious injury.
+Maintenance must be performed only by trained personnel. Lockout/Tagout (LOTO) is **mandatory** before opening guards or working near moving parts. Failure to follow these instructions may result in serious injury.
 ====
 
-=== PPE
-* Safety helmet, goggles, cut-resistant gloves.
-* Hearing protection (≥ 25 dB SNR).
-* Steel-toe boots.
+=== PPE (Personal Protective Equipment)
+* Safety helmet and ANSI Z87.1/EN 166 eye protection
+* Cut-resistant gloves appropriate to task
+* Hearing protection (≥ 25 dB SNR)
+* Steel-toe safety footwear
+* Protective clothing free of loose items (no jewelry, secure long hair)
 
-=== Lockout/Tagout Procedure (Summary)
-. Notify operators and shut down machine.
-. Isolate power (main disconnect).
-. Lock and tag the disconnect; verify zero energy.
-. Attempt restart to confirm isolation.
-. Perform maintenance; remove locks/tags only after verification.
+=== Lockout/Tagout (LOTO) — Summary
+. Notify affected operators and stop the machine; press **E-Stop**.
+. Isolate **electrical energy**: set main disconnect to **OFF**; apply personal lock and tag.
+. Isolate **pneumatic/hydraulic energy**: close supply valves; bleed off stored pressure; apply locks/tags.
+. Isolate **mechanical/kinetic energy**: block or brace moving parts as required.
+. **Verify zero energy**:
+.. Attempt a normal start to confirm isolation (machine must not power).
+.. Use appropriate test devices: absence-of-voltage indicator; gauges at **0** pressure.
+. Perform maintenance.
+. Remove tools/fixtures, reinstall guards, clear work area.
+. Remove personal locks/tags; restore energy in reverse order; perform a controlled test run.
+
+[NOTE]
+====
+Follow facility-specific procedures in addition to this summary. Reference: OSHA 1910.147 (Control of Hazardous Energy), ISO 16090-1 (Machine tool safety), and applicable local regulations.
+====
 
 == Routine Maintenance Schedule
 
