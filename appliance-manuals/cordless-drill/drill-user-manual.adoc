@@ -213,11 +213,16 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 [cols="1,1", options="header"]
 |===
 |Parameter | Value
-|Voltage | 18 V
-|No-load speed | 0–450 / 0–1600 RPM
+|Voltage | 18 V (Li-ion)
+|Battery capacity | 2.0 Ah (example)
+|No-load speed | 0–450 / 0–1600 RPM (2-speed)
 |Max torque | 45 Nm
+|Clutch settings | 20 + drill
 |Chuck capacity | 1.5–13 mm
-|Weight (w/ battery) | 1.6 kg
+|Charging time | ~60–90 min (2.0 Ah)
+|Weight (with battery) | ~1.6 kg
+|Operating temperature | 0–40 °C (tool)
+|Charging temperature | 5–35 °C (battery/charger)
 |===
 
 == Warranty & Support
