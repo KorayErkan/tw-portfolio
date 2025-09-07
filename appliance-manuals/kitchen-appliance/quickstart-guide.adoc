@@ -77,9 +77,18 @@ If ingredients stick to the sides, press *STOP* first. Use the tamper through th
 
 == Controls Overview
 image::control-panel.png[Control panel, width=60%]
-* *START/STOP* — Begin/end blending.
-* *PULSE* — Short bursts for chopping.
-* Programs: *SMOOTHIE*, *ICE CRUSH*, *SOUP*.
+
+* *START/STOP* — Begin or end blending.
+* *PULSE* — Short bursts for chopping or clearing air pockets.
+* *Programs* — Pre-set time/speed profiles:
+** *SMOOTHIE* — Soft fruit + liquid; gradual ramp-up.
+** *ICE CRUSH* — Short high-power pulses; best for ice/frozen items.
+** *SOUP* — Extended blend for smooth, hot-ready textures (use vented lid; do not seal steam).
+* *Safety Interlock* — The blender won’t start unless the pitcher is fully seated and the lid is locked.
+[TIP]
+====
+If ingredients ride high on the sides, press *STOP*, reseat the lid, and use *PULSE* or the tamper.
+====
 
 == Cleaning & Care
 * Unplug before cleaning.
