@@ -174,11 +174,40 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 [cols="1,2,2", options="header"]
 |===
 |Problem | Possible Cause | Corrective Action
-|Drill does not start | Battery discharged | Recharge or replace battery.
-|Chuck slips | Bit not fully seated | Reseat bit and tighten.
-|Low power | Incorrect gear/torque | Switch to gear 1, increase torque.
-|Overheating | Prolonged heavy load | Rest tool; check ventilation.
+
+|Drill does not start
+|Battery not seated / discharged
+|Remove and reinsert battery until it clicks; recharge or try a known-good pack.
+
+|Intermittent power loss
+|Dirty battery contacts or debris in trigger
+|Power off and remove battery; clean contacts with dry cloth; blow out trigger area gently.
+
+|Chuck slips / bit spins
+|Bit not fully seated or jaws dirty
+|Reseat bit and tighten; clean jaws; replace worn bits.
+
+|Screw head cam-out
+|Wrong driver bit or excessive torque
+|Use correct bit size/profile; reduce torque or switch to Gear 1.
+
+|Slow or stalling in wood/metal
+|Too high gear/speed or dull bit
+|Switch to Gear 1; use steady pressure; replace or sharpen bit; lubricate for metal.
+
+|Overheating / hot housing
+|Prolonged heavy load or blocked vents
+|Stop and allow to cool; clear ventilation slots; use appropriate speed/bit.
+
+|Unusual vibration/noise
+|Bent bit or loose accessory
+|Stop immediately; remove battery; replace bit and check accessories are tight.
 |===
+
+=== When to Contact Service
+* Housing cracked, burning smell, or visible arcing.
+* Battery leaking, swollen, or excessively hot after cooling.
+* Repeated fault after following the corrective actions above.
 
 == Technical Specifications
 [cols="1,1", options="header"]
