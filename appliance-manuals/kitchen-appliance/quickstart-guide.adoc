@@ -3,6 +3,8 @@
 :revdate: {docdate}
 :doctype: article
 :toc: macro
+:stylesdir: ../../include
+:stylesheet: portfolio-dark.css
 :icons: font
 :sectanchors:
 :imagesdir: images

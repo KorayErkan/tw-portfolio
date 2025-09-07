@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<title>Cordless Drill — User Manual</title>
+<style>
+
+/* portfolio-dark.css — minimal, eye-friendly Asciidoctor theme
+   - Dark gray background (not pure black)
+   - Soft contrast text
+   - No harsh borders or "white stripes" around code blocks
+   - Comfortable line-length and spacing
+*/
+
+:root{
+  --bg: #121417;
+  --panel: #181b20;
+  --panel-alt: #1e2329;
+  --text: #e4e7eb;
+  --muted: #b8c0cc;
+  --accent: #7aa2f7;   /* muted blue */
+  --accent-2: #8bd5ca; /* teal accent */
+  --border: #2a2f36;
+  --code-bg: #0f1317;
+  --code-border: transparent;
+  --kbd-bg: #262b33;
+  --link: #89b4fa;
+}
+
+/* Base */
+html, body{
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "DejaVu Sans", "Calibri", sans-serif;
+  font-size: 16px;
+}
+
+/* Layout */
+#header, #content, #footnotes, #footer{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+#toc.toc2{
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+}
+#toc.toc2, #toc.toc2 #toctitle, #toc.toc2 a{
+  color: var(--muted);
+}
+#toc.toc2 a:hover{ color: var(--text); }
+
+/* Headings */
+h1, h2, h3, h4{
+  color: var(--text);
+  line-height: 1.25;
+  margin: 1.2em 0 0.5em;
+}
+#header > h1{
+  margin-top: .8em;
+  letter-spacing: .3px;
+}
+.sectionbody > .paragraph:first-child p{
+  margin-top: .5rem;
+}
+
+/* Links */
+a{ color: var(--link); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+/* Blocks & panels */
+.admonitionblock, .exampleblock, .sidebarblock, .quoteblock, .verseblock{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+}
+.admonitionblock .title, .exampleblock .title{
+  color: var(--muted);
+  margin-bottom: .25rem;
+}
+
+/* Code blocks */
+.listingblock pre, .literalblock pre{
+  background: var(--code-bg);
+  color: var(--text);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--code-border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+pre, code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Mono", monospace; font-size: .95em; }
+.literalblock pre, .listingblock pre > code{ background: transparent; }
+
+/* Inline code */
+code, .literal{ background: var(--kbd-bg); color: var(--text); border-radius: 6px; padding: 0 .35rem; }
+
+/* Tables */
+table.tableblock{
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+table.tableblock th, table.tableblock td{
+  border: 1px solid var(--border);
+  padding: .6rem .75rem;
+}
+table.tableblock thead th{
+  background: var(--panel-alt);
+  color: var(--text);
+  font-weight: 600;
+}
+table.tableblock tr:nth-child(even) td{ background: rgba(255,255,255,.015); }
+
+/* Lists */
+ul, ol{ padding-left: 1.25rem; }
+ul li, ol li{ margin: .2rem 0; }
+
+/* Images */
+.imageblock img, img{
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0d0f12;
+  max-width: 100%;
+}
+
+/* Footer */
+#footer{
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+/* Notes/footnotes */
+.footnote, .conum[data-value]{ background: var(--kbd-bg); border-radius: 4px; padding: 0 .3rem; color: var(--muted); }
+
+/* Reduce "white stripes" around code & blocks */
+.listingblock, .literalblock{ margin: 1rem 0; }
+blockquote{ border-left: 3px solid var(--border); padding-left: 1rem; color: var(--muted); }
+
+/* Make the page breathe a bit */
+.paragraph p{ margin: .5rem 0 .9rem; }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Cordless Drill — User Manual</h1>
+<div class="details">
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2025-09-07</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_safety_information">1. Safety Information</a>
+<ul class="sectlevel2">
+<li><a href="#_general_safety">1.1. General Safety</a></li>
+<li><a href="#_electrical_battery_safety">1.2. Electrical &amp; Battery Safety</a></li>
+</ul>
+</li>
+<li><a href="#_product_overview">2. Product Overview</a>
+<ul class="sectlevel2">
+<li><a href="#_package_contents">2.1. Package Contents</a></li>
+<li><a href="#_parts_controls">2.2. Parts &amp; Controls</a></li>
+</ul>
+</li>
+<li><a href="#_assembly_setup">3. Assembly &amp; Setup</a>
+<ul class="sectlevel2">
+<li><a href="#_attachingremoving_the_battery">3.1. Attaching/Removing the Battery</a></li>
+<li><a href="#_inserting_drilldriver_bits">3.2. Inserting Drill/Driver Bits</a></li>
+</ul>
+</li>
+<li><a href="#_operating_instructions">4. Operating Instructions</a>
+<ul class="sectlevel2">
+<li><a href="#_power_onoff">4.1. Power On/Off</a></li>
+<li><a href="#_speed_torque">4.2. Speed &amp; Torque</a></li>
+</ul>
+</li>
+<li><a href="#_charging_maintenance">5. Charging &amp; Maintenance</a>
+<ul class="sectlevel2">
+<li><a href="#_charging">5.1. Charging</a></li>
+<li><a href="#_storage_care">5.2. Storage &amp; Care</a></li>
+</ul>
+</li>
+<li><a href="#_troubleshooting">6. Troubleshooting</a></li>
+<li><a href="#_technical_specifications">7. Technical Specifications</a></li>
+<li><a href="#_warranty_support">8. Warranty &amp; Support</a></li>
+<li><a href="#_compliance_disposal">Appendix A: Compliance &amp; Disposal</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="quoteblock abstract">
+<blockquote>
+This manual explains safe use, setup, operation, maintenance, and troubleshooting for the Cordless Drill (Model <strong>CDR-18V</strong>). Read all instructions before use.
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_safety_information"><a class="anchor" href="#_safety_information"></a><a class="link" href="#_safety_information">1. Safety Information</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Power tools are dangerous if used improperly. Always read and retain this manual.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_general_safety"><a class="anchor" href="#_general_safety"></a><a class="link" href="#_general_safety">1.1. General Safety</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Wear PPE: safety goggles, gloves, and hearing protection.</p>
+</li>
+<li>
+<p>Keep work area clean and well lit.</p>
+</li>
+<li>
+<p>Do not operate in explosive atmospheres.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_electrical_battery_safety"><a class="anchor" href="#_electrical_battery_safety"></a><a class="link" href="#_electrical_battery_safety">1.2. Electrical &amp; Battery Safety</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Use only the supplied charger (Model <strong>CHG-18V</strong>).</p>
+</li>
+<li>
+<p>Do not short-circuit, crush, or incinerate battery packs.</p>
+</li>
+<li>
+<p>Charge only between 5°C and 35°C.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_product_overview"><a class="anchor" href="#_product_overview"></a><a class="link" href="#_product_overview">2. Product Overview</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_package_contents"><a class="anchor" href="#_package_contents"></a><a class="link" href="#_package_contents">2.1. Package Contents</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Drill body (x1)</p>
+</li>
+<li>
+<p>18V Li-Ion battery (x1)</p>
+</li>
+<li>
+<p>Charger (x1)</p>
+</li>
+<li>
+<p>Carry case (x1)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_parts_controls"><a class="anchor" href="#_parts_controls"></a><a class="link" href="#_parts_controls">2.2. Parts &amp; Controls</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/drill-labeled.png" alt="Labeled drill diagram" width="60%">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Chuck</p>
+</li>
+<li>
+<p>Torque ring</p>
+</li>
+<li>
+<p>Gear selector</p>
+</li>
+<li>
+<p>Trigger &amp; reverse switch</p>
+</li>
+<li>
+<p>Battery release</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assembly_setup"><a class="anchor" href="#_assembly_setup"></a><a class="link" href="#_assembly_setup">3. Assembly &amp; Setup</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_attachingremoving_the_battery"><a class="anchor" href="#_attachingremoving_the_battery"></a><a class="link" href="#_attachingremoving_the_battery">3.1. Attaching/Removing the Battery</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Slide battery until it clicks.</p>
+</li>
+<li>
+<p>To remove, press the latch and pull downward.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inserting_drilldriver_bits"><a class="anchor" href="#_inserting_drilldriver_bits"></a><a class="link" href="#_inserting_drilldriver_bits">3.2. Inserting Drill/Driver Bits</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Rotate chuck counter-clockwise to open jaws.</p>
+</li>
+<li>
+<p>Insert bit; tighten clockwise.</p>
+</li>
+<li>
+<p>Verify bit is secured.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operating_instructions"><a class="anchor" href="#_operating_instructions"></a><a class="link" href="#_operating_instructions">4. Operating Instructions</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_power_onoff"><a class="anchor" href="#_power_onoff"></a><a class="link" href="#_power_onoff">4.1. Power On/Off</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Squeeze trigger to start; release to stop.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_speed_torque"><a class="anchor" href="#_speed_torque"></a><a class="link" href="#_speed_torque">4.2. Speed &amp; Torque</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Use gear selector (1 = high torque / 2 = high speed).</p>
+</li>
+<li>
+<p>Adjust torque ring based on material.</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Recommended settings:</p>
+</div>
+<table class="tableblock frame-all grid-all stripes-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Material</th>
+<th class="tableblock halign-left valign-top">Bit Type</th>
+<th class="tableblock halign-left valign-top">Torque</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Softwood</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wood twist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8–12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hardwood</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wood twist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12–16</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Masonry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Masonry bit + hammer mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">18–20</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_charging_maintenance"><a class="anchor" href="#_charging_maintenance"></a><a class="link" href="#_charging_maintenance">5. Charging &amp; Maintenance</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_charging"><a class="anchor" href="#_charging"></a><a class="link" href="#_charging">5.1. Charging</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Connect charger to mains.</p>
+</li>
+<li>
+<p>Insert battery pack; indicator shows charging.</p>
+</li>
+<li>
+<p>Charging time: ~60–90 minutes.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_storage_care"><a class="anchor" href="#_storage_care"></a><a class="link" href="#_storage_care">5.2. Storage &amp; Care</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Store between 10–25°C, dry environment.</p>
+</li>
+<li>
+<p>Clean dust with dry cloth; do not use solvents.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a><a class="link" href="#_troubleshooting">6. Troubleshooting</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stripes-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Problem</th>
+<th class="tableblock halign-left valign-top">Possible Cause</th>
+<th class="tableblock halign-left valign-top">Corrective Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Drill does not start</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Battery discharged</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recharge or replace battery.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chuck slips</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bit not fully seated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reseat bit and tighten.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low power</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Incorrect gear/torque</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Switch to gear 1, increase torque.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overheating</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prolonged heavy load</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rest tool; check ventilation.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_specifications"><a class="anchor" href="#_technical_specifications"></a><a class="link" href="#_technical_specifications">7. Technical Specifications</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stripes-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Voltage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">18 V</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No-load speed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0–450 / 0–1600 RPM</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max torque</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">45 Nm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chuck capacity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.5–13 mm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Weight (w/ battery)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.6 kg</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_warranty_support"><a class="anchor" href="#_warranty_support"></a><a class="link" href="#_warranty_support">8. Warranty &amp; Support</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This product is warranted against defects for 24 months from the purchase date. Retain proof of purchase.</p>
+</div>
+<div class="paragraph">
+<p><strong>Support:</strong> <a href="mailto:support@exampletools.com">support@exampletools.com</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_compliance_disposal"><a class="anchor" href="#_compliance_disposal"></a><a class="link" href="#_compliance_disposal">Appendix A: Compliance &amp; Disposal</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This tool complies with applicable directives. Dispose of batteries according to local regulations.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br>
+Last updated 2025-09-07 18:55:44 +0300
+</div>
+</div>
+</body>
+</html>

@@ -4,6 +4,8 @@
 :doctype: book
 :toc: left
 :toclevels: 3
+:stylesdir: ../../include
+:stylesheet: portfolio-dark.css
 :icons: font
 :sectnums:
 :sectlinks:
@@ -75,8 +77,8 @@ image::cnc-exploded.png[Exploded view with numbered parts, width=70%]
 [cols="1,1,2,1,1", options="header"]
 |===
 |Date | Technician | Task | Parts Used | Signature
-| | | | | 
-| | | | | 
+| | | | |
+| | | | |
 |===
 
 == References & Standards
