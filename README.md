@@ -1,22 +1,37 @@
 # Technical Writing Portfolio
 
-These are the documents I have created to demonstrate my technical writing skills.
+A curated collection of technical writing samples across software and non‑software domains. Each section focuses on a different audience and deliverable type (developers, sysadmins, end users, technicians, and executives). Most samples are Markdown or Asciidoc with compiled HTML/PDF for quick viewing.
 
-There are 8 document categories included here:
+## Sections
 
-1. [API Documentation](./api-documentation)
-2. [Installation Guide](./installation-guide)
+1. [API Documentation](./api-documentation/)
+2. [Installation Guide](./installation-guide/)
 3. [Reference Charts](./reference-charts/)
 4. [Release Notes](./release-notes/)
 5. [System Configuration Guide](./system-configuration-quide/)
 6. [Tutorial](./tutorial/)
 7. [User Assistance](./user-assistance/)
 8. [User Manual](./user-manual/)
+9. [Appliance & Industrial Manuals](./appliance-manuals/)
 
-Each of these document types is used for a specific purpose, and the samples were edited with those purposes and the structure that entails in mind. However, the documents are only intended to be illustrative of my _general skills_, and are __not__ meant to be thorough representations of real-life samples.
+## Quick Matrix
 
-All software entities, products, and services referred to in the text is intended to be imaginary, and any similarities with real life instances can only be coincidental. The mail addresses, phone numbers, etc. are also meant to be fake.
+| Category | Audience | Formats | Highlights |
+|---|---|---|---|
+| API Documentation | Developers | MD, HTML | Endpoint docs, request parsing, examples |
+| Installation Guide | Sysadmins | MD, HTML | Requirements, steps, troubleshooting |
+| Reference Charts | Developers | MD, HTML | Config tables, EBNF, quick lookup |
+| Release Notes | Product/Eng | MD, HTML | Features, fixes, deprecations, migration |
+| System Config Guide | Sysadmins | MD, HTML | Server/network setup, best practices |
+| Tutorial | Developers/Power Users | MD, HTML | Concepts, exercises, examples |
+| User Assistance | End Users | MD + images | Task guides, screenshots, tips |
+| User Manual | End Users | PDF, DOCX | Complete manual format |
+| Appliance/Industrial | Consumers/Technicians | Asciidoc, HTML | Hardware manuals, quick-starts, maintenance |
 
-The material is available as Markdown (__\*.md__), Hypertext Markup Language (__\*.html__), and Portable Dodcument Format (__\*.pdf__) files. The Markdown files allowed basic editing and layout, the HTML files allowed using stylesheets for Web presentation, and the PDF files allowed pagination and indexing. The text-based files were edited and developed with __Visual Studio Code__, and the PDFs were generated with __Microsoft Word__.
+> Styling: Asciidoc samples use a readable dark theme (`include/portfolio-dark.css`). Markdown → HTML exports may use `include/portfolio-markdown-dark.css` (optional).
 
-Finally, I'm indebted to [Ugur Akinci](https://technicalcommunicationcenter.com) for informing me on the fundamentals of technical writing, as well as on the structure, components, and layout of the documents here, and I'd like to express my gratitude to him.
+## Notes & Credits
+
+- All products, names, and data are fictional and for demonstration only.
+- Some samples are intentionally concise; scope is tuned to portfolio needs.
+- Acknowledgements to mentors and references used in shaping these samples.
