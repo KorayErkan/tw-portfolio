@@ -1,0 +1,61 @@
+= Kitchen Blender — Quick-Start Guide
+:revnumber: 1.0
+:revdate: {docdate}
+:doctype: article
+:toc: macro
+:icons: font
+:sectanchors:
+:imagesdir: images
+
+[abstract]
+This quick-start shows the essentials to set up and use your Kitchen Blender (Model **BLN-700**). For full safety and care instructions, see the User Manual.
+
+toc::[]
+
+== Unboxing
+Verify that all parts are present and undamaged:
+* Motor base
+* Pitcher with lid
+* Blade assembly (pre-installed)
+* Tamper
+* Quick-start guide
+
+== Safety Warnings
+[IMPORTANT]
+====
+Read all safety instructions before use. Keep hands and utensils away from moving blades.
+====
+* Do not operate without the lid locked.
+* Do not immerse the motor base in water.
+
+== Setup
+. Place the base on a flat, dry surface.
+. Seat the pitcher onto the base until it locks.
+. Insert the lid and ensure the cap is closed.
+
+== First Run (Example Smoothie)
+. Add 1 cup liquid + fruit + ice (max fill line).
+. Select *SMOOTHIE* program.
+. Press *START*. Blend for ~45 seconds.
+. Turn *OFF*, remove lid, and serve.
+
+== Controls Overview
+image::control-panel.png[Control panel, width=60%]
+* *START/STOP* — Begin/end blending.
+* *PULSE* — Short bursts for chopping.
+* Programs: *SMOOTHIE*, *ICE CRUSH*, *SOUP*.
+
+== Cleaning & Care
+* Unplug before cleaning.
+* Rinse pitcher and lid immediately after use.
+* Dishwasher-safe: pitcher and lid (top rack only).
+* Wipe base with damp cloth; do not submerge.
+
+== Quick Troubleshooting
+[cols="1,2,2", options="header"]
+|===
+|Symptom | Possible Cause | Fix
+|Won't start | Lid not locked | Lock lid fully; check safety interlock.
+|Unusual noise | Foreign object | Stop immediately; inspect pitcher.
+|Poor blend | Overfilled or wrong program | Reduce contents; select correct program.
+|===

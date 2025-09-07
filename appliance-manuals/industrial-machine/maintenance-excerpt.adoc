@@ -1,0 +1,89 @@
+= Industrial CNC — Maintenance Manual (Excerpt)
+:revnumber: 0.9
+:revdate: {docdate}
+:doctype: book
+:toc: left
+:toclevels: 3
+:icons: font
+:sectnums:
+:sectlinks:
+:sectanchors:
+:imagesdir: images
+:table-stripes: even
+
+[abstract]
+This excerpt illustrates routine maintenance, safety procedures, and fault code handling for a fictional CNC machining center (Model **CNC-5000**). Prepared as a portfolio sample.
+
+== Introduction
+*Intended audience:* certified maintenance technicians and supervisors.
+*Scope:* routine service, selected fault codes, and recordkeeping templates.
+
+== Safety Requirements
+
+[WARNING]
+====
+Perform lockout/tagout (LOTO) before any service. Failure to comply may result in serious injury.
+====
+
+=== PPE
+* Safety helmet, goggles, cut-resistant gloves.
+* Hearing protection (≥ 25 dB SNR).
+* Steel-toe boots.
+
+=== Lockout/Tagout Procedure (Summary)
+. Notify operators and shut down machine.
+. Isolate power (main disconnect).
+. Lock and tag the disconnect; verify zero energy.
+. Attempt restart to confirm isolation.
+. Perform maintenance; remove locks/tags only after verification.
+
+== Routine Maintenance Schedule
+
+[cols="2,1,1,2", options="header"]
+|===
+|Task | Frequency | Tools | Notes
+|Inspect way covers | Daily | Visual | Replace if torn or jammed.
+|Clean chip conveyors | Daily | Scraper/brush | Power off first.
+|Lubricate spindle bearings | Weekly | Grease gun (NLGI-2) | 2–3 pumps per fitting.
+|Check coolant concentration | Weekly | Refractometer | Maintain 6–8%.
+|Replace hydraulic filter | Monthly | Wrench set | Depressurize system.
+|Inspect belts | Quarterly | Tension gauge | Replace if frayed.
+|===
+
+== Fault Codes
+
+[cols="1,2,3", options="header"]
+|===
+|Code | Meaning | Corrective Action
+|E-101 | Axis overtravel | Home the machine; check limit switches.
+|E-102 | Spindle overheating | Shut down; verify coolant flow and fan operation.
+|E-204 | Servo drive fault | Inspect drive LEDs; reseat connectors; consult drive manual.
+|===
+
+== Diagrams
+image::cnc-exploded.png[Exploded view with numbered parts, width=70%]
+
+.Callouts
+. Spindle assembly
+. Way covers
+. Hydraulic unit
+. Coolant tank
+
+== Recordkeeping
+
+=== Maintenance Log Template
+[cols="1,1,2,1,1", options="header"]
+|===
+|Date | Technician | Task | Parts Used | Signature
+| | | | | 
+| | | | | 
+|===
+
+== References & Standards
+* ISO 16090-1 (Machine tool safety)
+* OSHA 1910.147 (Control of hazardous energy)
+
+[appendix]
+== Controlled Document Info
+Doc ID: CNC-5000-MNT-EX-01 +
+Revision: 0.9 (Portfolio Sample)

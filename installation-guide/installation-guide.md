@@ -10,7 +10,9 @@ NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS
 
 ## Copyright
 
-__ProSoft__ is registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners. This document is is subject to change without prior notice.
+__ProSoft__ is registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners.
+
+This document is subject to change without prior notice.
 
 &copy; ProSoft 2024.
 

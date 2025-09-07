@@ -1,0 +1,123 @@
+= Cordless Drill — User Manual
+:revnumber: 1.0
+:revdate: {docdate}
+:doctype: book
+:toc: left
+:toclevels: 3
+:icons: font
+:sectnums:
+:sectlinks:
+:sectanchors:
+:imagesdir: images
+:table-stripes: all
+
+[abstract]
+This manual explains safe use, setup, operation, maintenance, and troubleshooting for the Cordless Drill (Model **CDR-18V**). Read all instructions before use.
+
+== Safety Information
+
+[CAUTION]
+====
+Power tools are dangerous if used improperly. Always read and retain this manual.
+====
+
+=== General Safety
+* Wear PPE: safety goggles, gloves, and hearing protection.
+* Keep work area clean and well lit.
+* Do not operate in explosive atmospheres.
+
+=== Electrical & Battery Safety
+* Use only the supplied charger (Model **CHG-18V**).
+* Do not short-circuit, crush, or incinerate battery packs.
+* Charge only between 5°C and 35°C.
+
+== Product Overview
+
+=== Package Contents
+* Drill body (x1)
+* 18V Li-Ion battery (x1)
+* Charger (x1)
+* Carry case (x1)
+
+=== Parts & Controls
+image::drill-labeled.png[alt="Labeled drill diagram", width=60%]
+
+. Chuck
+. Torque ring
+. Gear selector
+. Trigger & reverse switch
+. Battery release
+
+== Assembly & Setup
+
+=== Attaching/Removing the Battery
+. Slide battery until it clicks.
+. To remove, press the latch and pull downward.
+
+=== Inserting Drill/Driver Bits
+. Rotate chuck counter-clockwise to open jaws.
+. Insert bit; tighten clockwise.
+. Verify bit is secured.
+
+== Operating Instructions
+
+=== Power On/Off
+* Squeeze trigger to start; release to stop.
+
+=== Speed & Torque
+* Use gear selector (1 = high torque / 2 = high speed).
+* Adjust torque ring based on material.
+
+[example]
+====
+Recommended settings:
+[cols="1,1,1", options="header"]
+|===
+|Material | Bit Type | Torque
+|Softwood | Wood twist | 8–12
+|Hardwood | Wood twist | 12–16
+|Masonry  | Masonry bit + hammer mode | 18–20
+|===
+====
+
+== Charging & Maintenance
+
+=== Charging
+. Connect charger to mains.
+. Insert battery pack; indicator shows charging.
+. Charging time: ~60–90 minutes.
+
+=== Storage & Care
+* Store between 10–25°C, dry environment.
+* Clean dust with dry cloth; do not use solvents.
+
+== Troubleshooting
+
+[cols="1,2,2", options="header"]
+|===
+|Problem | Possible Cause | Corrective Action
+|Drill does not start | Battery discharged | Recharge or replace battery.
+|Chuck slips | Bit not fully seated | Reseat bit and tighten.
+|Low power | Incorrect gear/torque | Switch to gear 1, increase torque.
+|Overheating | Prolonged heavy load | Rest tool; check ventilation.
+|===
+
+== Technical Specifications
+[cols="1,1", options="header"]
+|===
+|Parameter | Value
+|Voltage | 18 V
+|No-load speed | 0–450 / 0–1600 RPM
+|Max torque | 45 Nm
+|Chuck capacity | 1.5–13 mm
+|Weight (w/ battery) | 1.6 kg
+|===
+
+== Warranty & Support
+This product is warranted against defects for 24 months from the purchase date. Retain proof of purchase.
+
+*Support:* mailto:support@exampletools.com[]
+
+[appendix]
+== Compliance & Disposal
+This tool complies with applicable directives. Dispose of batteries according to local regulations.
