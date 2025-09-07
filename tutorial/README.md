@@ -1,3 +1,13 @@
-# Tutorial Sample
+# Tutorial (Portfolio Sample)
 
-This text covers using the command line to perform file and text searching tasks. A number of commonly used cmdlets are introduced, their basic syntax is explained, and example uses are provided to illustrate how they work.
+**Audience:** Developers / Power users  
+**Purpose:** Explain a concept progressively with examples and small exercises.
+
+## What's Inside
+- **Command‑Line Tutorial** — commands, piping, parameters  
+  - [Markdown](./command-line-tutorial.md) · [HTML](./command-line-tutorial.html)
+
+## Highlights
+- Concepts → examples → practice flow
+- Progressive difficulty
+- Clear, reproducible snippets
