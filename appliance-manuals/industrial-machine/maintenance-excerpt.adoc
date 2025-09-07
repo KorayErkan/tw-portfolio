@@ -139,10 +139,30 @@ After any maintenance affecting motion, run a short test program and verify part
 [cols="1,2,3", options="header"]
 |===
 |Code | Meaning | Corrective Action
-|E-101 | Axis overtravel | Home the machine; check limit switches.
-|E-102 | Spindle overheating | Shut down; verify coolant flow and fan operation.
-|E-204 | Servo drive fault | Inspect drive LEDs; reseat connectors; consult drive manual.
+
+|E-101 | Axis overtravel | Press *RESET*; home the machine; check limit switches and soft limits.
+|E-102 | Spindle overheating | Stop; verify coolant/fan operation; allow cooldown; inspect spindle load history.
+|E-204 | Servo drive fault | Note drive LED code; power-cycle control only once; reseat connectors; check encoder cable; consult drive manual.
+|E-305 | Low hydraulic pressure | Stop motion; verify pump runs; check reservoir level and filters; inspect for leaks.
+|E-410 | Door interlock open | Verify doors fully closed; check interlock switch alignment and wiring.
+|E-512 | Coolant flow low | Clean intake screen; check pump and lines for blockage; verify concentration 6–8%.
+|E-601 | Pneumatic pressure low | Check main supply (6–8 bar); drain water separator; inspect regulator and leaks.
 |===
+
+=== After-Clear Checklist
+. Clear alarms; **home all axes**.
+. Run a short warm-up cycle (spindle + axes); observe temperatures and loads.
+. Verify part accuracy on a test coupon before resuming production.
+
+[IMPORTANT]
+====
+Do **not** clear and restart repeatedly without investigation. Recurrent or intermittent faults may indicate wiring damage, failing sensors, or drive issues.
+====
+
+=== Escalate to OEM/Service When
+* Spindle temperature rises rapidly at idle or faults recur after cooldown.
+* Servo faults persist after verifying cables, connectors, and supply voltages.
+* Hydraulic pressure fluctuates under steady load or ΔP gauge spikes after filter change.
 
 == Diagrams
 image::cnc-exploded.png[Exploded view with numbered parts, width=70%]

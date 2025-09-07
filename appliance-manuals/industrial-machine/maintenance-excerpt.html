@@ -179,7 +179,12 @@ blockquote{ border-left: 3px solid var(--border); padding-left: 1rem; color: var
 </ul>
 </li>
 <li><a href="#_routine_maintenance_schedule">3. Routine Maintenance Schedule</a></li>
-<li><a href="#_fault_codes">4. Fault Codes</a></li>
+<li><a href="#_fault_codes">4. Fault Codes</a>
+<ul class="sectlevel2">
+<li><a href="#_after_clear_checklist">4.1. After-Clear Checklist</a></li>
+<li><a href="#_escalate_to_oemservice_when">4.2. Escalate to OEM/Service When</a></li>
+</ul>
+</li>
 <li><a href="#_diagrams">5. Diagrams</a></li>
 <li><a href="#_recordkeeping">6. Recordkeeping</a>
 <ul class="sectlevel2">
@@ -456,20 +461,86 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-101</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Axis overtravel</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Home the machine; check limit switches.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Press <strong>RESET</strong>; home the machine; check limit switches and soft limits.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-102</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spindle overheating</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Shut down; verify coolant flow and fan operation.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop; verify coolant/fan operation; allow cooldown; inspect spindle load history.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-204</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Servo drive fault</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inspect drive LEDs; reseat connectors; consult drive manual.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Note drive LED code; power-cycle control only once; reseat connectors; check encoder cable; consult drive manual.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-305</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low hydraulic pressure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop motion; verify pump runs; check reservoir level and filters; inspect for leaks.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-410</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door interlock open</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify doors fully closed; check interlock switch alignment and wiring.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-512</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coolant flow low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clean intake screen; check pump and lines for blockage; verify concentration 6–8%.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-601</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pneumatic pressure low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check main supply (6–8 bar); drain water separator; inspect regulator and leaks.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="_after_clear_checklist"><a class="anchor" href="#_after_clear_checklist"></a><a class="link" href="#_after_clear_checklist">4.1. After-Clear Checklist</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clear alarms; <strong>home all axes</strong>.</p>
+</li>
+<li>
+<p>Run a short warm-up cycle (spindle + axes); observe temperatures and loads.</p>
+</li>
+<li>
+<p>Verify part accuracy on a test coupon before resuming production.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do <strong>not</strong> clear and restart repeatedly without investigation. Recurrent or intermittent faults may indicate wiring damage, failing sensors, or drive issues.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_escalate_to_oemservice_when"><a class="anchor" href="#_escalate_to_oemservice_when"></a><a class="link" href="#_escalate_to_oemservice_when">4.2. Escalate to OEM/Service When</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Spindle temperature rises rapidly at idle or faults recur after cooldown.</p>
+</li>
+<li>
+<p>Servo faults persist after verifying cables, connectors, and supply voltages.</p>
+</li>
+<li>
+<p>Hydraulic pressure fluctuates under steady load or ΔP gauge spikes after filter change.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -569,7 +640,7 @@ Revision: 0.9 (Portfolio Sample)</p>
 <div id="footer">
 <div id="footer-text">
 Version 0.9<br>
-Last updated 2025-09-07 19:36:55 +0300
+Last updated 2025-09-07 19:38:02 +0300
 </div>
 </div>
 </body>
