@@ -91,16 +91,25 @@ If ingredients ride high on the sides, press *STOP*, reseat the lid, and use *PU
 ====
 
 == Cleaning & Care
-* Unplug before cleaning.
-* Rinse pitcher and lid immediately after use.
-* Dishwasher-safe: pitcher and lid (top rack only).
-* Wipe base with damp cloth; do not submerge.
+* Unplug the blender before cleaning.
+* Rinse pitcher and lid immediately after use to prevent buildup.
+* Dishwasher-safe: pitcher and lid (top rack only). Hand-wash blades carefully.
+* Wipe the motor base with a damp cloth; do **not** immerse or spray the base.
+* Do not use abrasive pads or solvents on any part.
+
+[IMPORTANT]
+====
+Always remove the pitcher from the base before cleaning. Inspect the lid seal regularly; replace if cracked or deformed.
+====
 
 == Quick Troubleshooting
 [cols="1,2,2", options="header"]
 |===
 |Symptom | Possible Cause | Fix
-|Won't start | Lid not locked | Lock lid fully; check safety interlock.
-|Unusual noise | Foreign object | Stop immediately; inspect pitcher.
-|Poor blend | Overfilled or wrong program | Reduce contents; select correct program.
+|Won’t start | Pitcher/lid not locked (interlock) | Reseat pitcher; lock lid until it clicks.
+|Unusual noise | Foreign object or mis-seated lid | Press *STOP*; inspect pitcher, remove obstructions; reseat lid.
+|Poor blend / ingredients ride high | Overfilled or program mismatch | Reduce volume; use *SMOOTHIE* for soft items; *ICE CRUSH* for ice/frozen.
+|Overheats / smell | Extended high load | Press *STOP*; allow to cool; blend in shorter cycles.
+|Leaks at lid | Lid cap or seal not seated | Remove, clean, and reseat cap and seal; replace if worn.
 |===
+
