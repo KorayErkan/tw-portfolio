@@ -1,27 +1,20 @@
-
-/* common-dark.css — minimal, eye-friendly Asciidoctor theme
-   - Dark gray background (not pure black)
-   - Soft contrast text
-   - No harsh borders or "white stripes" around code blocks
-   - Comfortable line-length and spacing
-*/
-
+/* github-dark-asciidoctor.css — Asciidoctor theme inspired by GitHub Dark */
 :root{
-  --bg: #121417;
-  --panel: #181b20;
-  --panel-alt: #1e2329;
-  --text: #e4e7eb;
-  --muted: #b8c0cc;
-  --accent: #7aa2f7;   /* muted blue */
-  --accent-2: #8bd5ca; /* teal accent */
-  --border: #2a2f36;
-  --code-bg: #0f1317;
-  --code-border: transparent;
-  --kbd-bg: #262b33;
-  --link: #89b4fa;
+  /* GitHub Dark neutrals */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-alt: #161b22;
+  --text: #c9d1d9;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-2: #3fb950; /* success green */
+  --border: #30363d;
+  --code-bg: #0d1117;   /* inline code uses translucency; blocks sit on panel */
+  --code-border: #30363d;
+  --kbd-bg: rgba(110,118,129,0.15);
+  --link: #58a6ff;
 }
 
-/* Base */
 html, body{
   background: var(--bg);
   color: var(--text);
@@ -33,13 +26,13 @@ html, body{
 }
 
 body{
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "DejaVu Sans", "Calibri", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   font-size: 16px;
 }
 
 /* Layout */
 #header, #content, #footnotes, #footer{
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 1.25rem;
 }
@@ -48,103 +41,158 @@ body{
   background: var(--panel);
   border-right: 1px solid var(--border);
 }
-#toc.toc2, #toc.toc2 #toctitle, #toc.toc2 a{
-  color: var(--muted);
-}
+#toc.toc2, #toc.toc2 #toctitle, #toc.toc2 a{ color: var(--muted); }
 #toc.toc2 a:hover{ color: var(--text); }
 
 /* Headings */
-h1, h2, h3, h4{
+h1, h2, h3, h4, h5, h6{
   color: var(--text);
   line-height: 1.25;
-  margin: 1.2em 0 0.5em;
+  margin: 1.25em 0 .6em;
+  font-weight: 600;
 }
 #header > h1{
-  margin-top: .8em;
-  letter-spacing: .3px;
+  margin-top: 1rem;
+  letter-spacing: .2px;
 }
-.sectionbody > .paragraph:first-child p{
-  margin-top: .5rem;
-}
+.sectionbody > .paragraph:first-child p{ margin-top: .5rem; }
 
 /* Links */
 a{ color: var(--link); text-decoration: none; }
 a:hover{ text-decoration: underline; }
 
-/* Blocks & panels */
+/* Admonitions & panels */
 .admonitionblock, .exampleblock, .sidebarblock, .quoteblock, .verseblock{
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 1rem 1.2rem;
   margin: 1rem 0;
 }
 .admonitionblock .title, .exampleblock .title{
   color: var(--muted);
-  margin-bottom: .25rem;
+  margin-bottom: .35rem;
+  font-weight: 600;
 }
 
 /* Code blocks */
+pre, code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .95em;
+}
 .listingblock pre, .literalblock pre{
-  background: var(--code-bg);
+  background: var(--panel);
   color: var(--text);
-  border: 0;
-  box-shadow: inset 0 0 0 1px var(--code-border);
-  border-radius: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
   padding: 1rem 1.2rem;
   overflow-x: auto;
 }
-pre, code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Mono", monospace; font-size: .95em; }
+/* ensure Rouge/Highlighter overlays don't repaint block bg */
 .literalblock pre, .listingblock pre > code{ background: transparent; }
 
-/* Inline code */
-code, .literal{ background: var(--kbd-bg); color: var(--text); border-radius: 6px; padding: 0 .35rem; }
+/* Inline code (GitHub uses translucent background) */
+code, .literal{
+  background: rgba(110,118,129,0.15);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0 .35rem;
+  border: 1px solid rgba(110,118,129,0.4);
+}
+
+/* kbd keys */
+kbd, .keyseq, .conum[data-value]{
+  background: rgba(110,118,129,0.15);
+  border: 1px solid rgba(110,118,129,0.4);
+  border-bottom-color: rgba(110,118,129,0.6);
+  border-radius: 6px;
+  padding: 0 .3rem;
+  color: var(--muted);
+  box-shadow: inset 0 -1px 0 rgba(1,4,9,.2);
+}
 
 /* Tables */
 table.tableblock{
   width: 100%;
-  border-collapse: collapse;
-  background: var(--panel);
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
 }
-table.tableblock th, table.tableblock td{
-  border: 1px solid var(--border);
-  padding: .6rem .75rem;
-}
 table.tableblock thead th{
-  background: var(--panel-alt);
+  background: var(--panel);
   color: var(--text);
   font-weight: 600;
+  border-bottom: 1px solid var(--border);
 }
-table.tableblock tr:nth-child(even) td{ background: rgba(255,255,255,.015); }
+table.tableblock th, table.tableblock td{
+  border-right: 1px solid var(--border);
+  padding: .6rem .75rem;
+}
+table.tableblock th:last-child, table.tableblock td:last-child{ border-right: 0; }
+table.tableblock tbody tr{
+  background: transparent;
+}
+table.tableblock tbody tr + tr td{
+  border-top: 1px solid var(--border);
+}
+table.tableblock tbody tr:hover td{
+  background: rgba(177,186,196,0.04);
+}
 
 /* Lists */
 ul, ol{ padding-left: 1.25rem; }
-ul li, ol li{ margin: .2rem 0; }
+ul li, ol li{ margin: .25rem 0; }
+
+/* Blockquotes */
+blockquote{
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+  color: var(--muted);
+  margin: 1rem 0;
+}
 
 /* Images */
 .imageblock img, img{
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--border);
-  background: #0d0f12;
+  background: #0d1117;
   max-width: 100%;
 }
 
-/* Footer */
+/* Footnotes & misc */
 #footer{
   color: var(--muted);
   border-top: 1px solid var(--border);
   margin-top: 2rem;
 }
+.footnote{ background: rgba(110,118,129,0.15); border-radius: 4px; padding: 0 .3rem; color: var(--muted); }
 
-/* Notes/footnotes */
-.footnote, .conum[data-value]{ background: var(--kbd-bg); border-radius: 4px; padding: 0 .3rem; color: var(--muted); }
-
-/* Reduce "white stripes" around code & blocks */
+/* Asciidoctor specifics to reduce “white stripes” */
 .listingblock, .literalblock{ margin: 1rem 0; }
-blockquote{ border-left: 3px solid var(--border); padding-left: 1rem; color: var(--muted); }
-
-/* Make the page breathe a bit */
 .paragraph p{ margin: .5rem 0 .9rem; }
+
+/* Callouts in code blocks */
+.conum[data-value]{
+  display: inline-block;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+/* Horizontal rule */
+hr{
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* Definition lists */
+dl dt{ font-weight: 600; }
+dl dd{ color: var(--muted); margin: 0 0 .6rem 0; }
+
+/* ToC tweaks */
+#toctitle{ font-weight: 600; }
+#toc a{ text-decoration: none; }
+#toc a:hover{ text-decoration: underline; }
