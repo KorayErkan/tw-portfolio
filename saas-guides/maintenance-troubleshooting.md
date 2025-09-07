@@ -1,14 +1,16 @@
 # Maintenance & Troubleshooting
 
 ## Routine Maintenance
-- Backups (policy/schedule/restore test)  
-- Data retention  
-- Key rotation  
+
+- Backups (policy/schedule/restore test)
+- Data retention
+- Key rotation
 
 ## Monitoring
-- Health endpoints  
-- Log aggregation  
-- Alert thresholds  
+
+- Health endpoints
+- Log aggregation
+- Alert thresholds
 
 ## Troubleshooting Playbooks
 
@@ -19,4 +21,5 @@
 | Slow exports | Large datasets | Start async export, paginate inputs |
 
 ## Escalation Matrix
+
 Tiered support and SLAs.
