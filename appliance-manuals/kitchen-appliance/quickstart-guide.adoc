@@ -40,9 +40,34 @@ Read all safety instructions before use. Keep hands and utensils away from movin
 * Ensure the pitcher is fully seated and the lid locks before pressing *START*.
 
 == Setup
-. Place the base on a flat, dry surface.
-. Seat the pitcher onto the base until it locks.
-. Insert the lid and ensure the cap is closed.
+. Rinse the pitcher, lid, and tamper with warm soapy water; dry thoroughly.
+. Place the motor base on a flat, dry surface with ~10 cm clearance for ventilation.
+. Seat the pitcher on the base until it **locks** (no wobble).
+. Insert the lid; press down until the latch clicks. Keep the cap closed unless adding ingredients mid-blend.
+. Plug the power cord into a grounded outlet.
+
+[IMPORTANT]
+====
+The blender will not start unless the pitcher is fully seated and the lid is locked (safety interlock).
+====
+
+== First Run (Example Smoothie)
+*Ingredients (serves 2):*
+- 1 cup cold liquid (water or milk)
+- 1 banana (peeled, in chunks)
+- 1 cup frozen berries
+- 1 cup ice (optional)
+
+.Steps
+. Add liquid first, then soft items, then frozen/ice (do not exceed the MAX line).
+. Select the *SMOOTHIE* program (or speed 3–4 if using manual speed).
+. Press *START*. Blend ~45 seconds (or until desired texture).
+. Press *STOP*, remove the lid, and serve.
+
+[TIP]
+====
+If ingredients stick to the sides, press *STOP* first. Use the tamper through the lid cap while blending, or pulse in short bursts.
+====
 
 == First Run (Example Smoothie)
 . Add 1 cup liquid + fruit + ice (max fill line).
