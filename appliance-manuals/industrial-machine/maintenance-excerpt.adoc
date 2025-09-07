@@ -181,12 +181,22 @@ Replace this placeholder with the OEM exploded view when available. Keep diagram
 == Recordkeeping
 
 === Maintenance Log Template
-[cols="1,1,2,1,1", options="header"]
+[cols="1,1,2,1,1,1", options="header"]
 |===
-|Date | Technician | Task | Parts Used | Signature
-| | | | |
-| | | | |
+|Date | Technician | Task | Parts/Materials | Machine Hours | Signature
+| | | | | |
+| | | | | |
 |===
+
+=== Usage Rules
+* Complete entries in **permanent ink**; no erasures. Use single strike-through for corrections and add initials/date.
+* Record **machine hours** at the start of each task.
+* Note torque values, measurements, and test results (e.g., coolant 7.2% Brix, backlash 0.006 mm).
+* Attach supporting checklists (E-Stop/door interlock tests) and reference their file IDs in the log.
+* After any safety or motion-related maintenance, run a **controlled test program** and record results.
+
+=== Retention
+Maintain maintenance logs and checklists for **5 years** (or per facility policy). Provide on request to auditors or OEM service.
 
 == References & Standards
 * ISO 16090-1 (Machine tool safety)
