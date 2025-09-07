@@ -18,20 +18,33 @@ This manual explains safe use, setup, operation, maintenance, and troubleshootin
 
 == Safety Information
 
-[CAUTION]
+[WARNING]
 ====
-Power tools are dangerous if used improperly. Always read and retain this manual.
+Power tools can cause serious injury if used improperly. Read and keep this manual. Do not allow children to operate the drill.
 ====
 
 === General Safety
-* Wear PPE: safety goggles, gloves, and hearing protection.
-* Keep work area clean and well lit.
-* Do not operate in explosive atmospheres.
+* Wear PPE: safety goggles, hearing protection, and work gloves.
+* Keep work area clean, dry, and well lit. Do not operate near flammable vapors.
+* Maintain stable footing and balance at all times.
+* Secure the workpiece (vise or clamps); never hold material in your hand.
+* Do not modify the tool. Use only accessories rated for the drill.
 
 === Electrical & Battery Safety
-* Use only the supplied charger (Model **CHG-18V**).
-* Do not short-circuit, crush, or incinerate battery packs.
-* Charge only between 5°C and 35°C.
+* Use only charger **CHG-18V** and battery **BAT-18V** (or approved equivalents).
+* Do not short-circuit, crush, heat above 60 °C, or incinerate battery packs.
+* Charge only indoors, between 5 °C and 35 °C. Unplug the charger when not in use.
+* Inspect battery and charger before each use; replace if cracked, deformed, or leaking.
+
+=== Operation Safety
+* Remove adjusting keys and wrenches before powering on.
+* Select the correct speed/torque and bit for the material before contact.
+* Keep hands, hair, and clothing away from rotating parts.
+* If the tool smokes, vibrates excessively, or overheats, stop and investigate.
+
+=== After Use
+* Turn off and remove the battery before changing bits, adjusting, cleaning, or storage.
+* Allow the tool to cool. Store in a dry location out of children’s reach.
 
 == Product Overview
 
