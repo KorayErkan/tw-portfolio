@@ -1,5 +1,5 @@
 ---
-css: ../../include/portfolio-markdown-dark.css
+css: ../../include/common-md-dark.css
 ---
 
 # Industrial Machine — Maintenance Excerpt (Outline)

@@ -28,7 +28,7 @@ A curated collection of technical writing samples across software and non‑soft
 | User Manual | End Users | PDF, DOCX | Complete manual format |
 | Appliance/Industrial | Consumers/Technicians | Asciidoc, HTML | Hardware manuals, quick-starts, maintenance |
 
-> Styling: Asciidoc samples use a readable dark theme (`include/portfolio-dark.css`). Markdown → HTML exports may use `include/portfolio-markdown-dark.css` (optional).
+> Styling: Asciidoc samples use a readable dark theme (`include/common-dark.css`). Markdown → HTML exports may use `include/common-md-dark.css` (optional).
 
 ## Notes & Credits
 

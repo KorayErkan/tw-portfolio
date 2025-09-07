@@ -2,7 +2,7 @@
 
 This section showcases **non-software** technical writing samples aimed at agencies and manufacturers:
 consumer user manuals, quick-start guides, and industrial maintenance excerpts.
-All documents are written in **Asciidoc** and compiled with **Asciidoctor** (dark theme via `include/portfolio-dark.css`).
+All documents are written in **Asciidoc** and compiled with **Asciidoctor** (dark theme via `include/common-dark.css`).
 
 ---
 
