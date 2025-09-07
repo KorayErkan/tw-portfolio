@@ -1,12 +1,19 @@
+---
+css: ../../include/portfolio-markdown-dark.css
+---
+
 # Kitchen Appliance — Quick-Start (Outline)
 
 ## Purpose
+
 Visual-heavy 2–3 page quick-start to get users blending immediately.
 
 ## Audience
+
 General consumers; minimal prior knowledge.
 
 ## Structure
+
 - Unboxing
 - Safety warnings
 - Setup
@@ -16,8 +23,10 @@ General consumers; minimal prior knowledge.
 - Quick troubleshooting table
 
 ## Assets To Prepare
+
 - `images/control-panel.png` (line art or screenshot)
 
 ## Notes
+
 - Minimal text, priority on visuals.
 - Clearly mark safety interlocks and lid lock.
