@@ -15,7 +15,7 @@ All documents are written in **Asciidoc** and compiled with **Asciidoctor** (dar
 **Files:**
 
 - [HTML](cordless-drill/drill-user-manual.html)
-- [Asciidoc](cordless-drill/drill-user-manual.adoc)
+- [PDF](cordless-drill/drill-user-manual.pdf)
 
 ---
 
@@ -26,4 +26,17 @@ All documents are written in **Asciidoc** and compiled with **Asciidoctor** (dar
 **Files:**
 
 - [HTML](kitchen-appliance/quickstart-guide.html)
-- [Asciidoc](kitchen-appliance/quickstart-guid)
+- [PDF](kitchen-appliance/quickstart-guide.pdf)
+
+---
+
+---
+
+### Industrial Machine — Maintenance
+
+**Audience:** Industrial users; ???
+**Highlights:** ???
+**Files:** ???
+
+- [HTML](industrial-machine/maintenance-excerpt.html)
+- [PDF](industrial-machine/maintenance-excerpt.pdf)
