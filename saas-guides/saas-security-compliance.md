@@ -1,0 +1,25 @@
+# Security & Compliance Overview
+
+## Trust Model & Responsibilities
+Shared responsibility: vendor vs customer.
+
+## Identity & Access Management
+- SSO (SAML/OIDC)  
+- MFA enforcement  
+- RBAC and least privilege  
+
+## Data Protection
+- Encryption in transit/at rest  
+- Key management  
+- Data residency  
+
+## Compliance
+- SOC 2 (type, scope), ISO 27001  
+- DPA & GDPR addendum  
+- Audit trails and exports  
+
+## Secure SDLC Practices
+Threat modeling, code scanning, dependency policies.
+
+## Incident Response
+Runbook, RACI, notification timelines.
