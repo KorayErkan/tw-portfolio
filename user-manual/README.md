@@ -1,3 +1,13 @@
-# User Manual Sample
+# User Manual (Portfolio Sample)
 
-The sample document here is a manual about an imaginary brand of coffee machine, and describes its parts, what those parts are for and how they should be handled, and various types of coffee that can be prepared by the machine.
+**Audience:** End users  
+**Purpose:** Demonstrate a polished, full manual deliverable in PDF/DOCX formats.
+
+## Files
+- [User Manual (PDF)](./user-manual.pdf)
+- [User Manual (DOCX)](./user-manual.docx)
+
+## Highlights
+- Structured chapters and TOC
+- Safety and warnings
+- Procedures and reference sections
