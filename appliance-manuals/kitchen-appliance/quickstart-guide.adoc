@@ -17,18 +17,27 @@ toc::[]
 == Unboxing
 Verify that all parts are present and undamaged:
 * Motor base
-* Pitcher with lid
+* Pitcher with lid (locking)
 * Blade assembly (pre-installed)
-* Tamper
+* Tamper (if included)
 * Quick-start guide
+
+[NOTE]
+====
+If any part is missing or damaged, do not use the appliance. Contact support before first use.
+====
 
 == Safety Warnings
 [IMPORTANT]
 ====
-Read all safety instructions before use. Keep hands and utensils away from moving blades.
+Read all safety instructions before use. Keep hands and utensils away from moving blades. Never operate without the lid locked.
 ====
-* Do not operate without the lid locked.
-* Do not immerse the motor base in water.
+
+* Place the base on a flat, dry surface with at least 10 cm of clearance for ventilation.
+* Do **not** immerse the motor base in water; unplug before cleaning.
+* Keep hair, clothing, jewelry, and utensils away from the blade area.
+* Do **not** blend hot liquids with a sealed lid; release steam to avoid pressure buildup.
+* Ensure the pitcher is fully seated and the lid locks before pressing *START*.
 
 == Setup
 . Place the base on a flat, dry surface.

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<title>Kitchen Blender — Quick-Start Guide</title>
+<style>
+
+/* portfolio-dark.css — minimal, eye-friendly Asciidoctor theme
+   - Dark gray background (not pure black)
+   - Soft contrast text
+   - No harsh borders or "white stripes" around code blocks
+   - Comfortable line-length and spacing
+*/
+
+:root{
+  --bg: #121417;
+  --panel: #181b20;
+  --panel-alt: #1e2329;
+  --text: #e4e7eb;
+  --muted: #b8c0cc;
+  --accent: #7aa2f7;   /* muted blue */
+  --accent-2: #8bd5ca; /* teal accent */
+  --border: #2a2f36;
+  --code-bg: #0f1317;
+  --code-border: transparent;
+  --kbd-bg: #262b33;
+  --link: #89b4fa;
+}
+
+/* Base */
+html, body{
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "DejaVu Sans", "Calibri", sans-serif;
+  font-size: 16px;
+}
+
+/* Layout */
+#header, #content, #footnotes, #footer{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+#toc.toc2{
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+}
+#toc.toc2, #toc.toc2 #toctitle, #toc.toc2 a{
+  color: var(--muted);
+}
+#toc.toc2 a:hover{ color: var(--text); }
+
+/* Headings */
+h1, h2, h3, h4{
+  color: var(--text);
+  line-height: 1.25;
+  margin: 1.2em 0 0.5em;
+}
+#header > h1{
+  margin-top: .8em;
+  letter-spacing: .3px;
+}
+.sectionbody > .paragraph:first-child p{
+  margin-top: .5rem;
+}
+
+/* Links */
+a{ color: var(--link); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+/* Blocks & panels */
+.admonitionblock, .exampleblock, .sidebarblock, .quoteblock, .verseblock{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+}
+.admonitionblock .title, .exampleblock .title{
+  color: var(--muted);
+  margin-bottom: .25rem;
+}
+
+/* Code blocks */
+.listingblock pre, .literalblock pre{
+  background: var(--code-bg);
+  color: var(--text);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--code-border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+pre, code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Mono", monospace; font-size: .95em; }
+.literalblock pre, .listingblock pre > code{ background: transparent; }
+
+/* Inline code */
+code, .literal{ background: var(--kbd-bg); color: var(--text); border-radius: 6px; padding: 0 .35rem; }
+
+/* Tables */
+table.tableblock{
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+table.tableblock th, table.tableblock td{
+  border: 1px solid var(--border);
+  padding: .6rem .75rem;
+}
+table.tableblock thead th{
+  background: var(--panel-alt);
+  color: var(--text);
+  font-weight: 600;
+}
+table.tableblock tr:nth-child(even) td{ background: rgba(255,255,255,.015); }
+
+/* Lists */
+ul, ol{ padding-left: 1.25rem; }
+ul li, ol li{ margin: .2rem 0; }
+
+/* Images */
+.imageblock img, img{
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0d0f12;
+  max-width: 100%;
+}
+
+/* Footer */
+#footer{
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+/* Notes/footnotes */
+.footnote, .conum[data-value]{ background: var(--kbd-bg); border-radius: 4px; padding: 0 .3rem; color: var(--muted); }
+
+/* Reduce "white stripes" around code & blocks */
+.listingblock, .literalblock{ margin: 1rem 0; }
+blockquote{ border-left: 3px solid var(--border); padding-left: 1rem; color: var(--muted); }
+
+/* Make the page breathe a bit */
+.paragraph p{ margin: .5rem 0 .9rem; }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Kitchen Blender — Quick-Start Guide</h1>
+<div class="details">
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2025-09-07</span>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="quoteblock abstract">
+<blockquote>
+This quick-start shows the essentials to set up and use your Kitchen Blender (Model <strong>BLN-700</strong>). For full safety and care instructions, see the User Manual.
+</blockquote>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_unboxing">Unboxing</a></li>
+<li><a href="#_safety_warnings">Safety Warnings</a></li>
+<li><a href="#_setup">Setup</a></li>
+<li><a href="#_first_run_example_smoothie">First Run (Example Smoothie)</a></li>
+<li><a href="#_controls_overview">Controls Overview</a></li>
+<li><a href="#_cleaning_care">Cleaning &amp; Care</a></li>
+<li><a href="#_quick_troubleshooting">Quick Troubleshooting</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unboxing"><a class="anchor" href="#_unboxing"></a>Unboxing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Verify that all parts are present and undamaged:
+* Motor base
+* Pitcher with lid (locking)
+* Blade assembly (pre-installed)
+* Tamper (if included)
+* Quick-start guide</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If any part is missing or damaged, do not use the appliance. Contact support before first use.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_safety_warnings"><a class="anchor" href="#_safety_warnings"></a>Safety Warnings</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Read all safety instructions before use. Keep hands and utensils away from moving blades. Never operate without the lid locked.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Place the base on a flat, dry surface with at least 10 cm of clearance for ventilation.</p>
+</li>
+<li>
+<p>Do <strong>not</strong> immerse the motor base in water; unplug before cleaning.</p>
+</li>
+<li>
+<p>Keep hair, clothing, jewelry, and utensils away from the blade area.</p>
+</li>
+<li>
+<p>Do <strong>not</strong> blend hot liquids with a sealed lid; release steam to avoid pressure buildup.</p>
+</li>
+<li>
+<p>Ensure the pitcher is fully seated and the lid locks before pressing <strong>START</strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup"><a class="anchor" href="#_setup"></a>Setup</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Place the base on a flat, dry surface.</p>
+</li>
+<li>
+<p>Seat the pitcher onto the base until it locks.</p>
+</li>
+<li>
+<p>Insert the lid and ensure the cap is closed.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_first_run_example_smoothie"><a class="anchor" href="#_first_run_example_smoothie"></a>First Run (Example Smoothie)</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add 1 cup liquid + fruit + ice (max fill line).</p>
+</li>
+<li>
+<p>Select <strong>SMOOTHIE</strong> program.</p>
+</li>
+<li>
+<p>Press <strong>START</strong>. Blend for ~45 seconds.</p>
+</li>
+<li>
+<p>Turn <strong>OFF</strong>, remove lid, and serve.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_controls_overview"><a class="anchor" href="#_controls_overview"></a>Controls Overview</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/control-panel.png" alt="Control panel" width="60%">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>START/STOP</strong> — Begin/end blending.</p>
+</li>
+<li>
+<p><strong>PULSE</strong> — Short bursts for chopping.</p>
+</li>
+<li>
+<p>Programs: <strong>SMOOTHIE</strong>, <strong>ICE CRUSH</strong>, <strong>SOUP</strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cleaning_care"><a class="anchor" href="#_cleaning_care"></a>Cleaning &amp; Care</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Unplug before cleaning.</p>
+</li>
+<li>
+<p>Rinse pitcher and lid immediately after use.</p>
+</li>
+<li>
+<p>Dishwasher-safe: pitcher and lid (top rack only).</p>
+</li>
+<li>
+<p>Wipe base with damp cloth; do not submerge.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quick_troubleshooting"><a class="anchor" href="#_quick_troubleshooting"></a>Quick Troubleshooting</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symptom</th>
+<th class="tableblock halign-left valign-top">Possible Cause</th>
+<th class="tableblock halign-left valign-top">Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Won&#8217;t start</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lid not locked</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lock lid fully; check safety interlock.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unusual noise</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Foreign object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop immediately; inspect pitcher.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Poor blend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overfilled or wrong program</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reduce contents; select correct program.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br>
+Last updated 2025-09-07 19:26:17 +0300
+</div>
+</div>
+</body>
+</html>
