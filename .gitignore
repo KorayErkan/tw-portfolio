@@ -1,4 +1,5 @@
+.markdownlint.json
+
 *.docx
 *.mscz
 *.txt
-.markdownlint.json
