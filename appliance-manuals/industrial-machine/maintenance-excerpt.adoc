@@ -53,16 +53,86 @@ Follow facility-specific procedures in addition to this summary. Reference: OSHA
 
 == Routine Maintenance Schedule
 
-[cols="2,1,1,2", options="header"]
+[IMPORTANT]
+====
+Intervals assume two-shift operation in clean, indoor conditions. Increase frequency for abrasive materials (cast iron, composites) or heavy coolant carryout. Record each task in the maintenance log.
+====
+
+[cols="1,2,1,2,2", options="header"]
 |===
-|Task | Frequency | Tools | Notes
-|Inspect way covers | Daily | Visual | Replace if torn or jammed.
-|Clean chip conveyors | Daily | Scraper/brush | Power off first.
-|Lubricate spindle bearings | Weekly | Grease gun (NLGI-2) | 2–3 pumps per fitting.
-|Check coolant concentration | Weekly | Refractometer | Maintain 6–8%.
-|Replace hydraulic filter | Monthly | Wrench set | Depressurize system.
-|Inspect belts | Quarterly | Tension gauge | Replace if frayed.
+|Interval | Task | Area | Tools/Materials | Notes
+
+|Daily
+|Clean chips/swarf; empty conveyors & bins
+|Enclosure, conveyors
+|Scraper/brush; PPE
+|Power off; check for jams at discharge points.
+
+|Daily
+|Check coolant level & concentration (6–8%)
+|Coolant system
+|Refractometer; premix
+|Top up with premix; skim tramp oil if present.
+
+|Daily
+|Wipe/inspect way covers & wipers
+|Axes
+|Lint-free cloth
+|Replace if torn, dragging, or leaking.
+
+|Weekly
+|Lubricate spindle bearings
+|Spindle
+|Grease gun (NLGI-2)
+|2–3 pumps per fitting; do not over-pack.
+
+|Weekly
+|Verify auto-lube reservoir; inspect lines
+|Ways/ballscrews
+|OEM way oil
+|Fill to mark; inspect for leaks or blocked metering units.
+
+|Weekly
+|Drain air line water separator; check pressure
+|Pneumatics
+|Drain key; gauge
+|Maintain 6–8 bar; replace filter element if saturated.
+
+|Monthly
+|Replace hydraulic filter; check ΔP gauge
+|Hydraulics
+|Wrench set; new element
+|Depressurize first; log hours since last change.
+
+|Monthly
+|Inspect/tension belts
+|Spindle/axes
+|Tension gauge
+|Replace if frayed/glazed; set to spec.
+
+|Quarterly
+|Verify axis backlash & home repeatability
+|X/Y/Z
+|Dial indicator; test macro
+|Compare to spec; adjust or schedule service.
+
+|Quarterly
+|Test E-Stops, door interlocks, light curtain
+|Safety systems
+|Checklist
+|Document results; correct faults before production.
+
+|Annual
+|Coolant system deep clean
+|Coolant system
+|Cleaning additive; PPE
+|Drain, flush, disinfect, refill with fresh premix.
 |===
+
+[TIP]
+====
+After any maintenance affecting motion, run a short test program and verify part accuracy on a gauge block or test coupon.
+====
 
 == Fault Codes
 
