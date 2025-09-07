@@ -199,8 +199,12 @@ Replace this placeholder with the OEM exploded view when available. Keep diagram
 Maintain maintenance logs and checklists for **5 years** (or per facility policy). Provide on request to auditors or OEM service.
 
 == References & Standards
-* ISO 16090-1 (Machine tool safety)
-* OSHA 1910.147 (Control of hazardous energy)
+* ISO 16090-1 — Machine tool safety
+* OSHA 29 CFR 1910.147 — Control of hazardous energy (LOTO)
+* IEC 60204-1 — Safety of machinery — Electrical equipment of machines
+* ISO 4413 — Hydraulic fluid power — General rules and safety requirements
+* ISO 8573-1 — Compressed air — Contaminants and purity classes
+* NFPA 70 (NEC) — National Electrical Code
 
 [appendix]
 == Controlled Document Info
