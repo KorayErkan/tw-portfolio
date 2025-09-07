@@ -76,23 +76,45 @@ image::drill-labeled.png[alt="Labeled drill diagram", width=60%]
 
 == Operating Instructions
 
-=== Power On/Off
-* Squeeze trigger to start; release to stop.
+=== Bit & Material Selection
+[cols="1,2,2", options="header"]
+|===
+|Material | Recommended Bit | Notes
+|Softwood | Wood twist, brad-point | Low torque, high speed.
+|Hardwood | Brad-point | Pre-drill pilot holes; moderate speed.
+|Metal    | HSS twist        | Lubricate; low speed, steady pressure.
+|Masonry  | Masonry bit      | Use hammer mode if available; low speed.
+|===
 
 === Speed & Torque
-* Use gear selector (1 = high torque / 2 = high speed).
-* Adjust torque ring based on material.
+* *Gear 1* → High torque / low speed (screws, large bits).
+* *Gear 2* → Low torque / high speed (small holes in wood/soft material).
+* Start low; increase torque only if the bit stalls or the screw cams out.
 
-[example]
+[IMPORTANT]
 ====
-Recommended settings:
-[cols="1,1,1", options="header"]
+Use the lowest speed that produces a clean cut. Excess speed overheats bits and dulls edges.
+====
+
+=== Pilot Holes (Guideline)
+[cols="1,1", options="header"]
 |===
-|Material | Bit Type | Torque
-|Softwood | Wood twist | 8–12
-|Hardwood | Wood twist | 12–16
-|Masonry  | Masonry bit + hammer mode | 18–20
+|Screw Size | Pilot Diameter
+|3 mm (≈#4) | 2.0–2.2 mm
+|4 mm (≈#8) | 3.0–3.2 mm
+|5 mm (≈#10)| 3.5–4.0 mm
 |===
+
+=== Technique
+. Mark the hole; use a center punch on metal to prevent wandering.
+. Hold the drill perpendicular to the surface; brace your wrist.
+. Squeeze the trigger gently to start; increase only as needed.
+. Ease pressure before breaking through the far side to prevent tear-out.
+. For screws: select a driver bit that fully fits the screw head; stop when the clutch clicks.
+
+[WARNING]
+====
+Kickback risk: if the bit binds, release the trigger immediately and back the bit out. Do not force the tool.
 ====
 
 == Charging & Maintenance
