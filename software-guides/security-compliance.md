@@ -7,34 +7,34 @@
 
 ## Trust Model & Responsibilities
 
-- **Vendor responsibilities:** application security, infrastructure hardening, incident response
-- **Customer responsibilities:** identity provider configuration, user role assignment, endpoint security
+- **Vendor responsibilities:** Application security, infrastructure hardening, incident response protocols
+- **Customer responsibilities:** Identity provider configuration, user access governance, endpoint protection
 
 ---
 
 ## Identity & Access Management
 
-- Single Sign-On (SAML / OIDC)
-- Multi-Factor Authentication (MFA) enforcement
-- Role-Based Access Control (RBAC) with least privilege
+- Single Sign-On integration (SAML/OIDC protocols)
+- Multi-Factor Authentication with conditional enforcement
+- Role-Based Access Control implementing least privilege principles
 
 ---
 
 ## Data Protection
 
-- **In transit:** TLS 1.2+ encryption for all traffic
-- **At rest:** AES-256 encryption for databases and object storage
-- **Key management:** rotation every 12 months; managed by KMS
-- **Data residency:** choice of EU/US regions
+- **In transit:** TLS 1.2+ encryption for all network communications
+- **At rest:** AES-256 encryption for databases and object storage systems
+- **Key management:** Automated 12-month rotation cycles via dedicated KMS
+- **Data residency:** Configurable EU/US regional data localization
 
 ---
 
 ## Compliance
 
-- SOC 2 Type II (renewed annually)
-- ISO/IEC 27001 certified
-- GDPR-compliant Data Processing Addendum (DPA)
-- Audit trails exportable in JSON or CSV
+- SOC 2 Type II certification with annual renewals
+- ISO/IEC 27001 information security management certification
+- GDPR-compliant Data Processing Addendum available
+- Comprehensive audit trails with JSON/CSV export capabilities
 
 Example audit log:
 
@@ -53,17 +53,17 @@ Example audit log:
 
 ## Secure SDLC Practices
 
-- Threat modeling during design phase
-- Automated static code analysis (SAST) and dependency scanning
-- Penetration testing annually
-- CI/CD pipelines with signed artifacts
+- Comprehensive threat modeling integrated into design phases
+- Automated SAST and dependency vulnerability scanning
+- Annual third-party penetration testing assessments
+- Secure CI/CD pipelines with cryptographically signed artifacts
 
 ---
 
 ## Incident Response
 
-- **Runbook:** contain, investigate, remediate, communicate
-- **Notification timelines:**
-  - Regulatory notifications within 72 hours (GDPR)
-  - Customer notification within 24 hours of confirmed breach
-- **RACI matrix:** clearly defined ownership (Ops, Security, Legal, Comms)
+- **Response framework:** Containment, investigation, remediation, and communication protocols
+- **Notification requirements:**
+  - Regulatory compliance within 72 hours (GDPR mandates)
+  - Customer breach notification within 24 hours of confirmation
+- **RACI accountability:** Defined ownership across Operations, Security, Legal, and Communications teams
