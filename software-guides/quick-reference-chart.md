@@ -1,6 +1,6 @@
 # Reference Chart / Quick Reference
 
-**Author:** Koray Erkan (portfolio sample)
+**Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
 
 ---
@@ -36,10 +36,10 @@
 
 ```bash
 # Health check
-curl -i https://api.acmecloud.example/v1/health
+curl -i https://api.cloudflow.goodweb.com/v1/health
 
 # Get projects
-curl -H "Authorization: Bearer <TOKEN>" https://api.acmecloud.example/v1/projects
+curl -H "Authorization: Bearer <TOKEN>" https://api.cloudflow.goodweb.com/v1/projects
 ```
 
 ---
