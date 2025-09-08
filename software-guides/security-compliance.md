@@ -1,6 +1,6 @@
 # Security and Compliance Overview
 
-**Author:** John Saysitall (portfolio sample)
+**Author:** John Saysitall
 **Version:** 0.1 — <update date here>
 
 ---
@@ -58,7 +58,7 @@ Example audit log:
 - Annual third-party penetration testing assessments
 - Secure CI/CD pipelines with cryptographically signed artifacts
 
-![Data Security Layers](./images/data-security-layers.svg)
+![Data Security Layers](./img/data-security-layers.svg)
 
 ---
 

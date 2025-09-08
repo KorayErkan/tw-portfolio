@@ -3,7 +3,7 @@
 :revdate: {docdate}
 :doctype: article
 :toc: macro
-:stylesdir: ../../include
+:stylesdir: ../../css
 :stylesheet: common-dark.css
 :icons: font
 :sectanchors:

@@ -1,6 +1,6 @@
 # Reference Chart / Quick Reference
 
-**Author:** John Saysitall (portfolio sample)
+**Author:** John Saysitall
 **Version:** 0.1 — <update date here>
 
 ---
@@ -46,4 +46,4 @@ curl -H "Authorization: Bearer <TOKEN>" https://api.cloudflow.goodweb.com/v1/pro
 
 ## Visual Overview
 
-![Visual Overview](./images/visual-overview.svg)
+![Visual Overview](./img/visual-overview.svg)

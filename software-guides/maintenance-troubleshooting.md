@@ -1,6 +1,6 @@
 # Maintenance and Troubleshooting
 
-**Author:** John Saysitall (portfolio sample)
+**Author:** John Saysitall
 **Version:** 0.1 — <update date here>
 
 ---
@@ -26,7 +26,7 @@ Example health check:
 curl -s https://api.cloudflow.goodweb.com/v1/health | jq
 ```
 
-![Webhooks Eventing Topology](./images/webhooks-eventing-topology.svg)
+![Webhooks Eventing Topology](./img/webhooks-eventing-topology.svg)
 
 ---
 

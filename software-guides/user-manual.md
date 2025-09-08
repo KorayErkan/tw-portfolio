@@ -1,6 +1,6 @@
 # Product User Manual (SaaS)
 
-**Author:** John Saysitall (portfolio sample)
+**Author:** John Saysitall
 **Version:** 0.1 — <update date here>
 
 ---
@@ -30,7 +30,7 @@
 
 > 💡 **Tip:** Bookmark the dashboard for faster access.
 
-![User Onboarding Flow](./images/user-onboarding-flow.svg)
+![User Onboarding Flow](./img/user-onboarding-flow.svg)
 
 ---
 

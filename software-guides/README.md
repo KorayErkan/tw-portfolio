@@ -1,23 +1,35 @@
 # Software Guides
 
-This folder contains **professional software documentation templates** showcasing comprehensive technical writing capabilities.
-Each document serves as an independent example demonstrating specific documentation methodologies and deliverable types.
+This folder contains **software documentation** for an imaginary product (_CloudFlow_ by Goodweb, Inc.), showcasing comprehensive technical writing capabilities.
 
-## Contents
+The chapters represent fictional scenarios crafted to demonstrate professional documentation standards and real-world applicability.
 
-- [Product User Manual](user-manual.md) — Comprehensive end-user manual with workflow guidance and onboarding procedures.
-- [Installation and Setup Guide](installation-setup-guide.md) — Administrator-focused setup and configuration documentation.
-- [Release Notes](release-notes.md) — Structured changelog and release communication template.
-- [Quick Reference Chart](quick-reference-chart.md) — Technical reference documentation with tabular data organization.
-- [Maintenance and Troubleshooting](maintenance-troubleshooting.md) — Operational maintenance procedures and diagnostic playbooks.
-- [Conceptual Architecture](conceptual-architecture.md) — Educational architecture overview with system design documentation.
-- [Security and Compliance Overview](security-compliance.md) — Security framework and regulatory compliance documentation.
+## Running This Documentation Locally
 
-## How to Use
+This folder is set up as a self-contained documentation site.
 
-These documents represent fictional scenarios crafted to demonstrate professional documentation standards and real-world applicability.
-Each file can be accessed directly for preview and evaluation.
-For client customization, substitute the product name (_CloudFlow_ by Goodweb, Inc.) and adapt examples to specific requirements.
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v16 or later recommended)
+- `npm` (comes with Node)
+
+### Steps
+1. Open a terminal in the `software-guides` folder.
+2. Install the `serve` package (first time only):
+   ```bash
+   npx serve
+   ```
+(This will download serve@14.x automatically if not already present.)
+3. Start the local web server:
+   ```bash
+   npx serve .
+   ```
+4. Open http://localhost:3000 (or the port shown in the terminal).
+
+### Notes
+
+- The sidebar navigation is driven by toc.json.
+- Markdown files (.md) are rendered dynamically into HTML.
+- All styles are defined in css/custom.css. Adjust this file to change the look and feel.
 
 ---
 

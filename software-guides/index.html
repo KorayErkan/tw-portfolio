@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Software Documentation</title>
+  <link rel="stylesheet" href="./css/custom.css">
+</head>
+<body>
+  <div id="sidebar"></div>
+  <div id="content">
+     <div id="doc"></div>
+     <div id="nav"></div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  let toc = [];
+  let currentIndex = 0;
+
+  async function loadTOC() {
+    const res = await fetch('toc.json');
+    toc = await res.json();
+    const sidebar = document.getElementById('sidebar');
+
+    toc.forEach((item, pos) => {
+      const link = document.createElement('a');
+      link.textContent = item.title;
+      link.href = '#';
+      link.onclick = (e) => {
+        e.preventDefault();
+        loadFile(pos);
+        document.querySelectorAll('#sidebar a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      };
+      if (pos === 0) link.classList.add('active');
+      sidebar.appendChild(link);
+    });
+
+    if (toc.length > 0) loadFile(0);
+  }
+
+  async function loadFile(pos) {
+    currentIndex = pos;
+    const res = await fetch(toc[pos].file);
+    const text = await res.text();
+    document.getElementById('doc').innerHTML = marked.parse(text);
+    document.getElementById('content').scrollTop = 0;   // 👈 reset scroll
+    renderNav();
+  }
+
+  function renderNav() {
+    const nav = document.getElementById('nav');
+    nav.innerHTML = '';
+
+    if (currentIndex > 0) {
+      const prev = document.createElement('a');
+      prev.textContent = '← ' + toc[currentIndex - 1].title;
+      prev.href = '#';
+      prev.onclick = (e) => { e.preventDefault(); loadFile(currentIndex - 1); };
+      nav.appendChild(prev);
+    }
+
+    if (currentIndex < toc.length - 1) {
+      const next = document.createElement('a');
+      next.textContent = toc[currentIndex + 1].title + ' →';
+      next.href = '#';
+      next.style.float = 'right';
+      next.onclick = (e) => { e.preventDefault(); loadFile(currentIndex + 1); };
+      nav.appendChild(next);
+    }
+
+    nav.style.marginTop = '2em';
+    nav.style.display = 'flex';
+    nav.style.justifyContent = 'space-between';
+  }
+
+  loadTOC();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+[
+  { "title": "Introduction", "file": "README.md" },
+  { "title": "Conceptual Architecture", "file": "conceptual-architecture.md" },
+  { "title": "Installation & Setup", "file": "installation-setup-guide.md" },
+  { "title": "User Manual", "file": "user-manual.md" },
+  { "title": "Maintenance & Troubleshooting", "file": "maintenance-troubleshooting.md" },
+  { "title": "Quick Reference", "file": "quick-reference-chart.md" },
+  { "title": "Security & Compliance", "file": "security-compliance.md" },
+  { "title": "Release Notes", "file": "release-notes.md" }
+]

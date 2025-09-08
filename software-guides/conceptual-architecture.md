@@ -1,6 +1,6 @@
 # Conceptual / Architecture Overview
 
-**Author:** John Saysitall (portfolio sample)
+**Author:** John Saysitall
 **Version:** 0.1 — <update date here>
 
 ---
@@ -8,7 +8,7 @@
 ## High-Level Architecture
 
 // conceptual-architecture.dot
-![Conceptual Architecture](./images/conceptual-architecture.svg)
+![Conceptual Architecture](./img/conceptual-architecture.svg)
 
 ---
 

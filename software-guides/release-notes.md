@@ -1,6 +1,6 @@
 # Release Notes / Changelog Template
 
-**Author:** John Saysitall (portfolio sample)
+**Author:** John Saysitall
 **Version:** 0.1 — <update date here>
 
 ---
@@ -11,7 +11,7 @@
 - Prioritize *upgrade notes*, *breaking changes*, and *deprecations* prominently.
 - Apply consistent categorization tags (✨ New, ⚡ Improved, 🐛 Fixed, 🛡️ Security).
 
-![Version Upgrade Path](./images/version-upgrade-path.svg)
+![Version Upgrade Path](./img/version-upgrade-path.svg)
 
 ---
 

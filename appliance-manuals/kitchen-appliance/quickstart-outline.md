@@ -1,5 +1,5 @@
 ---
-css: ../../include/common-md-dark.css
+css: ../../css/common-md-dark.css
 ---
 
 # Kitchen Appliance — Quick-Start (Outline)

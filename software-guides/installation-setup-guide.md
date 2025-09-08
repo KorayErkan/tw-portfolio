@@ -1,6 +1,6 @@
 # Installation and Setup Guide (SaaS + Optional Self-Hosted Agent)
 
-**Author:** John Saysitall (portfolio sample)
+**Author:** John Saysitall
 **Version:** 0.1 — <update date here>
 
 > 🎯 **Purpose**
@@ -50,7 +50,7 @@ tar xzf agent.tgz && sudo mv agent /usr/local/bin/agent
 sudo systemctl enable --now agent
 sudo systemctl status agent
 ```
-![Agent Connectivity](./images/agent-connectivity.svg)
+![Agent Connectivity](./img/agent-connectivity.svg)
 
 ### Health Check
 
@@ -70,7 +70,7 @@ curl -I https://agent.cloudflow.goodweb.com/health
 - Import IdP metadata or establish client credential configuration.
 - Execute pilot group testing before production enforcement.
 
-![SSO Flow](./images/sso-flow.svg)
+<img src="images/sso-flow.svg" alt="SSO Flow" style="max-width:100%; height:auto;">
 
 ### SCIM Provisioning
 
