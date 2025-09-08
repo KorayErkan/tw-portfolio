@@ -1,6 +1,6 @@
 # Installation & Setup Guide (SaaS + Optional Self-Hosted Agent)
 
-**Author:** Koray Erkan (portfolio sample)
+**Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
 
 > 🎯 **Purpose**
@@ -13,7 +13,7 @@
 | Category | Requirement | Notes |
 |----------|-------------|-------|
 | Identity Provider | SAML or OIDC compatibility | Okta, Azure AD, Google Workspace supported |
-| Network Connectivity | HTTPS egress to `*.example.com` | Corporate firewall/proxy allowlist configuration required |
+| Network Connectivity | HTTPS egress to `*.goodweb.com` | Corporate firewall/proxy allowlist configuration required |
 | Browser Support | Latest Chrome/Edge/Firefox/Safari | Cookie and local storage functionality enabled |
 | Administrative Access | Organization Admin privileges | Required for SSO, SCIM, billing, and configuration management |
 | (Agent) Operating System | Linux x86_64 (Ubuntu 20.04+/RHEL 8+) | Minimum: 2 vCPU, 4 GB RAM, 10 GB storage |
@@ -24,7 +24,7 @@
 ## Cloud Installation
 
 1. **Organization registration**
-   Navigate to `https://app.acmecloud.example` and establish your organizational account.
+   Navigate to `https://app.cloudflow.goodweb.com` and establish your organizational account.
 2. **Domain ownership verification**
    Configure the provided TXT record in DNS management, then execute **Verify**.
 3. **Billing configuration (optional)**
@@ -39,13 +39,13 @@
 ### System Requirements
 
 - Linux x86_64 architecture with 2 vCPU, 4 GB RAM, 10 GB storage minimum
-- Outbound HTTPS connectivity (port 443) to `agent.acmecloud.example`
+- Outbound HTTPS connectivity (port 443) to `agent.cloudflow.goodweb.com`
 - Systemd service management capability for daemon operations
 
 ### Install Example
 
 ```bash
-curl -fsSL https://downloads.acmecloud.example/agent/v1.2.3/agent-linux-amd64.tgz -o agent.tgz
+curl -fsSL https://downloads.cloudflow.goodweb.com/agent/v1.2.3/agent-linux-amd64.tgz -o agent.tgz
 tar xzf agent.tgz && sudo mv agent /usr/local/bin/agent
 sudo systemctl enable --now agent
 sudo systemctl status agent
@@ -70,14 +70,14 @@ digraph G {
     label="SaaS Cloud";
     labelloc="t"; fontsize=12;
     color="#30363d"; fontcolor="#c9d1d9"; style="rounded,dashed";
-    api   [label="Agent Ingress\nagent.acmecloud.example:443", shape=box, style="filled", fillcolor="#0d1117"];
+    api   [label="Agent Ingress\nagent.cloudflow.goodweb.com:443", shape=box, style="filled", fillcolor="#0d1117"];
     ctrl  [label="Control Plane\n(config, tokens)"];
     telem [label="Telemetry\n(health, logs)"];
   }
 
   // outbound-only TLS
   agent -> fw  [label="TLS 1.2+ 443", fontcolor="#8b949e"];
-  fw    -> api [label="allowlist *.acmecloud.example", fontcolor="#8b949e"];
+  fw    -> api [label="allowlist *.cloudflow.goodweb.com", fontcolor="#8b949e"];
 
   // control/telemetry (logical paths)
   api -> ctrl  [label="register / fetch config"];
@@ -95,7 +95,7 @@ digraph G {
 ### Health Check
 
 ```bash
-curl -I https://agent.acmecloud.example/health
+curl -I https://agent.cloudflow.goodweb.com/health
 ```
 
 ---
@@ -105,8 +105,8 @@ curl -I https://agent.acmecloud.example/health
 ### Single Sign-On (SAML/OIDC)
 
 - Configure Identity Provider parameters:
-  - **ACS / Redirect URI:** `https://app.acmecloud.example/auth/callback`
-  - **Entity ID:** `https://app.acmecloud.example`
+  - **ACS / Redirect URI:** `https://app.cloudflow.goodweb.com/auth/callback`
+  - **Entity ID:** `https://app.cloudflow.goodweb.com`
 - Import IdP metadata or establish client credential configuration.
 - Execute pilot group testing before production enforcement.
 
@@ -118,7 +118,7 @@ digraph G {
   edge  [color="#8b949e", arrowsize=0.8, penwidth=1.2];
 
   user    [label="User Browser"];
-  app     [label="SaaS App\n(app.acmecloud.example)"];
+  app     [label="CloudFlow Pro\n(app.cloudflow.goodweb.com)"];
   idp     [label="IdP (SAML/OIDC)"];
   session [label="Session Established", shape=ellipse, fillcolor="#0d1117", penwidth=1.6];
 
