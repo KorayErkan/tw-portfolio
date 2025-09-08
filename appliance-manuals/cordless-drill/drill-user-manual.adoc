@@ -1,4 +1,4 @@
-= Cordless Drill — User Manual
+= Spinomatic X7 — Cordless Drill User Manual - TorqueWorks Ltd.
 :revnumber: 1.0
 :revdate: {docdate}
 :doctype: book
@@ -10,11 +10,12 @@
 :sectnums:
 :sectlinks:
 :sectanchors:
-:imagesdir: images
+:imagesdir: img
 :table-stripes: all
 
 [abstract]
-This manual explains safe use, setup, operation, maintenance, and troubleshooting for the Cordless Drill (Model **CDR-18V**). Read all instructions before use.
+This manual explains safe use, setup, operation, maintenance, and troubleshooting
+for the *Spinomatic X7* cordless drill (TorqueWorks Ltd.).
 
 == Safety Information
 
@@ -48,14 +49,21 @@ Power tools can cause serious injury if used improperly. Read and keep this manu
 
 == Product Overview
 
+The *Spinomatic X7* by TorqueWorks Ltd. is a versatile 18V cordless drill
+designed for DIY enthusiasts and light professional use.
+
 === Package Contents
 * Drill body (x1)
 * 18V Li-Ion battery (x1)
 * Charger (x1)
 * Carry case (x1)
 
+.Package contents
+image::package-contents.png[alt="Drill, battery, charger, and carry case", width=70%, align=center]
+
 === Parts & Controls
-image::drill-labeled.png[alt="Labeled drill diagram", width=60%]
+.Drill parts and controls
+image::drill-labeled.png[alt="Labeled drill diagram", width=70%, align=center]
 
 . Chuck
 . Torque ring
@@ -63,13 +71,33 @@ image::drill-labeled.png[alt="Labeled drill diagram", width=60%]
 . Trigger & reverse switch
 . Battery release
 
+[.small]
+*Tip:* Use this diagram to locate controls referenced throughout the manual.
+
+=== Exploded View (reference)
+.Exploded assembly (major external components)
+image::drill-exploded.png[alt="Exploded view showing chuck, torque ring, gearbox housing, body, and battery pack", width=70%, align=center]
+
 == Assembly & Setup
 
 === Attaching/Removing the Battery
-. Slide battery until it clicks.
-. To remove, press the latch and pull downward.
+
+.Battery attachment (slide until it clicks)
+image::battery-attach.png[alt="Attach battery to base of handle", width=55%, align=center]
+
+. Slide battery until it *clicks*.
+. Verify it is seated and cannot pull free.
+
+.Battery removal (press latch, pull downward)
+image::battery-remove.png[alt="Remove battery by pressing latch", width=55%, align=center]
+
+. Press the latch.
+. Pull the battery downward to remove.
 
 === Inserting Drill/Driver Bits
+.Chuck open → insert bit → tighten clockwise
+image::insert-bit.png[alt="Insert and secure drill bit in chuck", width=65%, align=center]
+
 . Rotate chuck counter-clockwise to open jaws.
 . Insert bit; tighten clockwise.
 . Verify bit is secured.
@@ -87,6 +115,9 @@ image::drill-labeled.png[alt="Labeled drill diagram", width=60%]
 |===
 
 === Speed & Torque
+.Gear selector: 1 = high torque / low speed, 2 = high speed / lower torque
+image::gear-selector.png[alt="Gear selector positions 1 and 2", width=55%, align=center]
+
 * *Gear 1* → High torque / low speed (screws, large bits).
 * *Gear 2* → Low torque / high speed (small holes in wood/soft material).
 * Start low; increase torque only if the bit stalls or the screw cams out.
@@ -106,6 +137,9 @@ Use the lowest speed that produces a clean cut. Excess speed overheats bits and 
 |===
 
 === Technique
+.Correct stance and perpendicular approach
+image::drill-technique.png[alt="Proper grip and perpendicular drilling into wood", width=70%, align=center]
+
 . Mark the hole; use a center punch on metal to prevent wandering.
 . Hold the drill perpendicular to the surface; brace your wrist.
 . Squeeze the trigger gently to start; increase only as needed.
@@ -120,6 +154,9 @@ Kickback risk: if the bit binds, release the trigger immediately and back the bi
 == Charging & Maintenance
 
 === Charging
+.Charger with battery pack and LED indicators
+image::charger.png[alt="Battery charger with indicators", width=60%, align=center]
+
 . Place charger on a flat, ventilated surface.
 . Connect charger to mains.
 . Insert the battery pack until it clicks; ensure contacts are clean/dry.
@@ -133,6 +170,9 @@ Kickback risk: if the bit binds, release the trigger immediately and back the bi
 |Flashing red | Temperature/fault detected — allow to cool; check contacts and vents
 |No light     | No power — check outlet/cable
 |===
+
+.LED states (legend)
+image::led-states.png[alt="Charging, Full, Fault/Overheat, No Power", width=65%, align=center]
 
 [IMPORTANT]
 ====
@@ -170,6 +210,11 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 |===
 
 == Troubleshooting
+
+[.small]
+*Icon note:* Use the warning triangle where safety-critical symptoms appear.
+
+image::warning.png[alt="Warning icon", width=10%]
 
 [cols="1,2,2", options="header"]
 |===
@@ -223,13 +268,21 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 |Weight (with battery) | ~1.6 kg
 |Operating temperature | 0–40 °C (tool)
 |Charging temperature | 5–35 °C (battery/charger)
+|Manufacturer | TorqueWorks Ltd., 221B Tool Street, Inventon, NY 10001
 |===
 
 == Warranty & Support
-This product is warranted against defects for 24 months from the purchase date. Retain proof of purchase.
+The *Spinomatic X7* is warranted against defects for 24 months from the purchase date.
+Retain proof of purchase.
 
-*Support:* mailto:support@exampletools.com[]
+[%hardbreaks]
+*Manufacturer:* TorqueWorks Ltd.
+*Head Office:* 221B Tool Street, Inventon, NY 10001, USA
+*Phone:* +1-800-555-7746
+*Email (Support):* support@torqueworks.example
+*Email (Info):* info@torqueworks.example
+*Website:* www.torqueworks.example
 
 [appendix]
 == Compliance & Disposal
-This tool complies with applicable directives. Dispose of batteries according to local regulations.
+This product is manufactured by TorqueWorks Ltd., a fictional company established for demonstration purposes.
