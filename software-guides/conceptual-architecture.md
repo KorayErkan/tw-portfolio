@@ -1,6 +1,6 @@
 # Conceptual / Architecture Overview
 
-**Author:** Koray Erkan (portfolio sample)
+**Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
 
 ---
