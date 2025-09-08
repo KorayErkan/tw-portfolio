@@ -38,22 +38,102 @@ The system is compliant with the requirements and logic of CI/CD as it has been 
 
 ## System Requirements
 
-### Hardware
+### Operating System Compatibility
 
-For an average team of 25 developers, the system requires at least 5 x 2.5GHz quadcore 7i processors, 64GB of RAM, and 1TB of disk space.
+| Operating System | Version | Architecture | Status |
+|------------------|---------|-------------|--------|
+| Windows Server 2019 | Build 17763+ | x64 | Recommended |
+| Windows Server 2022 | Build 20348+ | x64 | Recommended |
+| Windows 10 Enterprise | Version 1909+ | x64 | Supported |
+| Windows 11 Pro/Enterprise | Version 21H2+ | x64 | Supported |
+| Ubuntu Server LTS | 20.04, 22.04 | x64 | Supported |
+| Red Hat Enterprise Linux | 8.x, 9.x | x64 | Supported |
 
-Also, a 1000Base-TX Ethernet network connection is recommended for effective and efficient use.
+### Hardware Requirements
+
+#### Minimum Requirements (Development Team: 10-25 users)
+
+| Component | Specification |
+|-----------|---------------|
+| **CPU** | Intel Core i7-10700K (8 cores, 3.8GHz base) or AMD Ryzen 7 3700X (8 cores, 3.6GHz base) |
+| **Memory** | 32GB DDR4-3200 RAM |
+| **Storage** | 500GB NVMe SSD (minimum 3,500 MB/s read speed) |
+| **Network** | Gigabit Ethernet (1000Base-T) |
+| **GPU** | Integrated graphics sufficient |
+
+#### Recommended Requirements (Development Team: 25-100 users)
+
+| Component | Specification |
+|-----------|---------------|
+| **CPU** | Intel Xeon W-2245 (8 cores, 3.9GHz base) or AMD EPYC 7302P (16 cores, 3.0GHz base) |
+| **Memory** | 128GB DDR4-3200 ECC RAM |
+| **Storage** | 2TB NVMe SSD RAID 1 configuration (minimum 5,000 MB/s read speed) |
+| **Network** | 10 Gigabit Ethernet or dual Gigabit NICs |
+| **GPU** | Not required for server operation |
+
+#### Enterprise Requirements (Development Team: 100+ users)
+
+| Component | Specification |
+|-----------|---------------|
+| **CPU** | Dual Intel Xeon Gold 6248R (48 cores total) or AMD EPYC 7742 (64 cores, 2.25GHz base) |
+| **Memory** | 256GB+ DDR4-3200 ECC RAM |
+| **Storage** | 4TB+ NVMe SSD RAID 10 configuration with hot swap capability |
+| **Network** | 10+ Gigabit Ethernet with redundant connections |
+| **Backup** | Dedicated backup storage subsystem (8TB+ capacity) |
+
+### Network Requirements
+
+| Port | Protocol | Direction | Purpose |
+|------|----------|-----------|---------|
+| 443 | HTTPS | Outbound | License validation and updates |
+| 4096 | TCP | Inbound/Outbound | API communication |
+| 6650 | TCP | Inbound | Client connections |
+| 8080 | HTTP | Inbound | Web management interface |
+| 5432 | TCP | Inbound/Outbound | PostgreSQL database (if external) |
+| 1433 | TCP | Inbound/Outbound | SQL Server database (if external) |
 
 ### Dependencies
 
-The installer checks the presence of the following components, and in case any of them is not in place it terminates the installation process:
+The installer performs automated dependency checking. Installation will be terminated if any required components are missing.
 
-* Microsoft Visual C++ Redistributable: this is required for the MSVC libraries
-* An ANSI SQL compliant database server (such as PostgreSQL 14.5 and above, Microsoft SQL Server 2018 and above, Oracle DBMS 2016 and above, etc.): the system keeps significant amounts of data in a relational database
-* Microsoft .NET Framework 5 or higher: the system was developed with .NET and the runtime requires the presence of certain libraries
-* Microsoft IIS 11.4 or higher: the system requires an internet connection for managing cloud storage and connecting to our servers for patches and updates
+#### Required Dependencies
 
-The system locale is *en-us* by default but can be set to any locale.
+| Component | Version | Architecture | Purpose |
+|-----------|---------|-------------|---------|
+| **Microsoft Visual C++ Redistributable** | 2019-2022 (14.29+) | x64 | Runtime libraries for MSVC compiled components |
+| **Microsoft .NET Runtime** | 6.0.0 or 7.0.0+ | x64 | Primary application runtime environment |
+| **Database Server** | See table below | x64 | Persistent data storage and repository management |
+| **Web Server** | IIS 10.0+ or Apache 2.4+ | x64 | Web interface and API hosting |
+
+#### Database Compatibility Matrix
+
+| Database System | Supported Versions | Connection Method | Notes |
+|----------------|-------------------|-------------------|-------|
+| **PostgreSQL** | 13.0 - 15.x | TCP/IP, Local Socket | Recommended for new installations |
+| **Microsoft SQL Server** | 2019, 2022 | TCP/IP, Named Pipes | Enterprise environments |
+| **Oracle Database** | 19c, 21c | TCP/IP, Oracle Net | Large-scale deployments |
+| **MySQL** | 8.0.28+ | TCP/IP | Community edition supported |
+
+#### Optional Components
+
+| Component | Version | Benefit |
+|-----------|---------|---------|
+| **Redis Cache** | 6.2+ | 60% faster API response times |
+| **Elasticsearch** | 7.17+ or 8.x | Advanced search capabilities |
+| **Docker Engine** | 20.10+ | Containerized deployment support |
+
+#### Firewall Requirements
+
+Ensure the following firewall exceptions are configured:
+
+```powershell
+# Windows Firewall configuration
+New-NetFirewallRule -DisplayName "ProSoft API" -Direction Inbound -Protocol TCP -LocalPort 4096
+New-NetFirewallRule -DisplayName "ProSoft Client" -Direction Inbound -Protocol TCP -LocalPort 6650
+New-NetFirewallRule -DisplayName "ProSoft Web" -Direction Inbound -Protocol TCP -LocalPort 8080
+```
+
+The system locale is *en-US* by default but supports all ISO 639-1 language codes.
 
 ## Installation
 
@@ -77,7 +157,9 @@ Before beginning the installation, from the __ProSoft__ [downloads](https://www.
 * Open a terminal window with elevated (i.e. __admin__) privileges. If you haven't downloaded the installation (i.e. __*.msi__) file, you can do so on the command line by typing
 
 <pre id="cmdln-text">
-C:\> winget www.prosoft.com/downloads/prosoft_x64.msi
+C:\> curl -L -o prosoft_x64.msi https://www.prosoft.com/downloads/prosoft_x64.msi
+C:\> # Alternative: Use PowerShell's Invoke-WebRequest
+C:\> Invoke-WebRequest -Uri "https://www.prosoft.com/downloads/prosoft_x64.msi" -OutFile "prosoft_x64.msi"
 </pre>
 
 * Navigate (i.e. `cd`) to the __Downloads__ directory of your server by typing:
@@ -159,6 +241,85 @@ C:\ProSoft\admin>install_cert.ps --install-dir=..\cert --certificates=..\cert\*.
 * Check the security settings of the server before starting to add users that will have access to the system. The users should have *Read*, *Write*, and *Execute* privileges
 
 </span>
+
+## Post-Installation Verification
+
+After completing the installation and configuration, verify that ProSoft is operating correctly:
+
+### Service Status Verification
+
+<pre id="cmdln-text">
+C:\ProSoft\admin> prosoftctl status
+>>> ProSoft Core Service: RUNNING (PID: 1234)
+>>> ProSoft API Server: RUNNING (PID: 1235)
+>>> ProSoft Web Interface: RUNNING (PID: 1236)
+>>> Database Connection: CONNECTED (PostgreSQL 14.5)
+>>> License Status: VALID (25 seats, expires 2025-12-31)
+</pre>
+
+### Web Interface Test
+
+1. Open a web browser and navigate to `https://your-server:8080`
+2. Log in using the default administrator credentials:
+   - **Username:** `prosoftadmin`
+   - **Password:** `ProSoft2024!` (change immediately after first login)
+3. Verify the dashboard loads and displays system statistics
+
+### API Connectivity Test
+
+<pre id="cmdln-text">
+C:\> curl -k -X GET "https://your-server:4096/api/v1/health" -H "Authorization: Bearer YOUR_API_KEY"
+>>> {"status":"healthy","version":"8.4.11","uptime":"00:05:23","database":"connected"}
+</pre>
+
+### Performance Baseline Test
+
+<pre id="cmdln-text">
+C:\ProSoft\admin> prosoftctl benchmark --quick
+>>> Running performance baseline...
+>>> Build processing: 450 builds/hour (target: >400)
+>>> API response time: 85ms average (target: <100ms)  
+>>> Database query time: 12ms average (target: <50ms)
+>>> Memory usage: 2.1GB (limit: 4GB for this configuration)
+>>> Disk I/O: 1200 IOPS (target: >1000)
+>>> RESULT: All benchmarks PASSED
+</pre>
+
+## Troubleshooting
+
+### Common Installation Issues
+
+| Problem | Symptoms | Solution |
+|---------|----------|----------|
+| **Insufficient Permissions** | Installation fails with "Access Denied" | Run installer as Administrator; ensure UAC is temporarily disabled |
+| **Port Conflicts** | Service fails to start, port binding errors | Check if ports 4096, 6650, 8080 are available using `netstat -an` |
+| **Database Connection Failed** | Cannot connect to database during setup | Verify database server is running and credentials are correct |
+| **License Validation Failed** | "Invalid license" error on startup | Check internet connectivity; verify license file integrity |
+| **Insufficient Disk Space** | Installation stops at 75% completion | Free up additional space; minimum 2GB required beyond listed requirements |
+
+### Installation Log Locations
+
+- **Windows:** `C:\ProgramData\ProSoft\Logs\install.log`
+- **Linux:** `/var/log/prosoft/install.log`
+
+### Service Management Commands
+
+<pre id="cmdln-text">
+# Start ProSoft services
+C:\ProSoft\admin> prosoftctl start
+
+# Stop ProSoft services  
+C:\ProSoft\admin> prosoftctl stop
+
+# Restart ProSoft services
+C:\ProSoft\admin> prosoftctl restart
+
+# View real-time logs
+C:\ProSoft\admin> prosoftctl logs --follow
+
+# Check configuration validity
+C:\ProSoft\admin> prosoftctl config --validate
+</pre>
 
 ---
 
