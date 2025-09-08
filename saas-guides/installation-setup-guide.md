@@ -51,6 +51,47 @@ sudo systemctl enable --now agent
 sudo systemctl status agent
 ```
 
+```graphviz
+// agent-connectivity.dot
+digraph G {
+  graph [rankdir=LR, splines=true, bgcolor="transparent", nodesep=0.7, ranksep=0.9];
+  node  [shape=rounded, style="filled,rounded", fillcolor="#161b22", color="#30363d", fontcolor="#c9d1d9", penwidth=1.2];
+  edge  [color="#8b949e", arrowsize=0.9, penwidth=1.3];
+
+  subgraph cluster_cust {
+    label="Customer Network";
+    labelloc="t"; fontsize=12;
+    color="#30363d"; fontcolor="#c9d1d9"; style="rounded,dashed";
+    agent [label="ACME Agent\n(systemd service)"];
+    fw    [label="Egress Firewall/Proxy", shape=box, style="filled", fillcolor="#0d1117"];
+  }
+
+  subgraph cluster_cloud {
+    label="SaaS Cloud";
+    labelloc="t"; fontsize=12;
+    color="#30363d"; fontcolor="#c9d1d9"; style="rounded,dashed";
+    api   [label="Agent Ingress\nagent.acmecloud.example:443", shape=box, style="filled", fillcolor="#0d1117"];
+    ctrl  [label="Control Plane\n(config, tokens)"];
+    telem [label="Telemetry\n(health, logs)"];
+  }
+
+  // outbound-only TLS
+  agent -> fw  [label="TLS 1.2+ 443", fontcolor="#8b949e"];
+  fw    -> api [label="allowlist *.acmecloud.example", fontcolor="#8b949e"];
+
+  // control/telemetry (logical paths)
+  api -> ctrl  [label="register / fetch config"];
+  api -> telem [label="healthbeat"];
+
+  // notes
+  note1 [label="No inbound ports required", shape=note, fillcolor="#0d1117"];
+  note2 [label="Rotate provisioning token regularly", shape=note, fillcolor="#0d1117"];
+
+  agent -> note1 [style=dotted, arrowhead=none, color="#484f58"];
+  ctrl  -> note2 [style=dotted, arrowhead=none, color="#484f58"];
+}
+```
+
 ### Health Check
 
 ```bash
@@ -68,6 +109,28 @@ curl -I https://agent.acmecloud.example/health
   - **Entity ID:** `https://app.acmecloud.example`
 - Upload IdP metadata or client credentials.
 - Test with a pilot group before enforcing.
+
+```graphviz
+// sso-flow.dot
+digraph G {
+  graph [rankdir=LR, splines=true, bgcolor="transparent", nodesep=0.6, ranksep=0.9];
+  node  [shape=rounded, style="filled,rounded", fillcolor="#161b22", color="#30363d", fontcolor="#c9d1d9", penwidth=1.2];
+  edge  [color="#8b949e", arrowsize=0.8, penwidth=1.2];
+
+  user    [label="User Browser"];
+  app     [label="SaaS App\n(app.acmecloud.example)"];
+  idp     [label="IdP (SAML/OIDC)"];
+  session [label="Session Established", shape=ellipse, fillcolor="#0d1117", penwidth=1.6];
+
+  user -> app   [label="GET /login"];
+  app  -> idp   [label="Redirect: AuthnRequest / OIDC Auth"];
+  idp  -> user  [label="Login (MFA, etc.)", dir=both, arrowhead=vee, arrowtail=none];
+  user -> app   [label="POST Assertion / Callback"];
+  app  -> idp   [label="Validate (metadata/keys)"];
+  app  -> session;
+  session -> user [label="Set cookie / token"];
+}
+```
 
 ### SCIM Provisioning
 

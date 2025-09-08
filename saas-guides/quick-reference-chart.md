@@ -46,13 +46,17 @@ curl -H "Authorization: Bearer <TOKEN>" https://api.acmecloud.example/v1/project
 
 ## Visual Overview
 
-```
-+------------+         +-------------+
-|   Client   |  --->   |   API GW    |
-+------------+         +-------------+
-                            |
-                            v
-                       +---------+
-                       | Service |
-                       +---------+
+// visual-overview.dot
+```graphviz
+digraph G {
+  graph [rankdir=LR, splines=true, bgcolor="transparent", nodesep=0.8, ranksep=0.8];
+  node  [shape=rounded, style="filled,rounded", fillcolor="#161b22", color="#30363d", fontcolor="#c9d1d9", penwidth=1.2];
+  edge  [color="#8b949e", arrowsize=0.9, penwidth=1.3];
+
+  client [label="Client"];
+  apigw  [label="API Gateway"];
+  svc    [label="Service"];
+
+  client -> apigw -> svc;
+}
 ```
