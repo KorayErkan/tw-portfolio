@@ -8,25 +8,25 @@
 ## About This Manual
 
 - **Product name**: _ACME Cloud_ (fictional SaaS product for demonstration)
-- **Audience**: end-users and workspace admins
-- **Assumptions**: User has signed up, created a workspace, and has browser access
+- **Audience**: End-users and workspace administrators
+- **Assumptions**: Active account with workspace access and modern web browser
 
 ---
 
 ## Getting Started
 
 1. **Sign in**
-   Go to https://acmecloud.example and enter your email and password.
+   Navigate to https://acmecloud.example and authenticate with your credentials.
    ![Screenshot: Sign-in page](images/sign-in-placeholder.png)
 
 2. **Create your first project**
-   From the dashboard, click **New Project**. Enter a name and optional description.
+   From the dashboard, select **New Project**. Provide a descriptive name and optional details.
 
 3. **Invite teammates**
-   Use the **Invite** button to add users by email.
+   Use the **Invite** function to add collaborators via email addresses.
 
 4. **Complete onboarding checklist**
-   Follow the guided checklist to configure workspace settings.
+   Follow the guided setup wizard to configure essential workspace preferences.
 
 > 💡 **Tip:** Bookmark the dashboard for faster access.
 
@@ -36,26 +36,26 @@
 
 ### Create & Assign Tasks
 
-1. Open your project.
-2. Click **+ Task** and provide a title, description, and due date.
-3. Assign the task to a teammate.
-4. Save.
+1. Access your project workspace.
+2. Select **+ Task** and define title, description, and deadline.
+3. Assign ownership to a team member.
+4. Confirm creation.
 
 ![Screenshot: New task dialog](images/new-task-placeholder.png)
 
 ### Track Progress & Dashboards
 
-- Open **Dashboards** from the top navigation.
-- Filter by **status**, **assignee**, and **priority**.
-- Export reports to CSV or PDF for stakeholders.
+- Access **Dashboards** via primary navigation.
+- Apply filters by **status**, **assignee**, and **priority**.
+- Generate CSV or PDF reports for stakeholder distribution.
 
 ---
 
 ## Tips & Shortcuts
 
-- Press `Ctrl + K` (Windows) / `Cmd + K` (Mac) for quick search.
-- Use **saved views** for recurring reports.
-- Bulk-edit tasks by selecting multiple rows in the task table.
+- Press `Ctrl + K` (Windows) / `Cmd + K` (Mac) for universal search.
+- Leverage **saved views** for standardized reporting.
+- Perform bulk operations by multi-selecting task rows.
 
 ---
 
