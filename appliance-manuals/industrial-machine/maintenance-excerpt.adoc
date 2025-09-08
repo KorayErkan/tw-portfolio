@@ -221,4 +221,5 @@ Maintain maintenance logs and checklists for **5 years** (or per facility policy
 Doc ID: CNC-5000-MNT-EX-01 +
 Revision: 0.9 (Portfolio Sample) +
 Manufacturer: IronClad Machinery GmbH +
-Note: For portfolio demonstration use only — all names and contacts are fictional.
+Figures: Updated exploded view illustration for portfolio clarity
+

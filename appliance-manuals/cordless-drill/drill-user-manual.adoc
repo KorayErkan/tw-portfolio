@@ -17,6 +17,11 @@
 This manual explains safe use, setup, operation, maintenance, and troubleshooting
 for the *Spinomatic X7* cordless drill (TorqueWorks Ltd.).
 
+[sidebar]
+.This is a portfolio sample
+All company names, addresses, and contact details are fictional.
+This document is created for demonstration purposes only.
+
 == Safety Information
 
 [WARNING]
