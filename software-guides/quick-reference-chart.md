@@ -9,15 +9,15 @@
 
 | Code | Meaning |
 |------|---------|
-| 200  | OK — success |
-| 201  | Created |
-| 400  | Bad Request — validation failed |
-| 401  | Unauthorized — invalid/missing token |
-| 403  | Forbidden — insufficient scope |
-| 404  | Not Found |
-| 409  | Conflict — versioning or duplicates |
-| 429  | Too Many Requests — rate limited |
-| 5xx  | Server error — retry with backoff |
+| 200  | OK — Request processed successfully |
+| 201  | Created — Resource created successfully |
+| 400  | Bad Request — Input validation failure |
+| 401  | Unauthorized — Authentication token invalid/missing |
+| 403  | Forbidden — Insufficient permissions for operation |
+| 404  | Not Found — Requested resource does not exist |
+| 409  | Conflict — Resource state conflict or duplicate |
+| 429  | Too Many Requests — Rate limit exceeded |
+| 5xx  | Server Error — Internal failure, implement retry logic |
 
 ---
 
@@ -25,10 +25,10 @@
 
 | Role   | Scope | Capabilities |
 |--------|-------|--------------|
-| Owner  | Org   | Billing, SSO, global policies |
-| Admin  | Space | Invite, manage members, configure integrations |
-| User   | Space | Create/edit content, run reports |
-| Viewer | Space | Read-only dashboards |
+| Owner  | Organization | Billing management, SSO configuration, global policy administration |
+| Admin  | Workspace | Member invitation/management, integration configuration |
+| User   | Workspace | Content creation/editing, report generation |
+| Viewer | Workspace | Read-only dashboard and report access |
 
 ---
 
