@@ -11,7 +11,7 @@ IronClad Machinery GmbH
 :sectnums:
 :sectlinks:
 :sectanchors:
-:imagesdir: images
+:imagesdir: img
 :table-stripes: even
 
 [abstract]
