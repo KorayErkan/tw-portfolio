@@ -1,18 +1,18 @@
-# Security & Compliance Overview
+# Security and Compliance Overview
 
 **Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
 
 ---
 
-## Trust Model & Responsibilities
+## Trust Model and Responsibilities
 
 - **Vendor responsibilities:** Application security, infrastructure hardening, incident response protocols
 - **Customer responsibilities:** Identity provider configuration, user access governance, endpoint protection
 
 ---
 
-## Identity & Access Management
+## Identity and Access Management
 
 - Single Sign-On integration (SAML/OIDC protocols)
 - Multi-Factor Authentication with conditional enforcement

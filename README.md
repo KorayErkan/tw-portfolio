@@ -13,6 +13,7 @@ A curated collection of technical writing samples across software and non‑soft
 7. [User Assistance](./user-assistance/)
 8. [User Manual](./user-manual/)
 9. [Appliance & Industrial Manuals](./appliance-manuals/)
+10. [Software Guide](./software-guides)
 
 ## Quick Matrix
 

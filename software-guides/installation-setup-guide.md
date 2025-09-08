@@ -1,4 +1,4 @@
-# Installation & Setup Guide (SaaS + Optional Self-Hosted Agent)
+# Installation and Setup Guide (SaaS + Optional Self-Hosted Agent)
 
 **Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
@@ -138,14 +138,14 @@ digraph G {
 - Configure Identity Provider with base URL and bearer token authentication.
 - Validate single group synchronization before full production deployment.
 
-### API Keys & Webhooks
+### API Keys and Webhooks
 
 - **API Keys:** Generate with minimal required permissions following least-privilege principles.
 - **Webhooks:** Configure endpoint URLs, validate 2xx response codes, establish retry policies.
 
 ---
 
-## Validation & Smoke Tests
+## Validation and Smoke Tests
 
 - [ ] Authenticate via SSO with pilot user account
 - [ ] Establish workspace and initial project

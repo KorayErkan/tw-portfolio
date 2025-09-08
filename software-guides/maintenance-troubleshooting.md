@@ -1,4 +1,4 @@
-# Maintenance & Troubleshooting
+# Maintenance and Troubleshooting
 
 **Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
