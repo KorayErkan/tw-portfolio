@@ -1,6 +1,6 @@
 # Maintenance & Troubleshooting
 
-**Author:** Koray Erkan (portfolio sample)
+**Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
 
 ---
@@ -23,7 +23,7 @@
 Example health check:
 
 ```bash
-curl -s https://api.acmecloud.example/v1/health | jq
+curl -s https://api.cloudflow.goodweb.com/v1/health | jq
 ```
 
 ```graphviz
@@ -51,8 +51,8 @@ digraph G {
     label="Customer Side";
     labelloc="t"; fontsize=12;
     color="#30363d"; fontcolor="#c9d1d9"; style="rounded,dashed";
-    wh1 [label="Endpoint A\nhttps://hooks.example.com/inbound"];
-    wh2 [label="Endpoint B\nhttps://api.partner.tld/webhooks"];
+    wh1 [label="Endpoint A\nhttps://hooks.goodweb.com/inbound"];
+    wh2 [label="Endpoint B\nhttps://api.webconnect.biz/webhooks"];
     mon [label="Monitoring / SIEM\n(status, latency, failure rate)"];
   }
 
