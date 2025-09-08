@@ -1,13 +1,13 @@
 # Product User Manual (SaaS)
 
-**Author:** Koray Erkan (portfolio sample)
+**Author:** John Saysitall (portfolio sample)
 **Version:** 0.1 — <update date here>
 
 ---
 
 ## About This Manual
 
-- **Product name**: _ACME Cloud_ (fictional SaaS product for demonstration)
+- **Product name**: _CloudFlow Pro_ by Goodweb, Inc. (fictional SaaS product for demonstration)
 - **Audience**: End-users and workspace administrators
 - **Assumptions**: Active account with workspace access and modern web browser
 
@@ -16,7 +16,7 @@
 ## Getting Started
 
 1. **Sign in**
-   Navigate to https://acmecloud.example and authenticate with your credentials.
+   Navigate to https://cloudflow.goodweb.com and authenticate with your credentials.
    ![Screenshot: Sign-in page](images/sign-in-placeholder.png)
 
 2. **Create your first project**
