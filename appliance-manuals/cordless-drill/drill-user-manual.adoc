@@ -37,6 +37,11 @@ Power tools can cause serious injury if used improperly. Read and keep this manu
 * Charge only indoors, between 5 °C and 35 °C. Unplug the charger when not in use.
 * Inspect battery and charger before each use; replace if cracked, deformed, or leaking.
 
+[WARNING]
+====
+*Temperature Monitoring*: If battery becomes hot during use (too hot to hold comfortably), stop work immediately and allow cooling for 15 minutes minimum. Continued use of overheated batteries can cause permanent damage or fire risk.
+====
+
 === Operation Safety
 * Remove adjusting keys and wrenches before powering on.
 * Select the correct speed/torque and bit for the material before contact.
@@ -136,19 +141,41 @@ Use the lowest speed that produces a clean cut. Excess speed overheats bits and 
 |5 mm (≈#10)| 3.5–4.0 mm
 |===
 
-=== Technique
+=== Basic Drilling Technique
+
+[CAUTION]
+====
+Always mark your drilling point and secure your workpiece before starting. Loose materials can cause injury.
+====
+
 .Correct stance and perpendicular approach
 image::drill-technique.png[alt="Proper grip and perpendicular drilling into wood", width=70%, align=center]
 
-. Mark the hole; use a center punch on metal to prevent wandering.
-. Hold the drill perpendicular to the surface; brace your wrist.
-. Squeeze the trigger gently to start; increase only as needed.
-. Ease pressure before breaking through the far side to prevent tear-out.
-. For screws: select a driver bit that fully fits the screw head; stop when the clutch clicks.
+.Step-by-step drilling procedure:
+. *Prepare the work area*: Clear debris, ensure adequate lighting, and secure the workpiece in a vise or with clamps.
+. *Mark the drilling point*: Use a center punch on metal surfaces to prevent bit wandering.
+. *Position the drill*: Hold the drill perpendicular to the surface with both hands. Brace your wrist for stability.
+. *Start slowly*: Squeeze the trigger gently to begin drilling at low speed.
+. *Apply steady pressure*: Increase speed gradually as needed, maintaining consistent downward pressure.
+. *Before breakthrough*: Reduce pressure when nearing the far side to prevent tear-out and splintering.
 
 [WARNING]
 ====
-Kickback risk: if the bit binds, release the trigger immediately and back the bit out. Do not force the tool.
+*Kickback Prevention*: If the bit binds, release the trigger immediately and reverse the drill to back out the bit. Never force the tool or attempt to free a bound bit by increasing pressure.
+====
+
+=== Screw Driving Technique
+
+.Proper screw driving procedure:
+. *Select correct bit*: Ensure driver bit fully fits the screw head with no gaps.
+. *Set appropriate torque*: Start with low torque setting; increase only if screws cam out.
+. *Pre-drill pilot holes*: Use pilot hole chart (above) for proper sizing.
+. *Drive steadily*: Maintain perpendicular angle and steady pressure.
+. *Stop at clutch click*: When clutch engages, the screw is properly seated.
+
+[IMPORTANT]
+====
+Overtightening screws can strip heads, crack materials, or damage the drill's clutch mechanism.
 ====
 
 == Charging & Maintenance
@@ -220,25 +247,25 @@ image::warning.png[alt="Warning icon", width=10%]
 |===
 |Problem | Possible Cause | Corrective Action
 
-|Drill does not start
+|Drill does not start when trigger is pulled
 |Battery not seated / discharged
 |Remove and reinsert battery until it clicks; recharge or try a known-good pack.
 
-|Intermittent power loss
+|Power cuts out intermittently during use
 |Dirty battery contacts or debris in trigger
 |Power off and remove battery; clean contacts with dry cloth; blow out trigger area gently.
 
-|Chuck slips / bit spins
+|Chuck slips and bit spins freely
 |Bit not fully seated or jaws dirty
 |Reseat bit and tighten; clean jaws; replace worn bits.
 
-|Screw head cam-out
-|Wrong driver bit or excessive torque
+|Screw head strips or bit slips out
+|Wrong driver bit size or excessive torque
 |Use correct bit size/profile; reduce torque or switch to Gear 1.
 
-|Slow or stalling in wood/metal
-|Too high gear/speed or dull bit
-|Switch to Gear 1; use steady pressure; replace or sharpen bit; lubricate for metal.
+|Drill cuts slowly or stalls frequently
+|Wrong gear selection, dull bit, or insufficient pressure
+|Switch to Gear 1 for more torque; maintain steady pressure; replace bit; for metal, use cutting lubricant and slower speed.
 
 |Overheating / hot housing
 |Prolonged heavy load or blocked vents
