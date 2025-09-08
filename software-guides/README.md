@@ -7,7 +7,7 @@ Each file is standalone and demonstrates a different type of documentation deliv
 
 - **user-manual.md** — End-user manual with workflows and onboarding.
 - **installation-setup-guide.md** — Admin-focused setup and configuration guide.
-- **release-notes-template.md** — Changelog / release notes template.
+- **release-notes.md** — Changelog / release notes template.
 - **quick-reference-chart.md** — Quick reference / cheat sheet with tables.
 - **maintenance-troubleshooting.md** — Maintenance tasks and troubleshooting playbooks.
 - **conceptual-architecture.md** — Conceptual/educational architecture overview.
