@@ -7,18 +7,18 @@
 
 ## Routine Maintenance
 
-- [ ] Verify backups complete successfully (weekly)
-- [ ] Perform test restores (monthly)
-- [ ] Review data retention policies (quarterly)
-- [ ] Rotate API keys and secrets (annually or on compromise)
+- [ ] Validate backup completion and integrity (weekly schedule)
+- [ ] Execute test restoration procedures (monthly validation)
+- [ ] Audit data retention policy compliance (quarterly review)
+- [ ] Implement API key and secret rotation (annual cycle or upon compromise)
 
 ---
 
 ## Monitoring
 
-- [ ] Check health endpoints (`/health`, `/status`)
-- [ ] Aggregate logs in SIEM/ELK stack
-- [ ] Review alerts against thresholds (CPU, memory, latency, error rates)
+- [ ] Monitor system health endpoints (`/health`, `/status`) for availability
+- [ ] Centralize log aggregation through SIEM/ELK infrastructure
+- [ ] Evaluate alerting thresholds for CPU, memory, latency, and error rates
 
 Example health check:
 
@@ -81,6 +81,8 @@ digraph G {
 
 | Symptom            | Likely Cause        | Resolution |
 |--------------------|---------------------|------------|
-| Login loop         | IdP misconfiguration | Verify ACS URL, certificate, and system clock |
-| Webhooks not firing| Firewall / DNS       | Check firewall allowlist, retry policy |
-| Slow exports       | Large datasets       |
+| Authentication loops | Identity provider misconfiguration | Validate ACS URL, certificate validity, system clock synchronization |
+| Webhook delivery failures | Network connectivity or DNS issues | Verify firewall allowlists, DNS resolution, retry policy configuration |
+| Slow report exports | Large dataset processing | Implement filtering, pagination, or asynchronous export processing |
+| High API latency | Database query performance | Review query optimization, caching strategy, connection pooling |
+| Memory consumption spikes | Resource leak or inefficient processing | Analyze heap dumps, optimize algorithms, implement garbage collection tuning |
