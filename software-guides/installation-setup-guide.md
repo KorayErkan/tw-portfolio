@@ -12,25 +12,25 @@
 
 | Category | Requirement | Notes |
 |----------|-------------|-------|
-| Identity | SAML or OIDC IdP | Okta, Azure AD, or Google Workspace supported |
-| Network | HTTPS egress to `*.example.com` | Allowlist on corporate firewall/proxy |
-| Browser | Latest Chrome/Edge/Firefox/Safari | Enable cookies and local storage |
-| Roles | Org Admin account | Needed for SSO, SCIM, billing, settings |
-| (Agent) OS | Linux x86_64 (Ubuntu 20.04+/RHEL 8+) | 2 vCPU, 4 GB RAM, 10 GB disk |
-| (Agent) Ports | Outbound 443 | No inbound ports required |
+| Identity Provider | SAML or OIDC compatibility | Okta, Azure AD, Google Workspace supported |
+| Network Connectivity | HTTPS egress to `*.example.com` | Corporate firewall/proxy allowlist configuration required |
+| Browser Support | Latest Chrome/Edge/Firefox/Safari | Cookie and local storage functionality enabled |
+| Administrative Access | Organization Admin privileges | Required for SSO, SCIM, billing, and configuration management |
+| (Agent) Operating System | Linux x86_64 (Ubuntu 20.04+/RHEL 8+) | Minimum: 2 vCPU, 4 GB RAM, 10 GB storage |
+| (Agent) Network | Outbound HTTPS (443) only | No inbound connectivity requirements |
 
 ---
 
 ## Cloud Installation
 
-1. **Sign up / Org creation**
-   Go to `https://app.acmecloud.example` and create your organization.
-2. **Domain verification**
-   Add the provided TXT record to DNS, then click **Verify**.
-3. **Billing (optional)**
-   Select a plan, add payment method, confirm invoice recipient.
-4. **Initial admin config**
-   Set org name, time zone, and default region.
+1. **Organization registration**
+   Navigate to `https://app.acmecloud.example` and establish your organizational account.
+2. **Domain ownership verification**
+   Configure the provided TXT record in DNS management, then execute **Verify**.
+3. **Billing configuration (optional)**
+   Select subscription tier, configure payment method, designate invoice recipient.
+4. **Administrative setup**
+   Define organization name, timezone preferences, and default regional deployment.
 
 ---
 
@@ -38,9 +38,9 @@
 
 ### System Requirements
 
-- Linux x86_64, 2 vCPU, 4 GB RAM, 10 GB disk
-- Outbound HTTPS (443) to `agent.acmecloud.example`
-- Systemd for service management
+- Linux x86_64 architecture with 2 vCPU, 4 GB RAM, 10 GB storage minimum
+- Outbound HTTPS connectivity (port 443) to `agent.acmecloud.example`
+- Systemd service management capability for daemon operations
 
 ### Install Example
 
@@ -104,11 +104,11 @@ curl -I https://agent.acmecloud.example/health
 
 ### Single Sign-On (SAML/OIDC)
 
-- Configure IdP with:
+- Configure Identity Provider parameters:
   - **ACS / Redirect URI:** `https://app.acmecloud.example/auth/callback`
   - **Entity ID:** `https://app.acmecloud.example`
-- Upload IdP metadata or client credentials.
-- Test with a pilot group before enforcing.
+- Import IdP metadata or establish client credential configuration.
+- Execute pilot group testing before production enforcement.
 
 ```graphviz
 // sso-flow.dot
@@ -134,25 +134,25 @@ digraph G {
 
 ### SCIM Provisioning
 
-- Enable SCIM in **Admin → Provisioning**.
-- Configure in IdP with base URL and bearer token.
-- Sync one group before production rollout.
+- Activate SCIM functionality via **Admin → Provisioning**.
+- Configure Identity Provider with base URL and bearer token authentication.
+- Validate single group synchronization before full production deployment.
 
 ### API Keys & Webhooks
 
-- **API Keys:** Create with least-privilege scopes.
-- **Webhooks:** Add endpoint, verify 2xx response, set retry policy.
+- **API Keys:** Generate with minimal required permissions following least-privilege principles.
+- **Webhooks:** Configure endpoint URLs, validate 2xx response codes, establish retry policies.
 
 ---
 
 ## Validation & Smoke Tests
 
-- [ ] Login via SSO (pilot user)
-- [ ] Create workspace + project
-- [ ] Invite teammate → teammate signs in
-- [ ] Create + assign task → confirm activity log
-- [ ] Export CSV report → verify columns/timezone
-- [ ] (If agent installed) Agent shows **Healthy** in **Admin → Connectors**
+- [ ] Authenticate via SSO with pilot user account
+- [ ] Establish workspace and initial project
+- [ ] Execute teammate invitation workflow and validate sign-in
+- [ ] Create and assign task, verify activity logging
+- [ ] Generate CSV report export and validate data/timezone accuracy
+- [ ] (Agent deployment) Confirm **Healthy** status in **Admin → Connectors**
 
 ---
 
@@ -160,18 +160,18 @@ digraph G {
 
 | Symptom | Likely Cause | Resolution |
 |---------|--------------|------------|
-| SSO login loop | ACS/Audience mismatch, clock skew | Re-check IdP settings; ensure NTP enabled |
-| 403 after SSO | Role not mapped | Map IdP group → app role; resync |
-| Webhooks not firing | Firewall or proxy blocks | Allowlist destination; retry |
-| Slow exports | Large dataset | Use async export; filter or paginate |
-| Agent unhealthy | Token invalid, egress blocked | Rotate token; check outbound 443/DNS |
+| SSO authentication loops | ACS/Audience configuration mismatch, clock synchronization issues | Validate IdP configuration parameters; ensure NTP synchronization |
+| Post-SSO authorization failure | Role mapping not configured | Establish IdP group to application role mapping; execute resynchronization |
+| Webhook delivery failures | Network firewall or proxy restrictions | Configure destination allowlists; verify retry policy settings |
+| Export performance degradation | Large dataset processing overhead | Implement asynchronous exports; apply filtering or pagination |
+| Agent connectivity issues | Authentication token expiration, network egress restrictions | Execute token rotation; verify outbound HTTPS/DNS connectivity |
 
 ---
 
 ## Rollback
 
-1. Revert SSO enforcement to optional.
-2. Pause SCIM provisioning.
-3. Stop and remove the agent service.
-4. Remove DNS TXT verification if decommissioning.
-5. Verify backups/exports before full rollback.
+1. Disable SSO enforcement, reverting to optional authentication.
+2. Suspend SCIM user provisioning operations.
+3. Terminate and uninstall agent service daemon.
+4. Remove DNS TXT verification records during decommissioning.
+5. Validate backup integrity and data exports before complete rollback execution.
