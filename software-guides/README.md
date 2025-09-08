@@ -1,18 +1,20 @@
 # Software Guides
 
-This folder contains **software documentation** for an imaginary product (_CloudFlow_ by Goodweb, Inc.), showcasing comprehensive technical writing capabilities.
+This folder contains **software documentation** for an imaginary product (_CloudFlow_ by Goodweb, Inc.), designed to demonstrate professional technical writing standards and comprehensive documentation practices.
 
-The chapters represent fictional scenarios crafted to demonstrate professional documentation standards and real-world applicability.
+Each chapter represents a fictional but realistic scenario, showcasing how software systems can be documented in a structured, user-friendly way.
 
-## Running This Documentation Locally
+## Running the Documentation Locally
 
-This folder is set up as a self-contained documentation site.
+This folder is a self-contained documentation site.
 
 ### Prerequisites
+
 - [Node.js](https://nodejs.org/) (v16 or later recommended)
-- `npm` (comes with Node)
+- `npm` (included with Node)
 
 ### Steps
+
 1. Open a terminal in the `software-guides` folder.
 2. Install the `serve` package (first time only):
    ```bash
@@ -27,9 +29,9 @@ This folder is set up as a self-contained documentation site.
 
 ### Notes
 
-- The sidebar navigation is driven by toc.json.
-- Markdown files (.md) are rendered dynamically into HTML.
-- All styles are defined in css/custom.css. Adjust this file to change the look and feel.
+- The sidebar navigation is driven by `toc.json`.
+- Markdown files (`.md`) are rendered dynamically into HTML.
+- All styles are defined in `css/custom.css`. Adjust this file to change the look and feel.
 
 ---
 
