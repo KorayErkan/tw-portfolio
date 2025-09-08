@@ -7,9 +7,9 @@
 
 ## How to Use
 
-- Keep entries **task-oriented** and **impact-oriented**.
-- Provide *upgrade notes*, *breaking changes*, and *deprecations* up front.
-- Use consistent tags or icons for clarity (✨ New, ⚡ Improved, 🐛 Fixed, 🛡️ Security).
+- Maintain **task-oriented** and **impact-focused** entries.
+- Prioritize *upgrade notes*, *breaking changes*, and *deprecations* prominently.
+- Apply consistent categorization tags (✨ New, ⚡ Improved, 🐛 Fixed, 🛡️ Security).
 
 ---
 
@@ -17,9 +17,9 @@
 
 ### Highlights
 
-- ✨ **New:** Project templates gallery
-- ⚡ **Improved:** Report exports now 30% faster
-- 🛡️ **Security:** SSO enforcement required for all admins
+- ✨ **New:** Project templates gallery with pre-configured workflows
+- ⚡ **Improved:** Report generation performance enhanced by 30%
+- 🛡️ **Security:** Mandatory SSO enforcement for administrator accounts
 
 ### Breaking Changes
 
@@ -27,9 +27,9 @@
 
 ### Details
 
-- Added `/v2/reports` batch endpoint
-- Improved CSV import error messages
-- Fixed timezone handling in dashboards
+- Introduced `/v2/reports` batch processing endpoint
+- Enhanced CSV import validation messaging
+- Resolved timezone inconsistencies in dashboard displays
 
 ### Upgrade Notes
 
@@ -41,13 +41,13 @@
 
 ### Highlights
 
-- 🐛 Bugfix rollup release
+- 🐛 Critical bug fixes and stability improvements
 
 ### Details
 
-- Fixed duplicate notifications in activity feed
-- Corrected billing invoice rounding issues
-- Patched minor XSS vulnerability in dashboard filters
+- Eliminated duplicate activity feed notifications
+- Resolved billing calculation precision errors
+- Addressed XSS vulnerability in dashboard filter components
 
 ### Upgrade Notes
 
