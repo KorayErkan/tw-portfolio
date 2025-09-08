@@ -1,0 +1,154 @@
+= K-Oven 12 Pro — Electric Convection Oven User & Maintenance Manual
+IronClad Home Appliances
+:revnumber: 1.0
+:revdate: {docdate}
+:doctype: book
+:toc: left
+:toclevels: 3
+:stylesdir: ../../css
+:stylesheet: common-dark.css
+:icons: font
+:sectnums:
+:sectlinks:
+:sectanchors:
+:imagesdir: img
+:table-stripes: even
+
+[abstract]
+This manual covers installation, operation, safety, cleaning, and troubleshooting for the fictional *IronClad K-Oven 12 Pro*.
+Prepared as a portfolio sample.
+
+[sidebar]
+.This is a portfolio sample
+All company names, addresses, and contact details are fictional.
+This document is created for demonstration purposes only.
+
+== Introduction
+*Manufacturer:* IronClad Home Appliances, 101 Hearth Street, Springfield, USA
+*Support:* support@ironclad-home.example · +1-555-0199
+
+*Intended audience:* qualified installers, service technicians, and safety-conscious end users.
+*Scope:* safe installation, operation, periodic cleaning, troubleshooting, and recordkeeping.
+
+== Safety Information
+
+[WARNING]
+====
+Improper installation, maintenance, or use may result in fire, electric shock, or serious injury.
+Read and follow all instructions before operating this appliance.
+====
+
+=== General Safety
+* Disconnect from power supply before servicing.
+* Keep combustible materials at least 0.5 m from oven surfaces.
+* Do not operate with damaged power cord, plug, or control panel.
+
+=== PPE (Personal Protective Equipment)
+* Heat-resistant oven mitts
+* Eye protection when servicing interior components
+* Protective clothing to avoid burns
+
+== Installation
+
+=== Clearances
+Provide minimum clearances for ventilation:
+* Rear: 100 mm
+* Sides: 50 mm
+* Top: 200 mm
+
+image::kitchen-oven-clearances.png[Installation clearances, width=60%]
+
+=== Electrical Supply
+* 230 V AC, 50 Hz, 15 A dedicated circuit
+* Connect to grounded outlet only
+* Do not use extension cords
+
+=== Leveling
+Adjust four leveling feet until oven is stable and level.
+
+== Operation
+
+=== Control Panel Overview
+image::kitchen-oven-controls.png[Control panel with numbered callouts, width=70%]
+
+1. Power button
+2. Mode selector (Bake, Broil, Convection, Self-Clean)
+3. Temperature dial
+4. Digital timer/display
+5. Child lock indicator
+
+=== Modes
+* **Bake:** 150–250 °C, bottom element
+* **Broil:** Top element, 250 °C max
+* **Convection:** Fan + heating elements for uniform results
+* **Self-Clean:** 3-hour cycle, locks door
+
+[NOTE]
+====
+Do not attempt to open the door during Self-Clean. Surface temperatures exceed 400 °C.
+====
+
+== Cleaning & Maintenance
+
+=== Daily
+* Wipe spills with damp cloth after cooling.
+* Avoid abrasive cleaners.
+
+=== Monthly
+* Inspect and clean door gasket.
+* Replace oven light bulb (E14, 25 W).
+
+=== Annual
+* Professional inspection recommended for heating elements and control circuits.
+
+image::kitchen-oven-exploded.png[Exploded view with numbered parts, width=70%]
+
+.Callouts
+. Heating element — replace if cracked or not heating
+. Convection fan — clean blades, check bearings
+. Door gasket — replace if torn or hardened
+. Light bulb — replace with rated type only
+
+== Troubleshooting
+
+[cols="1,2,2", options="header"]
+|===
+|Symptom | Possible Cause | Corrective Action
+
+|Oven not heating
+|Tripped circuit breaker
+|Reset breaker; ensure dedicated circuit
+
+|Uneven baking
+|Blocked convection fan; overloaded tray
+|Clean fan; reduce load; rotate trays
+
+|Display shows E1
+|Temperature sensor fault
+|Check wiring; replace sensor if faulty
+
+|Excessive smoke
+|Residue from previous spills
+|Run Self-Clean cycle; ventilate kitchen
+|===
+
+image::kitchen-oven-troubleshooting.png[Troubleshooting flow, width=60%]
+
+== Warranty & Support
+* 2-year limited warranty (parts & labor)
+* Excludes damage from misuse or unauthorized repairs
+* Support available Mon–Fri, 09:00–17:00 (local time)
+
+Contact: *IronClad Home Appliances, 101 Hearth Street, Springfield, USA*
+
+== References & Standards
+* IEC 60335-1 — Household and similar electrical appliances — Safety
+* UL 1026 — Electric Household Cooking and Food Serving Appliances
+* ISO 13732-1 — Ergonomics of thermal environment — Contact temperature limits
+
+[appendix]
+== Controlled Document Info
+Doc ID: KOVEN-12PRO-UM-01 +
+Revision: 1.0 (Portfolio Sample) +
+Manufacturer: IronClad Home Appliances +
+Note: For portfolio demonstration use only — all names and contacts are fictional.
