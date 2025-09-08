@@ -1,4 +1,5 @@
-= Industrial CNC — Maintenance Manual (Excerpt)
+= CNC-5000 Industrial Machining Center — Maintenance Manual
+IronClad Machinery GmbH
 :revnumber: 0.9
 :revdate: {docdate}
 :doctype: book
@@ -14,9 +15,18 @@
 :table-stripes: even
 
 [abstract]
-This excerpt illustrates routine maintenance, safety procedures, and fault code handling for a fictional CNC machining center (Model **CNC-5000**). Prepared as a portfolio sample.
+This excerpt illustrates routine maintenance, safety procedures, and fault code handling for a fictional CNC machining center (Model **CNC-5000**) manufactured by *IronClad Machinery GmbH*.
+Prepared as a portfolio sample.
+
+[sidebar]
+.This is a portfolio sample
+All company names, addresses, and contact details are fictional.
+This document is created for demonstration purposes only.
 
 == Introduction
+*Manufacturer:* IronClad Machinery GmbH, 2210 Werkstrasse, Düsseldorf, Germany
+*Support:* support@ironclad-machinery.example · +49-221-555-0199
+
 *Intended audience:* certified maintenance technicians and supervisors.
 *Scope:* routine service, selected fault codes, and recordkeeping templates.
 
@@ -209,4 +219,6 @@ Maintain maintenance logs and checklists for **5 years** (or per facility policy
 [appendix]
 == Controlled Document Info
 Doc ID: CNC-5000-MNT-EX-01 +
-Revision: 0.9 (Portfolio Sample)
+Revision: 0.9 (Portfolio Sample) +
+Manufacturer: IronClad Machinery GmbH +
+Note: For portfolio demonstration use only — all names and contacts are fictional.
