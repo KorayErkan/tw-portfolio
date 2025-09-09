@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<meta name="author" content="IronClad Home Appliances">
+<title>K-Oven 12 Pro — Electric Convection Oven User &amp; Maintenance Manual</title>
+<style>
+/* github-dark-asciidoctor.css — Asciidoctor theme inspired by GitHub Dark */
+:root{
+  /* GitHub Dark neutrals */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-alt: #161b22;
+  --text: #c9d1d9;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-2: #3fb950; /* success green */
+  --border: #30363d;
+  --code-bg: #0d1117;   /* inline code uses translucency; blocks sit on panel */
+  --code-border: #30363d;
+  --kbd-bg: rgba(110,118,129,0.15);
+  --link: #58a6ff;
+}
+
+html, body{
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 16px;
+}
+
+/* Layout */
+#header, #content, #footnotes, #footer{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+#toc.toc2{
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+}
+#toc.toc2, #toc.toc2 #toctitle, #toc.toc2 a{ color: var(--muted); }
+#toc.toc2 a:hover{ color: var(--text); }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6{
+  color: var(--text);
+  line-height: 1.25;
+  margin: 1.25em 0 .6em;
+  font-weight: 600;
+}
+#header > h1{
+  margin-top: 1rem;
+  letter-spacing: .2px;
+}
+.sectionbody > .paragraph:first-child p{ margin-top: .5rem; }
+
+/* Links */
+a{ color: var(--link); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+/* Admonitions & panels */
+.admonitionblock, .exampleblock, .sidebarblock, .quoteblock, .verseblock{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+}
+.admonitionblock .title, .exampleblock .title{
+  color: var(--muted);
+  margin-bottom: .35rem;
+  font-weight: 600;
+}
+
+/* Code blocks */
+pre, code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .95em;
+}
+.listingblock pre, .literalblock pre{
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+/* ensure Rouge/Highlighter overlays don't repaint block bg */
+.literalblock pre, .listingblock pre > code{ background: transparent; }
+
+/* Inline code (GitHub uses translucent background) */
+code, .literal{
+  background: rgba(110,118,129,0.15);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0 .35rem;
+  border: 1px solid rgba(110,118,129,0.4);
+}
+
+/* kbd keys */
+kbd, .keyseq, .conum[data-value]{
+  background: rgba(110,118,129,0.15);
+  border: 1px solid rgba(110,118,129,0.4);
+  border-bottom-color: rgba(110,118,129,0.6);
+  border-radius: 6px;
+  padding: 0 .3rem;
+  color: var(--muted);
+  box-shadow: inset 0 -1px 0 rgba(1,4,9,.2);
+}
+
+/* Tables */
+table.tableblock{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+table.tableblock thead th{
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+table.tableblock th, table.tableblock td{
+  border-right: 1px solid var(--border);
+  padding: .6rem .75rem;
+}
+table.tableblock th:last-child, table.tableblock td:last-child{ border-right: 0; }
+table.tableblock tbody tr{
+  background: transparent;
+}
+table.tableblock tbody tr + tr td{
+  border-top: 1px solid var(--border);
+}
+table.tableblock tbody tr:hover td{
+  background: rgba(177,186,196,0.04);
+}
+
+/* Lists */
+ul, ol{ padding-left: 1.25rem; }
+ul li, ol li{ margin: .25rem 0; }
+
+/* Blockquotes */
+blockquote{
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+  color: var(--muted);
+  margin: 1rem 0;
+}
+
+/* Images */
+.imageblock img, img{
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #0d1117;
+  max-width: 100%;
+}
+
+/* Footnotes & misc */
+#footer{
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+.footnote{ background: rgba(110,118,129,0.15); border-radius: 4px; padding: 0 .3rem; color: var(--muted); }
+
+/* Asciidoctor specifics to reduce “white stripes” */
+.listingblock, .literalblock{ margin: 1rem 0; }
+.paragraph p{ margin: .5rem 0 .9rem; }
+
+/* Callouts in code blocks */
+.conum[data-value]{
+  display: inline-block;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+/* Horizontal rule */
+hr{
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* Definition lists */
+dl dt{ font-weight: 600; }
+dl dd{ color: var(--muted); margin: 0 0 .6rem 0; }
+
+/* ToC tweaks */
+#toctitle{ font-weight: 600; }
+#toc a{ text-decoration: none; }
+#toc a:hover{ text-decoration: underline; }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>K-Oven 12 Pro — Electric Convection Oven User &amp; Maintenance Manual</h1>
+<div class="details">
+<span id="author" class="author">IronClad Home Appliances</span><br>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2025-09-09</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_safety_information">2. Safety Information</a>
+<ul class="sectlevel2">
+<li><a href="#_general_safety">2.1. General Safety</a></li>
+<li><a href="#_ppe_personal_protective_equipment">2.2. PPE (Personal Protective Equipment)</a></li>
+</ul>
+</li>
+<li><a href="#_installation">3. Installation</a>
+<ul class="sectlevel2">
+<li><a href="#_pre_installation_checklist">3.1. Pre-Installation Checklist</a></li>
+<li><a href="#_step_by_step_installation_procedure">3.2. Step-by-Step Installation Procedure</a>
+<ul class="sectlevel3">
+<li><a href="#_1_prepare_installation_location">3.2.1. 1. Prepare Installation Location</a></li>
+<li><a href="#_2_electrical_connection">3.2.2. 2. Electrical Connection</a></li>
+<li><a href="#_3_positioning_and_leveling">3.2.3. 3. Positioning and Leveling</a></li>
+<li><a href="#_4_initial_power_on_and_testing">3.2.4. 4. Initial Power-On and Testing</a></li>
+</ul>
+</li>
+<li><a href="#_post_installation_verification_checklist">3.3. Post-Installation Verification Checklist</a></li>
+<li><a href="#_initial_break_in_procedure">3.4. Initial Break-In Procedure</a></li>
+</ul>
+</li>
+<li><a href="#_operation">4. Operation</a>
+<ul class="sectlevel2">
+<li><a href="#_control_panel_overview">4.1. Control Panel Overview</a></li>
+<li><a href="#_cooking_modes_procedures">4.2. Cooking Modes &amp; Procedures</a>
+<ul class="sectlevel3">
+<li><a href="#_bake_mode_conventional_baking">4.2.1. Bake Mode (Conventional Baking)</a></li>
+<li><a href="#_broil_mode_high_heat_from_top">4.2.2. Broil Mode (High Heat from Top)</a></li>
+<li><a href="#_convection_mode_fan_assisted">4.2.3. Convection Mode (Fan-Assisted)</a></li>
+<li><a href="#_self_clean_mode">4.2.4. Self-Clean Mode</a></li>
+</ul>
+</li>
+<li><a href="#_food_safety_guidelines">4.3. Food Safety Guidelines</a></li>
+</ul>
+</li>
+<li><a href="#_cleaning_maintenance">5. Cleaning &amp; Maintenance</a>
+<ul class="sectlevel2">
+<li><a href="#_daily">5.1. Daily</a></li>
+<li><a href="#_monthly">5.2. Monthly</a></li>
+<li><a href="#_annual">5.3. Annual</a></li>
+</ul>
+</li>
+<li><a href="#_troubleshooting">6. Troubleshooting</a>
+<ul class="sectlevel2">
+<li><a href="#_error_code_reference">6.1. Error Code Reference</a></li>
+<li><a href="#_when_to_contact_service">6.2. When to Contact Service</a></li>
+<li><a href="#_parts_service_information">6.3. Parts &amp; Service Information</a></li>
+</ul>
+</li>
+<li><a href="#_warranty_support">7. Warranty &amp; Support</a></li>
+<li><a href="#_references_standards">8. References &amp; Standards</a></li>
+<li><a href="#_controlled_document_info">Appendix A: Controlled Document Info</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="quoteblock abstract">
+<blockquote>
+This manual covers installation, operation, safety, cleaning, and troubleshooting for the fictional <strong>IronClad K-Oven 12 Pro</strong>.
+Prepared as a portfolio sample.
+</blockquote>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">This is a portfolio sample</div>
+All company names, addresses, and contact details are fictional.
+This document is created for demonstration purposes only.
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a><a class="link" href="#_introduction">1. Introduction</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Manufacturer:</strong> IronClad Home Appliances, 101 Hearth Street, Springfield, USA
+<strong>Support:</strong> support@ironclad-home.example · +1-555-0199</p>
+</div>
+<div class="paragraph">
+<p><strong>Intended audience:</strong> qualified installers, service technicians, and safety-conscious end users.
+<strong>Scope:</strong> safe installation, operation, periodic cleaning, troubleshooting, and recordkeeping.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_safety_information"><a class="anchor" href="#_safety_information"></a><a class="link" href="#_safety_information">2. Safety Information</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Improper installation, maintenance, or use may result in fire, electric shock, or serious injury.
+Read and follow all instructions before operating this appliance.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_general_safety"><a class="anchor" href="#_general_safety"></a><a class="link" href="#_general_safety">2.1. General Safety</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Disconnect from power supply before servicing.</p>
+</li>
+<li>
+<p>Keep combustible materials at least 0.5 m from oven surfaces.</p>
+</li>
+<li>
+<p>Do not operate with damaged power cord, plug, or control panel.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ppe_personal_protective_equipment"><a class="anchor" href="#_ppe_personal_protective_equipment"></a><a class="link" href="#_ppe_personal_protective_equipment">2.2. PPE (Personal Protective Equipment)</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Heat-resistant oven mitts</p>
+</li>
+<li>
+<p>Eye protection when servicing interior components</p>
+</li>
+<li>
+<p>Protective clothing to avoid burns</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a><a class="link" href="#_installation">3. Installation</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Installation must be performed by qualified technicians. Improper installation voids warranty and may create fire or electrical hazards.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_pre_installation_checklist"><a class="anchor" href="#_pre_installation_checklist"></a><a class="link" href="#_pre_installation_checklist">3.1. Pre-Installation Checklist</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Verify electrical supply</strong>: 230V AC, 50Hz, 15A dedicated circuit with GFCI protection</p>
+</li>
+<li>
+<p><strong>Check installation space</strong>: Measure clearances and ensure adequate ventilation</p>
+</li>
+<li>
+<p><strong>Gather required tools</strong>: Level, drill, screwdrivers, electrical tester, measuring tape</p>
+</li>
+<li>
+<p><strong>Review local codes</strong>: Ensure compliance with electrical and building regulations</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_by_step_installation_procedure"><a class="anchor" href="#_step_by_step_installation_procedure"></a><a class="link" href="#_step_by_step_installation_procedure">3.2. Step-by-Step Installation Procedure</a></h3>
+<div class="sect3">
+<h4 id="_1_prepare_installation_location"><a class="anchor" href="#_1_prepare_installation_location"></a><a class="link" href="#_1_prepare_installation_location">3.2.1. 1. Prepare Installation Location</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Clear the area</strong>: Remove packaging and inspect oven for shipping damage</p>
+</li>
+<li>
+<p><strong>Measure space</strong>: Verify minimum clearances shown in diagram below</p>
+</li>
+<li>
+<p><strong>Check flooring</strong>: Ensure floor can support 45 kg distributed load</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/kitchen-oven-clearances.png" alt="Installation clearances with measurements" width="70%">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Location</th>
+<th class="tableblock halign-left valign-top">Minimum Clearance</th>
+<th class="tableblock halign-left valign-top">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rear wall</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100 mm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Heat dissipation and service access</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Side walls</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">50 mm each</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Air circulation and door opening</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Top surface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200 mm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ventilation and steam venting</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Front</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">600 mm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door opening and safe operation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_2_electrical_connection"><a class="anchor" href="#_2_electrical_connection"></a><a class="link" href="#_2_electrical_connection">3.2.2. 2. Electrical Connection</a></h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Turn OFF circuit breaker before making electrical connections. Verify power is OFF with a qualified electrical tester.</p>
+</div>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Install dedicated circuit</strong>: 230V, 15A circuit with GFCI protection required</p>
+</li>
+<li>
+<p><strong>Use proper wiring</strong>: 12 AWG copper wire minimum for 15A circuit</p>
+</li>
+<li>
+<p><strong>Connect ground wire</strong>: Green/yellow wire to ground terminal (mandatory)</p>
+</li>
+<li>
+<p><strong>Install outlet</strong>: NEMA 6-15R grounded outlet within 1.5m of oven location</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Electrical Verification Steps:</strong>
+. Test outlet voltage with multimeter: 230V ±10% expected
+. Verify ground continuity: &lt;1Ω resistance to ground
+. Test GFCI operation: Press test button, should trip immediately
+. Reset GFCI and verify proper operation</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3_positioning_and_leveling"><a class="anchor" href="#_3_positioning_and_leveling"></a><a class="link" href="#_3_positioning_and_leveling">3.2.3. 3. Positioning and Leveling</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Position oven</strong>: Place in final location, maintaining required clearances</p>
+</li>
+<li>
+<p><strong>Check stability</strong>: Oven should not rock when door is opened</p>
+</li>
+<li>
+<p><strong>Adjust leveling feet</strong>: Use adjustable wrench to level oven in both directions</p>
+</li>
+<li>
+<p><strong>Verify level</strong>: Use spirit level on top surface - bubble within center marks</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Leveling Specifications:</strong>
+* Maximum deviation: ±2mm over oven width/depth
+* Door should close smoothly without forcing
+* No gaps &gt;3mm between door and frame when closed</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_initial_power_on_and_testing"><a class="anchor" href="#_4_initial_power_on_and_testing"></a><a class="link" href="#_4_initial_power_on_and_testing">3.2.4. 4. Initial Power-On and Testing</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Connect power</strong>: Plug into grounded outlet firmly</p>
+</li>
+<li>
+<p><strong>Initial startup</strong>: Press power button - display should illuminate</p>
+</li>
+<li>
+<p><strong>Test all modes</strong>: Cycle through Bake, Broil, Convection, Self-Clean</p>
+</li>
+<li>
+<p><strong>Verify door lock</strong>: Test door lock mechanism during brief Self-Clean start</p>
+</li>
+<li>
+<p><strong>Check interior lighting</strong>: Light should activate when door opens</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_post_installation_verification_checklist"><a class="anchor" href="#_post_installation_verification_checklist"></a><a class="link" href="#_post_installation_verification_checklist">3.3. Post-Installation Verification Checklist</a></h3>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 75%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Test Item</th>
+<th class="tableblock halign-left valign-top">Pass/Fail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power indicator illuminates when plugged in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All mode buttons respond and display correctly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Temperature dial adjusts display reading</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timer counts down properly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interior light activates with door opening</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door seals properly with no visible gaps</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oven remains level when door is fully opened</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No unusual vibration during convection fan operation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Self-Clean mode activates and locks door</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All clearances maintained per specification</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">☐</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_initial_break_in_procedure"><a class="anchor" href="#_initial_break_in_procedure"></a><a class="link" href="#_initial_break_in_procedure">3.4. Initial Break-In Procedure</a></h3>
+<div class="paragraph">
+<p>Before first use, perform break-in procedure to remove manufacturing residues:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Set to Bake mode</strong> at 200°C for 30 minutes with empty oven</p>
+</li>
+<li>
+<p><strong>Ventilate kitchen</strong> - slight odor from protective coatings is normal</p>
+</li>
+<li>
+<p><strong>Clean interior</strong> with damp cloth after cooling to remove any residue</p>
+</li>
+<li>
+<p><strong>Record installation date</strong> in warranty documentation</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operation"><a class="anchor" href="#_operation"></a><a class="link" href="#_operation">4. Operation</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_control_panel_overview"><a class="anchor" href="#_control_panel_overview"></a><a class="link" href="#_control_panel_overview">4.1. Control Panel Overview</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="img/kitchen-oven-controls.png" alt="Control panel with numbered callouts" width="70%">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Power button</p>
+</li>
+<li>
+<p>Mode selector (Bake, Broil, Convection, Self-Clean)</p>
+</li>
+<li>
+<p>Temperature dial</p>
+</li>
+<li>
+<p>Digital timer/display</p>
+</li>
+<li>
+<p>Child lock indicator</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cooking_modes_procedures"><a class="anchor" href="#_cooking_modes_procedures"></a><a class="link" href="#_cooking_modes_procedures">4.2. Cooking Modes &amp; Procedures</a></h3>
+<div class="sect3">
+<h4 id="_bake_mode_conventional_baking"><a class="anchor" href="#_bake_mode_conventional_baking"></a><a class="link" href="#_bake_mode_conventional_baking">4.2.1. Bake Mode (Conventional Baking)</a></h4>
+<div class="paragraph">
+<p><strong>Temperature Range:</strong> 150–250°C
+<strong>Best For:</strong> Bread, cakes, casseroles, roasts</p>
+</div>
+<div class="paragraph">
+<p><strong>Procedure:</strong>
+. Preheat oven to desired temperature (typically 10-15 minutes)
+. Place food on center rack for even heating
+. Use light-colored, non-reflective pans for best results
+. Do not open door frequently - each opening reduces temperature 10-15°C</p>
+</div>
+<div class="paragraph">
+<p><strong>Recommended Settings:</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 33.3335%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Food Type</th>
+<th class="tableblock halign-left valign-top">Temperature</th>
+<th class="tableblock halign-left valign-top">Time</th>
+<th class="tableblock halign-left valign-top">Internal Temp (if applicable)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bread/Quick breads</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">175-200°C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25-45 min</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cakes (layer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">180°C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25-35 min</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cookies</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">175-190°C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8-12 min</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Roast chicken (1.5kg)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">190°C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.5 hours</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">75°C</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Roast beef (medium)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">180°C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20 min/kg</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">60°C</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Casseroles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">180°C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">30-45 min</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">75°C (center)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_broil_mode_high_heat_from_top"><a class="anchor" href="#_broil_mode_high_heat_from_top"></a><a class="link" href="#_broil_mode_high_heat_from_top">4.2.2. Broil Mode (High Heat from Top)</a></h4>
+<div class="paragraph">
+<p><strong>Temperature:</strong> Fixed at 250°C
+<strong>Best For:</strong> Browning, crisping, thin cuts of meat</p>
+</div>
+<div class="paragraph">
+<p><strong>Procedure:</strong>
+. Position rack 5-15cm from top element (closer = faster browning)
+. Preheat broiler for 5 minutes
+. Use broiler pan with slotted top to allow fat drainage
+. Watch food constantly - broiling happens quickly
+. Turn foods once halfway through cooking time</p>
+</div>
+<div class="paragraph">
+<p><strong>Broiling Guide:</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 33.3335%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Food</th>
+<th class="tableblock halign-left valign-top">Rack Position</th>
+<th class="tableblock halign-left valign-top">Time per Side</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fish fillets (2cm)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10cm from element</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4-6 minutes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Do not turn thin fillets</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chicken breast</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15cm from element</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7-10 minutes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Turn once, verify 75°C internal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Steaks (2.5cm)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10cm from element</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5-8 minutes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For medium-rare</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vegetables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15cm from element</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5-8 minutes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Brush with oil first</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_convection_mode_fan_assisted"><a class="anchor" href="#_convection_mode_fan_assisted"></a><a class="link" href="#_convection_mode_fan_assisted">4.2.3. Convection Mode (Fan-Assisted)</a></h4>
+<div class="paragraph">
+<p><strong>Temperature Range:</strong> 140–230°C (reduce conventional temp by 15-20°C)
+<strong>Best For:</strong> Multiple racks, even browning, faster cooking</p>
+</div>
+<div class="paragraph">
+<p><strong>Advantages:</strong>
+* 25% faster cooking times
+* More even browning and heating
+* Ability to use multiple racks simultaneously
+* Better for cookies, pastries, and roasting</p>
+</div>
+<div class="paragraph">
+<p><strong>Procedure:</strong>
+. Reduce conventional recipe temperature by 15-20°C
+. Reduce cooking time by 25% initially, then adjust
+. Use low-sided pans for better air circulation
+. Leave space between pans on multiple racks</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_self_clean_mode"><a class="anchor" href="#_self_clean_mode"></a><a class="link" href="#_self_clean_mode">4.2.4. Self-Clean Mode</a></h4>
+<div class="paragraph">
+<p><strong>Temperature:</strong> 485°C
+<strong>Duration:</strong> 3 hours
+<strong>Frequency:</strong> Every 3-4 months with normal use</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do not attempt to open door during Self-Clean cycle. Surface temperatures exceed 400°C. Ensure adequate kitchen ventilation during operation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Self-Clean Procedure:</strong>
+. Remove all racks, pans, and aluminum foil from oven
+. Wipe up large spills with damp cloth (small residue burns off normally)
+. Close door and select Self-Clean mode
+. Door will automatically lock when cycle begins
+. Wait for complete cycle and 1-hour cooldown before opening
+. Wipe ash residue with damp cloth after cooling</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_food_safety_guidelines"><a class="anchor" href="#_food_safety_guidelines"></a><a class="link" href="#_food_safety_guidelines">4.3. Food Safety Guidelines</a></h3>
+<div class="paragraph">
+<p><strong>Internal Temperature Requirements (Food Safety):</strong>
+* Poultry (whole): 75°C
+* Ground meat: 70°C
+* Beef/lamb (medium): 60°C
+* Pork: 63°C
+* Fish: 63°C
+* Casseroles/leftovers: 75°C</p>
+</div>
+<div class="paragraph">
+<p><strong>Use a reliable food thermometer</strong> - insert into thickest part without touching bone.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cleaning_maintenance"><a class="anchor" href="#_cleaning_maintenance"></a><a class="link" href="#_cleaning_maintenance">5. Cleaning &amp; Maintenance</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_daily"><a class="anchor" href="#_daily"></a><a class="link" href="#_daily">5.1. Daily</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Wipe spills with damp cloth after cooling.</p>
+</li>
+<li>
+<p>Avoid abrasive cleaners.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_monthly"><a class="anchor" href="#_monthly"></a><a class="link" href="#_monthly">5.2. Monthly</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Inspect and clean door gasket.</p>
+</li>
+<li>
+<p>Replace oven light bulb (E14, 25 W).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_annual"><a class="anchor" href="#_annual"></a><a class="link" href="#_annual">5.3. Annual</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Professional inspection recommended for heating elements and control circuits.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/kitchen-oven-exploded.png" alt="Exploded view with numbered parts" width="70%">
+</div>
+</div>
+<div class="olist arabic">
+<div class="title">Callouts</div>
+<ol class="arabic">
+<li>
+<p>Heating element — replace if cracked or not heating</p>
+</li>
+<li>
+<p>Convection fan — clean blades, check bearings</p>
+</li>
+<li>
+<p>Door gasket — replace if torn or hardened</p>
+</li>
+<li>
+<p>Light bulb — replace with rated type only</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting"><a class="anchor" href="#_troubleshooting"></a><a class="link" href="#_troubleshooting">6. Troubleshooting</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5714%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Symptom</th>
+<th class="tableblock halign-left valign-top">Possible Cause</th>
+<th class="tableblock halign-left valign-top">Corrective Action</th>
+<th class="tableblock halign-left valign-top">Error Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oven not heating at all</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No power to unit; tripped GFCI/breaker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check power cord connection; reset GFCI; verify circuit breaker; test outlet with multimeter (230V expected)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Heating element not glowing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Failed heating element; loose connection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check element for cracks/breaks; verify 230V at element terminals; replace element if faulty (Part #KO-ELEM-001)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uneven baking/hot spots</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Blocked convection fan; damaged door seal; overloaded rack</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clean fan blades; inspect door gasket for tears; reduce load; rotate pans halfway through; use center rack position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convection fan not running</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Motor failure; blocked fan; loose wiring</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Listen for fan noise in convection mode; check for obstructions; verify 24V at fan motor; replace fan assembly if needed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door won&#8217;t open after Self-Clean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cooling cycle incomplete; door lock malfunction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait additional 30 minutes for cooldown; check door lock mechanism; verify interior temperature &lt;250°C before attempting override</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oven overheating/too hot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Temperature sensor failure; control board fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test sensor resistance: 1100Ω at 25°C expected; check sensor wiring for damage; replace sensor (Part #KO-TEMP-001)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Display shows incorrect temperature</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Temperature sensor drift; calibration needed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compare oven thermometer to display reading; adjust calibration in service mode; replace sensor if &gt;25°C error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interior light not working</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Burned bulb; loose connection; switch fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace bulb (E14 base, 25W, high-temp rated); check door switch operation; verify 230V at light socket</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Excessive smoke during cooking</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spilled food burning; incorrect temperature; poor ventilation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clean spills immediately; verify temperature setting vs recipe; ensure adequate room ventilation; check for grease buildup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door won&#8217;t close properly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Misaligned hinges; warped door; damaged gasket</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check hinge alignment; adjust door position; inspect gasket for damage; ensure no obstructions in door frame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timer not counting down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Control board fault; display issue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test other functions; perform power cycle (unplug 60 seconds); check for software updates; replace control board if persistent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E6</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unusual noises during operation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loose fan blades; worn bearings; rattling components</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identify noise source (fan, heating elements, door); tighten loose screws; replace fan motor if bearing noise present</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">—</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Self-Clean cycle won&#8217;t start</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door not fully closed; oven too dirty; safety lockout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure door closes completely; remove excessive debris; wait 24 hours if multiple failed attempts; check door lock operation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E7</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error code E8 displayed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Communication fault between control board and display</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power cycle unit; check ribbon cable connections behind control panel; replace control board/display assembly</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oven turns off during cooking</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overheating protection; voltage fluctuation; control fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check for blocked vents; verify stable 230V supply; allow cooling period; inspect control board for burnt components</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E9</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="img/kitchen-oven-troubleshooting.png" alt="Troubleshooting diagnostic flowchart" width="70%">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_error_code_reference"><a class="anchor" href="#_error_code_reference"></a><a class="link" href="#_error_code_reference">6.1. Error Code Reference</a></h3>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+<th class="tableblock halign-left valign-top">Action Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Temperature sensor fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace temperature sensor (Part #KO-TEMP-001)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Heating element failure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test element resistance; replace if open circuit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convection fan motor fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check motor wiring; replace fan assembly</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door lock malfunction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check door lock mechanism; replace actuator</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door alignment error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adjust door hinges; replace gasket if damaged</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timer/control fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Power cycle; replace control board if persistent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Self-Clean safety lockout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear excessive debris; ensure proper door closure</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Display communication error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check control connections; replace display unit</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overheating protection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check ventilation; allow cooldown; service if recurring</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_when_to_contact_service"><a class="anchor" href="#_when_to_contact_service"></a><a class="link" href="#_when_to_contact_service">6.2. When to Contact Service</a></h3>
+<div class="paragraph">
+<p>Call IronClad service (+1-555-0199) when:
+* Multiple error codes appear simultaneously
+* Electrical components show signs of burning or melting
+* Oven trips household circuit breaker repeatedly
+* Temperature accuracy cannot be restored through sensor replacement
+* Self-Clean cycle repeatedly fails to complete
+* Any gas odor (if near gas appliances) - evacuate and call gas company immediately</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_parts_service_information"><a class="anchor" href="#_parts_service_information"></a><a class="link" href="#_parts_service_information">6.3. Parts &amp; Service Information</a></h3>
+<div class="paragraph">
+<p><strong>Common Replacement Parts:</strong>
+* Temperature sensor (KO-TEMP-001): $35
+* Heating element (KO-ELEM-001): $65
+* Convection fan assembly (KO-FAN-001): $85
+* Door gasket (KO-SEAL-001): $25
+* Interior light bulb (KO-BULB-001): $8</p>
+</div>
+<div class="paragraph">
+<p><strong>Service Schedule:</strong>
+* Annual inspection recommended for heavy-use environments
+* Door seal replacement every 3-4 years
+* Heating element typically lasts 8-10 years with normal use</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_warranty_support"><a class="anchor" href="#_warranty_support"></a><a class="link" href="#_warranty_support">7. Warranty &amp; Support</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>2-year limited warranty (parts &amp; labor)</p>
+</li>
+<li>
+<p>Excludes damage from misuse or unauthorized repairs</p>
+</li>
+<li>
+<p>Support available Mon–Fri, 09:00–17:00 (local time)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Contact: <strong>IronClad Home Appliances, 101 Hearth Street, Springfield, USA</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references_standards"><a class="anchor" href="#_references_standards"></a><a class="link" href="#_references_standards">8. References &amp; Standards</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>IEC 60335-1 — Household and similar electrical appliances — Safety</p>
+</li>
+<li>
+<p>UL 1026 — Electric Household Cooking and Food Serving Appliances</p>
+</li>
+<li>
+<p>ISO 13732-1 — Ergonomics of thermal environment — Contact temperature limits</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_controlled_document_info"><a class="anchor" href="#_controlled_document_info"></a><a class="link" href="#_controlled_document_info">Appendix A: Controlled Document Info</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Doc ID: KOVEN-12PRO-UM-01<br>
+Revision: 1.0 (Portfolio Sample)<br>
+Manufacturer: IronClad Home Appliances<br>
+Note: For portfolio demonstration use only — all names and contacts are fictional.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.0<br>
+Last updated 2025-09-09 09:55:58 +0300
+</div>
+</div>
+</body>
+</html>

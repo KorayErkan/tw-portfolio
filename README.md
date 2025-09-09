@@ -15,24 +15,14 @@ A curated collection of technical writing samples across software and non‑soft
 9. [Appliance & Industrial Manuals](./appliance-manuals/)
 10. [Software Guide](./software-guides)
 
-## Quick Matrix
+> **Styling**: Asciidoc samples use a readable dark theme (`css/common-dark.css`). Markdown → HTML exports may use `css/common-md-dark.css` (optional) or `css/common-light.css`.
 
-| Category | Audience | Formats | Highlights |
-|---|---|---|---|
-| API Documentation | Developers | MD, HTML | Endpoint docs, request parsing, examples |
-| Installation Guide | Sysadmins | MD, HTML | Requirements, steps, troubleshooting |
-| Reference Charts | Developers | MD, HTML | Config tables, EBNF, quick lookup |
-| Release Notes | Product/Eng | MD, HTML | Features, fixes, deprecations, migration |
-| System Config Guide | Sysadmins | MD, HTML | Server/network setup, best practices |
-| Tutorial | Developers/Power Users | MD, HTML | Concepts, exercises, examples |
-| User Assistance | End Users | MD + images | Task guides, screenshots, tips |
-| User Manual | End Users | PDF, DOCX | Complete manual format |
-| Appliance/Industrial | Consumers/Technicians | Asciidoc, HTML | Hardware manuals, quick-starts, maintenance |
+## Notes and Credits
 
-> Styling: Asciidoc samples use a readable dark theme (`include/common-dark.css`). Markdown → HTML exports may use `include/common-md-dark.css` (optional).
+Each of these document types is used for a specific purpose, and the samples were edited with those purposes and the layout that entails them in mind. However, the documents are only intended to be illustrative of my general skills, and not meant to be thorough representations of real-life samples.
 
-## Notes & Credits
+The material is available as **Markdown** (\*.md), **Asciidoc** (\*.adoc), **Hypertext Markup Language** (\*.html), and **Portable Dodcument Format** (\*.pdf) files. The Markdown and Asciidoc files allowed basic editing and layout, the HTML files allowed using stylesheets for Web presentation, and the PDF files allowed pagination and indexing. The text-based files were edited and developed with **Visual Studio Code**, and the PDFs were generated with various widely used command line tools.
 
-- All products, names, and data are fictional and for demonstration only.
-- Some samples are intentionally concise; scope is tuned to portfolio needs.
-- Acknowledgements to mentors and references used in shaping these samples.
+All software entities, products, and services referred to in the texts are intended to be imaginary, and any similarities with real life instances should be considered coincidental. The mail addresses, phone numbers, etc. are also meant to be fake.
+
+Finally, I'm indebted to [Ugur Akinci](https://technicalcommunicationcenter.com/) for mentoring me on the fundamentals of technical writing, as well as informing me on the structure, components, and layout of the documents here, and I'd like to express my gratitude to him.
