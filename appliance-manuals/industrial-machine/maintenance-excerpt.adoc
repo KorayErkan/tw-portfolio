@@ -61,6 +61,66 @@ Maintenance must be performed only by trained personnel. Lockout/Tagout (LOTO) i
 Follow facility-specific procedures in addition to this summary. Reference: OSHA 1910.147 (Control of Hazardous Energy), ISO 16090-1 (Machine tool safety), and applicable local regulations.
 ====
 
+=== Emergency Shutdown Procedures
+
+==== Electrical Emergency
+. **Press E-Stop immediately** — red mushroom button on control panel and pendant
+. **Turn main disconnect to OFF** — located at electrical cabinet
+. **Do not attempt to restart** until hazard is eliminated
+. **Call maintenance supervisor** and facility emergency response team
+. **Evacuate 3-meter radius** if sparking, smoke, or unusual odors present
+
+==== Mechanical Emergency (Collision, Jam, Broken Tool)
+. **Press E-Stop** — do not attempt to clear obstruction while powered
+. **Assess for injury** — call medical emergency if personnel involved
+. **Isolate all energy sources** following full LOTO procedure
+. **Document damage** with photos before disturbing evidence
+. **Contact OEM service** for spindle impact assessment if collision occurred
+
+==== Hydraulic/Coolant Leak
+. **Stop machine immediately** — E-Stop if leak is active/spraying
+. **Contain spill** with absorbent materials and drain pans
+. **Ventilate area** — hydraulic fluid vapors can be hazardous
+. **Check for slip hazards** — barricade wet areas immediately
+. **Report to environmental safety** for disposal of contaminated absorbents
+
+=== Risk Assessment by Task
+
+[cols="2,1,2,2", options="header"]
+|===
+|Task |Risk Level |Primary Hazards |Additional Precautions
+
+|Spindle bearing lubrication
+|Medium
+|Pinch points, rotating parts
+|Ensure spindle stop; use lockable grease gun
+
+|Way cover inspection  
+|Low
+|Sharp edges, pinch points
+|Inspect with machine off; wear cut-resistant gloves
+
+|Hydraulic filter change
+|High
+|Pressurized fluid, chemical exposure
+|Full system depressurization; chemical-resistant PPE
+
+|Coolant concentration testing
+|Medium
+|Chemical exposure, slip hazard
+|Eye protection; non-slip footwear; ventilation
+
+|Backlash measurement
+|Low
+|Moving axes during test
+|Use test mode; maintain clear egress path
+
+|Belt tensioning
+|High
+|Entanglement, stored energy
+|Full LOTO; proper belt tension gauge; no loose clothing
+|===
+
 == Routine Maintenance Schedule
 
 [IMPORTANT]
@@ -132,11 +192,47 @@ Intervals assume two-shift operation in clean, indoor conditions. Increase frequ
 |Checklist
 |Document results; correct faults before production.
 
+|Semi-Annual
+|Vibration analysis — spindle & main drives
+|Spindle, servo motors
+|Accelerometer; spectrum analyzer
+|Record baseline at commissioning; ±10% variance requires investigation.
+
+|Semi-Annual
+|Thermal imaging survey
+|Electrical panels, drives
+|Thermal camera
+|Max acceptable: 40°C above ambient for electrical connections.
+
+|Annual
+|Spindle runout measurement
+|Spindle
+|Dial indicator (0.001 mm res.)
+|Radial: <0.005 mm; axial: <0.003 mm at tool holder taper.
+
+|Annual
+|Ballscrew backlash verification
+|X/Y/Z axes
+|Laser interferometer or dial indicator
+|<0.01 mm at mid-stroke; document drift over time.
+
 |Annual
 |Coolant system deep clean
 |Coolant system
 |Cleaning additive; PPE
 |Drain, flush, disinfect, refill with fresh premix.
+
+|18 Months
+|Way wear measurement
+|Linear guides
+|Height gauge; reference surfaces
+|Max wear: 0.05 mm; replace if approaching limit.
+
+|24 Months
+|Geometric accuracy check (ISO 10791-7)
+|Machine structure
+|Ballbar; laser tracker
+|Full 21-point test per ISO standard; contact OEM for acceptance criteria.
 |===
 
 [TIP]
@@ -146,17 +242,39 @@ After any maintenance affecting motion, run a short test program and verify part
 
 == Fault Codes
 
-[cols="1,2,3", options="header"]
+[cols="1,2,3,1", options="header"]
 |===
-|Code | Meaning | Corrective Action
+|Code | Meaning | Corrective Action | Priority
 
-|E-101 | Axis overtravel | Press *RESET*; home the machine; check limit switches and soft limits.
-|E-102 | Spindle overheating | Stop; verify coolant/fan operation; allow cooldown; inspect spindle load history.
-|E-204 | Servo drive fault | Note drive LED code; power-cycle control only once; reseat connectors; check encoder cable; consult drive manual.
-|E-305 | Low hydraulic pressure | Stop motion; verify pump runs; check reservoir level and filters; inspect for leaks.
-|E-410 | Door interlock open | Verify doors fully closed; check interlock switch alignment and wiring.
-|E-512 | Coolant flow low | Clean intake screen; check pump and lines for blockage; verify concentration 6–8%.
-|E-601 | Pneumatic pressure low | Check main supply (6–8 bar); drain water separator; inspect regulator and leaks.
+|E-101 | Axis overtravel | Press *RESET*; home machine; verify limit switch operation (24VDC expected); check soft limits in parameters. | Medium
+|E-102 | Spindle overheating | Stop immediately; verify coolant flow rate >15 L/min; check fan operation; inspect for blocked air passages; allow >30min cooldown. | High
+|E-103 | Spindle load excessive | Reduce feed rate by 25%; verify tool sharpness; check workpiece clamping; inspect for chip buildup on cutting tool. | Medium
+|E-104 | Tool changer fault | Verify tool pot alignment; check ATC motor operation; inspect tool retention bolts; cycle ATC manually in test mode. | Medium
+|E-105 | Probe signal lost | Check probe battery (>6V); verify cable continuity; clean probe tip contacts; test signal with multimeter (5V expected). | Low
+
+|E-201 | X-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors. | High
+|E-202 | Y-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors. | High
+|E-203 | Z-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors. | High
+|E-204 | Servo following error | Check axis for mechanical binding; verify ballscrew lubrication; inspect coupling for wear; reduce rapid traverse rate 20%. | High
+|E-205 | Encoder communication error | Inspect encoder cable for cuts/pinch; verify encoder supply voltage 5VDC ±0.25V; clean encoder scale if linear type. | High
+
+|E-301 | Hydraulic pressure low | Verify pump operation; check reservoir level (min 75%); inspect filters for blockage; test pressure at 42 bar minimum. | High
+|E-302 | Hydraulic temperature high | Check oil level; verify cooling fan operation; clean heat exchanger fins; oil temp must be <60°C under load. | Medium
+|E-303 | Tool clamp pressure low | Test manual tool release; verify hydraulic pressure >40 bar; check tool holder for damage; inspect drawbar assembly. | High
+
+|E-401 | Door interlock failure | Verify all doors fully closed; check interlock switch alignment; test continuity (closed = 0Ω); inspect door seals. | Medium
+|E-402 | Light curtain interrupted | Clear obstruction from beam path; clean lens surfaces; verify 24VDC supply; test beam alignment per manual. | Medium
+|E-403 | Emergency stop activated | Identify activated E-Stop button; inspect for mechanical damage; reset all E-Stops; verify control circuit continuity. | High
+
+|E-501 | Coolant flow insufficient | Clean intake screen; verify pump operation; check flow rate >15 L/min; inspect nozzles for blockage. | Medium
+|E-502 | Coolant concentration error | Test with refractometer; adjust to 6-8% Brix; replace if contaminated; check additive mixing system. | Low
+|E-503 | Chip conveyor overload | Clear conveyor jam; inspect for oversized chips; verify conveyor motor current <8A; check drive belt tension. | Medium
+
+|E-601 | Pneumatic pressure low | Verify supply pressure 6-8 bar; drain water separator; check regulator operation; inspect for air leaks with soap solution. | Medium
+|E-602 | Air filter saturation | Replace filter element; drain moisture; check compressor operation; verify automatic drain valve function. | Low
+
+|E-701 | Control system fault | Record error details; perform controlled power cycle; check system logs; contact technical support if persistent. | Critical
+|E-702 | Memory backup failure | Replace backup battery immediately; verify parameter retention; reload backup parameters if available. | High
 |===
 
 === After-Clear Checklist
