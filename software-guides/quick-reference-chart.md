@@ -32,6 +32,12 @@
 
 ---
 
+## Visual Overview
+
+![Visual Overview](./img/visual-overview.svg)
+
+---
+
 ## Example API Calls
 
 ```bash
@@ -41,9 +47,3 @@ curl -i https://api.cloudflow.goodweb.com/v1/health
 # Get projects
 curl -H "Authorization: Bearer <TOKEN>" https://api.cloudflow.goodweb.com/v1/projects
 ```
-
----
-
-## Visual Overview
-
-![Visual Overview](./img/visual-overview.svg)

@@ -1,61 +1,67 @@
 digraph G {
-  graph [rankdir=LR, splines=true, bgcolor="transparent", nodesep=0.6, ranksep=0.7];
-  node  [shape=rounded, style="filled,rounded", fillcolor="#161b22", color="#30363d", fontcolor="#c9d1d9", penwidth=1.2];
-  edge  [color="#8b949e", arrowsize=0.8, penwidth=1.2];
+  graph [rankdir=TB, splines=false, bgcolor="transparent", nodesep=0.8, ranksep=1.2];
+  node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
+  edge [arrowsize=0.8, penwidth=1.5, fontname="Calibri", fontsize=14];
 
-  // Left: Clients
-  subgraph cluster_clients {
-    label="Clients";
-    labelloc="t";
-    fontsize=12;
-    color="#30363d";
-    fontcolor="#c9d1d9";
-    style="rounded,dashed";
-    c1 [label="Web App"];
-    c2 [label="Mobile"];
-    c3 [label="Integrations (CLI/SDK)"];
+  // Presentation Layer
+  subgraph cluster_presentation {
+    label="Presentation Layer";
+    style="rounded,filled";
+    fillcolor="#f0f8ff";
+    fontname="Calibri";
+    fontsize=14;
+    webapp [label="Web Application", fillcolor="#bbdefb"];
+    mobile [label="Mobile App", fillcolor="#bbdefb"];
+    cli [label="CLI/SDK Tools", fillcolor="#bbdefb"];
   }
 
-  // Middle: API Layer / Gateway
-  api [label="API Layer / Gateway", shape=rounded, fillcolor="#0d1117", penwidth=1.6];
+  // API Gateway Layer
+  subgraph cluster_gateway {
+    label="API Gateway";
+    style="rounded,filled";
+    fillcolor="#f0fff0";
+    fontname="Calibri";
+    fontsize=14;
+    gateway [label="API Gateway\n(Routing & Auth)", fillcolor="#c8e6c9"];
+  }
 
-  // Right: Services cluster
+  // Business Services Layer
   subgraph cluster_services {
-    label="Services";
-    labelloc="t";
-    fontsize=12;
-    color="#30363d";
-    fontcolor="#c9d1d9";
-    style="rounded,dashed";
-    s1 [label="Auth Service"];
-    s2 [label="Projects Service"];
-    s3 [label="Reporting Service"];
-    s4 [label="Webhooks Service"];
+    label="Business Services";
+    style="rounded,filled";
+    fillcolor="#fffaf0";
+    fontname="Calibri";
+    fontsize=14;
+    auth [label="Authentication\nService", fillcolor="#ffe0b2"];
+    projects [label="Projects\nService", fillcolor="#ffe0b2"];
+    reporting [label="Reporting\nService", fillcolor="#ffe0b2"];
+    webhooks [label="Webhooks\nService", fillcolor="#ffe0b2"];
   }
 
-  // Data layer (DB & Queues) on a lower rank
-  { rank=same; db [label="Primary Database", shape=folder, fillcolor="#161b22"]; q [label="Queues / Workers", shape=component, fillcolor="#161b22"]; }
+  // Data Layer
+  subgraph cluster_data {
+    label="Data Layer";
+    style="rounded,filled";
+    fillcolor="#f9f5ff";
+    fontname="Calibri";
+    fontsize=14;
+    database [label="Primary\nDatabase", fillcolor="#e1bee7", shape=cylinder];
+    queues [label="Message\nQueues", fillcolor="#e1bee7", shape=component];
+  }
 
-  // Flows
-  c1 -> api;
-  c2 -> api;
-  c3 -> api;
+  // Connections - Clean top-to-bottom flow
+  webapp -> gateway;
+  mobile -> gateway;
+  cli -> gateway;
 
-  api -> s1;
-  api -> s2;
-  api -> s3;
-  api -> s4;
+  gateway -> auth;
+  gateway -> projects;
+  gateway -> reporting;
+  gateway -> webhooks;
 
-  // Service to data dependencies
-  s1 -> db;
-  s2 -> db;
-  s3 -> db;
-  s3 -> q [label="async jobs"];
-  s4 -> q [label="events"];
-
-  // Optional reverse edges (responses)
-  s1 -> api [dir=back, color="#484f58"];
-  s2 -> api [dir=back, color="#484f58"];
-  s3 -> api [dir=back, color="#484f58"];
-  s4 -> api [dir=back, color="#484f58"];
+  auth -> database;
+  projects -> database;
+  reporting -> database;
+  reporting -> queues;
+  webhooks -> queues;
 }

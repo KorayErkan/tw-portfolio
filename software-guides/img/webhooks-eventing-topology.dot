@@ -1,45 +1,67 @@
 digraph G {
-  graph [rankdir=LR, splines=true, bgcolor="transparent", nodesep=0.7, ranksep=0.8];
-  node  [shape=rounded, style="filled,rounded", fillcolor="#161b22", color="#30363d", fontcolor="#c9d1d9", penwidth=1.2];
-  edge  [color="#8b949e", arrowsize=0.85, penwidth=1.2];
+  graph [rankdir=TD, splines=false, bgcolor="transparent", nodesep=1.0, ranksep=1.2];
+  node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
+  edge [arrowsize=0.8, penwidth=1.5, fontname="Calibri", fontsize=14];
 
-  subgraph cluster_prod {
-    label="Producer (SaaS)";
-    labelloc="t"; fontsize=12;
-    color="#30363d"; fontcolor="#c9d1d9"; style="rounded,dashed";
-    svc1 [label="Projects Service"];
-    svc2 [label="Reporting Service"];
-    svc3 [label="Auth Service"];
+  // Event Sources
+  subgraph cluster_sources {
+    label="Event Sources";
+    style="rounded,filled";
+    fillcolor="#f0f8ff";
+    fontname="Calibri";
+    fontsize=14;
+    projects [label="Projects\nService", fillcolor="#bbdefb"];
+    reports [label="Reports\nService", fillcolor="#bbdefb"];
+    auth [label="Auth\nService", fillcolor="#bbdefb"];
   }
 
-  bus   [label="Event Bus\n(topic: project.*, report.*, user.*)", shape=folder, fillcolor="#0d1117", penwidth=1.6];
-  xform [label="Webhook Formatter\n(JSON payload, HMAC-SHA256)"];
-  retry [label="Retry Worker\n(exp backoff)"];
-  dlq   [label="Dead-letter Queue"];
+  // Processing Pipeline
+  subgraph cluster_pipeline {
+    label="Webhook Pipeline";
+    style="rounded,filled";
+    fillcolor="#f0fff0";
+    fontname="Calibri";
+    fontsize=14;
 
-  subgraph cluster_cust {
-    label="Customer Side";
-    labelloc="t"; fontsize=12;
-    color="#30363d"; fontcolor="#c9d1d9"; style="rounded,dashed";
-    wh1 [label="Endpoint A\nhttps://hooks.goodweb.com/inbound"];
-    wh2 [label="Endpoint B\nhttps://api.webconnect.biz/webhooks"];
-    mon [label="Monitoring / SIEM\n(status, latency, failure rate)"];
+    eventbus [label="Event Bus\n(Message Routing)", fillcolor="#c8e6c9"];
+    formatter [label="Webhook\nFormatter", fillcolor="#c8e6c9"];
+    delivery [label="Delivery\nService", fillcolor="#c8e6c9"];
   }
 
-  // flows
-  svc1 -> bus; svc2 -> bus; svc3 -> bus;
-  bus  -> xform [label="event"];
-  xform -> wh1  [label="POST (HMAC header)"];
-  xform -> wh2  [label="POST (HMAC header)"];
+  // Destination
+  subgraph cluster_destinations {
+    label="Customer Endpoints";
+    style="rounded,filled";
+    fillcolor="#fffaf0";
+    fontname="Calibri";
+    fontsize=14;
 
-  // retry paths on non-2xx
-  wh1 -> retry [label="non-2xx", color="#d29922"];
-  wh2 -> retry [label="timeout", color="#d29922"];
-  retry -> wh1  [label="re-deliver"];
-  retry -> wh2  [label="re-deliver"];
-  retry -> dlq  [label="max attempts", color="#f85149"];
+    endpoint1 [label="Endpoint A\nhooks.example.com", fillcolor="#ffe0b2"];
+    endpoint2 [label="Endpoint B\napi.customer.com", fillcolor="#ffe0b2"];
+  }
 
-  // observability
-  xform -> mon  [label="delivery metrics"];
-  retry -> mon  [label="retries, DLQ"];
+  // Reliability Components
+  retry_queue [label="Retry Queue\n(Exponential Backoff)", fillcolor="#f3e5f5"];
+  dead_letter [label="Dead Letter\nQueue", fillcolor="#ffebee"];
+  monitoring [label="Delivery\nMonitoring", fillcolor="#f0f0f0"];
+
+  // Main flow
+  projects -> eventbus;
+  reports -> eventbus;
+  auth -> eventbus;
+
+  eventbus -> formatter [label="Events"];
+  formatter -> delivery [label="JSON + HMAC"];
+
+  delivery -> endpoint1 [label="HTTPS POST"];
+  delivery -> endpoint2 [label="HTTPS POST"];
+
+  // Error handling
+  delivery -> retry_queue [label="Failed\nDeliveries", style=dashed];
+  retry_queue -> delivery [label="Retry\nAttempts", style=dashed];
+  retry_queue -> dead_letter [label="Max Retries\nExceeded", style=dashed];
+
+  // Monitoring
+  delivery -> monitoring [label="Metrics"];
+  retry_queue -> monitoring [label="Retry Stats"];
 }
