@@ -6,11 +6,11 @@
 :toclevels: 3
 :stylesdir: ../../css
 :stylesheet: common-dark.css
+:imagesdir: img
 :icons: font
 :sectnums:
 :sectlinks:
 :sectanchors:
-:imagesdir: img
 :table-stripes: all
 
 [abstract]
@@ -69,11 +69,13 @@ designed for DIY enthusiasts and light professional use.
 * Carry case (x1)
 
 .Package contents
-image::package-contents.png[alt="Drill, battery, charger, and carry case", width=70%, align=center]
+image::package-contents.png[alt="Drill, battery, charger, and carry case", width=50%, align=left]
+
+<<<
 
 === Parts & Controls
 .Drill parts and controls
-image::drill-labeled.png[alt="Labeled drill diagram", width=70%, align=center]
+image::drill-labeled.png[alt="Labeled drill diagram", width=40%, align=left]
 
 . Chuck
 . Torque ring
@@ -86,27 +88,29 @@ image::drill-labeled.png[alt="Labeled drill diagram", width=70%, align=center]
 
 === Exploded View (reference)
 .Exploded assembly (major external components)
-image::drill-exploded.png[alt="Exploded view showing chuck, torque ring, gearbox housing, body, and battery pack", width=70%, align=center]
+image::drill-exploded.png[alt="Exploded view showing chuck, torque ring, gearbox housing, body, and battery pack", width=50%, align=left]
 
 == Assembly & Setup
 
 === Attaching/Removing the Battery
 
 .Battery attachment (slide until it clicks)
-image::battery-attach.png[alt="Attach battery to base of handle", width=55%, align=center]
+image::battery-attach.png[alt="Attach battery to base of handle", width=25%, align=left]
 
 . Slide battery until it *clicks*.
 . Verify it is seated and cannot pull free.
 
 .Battery removal (press latch, pull downward)
-image::battery-remove.png[alt="Remove battery by pressing latch", width=55%, align=center]
+image::battery-remove.png[alt="Remove battery by pressing latch", width=25%, align=left]
 
 . Press the latch.
 . Pull the battery downward to remove.
 
+<<<
+
 === Inserting Drill/Driver Bits
 .Chuck open → insert bit → tighten clockwise
-image::insert-bit.png[alt="Insert and secure drill bit in chuck", width=65%, align=center]
+image::insert-bit.png[alt="Insert and secure drill bit in chuck", width=30%, align=left]
 
 . Rotate chuck counter-clockwise to open jaws.
 . Insert bit; tighten clockwise.
@@ -126,7 +130,7 @@ image::insert-bit.png[alt="Insert and secure drill bit in chuck", width=65%, ali
 
 === Speed & Torque
 .Gear selector: 1 = high torque / low speed, 2 = high speed / lower torque
-image::gear-selector.png[alt="Gear selector positions 1 and 2", width=55%, align=center]
+image::gear-selector.png[alt="Gear selector positions 1 and 2", width=20%, align=left]
 
 * *Gear 1* → High torque / low speed (screws, large bits).
 * *Gear 2* → Low torque / high speed (small holes in wood/soft material).
@@ -141,9 +145,9 @@ Use the lowest speed that produces a clean cut. Excess speed overheats bits and 
 [cols="1,1", options="header"]
 |===
 |Screw Size | Pilot Diameter
-|3 mm (≈#4) | 2.0–2.2 mm
-|4 mm (≈#8) | 3.0–3.2 mm
-|5 mm (≈#10)| 3.5–4.0 mm
+|3 mm (≈#4) | 2.0-2.2 mm
+|4 mm (≈#8) | 3.0-3.2 mm
+|5 mm (≈#10)| 3.5-4.0 mm
 |===
 
 === Basic Drilling Technique
@@ -154,7 +158,7 @@ Always mark your drilling point and secure your workpiece before starting. Loose
 ====
 
 .Correct stance and perpendicular approach
-image::drill-technique.png[alt="Proper grip and perpendicular drilling into wood", width=70%, align=center]
+image::drill-technique.png[alt="Proper grip and perpendicular drilling into wood", width=50%, align=left]
 
 .Step-by-step drilling procedure:
 . *Prepare the work area*: Clear debris, ensure adequate lighting, and secure the workpiece in a vise or with clamps.
@@ -187,7 +191,7 @@ Overtightening screws can strip heads, crack materials, or damage the drill's cl
 
 === Charging
 .Charger with battery pack and LED indicators
-image::charger.png[alt="Battery charger with indicators", width=60%, align=center]
+image::charger.png[alt="Battery charger with indicators", width=40%, align=left]
 
 . Place charger on a flat, ventilated surface.
 . Connect charger to mains.
@@ -204,14 +208,14 @@ image::charger.png[alt="Battery charger with indicators", width=60%, align=cente
 |===
 
 .LED states (legend)
-image::led-states.png[alt="Charging, Full, Fault/Overheat, No Power", width=65%, align=center]
+image::led-states.png[alt="Charging, Full, Fault/Overheat, No Power", width=40%, align=left]
 
 [IMPORTANT]
 ====
 Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents clear.
 ====
 
-*Typical time:* ~60–90 min for a 2.0 Ah pack.
+*Typical time:* ~60-90 min for a 2.0 Ah pack.
 
 === Battery Health
 * Store at ~50% charge if unused for > 1 month.
@@ -229,7 +233,7 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 * Wipe with a dry or slightly damp cloth; avoid solvents and compressed air near bearings.
 
 === Storage
-* Dry, indoor location at **10–25 °C**.
+* Dry, indoor location at **10-25 °C**.
 * Remove battery from tool for storage/transport.
 
 === Consumables & Parts
@@ -238,7 +242,7 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 |Item | Example
 |Battery pack | BAT-18V (2.0 Ah / 4.0 Ah)
 |Charger | CHG-18V
-|Driver bits | PH2, PZ2, T20, hex 3–6 mm
+|Driver bits | PH2, PZ2, T20, hex 3-6 mm
 |===
 
 == Troubleshooting
@@ -292,14 +296,14 @@ image::warning.png[alt="Warning icon", width=10%]
 |Parameter | Value
 |Voltage | 18 V (Li-ion)
 |Battery capacity | 2.0 Ah (example)
-|No-load speed | 0–450 / 0–1600 RPM (2-speed)
+|No-load speed | 0-450 / 0-1600 RPM (2-speed)
 |Max torque | 45 Nm
 |Clutch settings | 20 + drill
-|Chuck capacity | 1.5–13 mm
-|Charging time | ~60–90 min (2.0 Ah)
+|Chuck capacity | 1.5-13 mm
+|Charging time | ~60-90 min (2.0 Ah)
 |Weight (with battery) | ~1.6 kg
-|Operating temperature | 0–40 °C (tool)
-|Charging temperature | 5–35 °C (battery/charger)
+|Operating temperature | 0-40 °C (tool)
+|Charging temperature | 5-35 °C (battery/charger)
 |Manufacturer | TorqueWorks Ltd., 221B Tool Street, Inventon, NY 10001
 |===
 

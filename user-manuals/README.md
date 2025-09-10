@@ -8,30 +8,22 @@ All documents were written in **Asciidoc** and compiled with `asciidoctor`.
 
 ## Samples
 
+### Coffee Machine — User Manual
+
+- **Audience:** Consumers
+- **Highlights:** Safety, recipes for various flavors, maintenance, troubleshooting, technical specs
+
 ### Cordless Drill — User Manual
 
-- **Audience:** Consumers (end users)
+- **Audience:** Consumers
 - **Highlights:** Safety, labeled diagram, assembly, operation (speed/torque), charging & maintenance, troubleshooting, technical specs
-- **Files:**
-  - [HTML](cordless-drill/drill-user-manual.html)
-  - [PDF](cordless-drill/drill-user-manual.pdf)
-
----
 
 ### Kitchen Oven — Quick-Start
 
 - **Audience:** Consumers; fast onboarding
 - **Highlights:** Unboxing, safety, setup, first-run smoothie example, controls overview, cleaning & quick fixes
-- **Files:**
-  - [HTML](kitchen-appliance/quickstart-guide.html)
-  - [PDF](kitchen-appliance/quickstart-guide.pdf)
-
----
 
 ### Industrial Machine — Maintenance
 
-- **Audience:** Industrial users; ???
-- **Highlights:** ???
-- **Files:** ???
-  - [HTML](industrial-machine/maintenance-excerpt.html)
-  - [PDF](industrial-machine/maintenance-excerpt.pdf)
+- **Audience:** Industrial users; support personnel
+- **Highlights:** Detailed maintenance instructions

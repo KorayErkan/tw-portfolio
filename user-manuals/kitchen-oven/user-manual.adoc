@@ -7,11 +7,11 @@ IronClad Home Appliances
 :toclevels: 3
 :stylesdir: ../../css
 :stylesheet: common-dark.css
+:imagesdir: img
 :icons: font
 :sectnums:
 :sectlinks:
 :sectanchors:
-:imagesdir: img
 :table-stripes: even
 
 [abstract]
@@ -159,7 +159,7 @@ image::kitchen-oven-controls.png[Control panel with numbered callouts, width=70%
 === Cooking Modes & Procedures
 
 ==== Bake Mode (Conventional Baking)
-**Temperature Range:** 150–250°C  
+**Temperature Range:** 150–250°C
 **Best For:** Bread, cakes, casseroles, roasts
 
 **Procedure:**
@@ -173,7 +173,7 @@ image::kitchen-oven-controls.png[Control panel with numbered callouts, width=70%
 |===
 |Food Type |Temperature |Time |Internal Temp (if applicable)
 |Bread/Quick breads |175-200°C |25-45 min |N/A
-|Cakes (layer) |180°C |25-35 min |N/A  
+|Cakes (layer) |180°C |25-35 min |N/A
 |Cookies |175-190°C |8-12 min |N/A
 |Roast chicken (1.5kg) |190°C |1.5 hours |75°C
 |Roast beef (medium) |180°C |20 min/kg |60°C
@@ -181,7 +181,7 @@ image::kitchen-oven-controls.png[Control panel with numbered callouts, width=70%
 |===
 
 ==== Broil Mode (High Heat from Top)
-**Temperature:** Fixed at 250°C  
+**Temperature:** Fixed at 250°C
 **Best For:** Browning, crisping, thin cuts of meat
 
 **Procedure:**
@@ -202,7 +202,7 @@ image::kitchen-oven-controls.png[Control panel with numbered callouts, width=70%
 |===
 
 ==== Convection Mode (Fan-Assisted)
-**Temperature Range:** 140–230°C (reduce conventional temp by 15-20°C)  
+**Temperature Range:** 140–230°C (reduce conventional temp by 15-20°C)
 **Best For:** Multiple racks, even browning, faster cooking
 
 **Advantages:**
@@ -218,8 +218,8 @@ image::kitchen-oven-controls.png[Control panel with numbered callouts, width=70%
 . Leave space between pans on multiple racks
 
 ==== Self-Clean Mode
-**Temperature:** 485°C  
-**Duration:** 3 hours  
+**Temperature:** 485°C
+**Duration:** 3 hours
 **Frequency:** Every 3-4 months with normal use
 
 [WARNING]
@@ -382,7 +382,7 @@ Call IronClad service (+1-555-0199) when:
 
 **Common Replacement Parts:**
 * Temperature sensor (KO-TEMP-001): $35
-* Heating element (KO-ELEM-001): $65  
+* Heating element (KO-ELEM-001): $65
 * Convection fan assembly (KO-FAN-001): $85
 * Door gasket (KO-SEAL-001): $25
 * Interior light bulb (KO-BULB-001): $8

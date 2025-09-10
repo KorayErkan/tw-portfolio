@@ -7,11 +7,11 @@ IronClad Machinery GmbH
 :toclevels: 3
 :stylesdir: ../../css
 :stylesheet: common-dark.css
+:imagesdir: img
 :icons: font
 :sectnums:
 :sectlinks:
 :sectanchors:
-:imagesdir: img
 :table-stripes: even
 
 [abstract]
@@ -95,7 +95,7 @@ Follow facility-specific procedures in addition to this summary. Reference: OSHA
 |Pinch points, rotating parts
 |Ensure spindle stop; use lockable grease gun
 
-|Way cover inspection  
+|Way cover inspection
 |Low
 |Sharp edges, pinch points
 |Inspect with machine off; wear cut-resistant gloves
