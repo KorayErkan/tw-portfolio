@@ -8,12 +8,11 @@ A curated collection of technical writing samples across software and non‑soft
 2. [Installation Guide](./installation-guide/)
 3. [Reference Charts](./reference-charts/)
 4. [Release Notes](./release-notes/)
-5. [System Configuration Guide](./system-configuration-quide/)
-6. [Tutorial](./tutorial/)
-7. [User Assistance](./user-assistance/)
-8. [User Manual](./user-manual/)
-9. [Appliance & Industrial Manuals](./appliance-manuals/)
-10. [Software Guide](./software-guides)
+5. [Software Guides](./software-guides)
+6. [System Configuration Guide](./system-configuration-quide/)
+7. [Tutorial](./tutorial/)
+8. [User Assistance](./user-assistance/)
+9. [User Manuals](./user-manuals/)
 
 > **Styling**: Asciidoc samples use a readable dark theme (`css/common-dark.css`). Markdown → HTML exports may use `css/common-md-dark.css` (optional) or `css/common-light.css`.
 
