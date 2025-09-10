@@ -23,7 +23,7 @@ th {
 }
 
 code, pre {
-	font-family: "Monaco";
+	font-family: "Monaco", monospace;
 	font-size: 14px;
 	color: black;
 }
@@ -82,7 +82,7 @@ blockquote {
 }
 
 #url-segment {
-	font-family: "Monaco";
+	font-family: "Monaco", monospace;
 	font-size: 14px;
 }
 
