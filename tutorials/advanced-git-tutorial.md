@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../css/common-light.css" type="text/css" />
+
 # Advanced Git Version Control
 
 [_John Saysitall_](mailto:John.saysitall@goodcode.com)
@@ -71,7 +73,7 @@ You can limit the output to see only recent commits by specifying a number:
 <pre id="cmdln-text">
 $ git log --oneline -5
 a1b2c3d Fix authentication bug in login module
-e4f5g6h Add user profile picture upload feature  
+e4f5g6h Add user profile picture upload feature
 i7j8k9l Refactor database connection pooling
 m0n1o2p Update README with installation instructions
 q3r4s5t Initial project setup
@@ -83,10 +85,10 @@ For branches with complex histories, adding the `--graph` option reveals the bra
 $ git log --oneline --graph
 * a1b2c3d Fix authentication bug in login module
 *   e4f5g6h Merge branch 'feature/profile-upload'
-|\  
+|\
 | * i7j8k9l Add image validation to upload
 | * m0n1o2p Implement profile picture storage
-|/  
+|/
 * q3r4s5t Refactor database connection pooling
 </pre>
 
@@ -108,7 +110,7 @@ This opens an editor showing the last 3 commits with options for how to handle e
 
 <pre id="cmdln-text">
 pick e4f5g6h Add user profile picture upload feature
-pick i7j8k9l Refactor database connection pooling  
+pick i7j8k9l Refactor database connection pooling
 pick a1b2c3d Fix authentication bug in login module
 
 # Rebase q3r4s5t..a1b2c3d onto q3r4s5t (3 commands)
@@ -128,7 +130,7 @@ The most common operations are:
 
 <pre id="cmdln-text">
 r e4f5g6h Add user profile picture upload feature
-pick i7j8k9l Refactor database connection pooling  
+pick i7j8k9l Refactor database connection pooling
 pick a1b2c3d Fix authentication bug in login module
 </pre>
 
@@ -168,7 +170,7 @@ The key to professional branch management is understanding the relationship betw
 <pre id="cmdln-text">
 $ git branch --list
   main
-  feature/user-authentication  
+  feature/user-authentication
 * feature/payment-integration
   hotfix/security-patch
   develop
@@ -432,14 +434,14 @@ Bisecting: 6 revisions left to test after this (roughly 3 steps)
 Continue testing and marking commits until Git identifies the problematic commit:
 
 <pre id="cmdln-text">
-$ npm test  
+$ npm test
 # Tests fail
 $ git bisect bad
 Bisecting: 2 revisions left to test after this (roughly 1 step)
 [b4c5d6e] Update session handling logic
 
 $ npm test
-# Tests fail  
+# Tests fail
 $ git bisect bad
 b4c5d6e is the first bad commit
 commit b4c5d6e
@@ -615,7 +617,7 @@ The `--force-with-lease` option is safer than `--force` because it prevents acci
 <pre id="cmdln-text">
 $ git log --oneline origin/main..feature/user-notifications
 e4f5g6h Add email notification templates
-i7j8k9l Implement notification delivery service  
+i7j8k9l Implement notification delivery service
 m0n1o2p Add user notification preferences
 q3r4s5t Create notification database schema
 </pre>

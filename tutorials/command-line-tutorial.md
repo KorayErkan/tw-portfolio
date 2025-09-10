@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../css/common-light.css" type="text/css" />
+
 # Searching Files With PowerShell
 
 [_John Saysitall_](mailto:John.saysitall@goodcode.com)
