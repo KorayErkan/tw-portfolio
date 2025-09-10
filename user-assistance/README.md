@@ -1,17 +1,16 @@
 # User Assistance (Portfolio Samples)
 
-**Audience:** End users (GUI tasks)  
-**Purpose:** Short, screenshot‑driven task guides.
+**Audience:** End users performing GUI-based tasks
+**Purpose:** Provide concise, visual task guides that help users accomplish specific goals quickly and efficiently.
 
 ## What's Inside
-- **Introduction** — scope and approach ([Markdown](./introduction.md))
-- **Creating a Score File** — step‑by‑step ([Markdown](./creating-a-score-file.md))
-- **Creating a Music Part** — task guide ([Markdown](./creating-a-music-part.md))
-- **Frequently Used Features** — quick tips ([Markdown](./frequently-used-features.md))
-
-Images: see [`./pictures/`](./pictures/)
+- **Introduction** — Overview of the music notation software and documentation approach
+- **Creating a Score File** — Step-by-step guide for setting up new music projects with proper templates and settings
+- **Creating a Music Part** — Detailed instructions for adding and configuring individual instrumental parts within compositions
+- **Frequently Used Features** — Quick reference for common operations and shortcuts to improve workflow efficiency
 
 ## Highlights
-- Task‑oriented steps with screenshots
-- Notes/tips inline for faster success
-- Friendly, concise tone
+- Task-oriented procedures with supporting screenshots and visual cues
+- Inline tips and notes to prevent common mistakes and accelerate learning
+- Friendly, accessible tone suitable for users of varying technical backgrounds
+- Focus on practical outcomes rather than comprehensive feature coverage

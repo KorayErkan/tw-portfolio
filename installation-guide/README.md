@@ -1,13 +1,14 @@
 # Installation Guide (Portfolio Sample)
 
-**Audience:** System administrators / DevOps  
-**Purpose:** Provide a clean, reproducible install path with verification and troubleshooting.
+**Audience:** System administrators, DevOps engineers, and IT professionals
+**Purpose:** Provide comprehensive, reproducible installation procedures with thorough verification steps and troubleshooting guidance.
 
 ## What's Inside
-- **Installation Guide** — end‑to‑end steps and verification checks  
-  - [Markdown](./installation-guide.md) · [HTML](./installation-guide.html)
+- **Installation Guide** — Complete end-to-end installation procedures covering system requirements, dependency management, configuration steps, and post-installation verification
 
 ## Highlights
-- Requirements and dependencies
-- Step‑by‑step commands and expected output
-- Troubleshooting tips for common pitfalls
+- Detailed system requirements and compatibility matrix
+- Step-by-step commands with expected outputs and verification checks
+- Comprehensive troubleshooting section for common installation issues
+- Network configuration and security considerations
+- Performance optimization recommendations

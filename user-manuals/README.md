@@ -1,29 +1,28 @@
 # Appliance and Industrial Manuals (Portfolio Samples)
 
-This section showcases **non-software** technical writing samples aimed at agencies and manufacturers:
-consumer user manuals, quick-start guides, and industrial maintenance excerpts.
-All documents were written in **Asciidoc** and compiled with `asciidoctor`.
+**Audience:** Consumers, industrial operators, and maintenance personnel
+**Purpose:** Demonstrate non-software technical writing capabilities for physical products, emphasizing safety, usability, and compliance requirements across different complexity levels.
 
----
+## What's Inside
 
-## Samples
+This collection showcases technical writing for physical products targeting both consumer and industrial markets:
 
-### Coffee Machine — User Manual
+### Coffee Machine — Consumer User Manual
 
-- **Audience:** Consumers
-- **Highlights:** Safety, recipes for various flavors, maintenance, troubleshooting, technical specs
+- **Audience:** Home users and consumers
+- **Highlights:** Comprehensive safety procedures, brewing recipes for various coffee types, routine maintenance schedules, systematic troubleshooting guide, and complete technical specifications
 
-### Cordless Drill — User Manual
+### Cordless Drill — Consumer User Manual
 
-- **Audience:** Consumers; fast onboarding
-- **Highlights:** Safety, labeled diagrams, assembly, operation (speed/torque), charging & maintenance, troubleshooting, technical specs
+- **Audience:** DIY enthusiasts and home users requiring quick onboarding
+- **Highlights:** Detailed safety protocols, labeled component diagrams, step-by-step assembly instructions, speed and torque operation guidance, battery charging procedures, maintenance schedules, troubleshooting charts, and technical specifications
 
-### Kitchen Oven — Quick-Start
+### Kitchen Oven — Consumer User Manual
 
-- **Audience:** Consumers; fast onboarding
-- **Highlights:** Unboxing, safety, setup, first-run smoothie example, controls overview, cleaning & quick fixes
+- **Audience:** Home cooks and appliance users needing immediate functionality
+- **Highlights:** Safe unboxing and installation procedures, essential safety guidelines, initial setup and calibration, cooking mode explanations, control panel overview, cleaning procedures, and quick troubleshooting reference
 
-### Industrial Machine — Maintenance
+### Industrial Machine — Maintenance Documentation
 
-- **Audience:** Industrial users; support personnel
-- **Highlights:** Detailed maintenance instructions
+- **Audience:** Industrial technicians and maintenance specialists
+- **Highlights:** Comprehensive preventive maintenance procedures, safety lockout/tagout protocols, diagnostic procedures, component replacement guidelines, performance monitoring, and regulatory compliance requirements
