@@ -27,24 +27,22 @@ This folder is a self-contained documentation site that requires local web servi
 ### Steps
 
 1. Open a terminal in the `software-guides` folder
-2. Install the serve package (first time only):
+2. Navigate to the folder where you have unzipped the contents of this bundle (e.g. `C:\Path\To\Portfolio\software-guides`)
+3. Install the serve package (first time only):
    ```bash
    npx serve
    ```
    (This will download serve@14.x automatically if not already present)
-3. Start the local web server:
+4. Start the local web server:
    ```bash
    npx serve .
    ```
-4. Open http://localhost:3000 (or the port shown in the terminal)
+5. Open http://localhost:3000 (or the port shown in the terminal)
 
-### Notes
-
-- The sidebar navigation is driven by `toc.json`
-- All styles are defined in `css/custom.css`
-- Content files are rendered dynamically into the site structure
+> **NOTE** Once you're done viewing the bundle, you can shut down the server by using `Ctrl+C` on the terminal.
 
 ## Highlights
+
 - Integrated documentation site with consistent navigation and styling
 - Multiple document types demonstrating versatility in technical communication
 - Realistic scenarios based on actual enterprise software requirements
