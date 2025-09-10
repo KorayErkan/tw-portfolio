@@ -179,10 +179,10 @@ upstream prosoft_backend {
 server {
     listen 9595 ssl;
     server_name proxy.prosoft.company.com;
-    
+
     ssl_certificate /etc/ssl/certs/prosoft.crt;
     ssl_certificate_key /etc/ssl/private/prosoft.key;
-    
+
     location / {
         proxy_pass http://prosoft_backend;
         proxy_set_header Host $host;
@@ -242,7 +242,7 @@ C:\ProSoft\cert\
 **Certificate Renewal Schedule:**
 - SSL certificates: Renew 30 days before expiration
 - Client authentication certificates: Renew 60 days before expiration
-- Automated renewal available with ACME protocol (Let's Encrypt compatible)
+- Automated renewal available with CloudFlow protocol (Let's Encrypt compatible)
 
 ## Configuration
 
@@ -339,7 +339,7 @@ C:\ProSoft\admin> .\sys_init.ps1 -CertDir "..\cert" -LicenseFile ".\purchased.li
     - server.crt (SSL certificate)
     - server.key (Private key)
     - intermediate.crt (CA chain)
-    
+
     Please install valid certificates and press [R] to retry, or [Q] to quit:
 </pre>
 
@@ -534,11 +534,11 @@ C:\ProSoft\admin> .\disk_io_test.ps1 -TestPath "C:\ProSoft\data" -Duration 60
 SELECT COUNT(*) as active_connections FROM pg_stat_activity WHERE state = 'active';
 
 -- Identify slow queries
-SELECT query, mean_time, calls FROM pg_stat_statements 
+SELECT query, mean_time, calls FROM pg_stat_statements
 WHERE mean_time > 1000 ORDER BY mean_time DESC LIMIT 10;
 
 -- Check table sizes and indexes
-SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) 
+SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename))
 FROM pg_tables WHERE schemaname = 'prosoft' ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
 ```
 
@@ -663,7 +663,7 @@ C:\ProSoft\admin> .\uninst_sys.ps1 -RemoveData -PreserveLogs
 >>> Preserving log files for audit trail...
 >>> Removing Windows services...
 >>> Uninstallation completed successfully
->>> 
+>>>
 >>> Preserved directories:
 >>> - C:\ProSoft\logs (system logs)
 >>> - C:\ProSoft\backup (backup files)
@@ -693,7 +693,7 @@ Get-ScheduledTask | Where-Object {$_.TaskName -like "*ProSoft*"} | Unregister-Sc
 > - License files and activation records
 > - System configuration files and custom scripts
 > - User access logs and audit trails
-> 
+>
 > **Recommended Retention**: Keep decommissioning backups for minimum 3 years for compliance and disaster recovery purposes.
 
 </span>
