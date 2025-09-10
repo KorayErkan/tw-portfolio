@@ -15,8 +15,8 @@ All documents were written in **Asciidoc** and compiled with `asciidoctor`.
 
 ### Cordless Drill — User Manual
 
-- **Audience:** Consumers
-- **Highlights:** Safety, labeled diagram, assembly, operation (speed/torque), charging & maintenance, troubleshooting, technical specs
+- **Audience:** Consumers; fast onboarding
+- **Highlights:** Safety, labeled diagrams, assembly, operation (speed/torque), charging & maintenance, troubleshooting, technical specs
 
 ### Kitchen Oven — Quick-Start
 

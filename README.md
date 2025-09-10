@@ -10,7 +10,7 @@ A curated collection of technical writing samples across software and non‑soft
 4. [Release Notes](./release-notes/)
 5. [Software Guides](./software-guides)
 6. [System Configuration Guide](./system-configuration-quide/)
-7. [Tutorial](./tutorial/)
+7. [Tutorials](./tutorials/)
 8. [User Assistance](./user-assistance/)
 9. [User Manuals](./user-manuals/)
 
