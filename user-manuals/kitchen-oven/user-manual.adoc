@@ -70,7 +70,7 @@ Installation must be performed by qualified technicians. Improper installation v
 . **Measure space**: Verify minimum clearances shown in diagram below
 . **Check flooring**: Ensure floor can support 45 kg distributed load
 
-image::kitchen-oven-clearances.png[Installation clearances with measurements, width=70%]
+image::kitchen-oven-clearances.png[Installation clearances with measurements, width=65%]
 
 [cols="2,1,2", options="header"]
 |===
@@ -148,7 +148,7 @@ Before first use, perform break-in procedure to remove manufacturing residues:
 == Operation
 
 === Control Panel Overview
-image::kitchen-oven-controls.png[Control panel with numbered callouts, width=70%]
+image::kitchen-oven-controls.png[Control panel with numbered callouts, width=50%]
 
 1. Power button
 2. Mode selector (Bake, Broil, Convection, Self-Clean)
@@ -260,7 +260,7 @@ Do not attempt to open door during Self-Clean cycle. Surface temperatures exceed
 === Annual
 * Professional inspection recommended for heating elements and control circuits.
 
-image::kitchen-oven-exploded.png[Exploded view with numbered parts, width=70%]
+image::kitchen-oven-exploded.png[Exploded view with numbered parts, width=50%]
 
 .Callouts
 . Heating element — replace if cracked or not heating
@@ -350,7 +350,7 @@ image::kitchen-oven-exploded.png[Exploded view with numbered parts, width=70%]
 |E9
 |===
 
-image::kitchen-oven-troubleshooting.png[Troubleshooting diagnostic flowchart, width=70%]
+image::kitchen-oven-troubleshooting.png[Troubleshooting diagnostic flowchart, width=30%]
 
 === Error Code Reference
 
