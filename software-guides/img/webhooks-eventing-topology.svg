@@ -135,10 +135,9 @@
 <!-- delivery&#45;&gt;retry_queue -->
 <g id="edge8" class="edge">
 <title>delivery&#45;&gt;retry_queue</title>
-<path fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,2" d="M306.89,-185.25C342.5,-185.25 402.39,-185.25 451.15,-185.25"/>
-<polygon fill="black" stroke="black" stroke-width="1.5" points="451.11,-188.05 459.11,-185.25 451.11,-182.45 451.11,-188.05"/>
-<text text-anchor="middle" x="384.06" y="-203.45" font-family="Calibri" font-size="14.00">Failed</text>
-<text text-anchor="middle" x="384.06" y="-189.2" font-family="Calibri" font-size="14.00">Deliveries</text>
+<path fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,2" d="M306.76,-185.25C355.03,-185.25 403.3,-185.25 451.57,-185.25"/>
+<polygon fill="black" stroke="black" stroke-width="1.5" points="451.27,-188.05 459.27,-185.25 451.27,-182.45 451.27,-188.05"/>
+<text text-anchor="middle" x="419.17" y="-186.2" font-family="Calibri" font-size="14.00">Retry Attempts</text>
 </g>
 <!-- monitoring -->
 <g id="node11" class="node">
@@ -157,10 +156,9 @@
 <!-- retry_queue&#45;&gt;delivery -->
 <g id="edge9" class="edge">
 <title>retry_queue&#45;&gt;delivery</title>
-<path fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,2" d="M461.38,-185.25C415.16,-185.25 355.76,-185.25 316.82,-185.25"/>
-<polygon fill="black" stroke="black" stroke-width="1.5" points="317.16,-182.45 309.16,-185.25 317.16,-188.05 317.16,-182.45"/>
-<text text-anchor="middle" x="384.06" y="-203.45" font-family="Calibri" font-size="14.00">Retry</text>
-<text text-anchor="middle" x="384.06" y="-189.2" font-family="Calibri" font-size="14.00">Attempts</text>
+<path fill="none" stroke="black" stroke-width="1.5" stroke-dasharray="5,2" d="M461.54,-185.25C413.27,-185.25 365,-185.25 316.73,-185.25"/>
+<polygon fill="black" stroke="black" stroke-width="1.5" points="317.03,-182.45 309.03,-185.25 317.03,-188.05 317.03,-182.45"/>
+<text text-anchor="middle" x="416.54" y="-171.95" font-family="Calibri" font-size="14.00">Failed Deliveries</text>
 </g>
 <!-- dead_letter -->
 <g id="node10" class="node">

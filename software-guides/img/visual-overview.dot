@@ -1,10 +1,10 @@
 digraph G {
-  graph [rankdir=TD, splines=false, bgcolor="transparent", nodesep=1.2, ranksep=1.2];
+  graph [rankdir=LR, splines=true, bgcolor="transparent", nodesep=1.2, ranksep=1.2];
   node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
   edge [arrowsize=1.0, penwidth=2, fontname="Calibri", fontsize=14];
 
   client [label="Client\nApplication", fillcolor="#e3f2fd"];
-  apigw [label="API Gateway", fillcolor="#e8f5e9"];
+  apigw [label="API\nGateway", fillcolor="#e8f5e9"];
   service [label="Business\nService", fillcolor="#fff3e0"];
 
   client -> apigw [label="HTTP Request"];

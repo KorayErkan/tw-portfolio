@@ -1,5 +1,5 @@
 digraph G {
-  graph [rankdir=LR, splines=false, bgcolor="transparent", nodesep=1.5, ranksep=1.0];
+  graph [rankdir=TD, splines=false, bgcolor="transparent", nodesep=1.5, ranksep=1.0];
   node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
   edge [arrowsize=0.9, penwidth=2, fontname="Calibri", fontsize=14];
 

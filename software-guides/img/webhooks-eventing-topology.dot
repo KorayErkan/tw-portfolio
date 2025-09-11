@@ -57,8 +57,8 @@ digraph G {
   delivery -> endpoint2 [label="HTTPS POST"];
 
   // Error handling
-  delivery -> retry_queue [label="Failed\nDeliveries", style=dashed];
-  retry_queue -> delivery [label="Retry\nAttempts", style=dashed];
+  delivery -> retry_queue [headlabel="Retry Attempts", style=dashed];
+  retry_queue -> delivery  [taillabel="Failed Deliveries", style=dashed];
   retry_queue -> dead_letter [label="Max Retries\nExceeded", style=dashed];
 
   // Monitoring
