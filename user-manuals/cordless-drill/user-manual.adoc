@@ -95,7 +95,7 @@ image::drill-exploded.png[alt="Exploded view showing chuck, torque ring, gearbox
 === Attaching/Removing the Battery
 
 .Battery attachment (slide until it clicks)
-image::battery-attach.png[alt="Attach battery to base of handle", width=25%, align=left]
+image::battery-attach.png[alt="Attach battery to base of handle", width=50%, align=left]
 
 . Slide battery until it *clicks*.
 . Verify it is seated and cannot pull free.
@@ -198,6 +198,9 @@ image::charger.png[alt="Battery charger with indicators", width=40%, align=left]
 . Insert the battery pack until it clicks; ensure contacts are clean/dry.
 . When complete, remove the battery and unplug the charger.
 
+.LED states (legend)
+image::led-states.png[alt="Charging, Full, Fault/Overheat, No Power", width=40%, align=left]
+
 [cols="1,3", options="header"]
 |===
 |Indicator | Meaning
@@ -206,9 +209,6 @@ image::charger.png[alt="Battery charger with indicators", width=40%, align=left]
 |Flashing red | Temperature/fault detected — allow to cool; check contacts and vents
 |No light     | No power — check outlet/cable
 |===
-
-.LED states (legend)
-image::led-states.png[alt="Charging, Full, Fault/Overheat, No Power", width=40%, align=left]
 
 [IMPORTANT]
 ====
