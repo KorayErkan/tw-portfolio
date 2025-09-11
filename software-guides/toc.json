@@ -1,5 +1,5 @@
 [
-  { "title": "Introduction", "file": "README.md" },
+  { "title": "Introduction", "file": "intro.md" },
   { "title": "Conceptual Architecture", "file": "conceptual-architecture.md" },
   { "title": "Installation & Setup", "file": "installation-setup-guide.md" },
   { "title": "User Manual", "file": "user-manual.md" },
