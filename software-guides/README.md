@@ -26,18 +26,18 @@ This folder is a self-contained documentation site that requires local web servi
 
 ### Steps
 
-1. Open a terminal in the `software-guides` folder
+1. Open a terminal
 2. Navigate to the folder where you have unzipped the contents of this bundle (e.g. `C:\Path\To\Portfolio\software-guides`)
 3. Install the serve package (first time only):
    ```bash
    npx serve
    ```
-   (This will download serve@14.x automatically if not already present)
+   This will download `serve@14.x` automatically if not already present.
 4. Start the local web server:
    ```bash
    npx serve .
    ```
-5. Open http://localhost:3000 (or the port shown in the terminal)
+5. Open `http://localhost:3000` (or the port shown in the terminal)
 
 > **NOTE** Once you're done viewing the bundle, you can shut down the server by using `Ctrl+C` on the terminal.
 
