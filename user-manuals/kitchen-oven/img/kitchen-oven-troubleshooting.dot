@@ -1,0 +1,38 @@
+digraph troubleshooting {
+    rankdir=LR;
+    node [shape=box, style=rounded, fontname="Arial", fontsize=10];
+    edge [fontname="Arial", fontsize=8];
+
+    // Main decision points
+    power_check [label="Power/Display\nWorking?"];
+    heating_check [label="Heating\nProperly?"];
+    fan_check [label="Fan/Mechanical\nIssues?"];
+
+    // Left column - Power/Electrical issues
+    no_power [label="No Power\n• Check GFCI/breaker\n• Test outlet (230V)\n• Check connections"];
+    display_error [label="Display Error\n• Power cycle unit\n• Check error codes\n• Replace control board"];
+
+    // Right column - Heating/Mechanical issues
+    no_heat [label="No Heating\n• Check element\n• Test 230V at terminals\n• Replace element (E2)"];
+    uneven_heat [label="Uneven Heating\n• Clean fan blades\n• Check door seal\n• Use center rack"];
+    fan_fail [label="Fan Problems\n• Check for obstructions\n• Test 24V at motor\n• Replace fan (E3)"];
+    door_issues [label="Door Problems\n• Check alignment\n• Inspect gasket\n• Adjust hinges (E5)"];
+
+    power_check -> no_power [label="No"];
+    power_check -> display_error [label="Errors"];
+
+    heating_check -> no_heat [label="No heat"];
+    heating_check -> uneven_heat [label="Uneven"];
+
+    fan_check -> fan_fail [label="Fan noise"];
+    fan_check -> door_issues [label="Door"];
+
+    // Service legend at bottom (no connections)
+    service [label="Contact Service:\n+1-555-0199", style=filled, fillcolor=lightyellow];
+
+    // Styling
+    {rank=same; no_power, display_error}
+    {rank=same; no_heat, uneven_heat}
+    {rank=same; fan_fail, door_issues}
+    {rank=sink; service}
+}

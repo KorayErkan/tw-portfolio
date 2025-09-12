@@ -350,7 +350,7 @@ image::kitchen-oven-exploded.png[Exploded view with numbered parts, width=50%]
 |E9
 |===
 
-image::kitchen-oven-troubleshooting.png[Troubleshooting diagnostic flowchart, width=30%]
+image::kitchen-oven-troubleshooting.svg[Troubleshooting diagnostic flowchart, width=70%]
 
 === Error Code Reference
 
