@@ -1,5 +1,8 @@
-.markdownlint.json
-
 *.docx
 *.mscz
 *.txt
+
+# Draft iteration rounds for the drill/oven manuals (~150 MB of PNGs).
+# Kept on disk as working material; the selected finals are versioned
+# under src/user-manuals/*/img.
+etc/img/
