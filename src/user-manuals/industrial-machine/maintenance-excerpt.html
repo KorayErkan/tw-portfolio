@@ -5,32 +5,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.23">
-<title>Industrial CNC — Maintenance Manual (Excerpt)</title>
+<meta name="author" content="IronClad Machinery GmbH">
+<title>CNC-5000 Industrial Machining Center — Maintenance Manual</title>
 <style>
-
-/* common-dark.css — minimal, eye-friendly Asciidoctor theme
-   - Dark gray background (not pure black)
-   - Soft contrast text
-   - No harsh borders or "white stripes" around code blocks
-   - Comfortable line-length and spacing
-*/
-
+/* github-dark-asciidoctor.css — Asciidoctor theme inspired by GitHub Dark */
 :root{
-  --bg: #121417;
-  --panel: #181b20;
-  --panel-alt: #1e2329;
-  --text: #e4e7eb;
-  --muted: #b8c0cc;
-  --accent: #7aa2f7;   /* muted blue */
-  --accent-2: #8bd5ca; /* teal accent */
-  --border: #2a2f36;
-  --code-bg: #0f1317;
-  --code-border: transparent;
-  --kbd-bg: #262b33;
-  --link: #89b4fa;
+  /* GitHub Dark neutrals */
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-alt: #161b22;
+  --text: #c9d1d9;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-2: #3fb950; /* success green */
+  --border: #30363d;
+  --code-bg: #0d1117;   /* inline code uses translucency; blocks sit on panel */
+  --code-border: #30363d;
+  --kbd-bg: rgba(110,118,129,0.15);
+  --link: #58a6ff;
 }
 
-/* Base */
 html, body{
   background: var(--bg);
   color: var(--text);
@@ -42,13 +36,13 @@ html, body{
 }
 
 body{
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "DejaVu Sans", "Calibri", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   font-size: 16px;
 }
 
 /* Layout */
 #header, #content, #footnotes, #footer{
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 1.25rem;
 }
@@ -57,143 +51,214 @@ body{
   background: var(--panel);
   border-right: 1px solid var(--border);
 }
-#toc.toc2, #toc.toc2 #toctitle, #toc.toc2 a{
-  color: var(--muted);
-}
+#toc.toc2, #toc.toc2 #toctitle, #toc.toc2 a{ color: var(--muted); }
 #toc.toc2 a:hover{ color: var(--text); }
 
 /* Headings */
-h1, h2, h3, h4{
+h1, h2, h3, h4, h5, h6{
   color: var(--text);
   line-height: 1.25;
-  margin: 1.2em 0 0.5em;
+  margin: 1.25em 0 .6em;
+  font-weight: 600;
 }
 #header > h1{
-  margin-top: .8em;
-  letter-spacing: .3px;
+  margin-top: 1rem;
+  letter-spacing: .2px;
 }
-.sectionbody > .paragraph:first-child p{
-  margin-top: .5rem;
-}
+.sectionbody > .paragraph:first-child p{ margin-top: .5rem; }
 
 /* Links */
 a{ color: var(--link); text-decoration: none; }
 a:hover{ text-decoration: underline; }
 
-/* Blocks & panels */
+/* Admonitions & panels */
 .admonitionblock, .exampleblock, .sidebarblock, .quoteblock, .verseblock{
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 1rem 1.2rem;
   margin: 1rem 0;
 }
 .admonitionblock .title, .exampleblock .title{
   color: var(--muted);
-  margin-bottom: .25rem;
+  margin-bottom: .35rem;
+  font-weight: 600;
 }
 
 /* Code blocks */
+pre, code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: .95em;
+}
 .listingblock pre, .literalblock pre{
-  background: var(--code-bg);
+  background: var(--panel);
   color: var(--text);
-  border: 0;
-  box-shadow: inset 0 0 0 1px var(--code-border);
-  border-radius: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
   padding: 1rem 1.2rem;
   overflow-x: auto;
 }
-pre, code{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "DejaVu Mono", monospace; font-size: .95em; }
+/* ensure Rouge/Highlighter overlays don't repaint block bg */
 .literalblock pre, .listingblock pre > code{ background: transparent; }
 
-/* Inline code */
-code, .literal{ background: var(--kbd-bg); color: var(--text); border-radius: 6px; padding: 0 .35rem; }
+/* Inline code (GitHub uses translucent background) */
+code, .literal{
+  background: rgba(110,118,129,0.15);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0 .35rem;
+  border: 1px solid rgba(110,118,129,0.4);
+}
+
+/* kbd keys */
+kbd, .keyseq, .conum[data-value]{
+  background: rgba(110,118,129,0.15);
+  border: 1px solid rgba(110,118,129,0.4);
+  border-bottom-color: rgba(110,118,129,0.6);
+  border-radius: 6px;
+  padding: 0 .3rem;
+  color: var(--muted);
+  box-shadow: inset 0 -1px 0 rgba(1,4,9,.2);
+}
 
 /* Tables */
 table.tableblock{
   width: 100%;
-  border-collapse: collapse;
-  background: var(--panel);
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
 }
-table.tableblock th, table.tableblock td{
-  border: 1px solid var(--border);
-  padding: .6rem .75rem;
-}
 table.tableblock thead th{
-  background: var(--panel-alt);
+  background: var(--panel);
   color: var(--text);
   font-weight: 600;
+  border-bottom: 1px solid var(--border);
 }
-table.tableblock tr:nth-child(even) td{ background: rgba(255,255,255,.015); }
+table.tableblock th, table.tableblock td{
+  border-right: 1px solid var(--border);
+  padding: .6rem .75rem;
+}
+table.tableblock th:last-child, table.tableblock td:last-child{ border-right: 0; }
+table.tableblock tbody tr{
+  background: transparent;
+}
+table.tableblock tbody tr + tr td{
+  border-top: 1px solid var(--border);
+}
+table.tableblock tbody tr:hover td{
+  background: rgba(177,186,196,0.04);
+}
 
 /* Lists */
 ul, ol{ padding-left: 1.25rem; }
-ul li, ol li{ margin: .2rem 0; }
+ul li, ol li{ margin: .25rem 0; }
+
+/* Blockquotes */
+blockquote{
+  border-left: 2px solid var(--border);
+  padding-left: 1rem;
+  color: var(--muted);
+  margin: 1rem 0;
+}
 
 /* Images */
 .imageblock img, img{
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--border);
-  background: #0d0f12;
+  background: #0d1117;
   max-width: 100%;
 }
 
-/* Footer */
+/* Footnotes & misc */
 #footer{
   color: var(--muted);
   border-top: 1px solid var(--border);
   margin-top: 2rem;
 }
+.footnote{ background: rgba(110,118,129,0.15); border-radius: 4px; padding: 0 .3rem; color: var(--muted); }
 
-/* Notes/footnotes */
-.footnote, .conum[data-value]{ background: var(--kbd-bg); border-radius: 4px; padding: 0 .3rem; color: var(--muted); }
-
-/* Reduce "white stripes" around code & blocks */
+/* Asciidoctor specifics to reduce “white stripes” */
 .listingblock, .literalblock{ margin: 1rem 0; }
-blockquote{ border-left: 3px solid var(--border); padding-left: 1rem; color: var(--muted); }
-
-/* Make the page breathe a bit */
 .paragraph p{ margin: .5rem 0 .9rem; }
+
+/* Callouts in code blocks */
+.conum[data-value]{
+  display: inline-block;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+/* Horizontal rule */
+hr{
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* Definition lists */
+dl dt{ font-weight: 600; }
+dl dd{ color: var(--muted); margin: 0 0 .6rem 0; }
+
+/* ToC tweaks */
+#toctitle{ font-weight: 600; }
+#toc a{ text-decoration: none; }
+#toc a:hover{ text-decoration: underline; }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Industrial CNC — Maintenance Manual (Excerpt)</h1>
+<h1>CNC-5000 Industrial Machining Center — Maintenance Manual</h1>
 <div class="details">
+<span id="author" class="author">IronClad Machinery GmbH</span><br>
 <span id="revnumber">version 0.9,</span>
-<span id="revdate">2025-09-07</span>
+<span id="revdate">2026-09-26</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_introduction">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_machine_overview">1.1. Machine Overview</a></li>
+</ul>
+</li>
 <li><a href="#_safety_requirements">2. Safety Requirements</a>
 <ul class="sectlevel2">
 <li><a href="#_ppe_personal_protective_equipment">2.1. PPE (Personal Protective Equipment)</a></li>
 <li><a href="#_lockouttagout_loto_summary">2.2. Lockout/Tagout (LOTO) — Summary</a></li>
+<li><a href="#_emergency_shutdown_procedures">2.3. Emergency Shutdown Procedures</a>
+<ul class="sectlevel3">
+<li><a href="#_electrical_emergency">2.3.1. Electrical Emergency</a></li>
+<li><a href="#_mechanical_emergency_collision_jam_broken_tool">2.3.2. Mechanical Emergency (Collision, Jam, Broken Tool)</a></li>
+<li><a href="#_hydrauliccoolant_leak">2.3.3. Hydraulic/Coolant Leak</a></li>
 </ul>
 </li>
-<li><a href="#_routine_maintenance_schedule">3. Routine Maintenance Schedule</a></li>
+<li><a href="#_risk_assessment_by_task">2.4. Risk Assessment by Task</a></li>
+</ul>
+</li>
+<li><a href="#_routine_maintenance_schedule">3. Routine Maintenance Schedule</a>
+<ul class="sectlevel2">
+<li><a href="#service-points">3.1. Service Points</a></li>
+</ul>
+</li>
 <li><a href="#_fault_codes">4. Fault Codes</a>
 <ul class="sectlevel2">
 <li><a href="#_after_clear_checklist">4.1. After-Clear Checklist</a></li>
 <li><a href="#_escalate_to_oemservice_when">4.2. Escalate to OEM/Service When</a></li>
 </ul>
 </li>
-<li><a href="#_diagrams">5. Diagrams</a></li>
-<li><a href="#_recordkeeping">6. Recordkeeping</a>
+<li><a href="#_recordkeeping">5. Recordkeeping</a>
 <ul class="sectlevel2">
-<li><a href="#_maintenance_log_template">6.1. Maintenance Log Template</a></li>
-<li><a href="#_usage_rules">6.2. Usage Rules</a></li>
-<li><a href="#_retention">6.3. Retention</a></li>
+<li><a href="#_maintenance_log_template">5.1. Maintenance Log Template</a></li>
+<li><a href="#_usage_rules">5.2. Usage Rules</a></li>
+<li><a href="#_retention">5.3. Retention</a></li>
 </ul>
 </li>
-<li><a href="#_references_standards">7. References &amp; Standards</a></li>
+<li><a href="#_references_standards">6. References &amp; Standards</a></li>
 <li><a href="#_controlled_document_info">Appendix A: Controlled Document Info</a></li>
 </ul>
 </div>
@@ -203,8 +268,16 @@ blockquote{ border-left: 3px solid var(--border); padding-left: 1rem; color: var
 <div class="sectionbody">
 <div class="quoteblock abstract">
 <blockquote>
-This excerpt illustrates routine maintenance, safety procedures, and fault code handling for a fictional CNC machining center (Model <strong>CNC-5000</strong>). Prepared as a portfolio sample.
+This excerpt illustrates routine maintenance, safety procedures, and fault code handling for a fictional CNC machining center (Model <strong>CNC-5000</strong>) manufactured by <strong>IronClad Machinery GmbH</strong>.
+Prepared as a portfolio sample.
 </blockquote>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">This is a portfolio sample</div>
+All company names, addresses, and contact details are fictional.
+This document is created for demonstration purposes only.
+</div>
 </div>
 </div>
 </div>
@@ -212,8 +285,40 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a><a class="link" href="#_introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p><strong>Manufacturer:</strong> IronClad Machinery GmbH, 2210 Werkstrasse, Düsseldorf, Germany
+<strong>Support:</strong> support@ironclad-machinery.example · +49-221-555-0199</p>
+</div>
+<div class="paragraph">
 <p><strong>Intended audience:</strong> certified maintenance technicians and supervisors.
 <strong>Scope:</strong> routine service, selected fault codes, and recordkeeping templates.</p>
+</div>
+<div class="sect2">
+<h3 id="_machine_overview"><a class="anchor" href="#_machine_overview"></a><a class="link" href="#_machine_overview">1.1. Machine Overview</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="img/cnc-overview.jpg" alt="Isometric view of the CNC-5000 with five numbered components" width="90%">
+</div>
+<div class="title">Figure 1. CNC-5000 main components</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Spindle assembly — lubrication points A/B (see <a href="#service-points">Service Points</a>); monitor temperature trend after service.</p>
+</li>
+<li>
+<p>Way covers — inspect for tears/binding; verify smooth travel across full stroke.</p>
+</li>
+<li>
+<p>Hydraulic unit — replace filter per schedule; verify pressure within spec at idle and load.</p>
+</li>
+<li>
+<p>Coolant tank and chip conveyor — clean intake screen; check return baffles; maintain 6–8% concentration.</p>
+</li>
+<li>
+<p>Emergency stop (E-Stop) — on the operator panel; see <a href="#_emergency_shutdown_procedures">Emergency Shutdown Procedures</a>.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -296,6 +401,25 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 </li>
 </ol>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="img/cnc-loto.jpg" alt="Main disconnect locked in the OFF position with a padlock and tag" width="60%">
+</div>
+<div class="title">Figure 2. Energy isolation points, locked out</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Main electrical disconnect — rotated to <strong>OFF</strong>.</p>
+</li>
+<li>
+<p>Personal padlock and blank tag — write your name, date, and reason on the tag.</p>
+</li>
+<li>
+<p>Pneumatic supply ball valve — closed, with valve lockout device and padlock.</p>
+</li>
+</ol>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -310,6 +434,132 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 </tr>
 </table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_emergency_shutdown_procedures"><a class="anchor" href="#_emergency_shutdown_procedures"></a><a class="link" href="#_emergency_shutdown_procedures">2.3. Emergency Shutdown Procedures</a></h3>
+<div class="sect3">
+<h4 id="_electrical_emergency"><a class="anchor" href="#_electrical_emergency"></a><a class="link" href="#_electrical_emergency">2.3.1. Electrical Emergency</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Press E-Stop immediately</strong> — red mushroom button on control panel and pendant</p>
+</li>
+<li>
+<p><strong>Turn main disconnect to OFF</strong> — located at electrical cabinet</p>
+</li>
+<li>
+<p><strong>Do not attempt to restart</strong> until hazard is eliminated</p>
+</li>
+<li>
+<p><strong>Call maintenance supervisor</strong> and facility emergency response team</p>
+</li>
+<li>
+<p><strong>Evacuate 3-meter radius</strong> if sparking, smoke, or unusual odors present</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mechanical_emergency_collision_jam_broken_tool"><a class="anchor" href="#_mechanical_emergency_collision_jam_broken_tool"></a><a class="link" href="#_mechanical_emergency_collision_jam_broken_tool">2.3.2. Mechanical Emergency (Collision, Jam, Broken Tool)</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Press E-Stop</strong> — do not attempt to clear obstruction while powered</p>
+</li>
+<li>
+<p><strong>Assess for injury</strong> — call medical emergency if personnel involved</p>
+</li>
+<li>
+<p><strong>Isolate all energy sources</strong> following full LOTO procedure</p>
+</li>
+<li>
+<p><strong>Document damage</strong> with photos before disturbing evidence</p>
+</li>
+<li>
+<p><strong>Contact OEM service</strong> for spindle impact assessment if collision occurred</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_hydrauliccoolant_leak"><a class="anchor" href="#_hydrauliccoolant_leak"></a><a class="link" href="#_hydrauliccoolant_leak">2.3.3. Hydraulic/Coolant Leak</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Stop machine immediately</strong> — E-Stop if leak is active/spraying</p>
+</li>
+<li>
+<p><strong>Contain spill</strong> with absorbent materials and drain pans</p>
+</li>
+<li>
+<p><strong>Ventilate area</strong> — hydraulic fluid vapors can be hazardous</p>
+</li>
+<li>
+<p><strong>Check for slip hazards</strong> — barricade wet areas immediately</p>
+</li>
+<li>
+<p><strong>Report to environmental safety</strong> for disposal of contaminated absorbents</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_risk_assessment_by_task"><a class="anchor" href="#_risk_assessment_by_task"></a><a class="link" href="#_risk_assessment_by_task">2.4. Risk Assessment by Task</a></h3>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 28.5715%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Task</th>
+<th class="tableblock halign-left valign-top">Risk Level</th>
+<th class="tableblock halign-left valign-top">Primary Hazards</th>
+<th class="tableblock halign-left valign-top">Additional Precautions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spindle bearing lubrication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pinch points, rotating parts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure spindle stop; use lockable grease gun</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Way cover inspection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sharp edges, pinch points</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inspect with machine off; wear cut-resistant gloves</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hydraulic filter change</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pressurized fluid, chemical exposure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full system depressurization; chemical-resistant PPE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coolant concentration testing</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chemical exposure, slip hazard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eye protection; non-slip footwear; ventilation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Backlash measurement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Moving axes during test</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use test mode; maintain clear egress path</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Belt tensioning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entanglement, stored energy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full LOTO; proper belt tension gauge; no loose clothing</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -419,11 +669,53 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 <td class="tableblock halign-left valign-top"><p class="tableblock">Document results; correct faults before production.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Semi-Annual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vibration analysis — spindle &amp; main drives</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spindle, servo motors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accelerometer; spectrum analyzer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record baseline at commissioning; ±10% variance requires investigation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Semi-Annual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Thermal imaging survey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Electrical panels, drives</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Thermal camera</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max acceptable: 40°C above ambient for electrical connections.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spindle runout measurement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spindle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dial indicator (0.001 mm res.)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Radial: &lt;0.005 mm; axial: &lt;0.003 mm at tool holder taper.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ballscrew backlash verification</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X/Y/Z axes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Laser interferometer or dial indicator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;0.01 mm at mid-stroke; document drift over time.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annual</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Coolant system deep clean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Coolant system</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Cleaning additive; PPE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Drain, flush, disinfect, refill with fresh premix.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">18 Months</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Way wear measurement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Linear guides</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Height gauge; reference surfaces</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max wear: 0.05 mm; replace if approaching limit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24 Months</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometric accuracy check (ISO 10791-7)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Machine structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ballbar; laser tracker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full 21-point test per ISO standard; contact OEM for acceptance criteria.</p></td>
 </tr>
 </tbody>
 </table>
@@ -441,6 +733,53 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="service-points"><a class="anchor" href="#service-points"></a><a class="link" href="#service-points">3.1. Service Points</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="img/cnc-spindle-lube.jpg" alt="Cut-away spindle head with a grease gun connected to the upper fitting A; front fitting B is also marked" width="60%">
+</div>
+<div class="title">Figure 3. Spindle lubrication points (weekly)</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>A</strong> — upper bearing housing fitting.</p>
+</li>
+<li>
+<p><strong>B</strong> — front bearing housing fitting.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Apply 2–3 pumps of NLGI-2 grease per fitting with the spindle stopped and locked out. Do not over-pack: excess grease raises bearing temperature.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/cnc-hydraulic-unit.jpg" alt="Hydraulic power unit with five numbered service points" width="60%">
+</div>
+<div class="title">Figure 4. Hydraulic power unit (monthly filter change)</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Return-line filter housing — replace the element monthly.</p>
+</li>
+<li>
+<p>Differential-pressure (ΔP) indicator — log the reading before and after the filter change.</p>
+</li>
+<li>
+<p>System pressure gauge — verify ≥ 42 bar at idle (see fault E-301).</p>
+</li>
+<li>
+<p>Oil-level sight glass — keep level above the 75% mark.</p>
+</li>
+<li>
+<p>Reservoir drain valve — use for oil sampling and complete drain-down.</p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -448,52 +787,157 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 33.3333%;">
-<col style="width: 50.0001%;">
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 42.8571%;">
+<col style="width: 14.2858%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Code</th>
 <th class="tableblock halign-left valign-top">Meaning</th>
 <th class="tableblock halign-left valign-top">Corrective Action</th>
+<th class="tableblock halign-left valign-top">Priority</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-101</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Axis overtravel</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Press <strong>RESET</strong>; home the machine; check limit switches and soft limits.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Press <strong>RESET</strong>; home machine; verify limit switch operation (24VDC expected); check soft limits in parameters.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-102</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spindle overheating</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stop; verify coolant/fan operation; allow cooldown; inspect spindle load history.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop immediately; verify coolant flow rate &gt;15 L/min; check fan operation; inspect for blocked air passages; allow &gt;30min cooldown.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-103</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spindle load excessive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reduce feed rate by 25%; verify tool sharpness; check workpiece clamping; inspect for chip buildup on cutting tool.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-104</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tool changer fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify tool pot alignment; check ATC motor operation; inspect tool retention bolts; cycle ATC manually in test mode.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-105</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Probe signal lost</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check probe battery (&gt;6V); verify cable continuity; clean probe tip contacts; test signal with multimeter (5V expected).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-201</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">X-axis servo fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-202</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y-axis servo fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-203</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Z-axis servo fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-204</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Servo drive fault</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Note drive LED code; power-cycle control only once; reseat connectors; check encoder cable; consult drive manual.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Servo following error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check axis for mechanical binding; verify ballscrew lubrication; inspect coupling for wear; reduce rapid traverse rate 20%.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">E-305</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Low hydraulic pressure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stop motion; verify pump runs; check reservoir level and filters; inspect for leaks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-205</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encoder communication error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inspect encoder cable for cuts/pinch; verify encoder supply voltage 5VDC ±0.25V; clean encoder scale if linear type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">E-410</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Door interlock open</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Verify doors fully closed; check interlock switch alignment and wiring.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-301</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hydraulic pressure low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify pump operation; check reservoir level (min 75%); inspect filters for blockage; test pressure at 42 bar minimum.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">E-512</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Coolant flow low</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clean intake screen; check pump and lines for blockage; verify concentration 6–8%.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-302</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hydraulic temperature high</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check oil level; verify cooling fan operation; clean heat exchanger fins; oil temp must be &lt;60°C under load.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-303</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tool clamp pressure low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test manual tool release; verify hydraulic pressure &gt;40 bar; check tool holder for damage; inspect drawbar assembly.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-401</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Door interlock failure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify all doors fully closed; check interlock switch alignment; test continuity (closed = 0Ω); inspect door seals.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-402</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Light curtain interrupted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear obstruction from beam path; clean lens surfaces; verify 24VDC supply; test beam alignment per manual.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Emergency stop activated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identify activated E-Stop button; inspect for mechanical damage; reset all E-Stops; verify control circuit continuity.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-501</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coolant flow insufficient</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clean intake screen; verify pump operation; check flow rate &gt;15 L/min; inspect nozzles for blockage.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-502</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coolant concentration error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test with refractometer; adjust to 6-8% Brix; replace if contaminated; check additive mixing system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-503</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chip conveyor overload</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear conveyor jam; inspect for oversized chips; verify conveyor motor current &lt;8A; check drive belt tension.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-601</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pneumatic pressure low</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Check main supply (6–8 bar); drain water separator; inspect regulator and leaks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify supply pressure 6-8 bar; drain water separator; check regulator operation; inspect for air leaks with soap solution.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-602</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Air filter saturation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace filter element; drain moisture; check compressor operation; verify automatic drain valve function.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-701</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Control system fault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record error details; perform controlled power cycle; check system logs; contact technical support if persistent.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Critical</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-702</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Memory backup failure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace backup battery immediately; verify parameter retention; reload backup parameters if available.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 </tbody>
 </table>
@@ -546,51 +990,10 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_diagrams"><a class="anchor" href="#_diagrams"></a><a class="link" href="#_diagrams">5. Diagrams</a></h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="images/cnc-exploded.png" alt="Exploded view with numbered parts" width="70%">
-</div>
-</div>
-<div class="olist arabic">
-<div class="title">Callouts</div>
-<ol class="arabic">
-<li>
-<p>Spindle assembly — lubrication points A/B; monitor temperature trend after service.</p>
-</li>
-<li>
-<p>Way covers — inspect for tears/binding; verify smooth travel across full stroke.</p>
-</li>
-<li>
-<p>Hydraulic unit — replace filter per schedule; verify pressure within spec at idle and load.</p>
-</li>
-<li>
-<p>Coolant tank — clean intake screen; check return baffles; maintain 6–8% concentration.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Replace this placeholder with the OEM exploded view when available. Keep diagram revision/date in the controlled footer.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_recordkeeping"><a class="anchor" href="#_recordkeeping"></a><a class="link" href="#_recordkeeping">6. Recordkeeping</a></h2>
+<h2 id="_recordkeeping"><a class="anchor" href="#_recordkeeping"></a><a class="link" href="#_recordkeeping">5. Recordkeeping</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_maintenance_log_template"><a class="anchor" href="#_maintenance_log_template"></a><a class="link" href="#_maintenance_log_template">6.1. Maintenance Log Template</a></h3>
+<h3 id="_maintenance_log_template"><a class="anchor" href="#_maintenance_log_template"></a><a class="link" href="#_maintenance_log_template">5.1. Maintenance Log Template</a></h3>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -631,7 +1034,7 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 </table>
 </div>
 <div class="sect2">
-<h3 id="_usage_rules"><a class="anchor" href="#_usage_rules"></a><a class="link" href="#_usage_rules">6.2. Usage Rules</a></h3>
+<h3 id="_usage_rules"><a class="anchor" href="#_usage_rules"></a><a class="link" href="#_usage_rules">5.2. Usage Rules</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -653,7 +1056,7 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_retention"><a class="anchor" href="#_retention"></a><a class="link" href="#_retention">6.3. Retention</a></h3>
+<h3 id="_retention"><a class="anchor" href="#_retention"></a><a class="link" href="#_retention">5.3. Retention</a></h3>
 <div class="paragraph">
 <p>Maintain maintenance logs and checklists for <strong>5 years</strong> (or per facility policy). Provide on request to auditors or OEM service.</p>
 </div>
@@ -661,7 +1064,7 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_references_standards"><a class="anchor" href="#_references_standards"></a><a class="link" href="#_references_standards">7. References &amp; Standards</a></h2>
+<h2 id="_references_standards"><a class="anchor" href="#_references_standards"></a><a class="link" href="#_references_standards">6. References &amp; Standards</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -692,7 +1095,9 @@ This excerpt illustrates routine maintenance, safety procedures, and fault code 
 <div class="sectionbody">
 <div class="paragraph">
 <p>Doc ID: CNC-5000-MNT-EX-01<br>
-Revision: 0.9 (Portfolio Sample)</p>
+Revision: 0.9 (Portfolio Sample)<br>
+Manufacturer: IronClad Machinery GmbH<br>
+Figures: machine overview, LOTO isolation points, spindle lubrication points, hydraulic unit service points</p>
 </div>
 </div>
 </div>
@@ -700,7 +1105,7 @@ Revision: 0.9 (Portfolio Sample)</p>
 <div id="footer">
 <div id="footer-text">
 Version 0.9<br>
-Last updated 2025-09-07 19:42:22 +0300
+Last updated 2026-09-26 13:40:08 +0300
 </div>
 </div>
 </body>

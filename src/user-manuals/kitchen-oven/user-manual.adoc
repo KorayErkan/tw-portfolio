@@ -1,4 +1,4 @@
-= K-Oven 12 Pro — Electric Convection Oven User & Maintenance Manual
+= K-Oven 12 Pro — Electric Convection Range with Gas Hob — User & Maintenance Manual
 IronClad Home Appliances
 :revnumber: 1.0
 :revdate: {docdate}
@@ -15,7 +15,7 @@ IronClad Home Appliances
 :table-stripes: even
 
 [abstract]
-This manual covers installation, operation, safety, cleaning, and troubleshooting for the fictional *IronClad K-Oven 12 Pro*.
+This manual covers installation, operation, safety, cleaning, and troubleshooting for the fictional *IronClad K-Oven 12 Pro*, a freestanding range combining an electric convection oven with a four-burner gas hob.
 Prepared as a portfolio sample.
 
 [sidebar]
@@ -24,10 +24,10 @@ All company names, addresses, and contact details are fictional.
 This document is created for demonstration purposes only.
 
 == Introduction
-*Manufacturer:* IronClad Home Appliances, 101 Hearth Street, Springfield, USA
+*Manufacturer:* IronClad Home Appliances, 101 Hearth Street, Springfield, USA +
 *Support:* support@ironclad-home.example · +1-555-0199
 
-*Intended audience:* qualified installers, service technicians, and safety-conscious end users.
+*Intended audience:* qualified installers, service technicians, and safety-conscious end users. +
 *Scope:* safe installation, operation, periodic cleaning, troubleshooting, and recordkeeping.
 
 == Safety Information
@@ -52,7 +52,7 @@ Read and follow all instructions before operating this appliance.
 
 [WARNING]
 ====
-Installation must be performed by qualified technicians. Improper installation voids warranty and may create fire or electrical hazards.
+Installation must be performed by qualified technicians. The gas hob must be connected by a licensed gas installer and leak-tested before first use. Improper installation voids warranty and may create fire, gas, or electrical hazards.
 ====
 
 === Pre-Installation Checklist
@@ -64,13 +64,14 @@ Installation must be performed by qualified technicians. Improper installation v
 
 === Step-by-Step Installation Procedure
 
-==== 1. Prepare Installation Location
+==== Prepare Installation Location
 
 . **Clear the area**: Remove packaging and inspect oven for shipping damage
 . **Measure space**: Verify minimum clearances shown in diagram below
 . **Check flooring**: Ensure floor can support 45 kg distributed load
 
-image::oven-clearances.png[Installation clearances with measurements, width=65%]
+.Minimum installation clearances (not to scale)
+image::oven-clearances.png[Freestanding range with arrows marking minimum top, rear, side, and front clearances, width=65%]
 
 [cols="2,1,2", options="header"]
 |===
@@ -81,7 +82,7 @@ image::oven-clearances.png[Installation clearances with measurements, width=65%]
 |Front |600 mm |Door opening and safe operation
 |===
 
-==== 2. Electrical Connection
+==== Electrical Connection
 
 [DANGER]
 ====
@@ -93,25 +94,25 @@ Turn OFF circuit breaker before making electrical connections. Verify power is O
 . **Connect ground wire**: Green/yellow wire to ground terminal (mandatory)
 . **Install outlet**: NEMA 6-15R grounded outlet within 1.5m of oven location
 
-**Electrical Verification Steps:**
+.Electrical Verification Steps
 . Test outlet voltage with multimeter: 230V ±10% expected
 . Verify ground continuity: <1Ω resistance to ground
 . Test GFCI operation: Press test button, should trip immediately
 . Reset GFCI and verify proper operation
 
-==== 3. Positioning and Leveling
+==== Positioning and Leveling
 
 . **Position oven**: Place in final location, maintaining required clearances
 . **Check stability**: Oven should not rock when door is opened
 . **Adjust leveling feet**: Use adjustable wrench to level oven in both directions
 . **Verify level**: Use spirit level on top surface - bubble within center marks
 
-**Leveling Specifications:**
+.Leveling Specifications
 * Maximum deviation: ±2mm over oven width/depth
 * Door should close smoothly without forcing
 * No gaps >3mm between door and frame when closed
 
-==== 4. Initial Power-On and Testing
+==== Initial Power-On and Testing
 
 . **Connect power**: Plug into grounded outlet firmly
 . **Initial startup**: Press power button - display should illuminate
@@ -148,21 +149,24 @@ Before first use, perform break-in procedure to remove manufacturing residues:
 == Operation
 
 === Control Panel Overview
-image::oven-controls.png[Control panel with numbered callouts, width=50%]
+.Control panel
+image::oven-controls.png[Control panel with four knobs, a digital display, and six push-buttons, each numbered, width=90%]
 
-1. Power button
-2. Mode selector (Bake, Broil, Convection, Self-Clean)
-3. Temperature dial
-4. Digital timer/display
-5. Child lock indicator
+. Power button
+. Mode selector (Bake, Broil, Convection, Self-Clean)
+. Temperature dial
+. Digital timer/display
+. Child lock button
+. Left hob burner knob
+. Right hob burner knob
 
 === Cooking Modes & Procedures
 
 ==== Bake Mode (Conventional Baking)
-**Temperature Range:** 150–250°C
+**Temperature Range:** 150–250°C +
 **Best For:** Bread, cakes, casseroles, roasts
 
-**Procedure:**
+.Procedure
 . Preheat oven to desired temperature (typically 10-15 minutes)
 . Place food on center rack for even heating
 . Use light-colored, non-reflective pans for best results
@@ -181,10 +185,10 @@ image::oven-controls.png[Control panel with numbered callouts, width=50%]
 |===
 
 ==== Broil Mode (High Heat from Top)
-**Temperature:** Fixed at 250°C
+**Temperature:** Fixed at 250°C +
 **Best For:** Browning, crisping, thin cuts of meat
 
-**Procedure:**
+.Procedure
 . Position rack 5-15cm from top element (closer = faster browning)
 . Preheat broiler for 5 minutes
 . Use broiler pan with slotted top to allow fat drainage
@@ -202,24 +206,24 @@ image::oven-controls.png[Control panel with numbered callouts, width=50%]
 |===
 
 ==== Convection Mode (Fan-Assisted)
-**Temperature Range:** 140–230°C (reduce conventional temp by 15-20°C)
+**Temperature Range:** 140–230°C (reduce conventional temp by 15-20°C) +
 **Best For:** Multiple racks, even browning, faster cooking
 
-**Advantages:**
+.Advantages
 * 25% faster cooking times
 * More even browning and heating
 * Ability to use multiple racks simultaneously
 * Better for cookies, pastries, and roasting
 
-**Procedure:**
+.Procedure
 . Reduce conventional recipe temperature by 15-20°C
 . Reduce cooking time by 25% initially, then adjust
 . Use low-sided pans for better air circulation
 . Leave space between pans on multiple racks
 
 ==== Self-Clean Mode
-**Temperature:** 485°C
-**Duration:** 3 hours
+**Temperature:** 485°C +
+**Duration:** 3 hours +
 **Frequency:** Every 3-4 months with normal use
 
 [WARNING]
@@ -227,7 +231,7 @@ image::oven-controls.png[Control panel with numbered callouts, width=50%]
 Do not attempt to open door during Self-Clean cycle. Surface temperatures exceed 400°C. Ensure adequate kitchen ventilation during operation.
 ====
 
-**Self-Clean Procedure:**
+.Self-Clean Procedure
 . Remove all racks, pans, and aluminum foil from oven
 . Wipe up large spills with damp cloth (small residue burns off normally)
 . Close door and select Self-Clean mode
@@ -237,7 +241,7 @@ Do not attempt to open door during Self-Clean cycle. Surface temperatures exceed
 
 === Food Safety Guidelines
 
-**Internal Temperature Requirements (Food Safety):**
+.Internal Temperature Requirements (Food Safety)
 * Poultry (whole): 75°C
 * Ground meat: 70°C
 * Beef/lamb (medium): 60°C
@@ -260,13 +264,13 @@ Do not attempt to open door during Self-Clean cycle. Surface temperatures exceed
 === Annual
 * Professional inspection recommended for heating elements and control circuits.
 
-image::oven-exploded.png[Exploded view with numbered parts, width=50%]
+.Exploded view — serviceable parts
+image::oven-exploded.png[Exploded view of the range with four numbered service parts, width=50%]
 
-.Callouts
-. Heating element — replace if cracked or not heating
-. Convection fan — clean blades, check bearings
-. Door gasket — replace if torn or hardened
 . Light bulb — replace with rated type only
+. Convection fan (behind rear wall) — clean blades, check bearings
+. Door gasket — replace if torn or hardened
+. Heating element (under cavity floor) — replace if cracked or not heating
 
 == Troubleshooting
 
@@ -371,23 +375,24 @@ image::oven-troubleshooting.svg[Troubleshooting diagnostic flowchart, width=70%]
 === When to Contact Service
 
 Call IronClad service (+1-555-0199) when:
+
 * Multiple error codes appear simultaneously
 * Electrical components show signs of burning or melting
 * Oven trips household circuit breaker repeatedly
 * Temperature accuracy cannot be restored through sensor replacement
 * Self-Clean cycle repeatedly fails to complete
-* Any gas odor (if near gas appliances) - evacuate and call gas company immediately
+* Any gas odor — turn off all hob burners, do not operate electrical switches, open windows, evacuate, and call the gas supplier immediately
 
 === Parts & Service Information
 
-**Common Replacement Parts:**
+.Common Replacement Parts
 * Temperature sensor (KO-TEMP-001): $35
 * Heating element (KO-ELEM-001): $65
 * Convection fan assembly (KO-FAN-001): $85
 * Door gasket (KO-SEAL-001): $25
 * Interior light bulb (KO-BULB-001): $8
 
-**Service Schedule:**
+.Service Schedule
 * Annual inspection recommended for heavy-use environments
 * Door seal replacement every 3-4 years
 * Heating element typically lasts 8-10 years with normal use

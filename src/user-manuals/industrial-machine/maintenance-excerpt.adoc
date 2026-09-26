@@ -30,6 +30,17 @@ This document is created for demonstration purposes only.
 *Intended audience:* certified maintenance technicians and supervisors.
 *Scope:* routine service, selected fault codes, and recordkeeping templates.
 
+=== Machine Overview
+
+.CNC-5000 main components
+image::cnc-overview.jpg[Isometric view of the CNC-5000 with five numbered components, width=90%]
+
+. Spindle assembly — lubrication points A/B (see <<service-points>>); monitor temperature trend after service.
+. Way covers — inspect for tears/binding; verify smooth travel across full stroke.
+. Hydraulic unit — replace filter per schedule; verify pressure within spec at idle and load.
+. Coolant tank and chip conveyor — clean intake screen; check return baffles; maintain 6–8% concentration.
+. Emergency stop (E-Stop) — on the operator panel; see <<Emergency Shutdown Procedures>>.
+
 == Safety Requirements
 
 [WARNING]
@@ -55,6 +66,13 @@ Maintenance must be performed only by trained personnel. Lockout/Tagout (LOTO) i
 . Perform maintenance.
 . Remove tools/fixtures, reinstall guards, clear work area.
 . Remove personal locks/tags; restore energy in reverse order; perform a controlled test run.
+
+.Energy isolation points, locked out
+image::cnc-loto.jpg[Main disconnect locked in the OFF position with a padlock and tag, and a pneumatic ball valve locked closed, width=60%]
+
+. Main electrical disconnect — rotated to *OFF*.
+. Personal padlock and blank tag — write your name, date, and reason on the tag.
+. Pneumatic supply ball valve — closed, with valve lockout device and padlock.
 
 [NOTE]
 ====
@@ -240,6 +258,26 @@ Intervals assume two-shift operation in clean, indoor conditions. Increase frequ
 After any maintenance affecting motion, run a short test program and verify part accuracy on a gauge block or test coupon.
 ====
 
+[[service-points]]
+=== Service Points
+
+.Spindle lubrication points (weekly)
+image::cnc-spindle-lube.jpg[Cut-away spindle head with a grease gun connected to the upper fitting A; front fitting B is also marked, width=60%]
+
+* *A* — upper bearing housing fitting.
+* *B* — front bearing housing fitting.
+
+Apply 2–3 pumps of NLGI-2 grease per fitting with the spindle stopped and locked out. Do not over-pack: excess grease raises bearing temperature.
+
+.Hydraulic power unit (monthly filter change)
+image::cnc-hydraulic-unit.jpg[Hydraulic power unit with five numbered service points, width=60%]
+
+. Return-line filter housing — replace the element monthly.
+. Differential-pressure (ΔP) indicator — log the reading before and after the filter change.
+. System pressure gauge — verify ≥ 42 bar at idle (see fault E-301).
+. Oil-level sight glass — keep level above the 75% mark.
+. Reservoir drain valve — use for oil sampling and complete drain-down.
+
 == Fault Codes
 
 [cols="1,2,3,1", options="header"]
@@ -292,20 +330,6 @@ Do **not** clear and restart repeatedly without investigation. Recurrent or inte
 * Servo faults persist after verifying cables, connectors, and supply voltages.
 * Hydraulic pressure fluctuates under steady load or ΔP gauge spikes after filter change.
 
-== Diagrams
-image::cnc-exploded.png[Exploded view with numbered parts, width=70%]
-
-.Callouts
-. Spindle assembly — lubrication points A/B; monitor temperature trend after service.
-. Way covers — inspect for tears/binding; verify smooth travel across full stroke.
-. Hydraulic unit — replace filter per schedule; verify pressure within spec at idle and load.
-. Coolant tank — clean intake screen; check return baffles; maintain 6–8% concentration.
-
-[NOTE]
-====
-Replace this placeholder with the OEM exploded view when available. Keep diagram revision/date in the controlled footer.
-====
-
 == Recordkeeping
 
 === Maintenance Log Template
@@ -339,5 +363,5 @@ Maintain maintenance logs and checklists for **5 years** (or per facility policy
 Doc ID: CNC-5000-MNT-EX-01 +
 Revision: 0.9 (Portfolio Sample) +
 Manufacturer: IronClad Machinery GmbH +
-Figures: Updated exploded view illustration for portfolio clarity
+Figures: machine overview, LOTO isolation points, spindle lubrication points, hydraulic unit service points
 
