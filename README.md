@@ -12,5 +12,4 @@ All companies, products, people and contact details in the samples are fictional
 | Path | Contents |
 |---|---|
 | `src/` | The published samples, one folder per document type |
-| `etc/scripts/` | Tooling used to build the samples (e.g. numbered image callouts) |
 | `.github/` | GitHub Pages build: publishes `src/` as the website |
