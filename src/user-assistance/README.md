@@ -7,12 +7,12 @@ The samples document MuseScore 3.6.2, a real open-source music notation program,
 
 ## What's inside
 
-- **Introduction** (`musescore/introduction.md`): What MuseScore is, how it stores scores, and where to download it
-- **Creating a Score File** (`musescore/creating-a-score-file.md`): Using the New Score Wizard to create a blank score, with a title, three instruments (piano, electric bass, drums), a key signature, and the default time signature and tempo
-- **Creating a Music Part** (`musescore/creating-a-music-part.md`): Entering an electric bass line with the keyboard, mouse, or onscreen piano; ties and slurs; and playing the part back
-- **Frequently Used Features** (`musescore/frequently-used-features.md`): Menu locations, palettes, and keyboard shortcuts for common tasks
+- **[Introduction](musescore/introduction.md)**: What MuseScore is, how it stores scores, and where to download it
+- **[Creating a Score File](musescore/creating-a-score-file.md)**: Using the New Score Wizard to create a blank score, with a title, three instruments (piano, electric bass, drums), a key signature, and the default time signature and tempo
+- **[Creating a Music Part](musescore/creating-a-music-part.md)**: Entering an electric bass line with the keyboard, mouse, or onscreen piano; ties and slurs; and playing the part back
+- **[Frequently Used Features](musescore/frequently-used-features.md)**: Menu locations, palettes, and keyboard shortcuts for common tasks
 
-Sample scores: `musescore/Love_Song.mscz` (the blank three-instrument score) and `musescore/Bass_Line.mscz` (the single-staff bass part used in the note-entry topic).
+Sample scores (open in MuseScore 3.6 or later): [Love_Song.mscz](musescore/Love_Song.mscz) (the blank three-instrument score) and [Bass_Line.mscz](musescore/Bass_Line.mscz) (the single-staff bass part used in the note-entry topic).
 
 ## Highlights
 
