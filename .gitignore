@@ -1,11 +1,8 @@
 *.docx
 *.mscz
+!src/user-assistance/musescore/*.mscz
 *.txt
 
-# Draft iteration rounds for the drill/oven manuals (~150 MB of PNGs).
-# Kept on disk as working material; the selected finals are versioned
-# under src/user-manuals/*/img.
-etc/img/
-
-# Private planning notes (rates, job-search strategy) - not for the public repo.
-etc/notes/
+# Working material (image drafts, build scripts, archived portfolio, private
+# notes) stays local; only src/ is published.
+etc/
