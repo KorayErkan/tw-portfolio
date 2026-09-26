@@ -1,375 +1,1212 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-<title>system-configuration-guide.md</title>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common-light.css" type="text/css">
-<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Nordvale Server 8.5.0 System Configuration Guide</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
 </head>
 <body>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
-          ? 'dark'
-          : 'default'
-    });
-  </script>
-<h1 id="prosoft-v8411-system-configuration-guide">ProSoft v8.4.11 System Configuration Guide</h1>
-<p>This document includes ProSoft proprietary or confidential information and may not be redistributed or disclosed without prior written permission.</p>
-<p>All information contained herein is provided &quot;<em>AS IS</em>&quot; based on the state of the ProSoft system as of the release date. ProSoft reserves the right to make changes to this document without prior notice.</p>
-<hr>
+<h1 id="nordvale-server-8.5.0-system-configuration-guide">Nordvale
+Server 8.5.0 System Configuration Guide</h1>
+<p>All information contained herein is provided “<em>AS IS</em>” based
+on the state of Nordvale Server as of its release date. Nordvale
+reserves the right to make changes to this document without prior
+notice.</p>
+<hr />
 <h2 id="disclaimer">Disclaimer</h2>
-<p>NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT REGARDING INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL PROSOFT BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.</p>
-<hr>
+<p>NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO
+THE CONTENTS OF THIS DOCUMENT, INCLUDING BUT NOT LIMITED TO
+AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY,
+OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL NORDVALE BE LIABLE FOR ANY
+DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF
+PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE
+USE OF THE INFORMATION IN THIS DOCUMENT.</p>
+<hr />
 <h2 id="copyright">Copyright</h2>
-<p><strong>ProSoft</strong> is a registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners.</p>
-<p>© ProSoft 2024.</p>
-<hr>
-<h2 id="table-of-contents">Table of Contents</h2>
+<p><strong>Nordvale</strong> is a registered trademark of Nordvale
+Corporation. Other products mentioned in this document may be trademarks
+of their respective owners.</p>
+<p>© Nordvale Corporation 2026.</p>
+<blockquote>
+<p><strong>Note:</strong> Nordvale, its products, and all hostnames in
+this document are fictitious. This is a portfolio sample.</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of contents</h2>
 <ul>
 <li><a href="#about-this-guide">About this guide</a></li>
 <li><a href="#preliminary-tasks">Preliminary tasks</a>
 <ul>
 <li><a href="#server-requirements">Server requirements</a></li>
 <li><a href="#networking">Networking</a></li>
-<li><a href="#licenses-and-certificates">Licenses and certificates</a></li>
-</ul>
-</li>
+<li><a href="#licenses-and-certificates">Licenses and
+certificates</a></li>
+</ul></li>
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#system-initialization">System initialization</a></li>
 <li><a href="#system-administration">System administration</a>
 <ul>
-<li><a href="#availability-and-provisioning">Availability and provisioning</a></li>
+<li><a href="#availability-and-provisioning">Availability and
+provisioning</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 <li><a href="#decommissioning">Decommissioning</a></li>
+</ul></li>
+<li><a href="#nordvale-hotline">Nordvale hotline</a></li>
 </ul>
-</li>
-</ul>
-<hr>
+<hr />
 <h2 id="about-this-guide">About this guide</h2>
-<p>This guide was prepared to aid administrators in configuring, administrating, and troubleshooting the software system. It is assumed that the software system has been installed previously with the required hadrware configuration and networking infrastructure.</p>
+<p>This guide helps administrators configure, administer, and
+troubleshoot Nordvale Server 8.5.0 on Windows Server 2022 or Windows
+Server 2019. It assumes that Nordvale Server has already been installed
+in the default directory, <code>C:\Program Files\Nordvale</code>, on
+hardware and network infrastructure that meet the requirements below.
+For the installation procedure, see the <em>Nordvale Server Installation
+Guide</em>.</p>
+<p>The examples in this guide use a <em>Professional</em> edition system
+(25 seats) whose web interface is published as
+<code>nordvale.corp.example</code>.</p>
+<p>All command-line procedures run in an elevated PowerShell session
+(<strong>Run as administrator</strong>). Code blocks labeled
+<em>PowerShell</em> contain only commands that you can copy and paste;
+the output you should expect appears in a separate block.</p>
 <h2 id="preliminary-tasks">Preliminary tasks</h2>
-<p>In order for the configuration procedure to continue without any errors or interruption, the servers where the system was installed, the network devices to be used to access the server and the clients, and the licenses and certificates required to use the software system must be ready and in place. To meet these prerequisites, follow the instructions below.</p>
+<p>For the configuration procedure to complete without errors or
+interruptions, the server where Nordvale Server is installed, the
+network devices used to reach it, and the required licenses and
+certificates must be ready and in place. To meet these prerequisites,
+follow the instructions below.</p>
 <h3 id="server-requirements">Server requirements</h3>
-<p>The system has to be installed on a server that meets the following minimum hardware requirements:</p>
-<ul>
-<li>2 blades with 8 quad-core 64-bit AMD processors each</li>
-<li>128 GB RAM</li>
-<li>A 2 TB SSD</li>
-<li>2 x 1 TB SCSI hard drives for redundancy</li>
-</ul>
-<blockquote>
-<p><span id="note-byline">To maintain a robust level of security while managing the traffic, it is strongly advised that the server be placed behind a proxy<br>
-</span></p>
-</blockquote>
-<h3 id="networking">Networking</h3>
-<p>Since the system will be accessed over a network, the following networking hardware must be in place and in working condition:</p>
-<ul>
-<li>A 1000BASE-T (i.e. gigabit) Ethernet</li>
-<li>A proxy to manage the server traffic listening on port 9595</li>
-<li>TCP/IP protocol in place on the server</li>
-</ul>
-<blockquote>
-<p><span id="note-byline">All wireless access must be monitored with cybersecurity software as once access is given to the server system, the software does <strong>not</strong> perform any further security checks.<br>
-</span></p>
-</blockquote>
-<h3 id="licenses-and-certificates">Licenses and certificates</h3>
-<p>During the configuration of the system, licenses (i.e. the <code>*.lic</code> files) and certificates (i.e. the <code>*.cert</code> files) will be required for the system to validate the installation and give access to users with various roles. Make sure that</p>
-<ul>
-<li><em>Licenses</em> are in the root directory where the server is to be installed—assuming the default is not changed, that will be <code>C:\ProSoft</code></li>
-<li><em>Authentification Certificates</em> are in the <code>.\cert</code> directory under the root</li>
-</ul>
-<p>The licensing scheme used by <strong>ProSoft</strong> is as follows:</p>
+<p>Size the server according to your license edition, which determines
+the maximum number of users (seats).</p>
 <table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 25%" />
+<col style="width: 32%" />
+<col style="width: 31%" />
+</colgroup>
 <thead>
 <tr>
-<th>License</th>
-<th>Duration</th>
-<th>Number of Users</th>
-<th>Types</th>
+<th>Component</th>
+<th>Standard (up to 10 users)</th>
+<th>Professional (11–25 users)</th>
+<th>Enterprise (26–250 users)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><em>Enterprise</em></td>
-<td>1 Year</td>
-<td>250</td>
-<td><em>Auditor</em>, <em>Admin</em>, <em>Supervisor</em>, <em>Client</em></td>
+<td><strong>CPU</strong></td>
+<td>4 cores, 2.5 GHz or faster</td>
+<td>8 cores, 2.5 GHz or faster</td>
+<td>16 cores, 2.5 GHz or faster</td>
 </tr>
 <tr>
-<td><em>Professional</em></td>
-<td>1 Year</td>
-<td>100</td>
-<td><em>Admin</em>, <em>Supervisor</em>, <em>Client</em></td>
+<td><strong>Memory</strong></td>
+<td>16 GB</td>
+<td>32 GB</td>
+<td>64 GB ECC</td>
 </tr>
 <tr>
-<td><em>SMB</em></td>
-<td>1 Year</td>
-<td>50</td>
-<td><em>Admin</em>,<em>Client</em></td>
+<td><strong>Primary storage</strong></td>
+<td>250 GB SSD</td>
+<td>500 GB NVMe SSD</td>
+<td>1 TB NVMe SSD, RAID 1</td>
+</tr>
+<tr>
+<td><strong>Backup storage</strong></td>
+<td>1 TB HDD</td>
+<td>2 TB HDD, RAID 1</td>
+<td>8 TB HDD, RAID 6</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td>1 Gigabit Ethernet</td>
+<td>Dual 1 Gigabit Ethernet with failover</td>
+<td>Dual 10 Gigabit Ethernet with link aggregation</td>
+</tr>
+<tr>
+<td><strong>Power</strong></td>
+<td>550 W PSU with UPS</td>
+<td>Redundant 750 W PSUs with UPS</td>
+<td>Redundant 1,600 W PSUs with N+1 UPS</td>
 </tr>
 </tbody>
 </table>
-<p>Certificates must be digitally signed by a recognized CA, and must be renewed after expiry dates.</p>
+<h4 id="environmental-specifications">Environmental specifications</h4>
+<ul>
+<li>Operating temperature: 10 °C to 35 °C (50 °F to 95 °F)</li>
+<li>Humidity: 20% to 80%, non-condensing</li>
+<li>Cooling: plan for about 3,412 BTU/hr per kilowatt of power drawn. A
+fully loaded Enterprise server drawing 1,600 W needs about 5,460 BTU/hr
+of cooling capacity.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> Deploy the server behind a perimeter firewall.
+For Enterprise deployments, place the server in a DMZ that is monitored
+by an intrusion detection system.</p>
+</blockquote>
+<h3 id="networking">Networking</h3>
+<p>Nordvale Server uses a single, fixed network model:</p>
+<ul>
+<li>IIS on the Nordvale server acts as the reverse proxy. It terminates
+TLS on port 443 and publishes both the web interface and the REST API
+(<code>/api/v1</code>).</li>
+<li>IIS forwards requests to the Nordvale Web Service, which listens
+only on the loopback address at <code>https://127.0.0.1:8443</code>.
+Port 8443 is never opened in the firewall.</li>
+<li>Build agents and desktop clients connect directly to the
+communications port, 6650.</li>
+</ul>
+<h4 id="network-infrastructure-requirements">Network infrastructure
+requirements</h4>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 42%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Specification</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Core switch</strong></td>
+<td>Managed Layer 3 switch with VLAN support</td>
+<td>Network backbone</td>
+</tr>
+<tr>
+<td><strong>Perimeter firewall</strong></td>
+<td>Enterprise firewall with IDS/IPS (1 Gbps throughput or higher)</td>
+<td>Security perimeter</td>
+</tr>
+<tr>
+<td><strong>Reverse proxy</strong></td>
+<td>IIS 10 with URL Rewrite and Application Request Routing, on the
+Nordvale server</td>
+<td>TLS termination on port 443</td>
+</tr>
+<tr>
+<td><strong>DNS server</strong></td>
+<td>Primary and secondary DNS, integrated with Active Directory</td>
+<td>Name resolution</td>
+</tr>
+<tr>
+<td><strong>Network monitoring</strong></td>
+<td>SNMP-capable monitoring with 24/7 alerting</td>
+<td>Infrastructure health</td>
+</tr>
+</tbody>
+</table>
+<h4 id="required-network-ports">Required network ports</h4>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 22%" />
+<col style="width: 25%" />
+<col style="width: 20%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th>Port</th>
+<th>Protocol</th>
+<th>Direction</th>
+<th>Service</th>
+<th>Access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>443</td>
+<td>HTTPS</td>
+<td>Inbound</td>
+<td>Web interface and REST API (IIS)</td>
+<td>Corporate network</td>
+</tr>
+<tr>
+<td>6650</td>
+<td>TCP (TLS)</td>
+<td>Inbound</td>
+<td>Communications port for build agents and clients</td>
+<td>Internal networks only</td>
+</tr>
+<tr>
+<td>8443</td>
+<td>HTTPS</td>
+<td>Local only</td>
+<td>Nordvale Web Service behind IIS</td>
+<td>Loopback only; blocked in the firewall</td>
+</tr>
+<tr>
+<td>3389</td>
+<td>RDP</td>
+<td>Inbound</td>
+<td>Administrative access</td>
+<td>VPN only</td>
+</tr>
+<tr>
+<td>443</td>
+<td>HTTPS</td>
+<td>Outbound</td>
+<td>License validation (<code>licensing.nordvale.example</code>)</td>
+<td>Allowed</td>
+</tr>
+<tr>
+<td>5432 or 1433</td>
+<td>TCP</td>
+<td>Outbound</td>
+<td>External PostgreSQL or SQL Server database</td>
+<td>Database server only</td>
+</tr>
+<tr>
+<td>53</td>
+<td>UDP/TCP</td>
+<td>Outbound</td>
+<td>DNS resolution</td>
+<td>Allowed</td>
+</tr>
+<tr>
+<td>123</td>
+<td>UDP</td>
+<td>Outbound</td>
+<td>NTP time synchronization</td>
+<td>Allowed</td>
+</tr>
+<tr>
+<td>587</td>
+<td>TCP</td>
+<td>Outbound</td>
+<td>E-mail notifications (SMTP submission)</td>
+<td>Mail relay only</td>
+</tr>
+</tbody>
+</table>
+<h4 id="firewall-configuration">Firewall configuration</h4>
+<p>The installer creates basic inbound rules. To restrict the
+communications port to internal networks and to block the local web
+service port explicitly, replace them with the following rules in
+Windows Defender Firewall:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the default rules created by the installer</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Remove-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;Nordvale*&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow HTTPS to the IIS reverse proxy</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>New-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;Nordvale Web (HTTPS)&quot;</span> <span class="op">-</span>Direction Inbound <span class="op">-</span>Protocol TCP <span class="op">-</span>LocalPort <span class="dv">443</span> <span class="op">-</span>Action Allow</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Allow the communications port from internal networks only</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>New-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;Nordvale Communications&quot;</span> <span class="op">-</span>Direction Inbound <span class="op">-</span>Protocol TCP <span class="op">-</span>LocalPort <span class="dv">6650</span> <span class="op">-</span>RemoteAddress <span class="dv">10.0</span><span class="op">.</span><span class="dv">0.0</span><span class="op">/</span><span class="dv">8</span><span class="op">,</span> <span class="dv">192.168</span><span class="op">.</span><span class="dv">0.0</span><span class="op">/</span><span class="dv">16</span> <span class="op">-</span>Action Allow</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Block the local web service port from the network</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>New-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;Nordvale Web Service (block)&quot;</span> <span class="op">-</span>Direction Inbound <span class="op">-</span>Protocol TCP <span class="op">-</span>LocalPort <span class="dv">8443</span> <span class="op">-</span>Action Block</span></code></pre></div>
+<h4 id="network-performance-requirements">Network performance
+requirements</h4>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 27%" />
+<col style="width: 33%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Edition</th>
+<th>Minimum bandwidth</th>
+<th>Recommended bandwidth</th>
+<th>Maximum latency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard (up to 10 users)</td>
+<td>100 Mbps</td>
+<td>500 Mbps</td>
+<td>50 ms</td>
+</tr>
+<tr>
+<td>Professional (11–25 users)</td>
+<td>500 Mbps</td>
+<td>1 Gbps</td>
+<td>30 ms</td>
+</tr>
+<tr>
+<td>Enterprise (26–250 users)</td>
+<td>1 Gbps</td>
+<td>10 Gbps</td>
+<td>20 ms</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dns-and-domain-configuration">DNS and domain configuration</h4>
+<p>Create one DNS record for the server. The web interface and the REST
+API share this name.</p>
+<pre class="text"><code>nordvale.corp.example.    A    10.0.1.100</code></pre>
+<p>Domain requirements:</p>
+<ul>
+<li>Active Directory domain membership (recommended)</li>
+<li>Kerberos authentication support</li>
+<li>LDAP connectivity for user management</li>
+<li>A certificate authority for TLS certificates</li>
+</ul>
+<h4 id="reverse-proxy-configuration">Reverse proxy configuration</h4>
+<p>The installer configures IIS as the reverse proxy. For reference, the
+rewrite rule it adds to <code>C:\inetpub\nordvale\web.config</code> is
+shown below. Do not change the target address: the Nordvale Web Service
+accepts connections only on <code>127.0.0.1:8443</code>.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode xml"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">configuration</span>&gt;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">system.webServer</span>&gt;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">rewrite</span>&gt;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">rules</span>&gt;</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">rule</span><span class="ot"> name=</span><span class="st">&quot;Nordvale reverse proxy&quot;</span><span class="ot"> stopProcessing=</span><span class="st">&quot;true&quot;</span>&gt;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          &lt;<span class="kw">match</span><span class="ot"> url=</span><span class="st">&quot;(.*)&quot;</span> /&gt;</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          &lt;<span class="kw">action</span><span class="ot"> type=</span><span class="st">&quot;Rewrite&quot;</span><span class="ot"> url=</span><span class="st">&quot;https://127.0.0.1:8443/{R:1}&quot;</span> /&gt;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        &lt;/<span class="kw">rule</span>&gt;</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">rules</span>&gt;</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">rewrite</span>&gt;</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">system.webServer</span>&gt;</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">configuration</span>&gt;</span></code></pre></div>
+<p>The rule requires the proxy feature of Application Request Routing to
+be enabled at the server level. The installer enables it; to check or
+enable it manually, run:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Set-WebConfigurationProperty <span class="op">-</span>PSPath <span class="st">&quot;MACHINE/WEBROOT/APPHOST&quot;</span> <span class="op">-</span>Filter <span class="st">&quot;system.webServer/proxy&quot;</span> <span class="op">-</span>Name <span class="st">&quot;enabled&quot;</span> <span class="op">-</span>Value <span class="st">&quot;True&quot;</span></span></code></pre></div>
+<blockquote>
+<p><strong>Warning:</strong> Wireless access to Nordvale Server must be
+secured with WPA3-Enterprise authentication at minimum. Isolate all
+wireless traffic in a separate, monitored VLAN. Nordvale Server does not
+perform network-level security validation beyond initial
+authentication.</p>
+</blockquote>
+<h3 id="licenses-and-certificates">Licenses and certificates</h3>
+<p>During configuration, Nordvale Server needs a license file and TLS
+certificates to validate the installation and to grant access to users
+with various roles. Before you continue, make sure that:</p>
+<ul>
+<li>The <em>license file</em>, <code>nordvale.lic</code>, is in
+<code>C:\Program Files\Nordvale\license\</code></li>
+<li>The <em>authentication certificates</em> (<code>*.crt</code> files)
+and the private key are in
+<code>C:\Program Files\Nordvale\certs\</code></li>
+</ul>
+<h4 id="nordvale-license-editions">Nordvale license editions</h4>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 8%" />
+<col style="width: 22%" />
+<col style="width: 32%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr>
+<th>Edition</th>
+<th>Term</th>
+<th>Maximum users</th>
+<th>Available user roles</th>
+<th>Support level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Standard</strong></td>
+<td>1 year</td>
+<td>10</td>
+<td>Admin, Developer, Client</td>
+<td>E-mail</td>
+</tr>
+<tr>
+<td><strong>Professional</strong></td>
+<td>1 year</td>
+<td>25</td>
+<td>Admin, Supervisor, Developer, Client</td>
+<td>Business hours</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>1 year</td>
+<td>250</td>
+<td>Auditor, Admin, Supervisor, Developer, Client</td>
+<td>24/7</td>
+</tr>
+</tbody>
+</table>
+<h4 id="user-role-definitions">User role definitions</h4>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 38%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr>
+<th>Role</th>
+<th>Permissions</th>
+<th>Typical usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Auditor</strong></td>
+<td>Read-only access to all projects, compliance reporting</td>
+<td>Security audits, compliance reviews</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td>Full system administration, user management</td>
+<td>System configuration, troubleshooting</td>
+</tr>
+<tr>
+<td><strong>Supervisor</strong></td>
+<td>Project oversight, team management, reporting</td>
+<td>Project management, resource allocation</td>
+</tr>
+<tr>
+<td><strong>Developer</strong></td>
+<td>Code repository access, build management</td>
+<td>Daily development tasks, code commits</td>
+</tr>
+<tr>
+<td><strong>Client</strong></td>
+<td>Limited project access, view-only dashboards</td>
+<td>Stakeholder reviews, progress monitoring</td>
+</tr>
+</tbody>
+</table>
+<h4 id="certificate-requirements">Certificate requirements</h4>
+<ul>
+<li>Issued by a trusted certificate authority (CA)</li>
+<li>RSA keys of at least 2048 bits, or ECC keys of at least 256
+bits</li>
+<li>Subject Alternative Name (SAN) entry for
+<code>nordvale.corp.example</code></li>
+<li>Wildcard certificates are supported</li>
+</ul>
+<h4 id="certificate-file-locations">Certificate file locations</h4>
+<pre class="text"><code>C:\Program Files\Nordvale\certs\
+├── server.crt          (server certificate)
+├── server.key          (private key; restrict access to Administrators)
+├── intermediate.crt    (intermediate CA certificate)
+├── root.crt            (root CA certificate)
+└── client-auth.crt     (optional: client authentication)</code></pre>
+<h4 id="certificate-renewal-schedule">Certificate renewal schedule</h4>
+<ul>
+<li>Server certificates: renew 30 days before expiration</li>
+<li>Client authentication certificates: renew 60 days before
+expiration</li>
+<li>Automated renewal is available through the ACME protocol, for
+example with Let’s Encrypt</li>
+</ul>
 <h2 id="configuration">Configuration</h2>
-<p>The system's configuration involves making the correct settings required by the server. This can be done either through the GUI or the CLI.</p>
-<span id="gui-byline">
-<p>This involves using the application's <strong>Administration Console</strong>.</p>
+<p>Configuring the system means applying the settings that the server
+needs. You can do this either through the GUI or through the command
+line. Both methods write the settings to the system configuration files
+(<code>*.scf</code>) in <code>C:\Program Files\Nordvale\config\</code>.
+For the file syntax and all available properties, see the <em>Nordvale
+Server Configuration File Reference</em>.</p>
+<p><strong>Using the GUI</strong></p>
+<p>Use the Nordvale <strong>Administration Console</strong>:</p>
+<ol type="1">
+<li>From the <strong>Start</strong> menu, open <strong>Nordvale
+Administration Console</strong>.</li>
+<li>Select <strong>Tools &gt; Settings</strong>. The
+<strong>Settings</strong> window opens.</li>
+<li>Review the settings, which are grouped by function:
 <ul>
-<li>Double click the <strong>ProSoft</strong> icon on the desktop to launch the console</li>
-<li>In the console window, pick the <strong>Tools &gt; Settings</strong> menu item. A window will pop up</li>
-<li>In the <strong>Settings</strong> window, various settings can be found grouped according to the functionality they are related to:
-<ul>
-<li>The <strong>Users</strong> group on the left is where you can add or remove users, set their credentials and the security groups they belong to, and assign them the directories under which the resources managed by <strong>ProSoft©</strong> are located</li>
-<li>The <strong>Resources</strong> group in the middle is for setting the directories the system uses to store various resources it generates and manages</li>
-<li>The <strong>System</strong> group on the right is for assigning the various values the system uses as defaults for marshalling and managing its data</li>
-</ul>
-</li>
-</ul>
-</span>
-<span id="cli-byline">
-<p>This involves running certain scripts—found in the <code>.\admin</code> directory under the root—through the command line. The script to be run depends on the settings to be configured.</p>
-<ul>
-<li>Launch a terminal with elevated (i.e. <strong>admin</strong>) privileges</li>
-<li>On the command line, navigate to the root directory</li>
-</ul>
-<pre id="cmdln-text">
-C:\>cd \ProSoft\admin
-C:\ProSoft\admin>
-</pre>
-<ul>
-<li>At this point, you should have the licenses (the <code>*.lic</code> files) under the root—i.e. the <code>C:\ProSoft\</code> directory—and the certificates (the <code>*.cert</code> files) under the <code>C:\ProSoft\admin\</code> directory. Run the script named <code>sys_config.ps</code> and check the output messages</li>
-</ul>
-<pre id="cmdln-text">
-C:\>ProSoft\admin\sys_config.ps
->>> Configuring system...
->>> Licenses discovered
->>> Certificates discovered
->>> Disks partitioned: 100%
->>> Indexes created
->>> Done
-C:\>ProSoft\admin
-</pre>
-<ul>
-<li>If any of these messages do not appear, you should suspend the configuration procedure and troubleshoot. For this, see the <a href="#troubleshooting">Troubleshooting</a> section below</li>
-<li>After the script has completed, you can exit the terminal</li>
-</ul>
-</span>
+<li>In the <strong>Users</strong> group on the left, add or remove
+users, set their credentials and security groups, and assign the
+directories that hold the resources Nordvale Server manages for
+them.</li>
+<li>In the <strong>Resources</strong> group in the middle, set the
+directories where the system stores the resources it generates and
+manages.</li>
+<li>In the <strong>System</strong> group on the right, set the default
+values the system uses for storing and managing its data.</li>
+</ul></li>
+<li>Click <strong>Apply</strong>, and then click
+<strong>OK</strong>.</li>
+</ol>
+<p><strong>Using the CLI</strong></p>
+<p>Use the configuration scripts in the <code>admin</code>
+directory:</p>
+<ol type="1">
+<li><p>Open PowerShell as an administrator.</p></li>
+<li><p>Change to the <code>admin</code> directory:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;C:\Program Files\Nordvale\admin&quot;</span></span></code></pre></div></li>
+<li><p>Check that the license file is in
+<code>C:\Program Files\Nordvale\license\</code> and the certificates are
+in <code>C:\Program Files\Nordvale\certs\</code>.</p></li>
+<li><p>Run the <code>sys_config.ps1</code> script:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\sys_config<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Nordvale System Configuration 8.5.0
+Checking prerequisites...
+License: 1 valid license found (Professional, 25 seats)
+Certificates: server certificate valid until 2027-12-31
+Initializing database schema... 100% complete
+Creating search indexes... 100% complete
+Configuration completed successfully</code></pre></li>
+<li><p>If any of these messages does not appear, stop the configuration
+procedure and see <a
+href="#troubleshooting">Troubleshooting</a>.</p></li>
+</ol>
 <h2 id="system-initialization">System initialization</h2>
-<p>Before it can be used, the system has to be initialized to verify that its configured state is intact and that all the resources and connections it needs are in place and accessible. The initialization process is carried out as follows.</p>
-<span id="cli-byline">
-<p>To carry out system initialization using the command line,</p>
-<ul>
-<li>Open a terminal with elevated privileges and navigate to the admin directory</li>
-<li>Run the <code>sys_init.ps</code> script entering the required directories, and check the output</li>
-</ul>
-<pre id="cmdln-text">
-C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
->>> Initializing system...
->>> Looking for licenses...
-</pre>
-<p>As the system proceeds with initialization, the status is reported on the command prompt:</p>
-<pre id="cmdln-text">
-C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
->>> Initializing system...
->>> Licenses: Found
->>> Admin module: OK
->>> Users module initializing: \ 97%
-</pre>
-<p>If any of the required files—e.g. certificates—are missing, the initialization procedure halts, and prompts what needs to be done:</p>
-<pre id="cmdln-text">
-C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
->>> Initializing system...
->>> Licenses: Found
->>> Admin module: OK
->>> Users module: OK
->>> Networking module initializing: 24% -> ERROR
-    Certificate(s) required to initialize the module missing.
-    Place a valid certificate in the "..\cert" directory: Resume? [Y/N]
-</pre>
-<p>In that case, follow the instructions to resolve the issue, and resume the process by typing <code>Y</code> at the prompt.</p>
-<p>After the errors are resolved and the system initialization is completed, the process prompts the user with a status:</p>
-<pre id="cmdln-text">
-C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
->>> Initializing system...
->>> Licenses: Found
->>> Admin module: OK
->>> Users module: OK
->>> Networking module initializing: 24% -> ERROR
-    Certificate(s) required to initialize the module missing.
-    Place a valid certificate in the "..\cert" directory: Resume? [Y/N] Y
->>> Networking module: OK
->>> PROCESS COMPLETED!
-C:\ProSoft\admin>
-</pre>
-</span>
+<p>Before it can be used, the system must be initialized. Initialization
+verifies that the configured state is intact and that all required
+resources and connections are in place and accessible.</p>
+<p><strong>Using the CLI</strong></p>
+<ol type="1">
+<li><p>Open PowerShell as an administrator and change to the
+<code>admin</code> directory:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;C:\Program Files\Nordvale\admin&quot;</span></span></code></pre></div></li>
+<li><p>Run the <code>sys_init.ps1</code> script with the certificate
+directory and the license file:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\sys_init<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>CertDir <span class="st">&quot;C:\Program Files\Nordvale\certs&quot;</span> <span class="op">-</span>LicenseFile <span class="st">&quot;C:\Program Files\Nordvale\license\nordvale.lic&quot;</span></span></code></pre></div>
+<p>The script reports the status of each module as it initializes:</p>
+<pre class="text"><code>Nordvale System Initialization 8.5.0
+Validating system prerequisites...
+License validation: PASSED (Professional, 25 seats, expires 2027-12-31)
+Certificate validation: PASSED (valid until 2027-12-31)
+Database connectivity: PASSED (PostgreSQL 16.4)
+Admin module: OK
+Users module: OK
+Networking module: OK
+Initialization completed successfully</code></pre></li>
+<li><p>If a required file is missing or invalid, initialization pauses
+with an error message and a prompt. For example:</p>
+<pre class="text"><code>Certificate validation: FAILED
+  ERROR 1122: Certificate file &#39;server.crt&#39; not found in C:\Program Files\Nordvale\certs\
+  Required files:
+  - server.crt (server certificate)
+  - server.key (private key)
+  - intermediate.crt (CA chain)
+Install valid certificates, then press [R] to retry or [Q] to quit:</code></pre></li>
+<li><p>Resolve the problem (in this example, copy the missing
+certificate files to <code>C:\Program Files\Nordvale\certs\</code>), and
+then press <strong>R</strong> to retry. Initialization resumes from the
+failed check. If you press <strong>Q</strong>, run the script again from
+step 2 after you fix the problem.</p></li>
+</ol>
 <h2 id="system-administration">System administration</h2>
-<p>The system has a number of facilities which cannot be offered unattended. To provide them, the system administrator has to perform the following tasks.</p>
-<h3 id="availability-and-provisioning">Availability and provisioning</h3>
-<p>Availability is measured based on the following criteria:</p>
+<p>Some tasks cannot be performed unattended. The system administrator
+performs them as described below.</p>
+<h3 id="availability-and-provisioning">Availability and
+provisioning</h3>
+<p>Availability is determined by:</p>
 <ul>
-<li>The purchased number of seats with the license</li>
+<li>The number of seats purchased with the license</li>
 <li>The number of seats that have already been provisioned</li>
-<li>Whether the seat and the resources available to it are accessible via the network and using the assigned roles</li>
+<li>Whether each seat, and the resources available to it, can be reached
+over the network with the assigned role</li>
 </ul>
-<p>To provide seats to users, the following procedure must be performed:</p>
-<span id="gui-byline">
-<p>To carry out this task using the graphical interface,</p>
-<ul>
-<li>From the <strong>Properties</strong> menu, open the <strong>Seats</strong> window</li>
-<li>Check the number of seats already in use in the left panel. If there are no seats left, you have to purchase additional seats</li>
-<li>Check the group that the user is a member of to see whether it matches that of any of the available seats</li>
-<li>Assign the user to the seat by filling in his credentials in the middle panel</li>
-<li>Finally, click on the <strong>Provision</strong> button on the bottom right</li>
-</ul>
-</span>
-<span id="cli-byline">
-<p>To carry out this task using the command line,</p>
-<ul>
-<li>Open a terminal with elevated privileges</li>
-<li>Navigate to <code>users</code> directory under the root, i.e. <code>C:\ProSoft\users</code>, and list the files in the directory</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\users>ls * | ft Name
-
+<p>To provision a seat for a user, use one of the following methods.</p>
+<p><strong>Using the GUI</strong></p>
+<ol type="1">
+<li>In the Administration Console, select <strong>Properties &gt;
+Seats</strong>.</li>
+<li>In the left panel, check the number of seats in use. If no seats are
+left, purchase additional seats or upgrade the license edition.</li>
+<li>Check that the user’s group matches that of an available seat.</li>
+<li>In the middle panel, enter the user’s credentials.</li>
+<li>Click <strong>Provision</strong>.</li>
+</ol>
+<p><strong>Using the CLI</strong></p>
+<ol type="1">
+<li><p>Open PowerShell as an administrator and change to the
+<code>users</code> directory:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;C:\Program Files\Nordvale\users&quot;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-ChildItem</span> <span class="op">|</span> <span class="fu">Format-Table</span> Name</span></code></pre></div>
+<p>Expected output (9 seats in use):</p>
+<pre class="text"><code>Name
+----
 adm-3c47db38aa86f032.seat
 adm-78fc4496f3aa5b3f.seat
 cli-4a83c96fe68dfea5.seat
-cli-d6407ede475985f0.seat
 cli-58c8dab0dd8c8fce.seat
 cli-869861562d411ee1.seat
-cli-fc586256b8cbf654.seat
+cli-d6407ede475985f0.seat
 cli-fb6985abc41894f4.seat
+cli-fc586256b8cbf654.seat
 sup-b51ae4a5c25e1658.seat
-prov_seat.ps
-prov_config.cfg
-</pre>
-<ul>
-<li>The seats already in use are the ones listed as <code>*.seat</code> files with hexadecimal numbers in their names. The file named <code>prov_config.cfg</code> contains the relevant data for seat allocation. Find the line in it with the entry <code>MAX_USER</code> using <code>Select-String</code> to learn the maximum seats available for the license. If the number of <code>*.seat</code> files is less than that number, you can provision a seat. If not, you need to purchase additional seats.</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\users>Select-String -Pattern "MAX_USER" -Path prov_config_.cfg
-
-prov_config_.cfg:18:MAX_USER=50
-</pre>
-<ul>
-<li>The script named <code>prov_seat.ps</code> can be run to do this automatically. Running the script with the required parameters will either provision the seat, or, in case there are no available seats, report an error.</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\users>prov_seat.cfg --user-type=client
->>> Checking availability ...
->>> Provisioning ...
->>> The seat was provisioned with id cli-'747ba03cab6fe9c'
-</pre>
-<ul>
-<li>If a seat was successfully provisioned, listing the id will show that a new seat file has been created in the directory.</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\users>ls '*747ba03cab6fe9c*' | ft Name
-
-cli-747ba03cab6fe9c.seat
-</pre>
-</span>
+prov_config.scf
+prov_seat.ps1</code></pre>
+<p>Each provisioned seat is a <code>*.seat</code> file named after its
+role prefix and a 16-digit hexadecimal identifier. The
+<code>prov_config.scf</code> file contains the seat allocation settings
+of the <code>[provisioning]</code> component.</p></li>
+<li><p>Check the maximum number of seats:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Select-String</span> <span class="op">-</span>Pattern <span class="st">&quot;max_seats&quot;</span> <span class="op">-</span>Path <span class="st">&quot;prov_config.scf&quot;</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>prov_config.scf:18:max_seats = 25</code></pre></li>
+<li><p>Run the <code>prov_seat.ps1</code> script to provision the seat.
+The script checks license availability and creates the seat file:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\prov_seat<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>UserType <span class="st">&quot;client&quot;</span> <span class="op">-</span>Username <span class="st">&quot;jane.roe&quot;</span> <span class="op">-</span>Email <span class="st">&quot;jane.roe@corp.example&quot;</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Nordvale Seat Provisioning 8.5.0
+Checking license availability...
+Seats in use: 9 of 25 (16 available)
+Creating user profile for: jane.roe
+Generating security credentials...
+Seat provisioned successfully
+Seat ID: cli-747ba03cab6fe9c2
+Seats in use: 10 of 25 (15 available)</code></pre></li>
+<li><p>Verify that the seat file was created:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-ChildItem</span> <span class="op">-</span>Filter <span class="st">&quot;*747ba03cab6fe9c2*&quot;</span> <span class="op">|</span> <span class="fu">Format-Table</span> Name</span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Name
+----
+cli-747ba03cab6fe9c2.seat</code></pre></li>
+</ol>
 <h3 id="troubleshooting">Troubleshooting</h3>
-<p>An essential part of system administration and maintanence is diagnosing the root causes of issues and resolving them. All troubleshooting must be done using the following general procedure:</p>
-<ul>
-<li>Check the <strong>error code</strong> and the <strong>error message</strong>: the error dialog provides a specific error number to identify the error, and a message explaining the exception that has been raised. The message will provide hints as to how to proceed</li>
-<li>Find the <strong>error code</strong> in the lookup table attached to this guide. It contains useful hints about the possible sources of the error</li>
-<li>Follow the instructions for diagnosing the root cause of the problem. The table provides possible actions and workarounds to resolve the issue</li>
-<li>If the error persists, consult the <a href="#prosoft-hotline"><strong>ProSoft</strong> hotline</a> for expert advice</li>
-</ul>
-<p>The error table provided has the following format:</p>
+<p>Troubleshoot systematically to identify, diagnose, and resolve
+problems.</p>
+<h4 id="general-troubleshooting-procedure">General troubleshooting
+procedure</h4>
+<ol type="1">
+<li><strong>Collect error information:</strong> note the error ID,
+message, timestamp, and user context.</li>
+<li><strong>Check system status:</strong> verify service status,
+resource usage, and network connectivity.</li>
+<li><strong>Consult the error reference:</strong> use the <a
+href="#error-reference-table">error reference table</a> for an initial
+diagnosis.</li>
+<li><strong>Test the fix:</strong> where possible, test the solution in
+a non-production environment first.</li>
+<li><strong>Document the resolution:</strong> record the steps that
+resolved the issue.</li>
+<li><strong>Escalate if necessary:</strong> contact the <a
+href="#nordvale-hotline">Nordvale hotline</a>.</li>
+</ol>
+<h4 id="log-file-locations">Log file locations</h4>
 <table>
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 32%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr>
-<th>Error Id</th>
-<th>Error Message</th>
-<th>Possible Root Cause</th>
-<th>Recommended Action</th>
+<th>Component</th>
+<th>Log file</th>
+<th>Contents</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1122</td>
-<td>No certificates found</td>
-<td><em>There was no registered certificate for the seat type</em></td>
-<td><em>Install the required type of certificate</em></td>
+<td><strong>System core</strong></td>
+<td><code>C:\ProgramData\Nordvale\logs\system.log</code></td>
+<td>Core system operations and errors</td>
 </tr>
 <tr>
-<td>2244</td>
-<td>Certificate invalid</td>
-<td><em>The installed certificate is not recognized by an authority as valid</em></td>
-<td><em>Replace the certificate with a valid one</em></td>
+<td><strong>Authentication</strong></td>
+<td><code>C:\ProgramData\Nordvale\logs\auth.log</code></td>
+<td>User authentication and authorization</td>
 </tr>
 <tr>
-<td>3344</td>
-<td>Certificate invalid</td>
-<td><em>The installed certificate has expired</em></td>
-<td><em>Renew the certificate</em></td>
+<td><strong>REST API</strong></td>
+<td><code>C:\ProgramData\Nordvale\logs\api.log</code></td>
+<td>API requests and responses</td>
+</tr>
+<tr>
+<td><strong>Database</strong></td>
+<td><code>C:\ProgramData\Nordvale\logs\database.log</code></td>
+<td>Database queries and connection issues</td>
+</tr>
+<tr>
+<td><strong>Build engine</strong></td>
+<td><code>C:\ProgramData\Nordvale\logs\builds.log</code></td>
+<td>Build processing and compilation errors</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td><code>C:\ProgramData\Nordvale\logs\network.log</code></td>
+<td>Connectivity and reverse proxy issues</td>
 </tr>
 </tbody>
 </table>
+<h4 id="diagnostic-commands">Diagnostic commands</h4>
+<p>Run these commands from
+<code>C:\Program Files\Nordvale\admin</code>:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the status of the Nordvale services</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\nordvalectl<span class="op">.</span><span class="fu">exe</span> status</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify database connectivity</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\db_test<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>ConnectionTest <span class="op">-</span>ReportHealth</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the REST API endpoints</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\api_test<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>TestAll <span class="op">-</span>ShowLatency</span></code></pre></div>
+<h4 id="error-reference-table">Error reference table</h4>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 19%" />
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 26%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr>
+<th>Error ID</th>
+<th>Error message</th>
+<th>Category</th>
+<th>Root cause</th>
+<th>Recommended action</th>
+<th>Urgency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1001</strong></td>
+<td>Service startup failed</td>
+<td>System</td>
+<td>Insufficient memory or disk space</td>
+<td>Free up resources; check the server requirements</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>1002</strong></td>
+<td>Database connection timeout</td>
+<td>Database</td>
+<td>Network issues or database server down</td>
+<td>Verify database server status and connectivity</td>
+<td>Critical</td>
+</tr>
+<tr>
+<td><strong>1003</strong></td>
+<td>License validation failed</td>
+<td>Licensing</td>
+<td>Invalid, expired, or corrupted license file</td>
+<td>Reinstall a valid license; contact licensing support</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>1004</strong></td>
+<td>TLS certificate error</td>
+<td>Security</td>
+<td>Certificate expired, invalid, or missing</td>
+<td>Renew or replace the certificate; verify the CA chain</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>1122</strong></td>
+<td>Authentication certificates not found</td>
+<td>Security</td>
+<td>Missing certificate files</td>
+<td>Install the required certificates in the <code>certs</code>
+directory</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>1123</strong></td>
+<td>Certificate authority not trusted</td>
+<td>Security</td>
+<td>CA not in the trusted store</td>
+<td>Import the CA certificate into the trusted root store</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>2001</strong></td>
+<td>Memory allocation error</td>
+<td>Performance</td>
+<td>Insufficient RAM or memory leak</td>
+<td>Restart the services; add RAM if the error persists</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>2002</strong></td>
+<td>Disk space critically low</td>
+<td>Storage</td>
+<td>Less than 5% free disk space</td>
+<td>Free up disk space; expand storage</td>
+<td>Critical</td>
+</tr>
+<tr>
+<td><strong>2003</strong></td>
+<td>Network connection lost</td>
+<td>Network</td>
+<td>Network infrastructure failure</td>
+<td>Check cabling, switches, and DNS resolution</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>2004</strong></td>
+<td>Reverse proxy unreachable</td>
+<td>Network</td>
+<td>IIS stopped or rewrite rule misconfigured</td>
+<td>Check the IIS site and the rewrite rule</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>2244</strong></td>
+<td>Certificate validation failed</td>
+<td>Security</td>
+<td>Certificate not recognized by the authority</td>
+<td>Replace with a valid CA-signed certificate</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>3001</strong></td>
+<td>User authentication failed</td>
+<td>Security</td>
+<td>Invalid credentials or account lockout</td>
+<td>Reset the password; check the account status</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>3002</strong></td>
+<td>Access denied to resource</td>
+<td>Security</td>
+<td>Insufficient user permissions</td>
+<td>Review and adjust the user’s role</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>3003</strong></td>
+<td>Session expired</td>
+<td>Security</td>
+<td>Session timeout reached</td>
+<td>Log in again; adjust the session timeout</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>3344</strong></td>
+<td>Certificate expired</td>
+<td>Security</td>
+<td>Certificate past its expiration date</td>
+<td>Renew the certificate immediately</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>4001</strong></td>
+<td>Build process failed</td>
+<td>Build</td>
+<td>Source code errors or missing dependencies</td>
+<td>Review the build log; fix compilation errors</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>4002</strong></td>
+<td>Repository synchronization error</td>
+<td>Version control</td>
+<td>Repository connectivity or authentication</td>
+<td>Check version control credentials and connectivity</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>4003</strong></td>
+<td>API rate limit exceeded</td>
+<td>API</td>
+<td>Too many requests from a single source</td>
+<td>Throttle requests; review API usage</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>5001</strong></td>
+<td>Database query timeout</td>
+<td>Performance</td>
+<td>Slow query or database lock</td>
+<td>Optimize queries; check database performance</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>5002</strong></td>
+<td>Search index corruption</td>
+<td>Performance</td>
+<td>Index files damaged or incomplete</td>
+<td>Rebuild the search indexes; check disk integrity</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>6001</strong></td>
+<td>E-mail notification failed</td>
+<td>Integration</td>
+<td>SMTP configuration error</td>
+<td>Verify the SMTP settings and credentials</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>6002</strong></td>
+<td>External API integration error</td>
+<td>Integration</td>
+<td>Third-party service unavailable</td>
+<td>Check the third-party service; review API keys</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>7001</strong></td>
+<td>Backup process failed</td>
+<td>Maintenance</td>
+<td>Insufficient space or permissions</td>
+<td>Check the backup destination and its permissions</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>7002</strong></td>
+<td>System cleanup failed</td>
+<td>Maintenance</td>
+<td>File system permissions or locks</td>
+<td>Run the cleanup from an elevated prompt</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<h4 id="performance-troubleshooting">Performance troubleshooting</h4>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Record performance metrics every 10 seconds for 5 minutes</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\perf_monitor<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>Duration <span class="dv">300</span> <span class="op">-</span>Interval <span class="dv">10</span> <span class="op">-</span>ExportCSV</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List the 10 processes using the most CPU time</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Process</span> <span class="op">|</span> <span class="fu">Sort-Object</span> CPU <span class="op">-</span>Descending <span class="op">|</span> <span class="fu">Select-Object</span> <span class="op">-</span>First <span class="dv">10</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Test disk I/O on the data directory</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\disk_io_test<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>TestPath <span class="st">&quot;C:\Program Files\Nordvale\data&quot;</span> <span class="op">-</span>Duration <span class="dv">60</span></span></code></pre></div>
+<p>The following PostgreSQL queries help diagnose database performance.
+The slow-query check requires the <code>pg_stat_statements</code>
+extension; the <code>mean_exec_time</code> column is available in
+PostgreSQL 13 and later.</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Count active connections</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> active_connections <span class="kw">FROM</span> pg_stat_activity <span class="kw">WHERE</span> state <span class="op">=</span> <span class="st">&#39;active&#39;</span>;</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- List the 10 slowest queries (mean execution time over 1 second)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">query</span>, mean_exec_time, calls <span class="kw">FROM</span> pg_stat_statements</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> mean_exec_time <span class="op">&gt;</span> <span class="dv">1000</span> <span class="kw">ORDER</span> <span class="kw">BY</span> mean_exec_time <span class="kw">DESC</span> <span class="kw">LIMIT</span> <span class="dv">10</span>;</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- List Nordvale tables by total size, including indexes</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname <span class="op">||</span> <span class="st">&#39;.&#39;</span> <span class="op">||</span> tablename)) <span class="kw">AS</span> total_size</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> pg_tables <span class="kw">WHERE</span> schemaname <span class="op">=</span> <span class="st">&#39;nordvale&#39;</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> pg_total_relation_size(schemaname <span class="op">||</span> <span class="st">&#39;.&#39;</span> <span class="op">||</span> tablename) <span class="kw">DESC</span>;</span></code></pre></div>
+<h4 id="network-troubleshooting">Network troubleshooting</h4>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the web interface and REST API through IIS</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Test-NetConnection <span class="op">-</span>ComputerName <span class="st">&quot;nordvale.corp.example&quot;</span> <span class="op">-</span>Port <span class="dv">443</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the communications port</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>Test-NetConnection <span class="op">-</span>ComputerName <span class="st">&quot;nordvale.corp.example&quot;</span> <span class="op">-</span>Port <span class="dv">6650</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check DNS resolution</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>Resolve-DnsName <span class="st">&quot;nordvale.corp.example&quot;</span> <span class="op">-</span>Type A</span></code></pre></div>
+<h4 id="certificate-troubleshooting">Certificate troubleshooting</h4>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Report certificates that expire within 30 days</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\cert_check<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>CertDir <span class="st">&quot;C:\Program Files\Nordvale\certs&quot;</span> <span class="op">-</span>WarnDays <span class="dv">30</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the certificate chain with the built-in Windows tool</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>certutil <span class="op">-</span>verify <span class="st">&quot;C:\Program Files\Nordvale\certs\server.crt&quot;</span></span></code></pre></div>
+<p>If OpenSSL is installed on the server, you can inspect the
+certificate and verify the full chain, supplying the intermediate
+certificate as untrusted input:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>openssl x509 <span class="op">-</span>in <span class="st">&quot;C:\Program Files\Nordvale\certs\server.crt&quot;</span> <span class="op">-</span>text <span class="op">-</span>noout</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>openssl verify <span class="op">-</span>CAfile <span class="st">&quot;C:\Program Files\Nordvale\certs\root.crt&quot;</span> <span class="op">-</span>untrusted <span class="st">&quot;C:\Program Files\Nordvale\certs\intermediate.crt&quot;</span> <span class="st">&quot;C:\Program Files\Nordvale\certs\server.crt&quot;</span></span></code></pre></div>
 <h3 id="decommissioning">Decommissioning</h3>
-<p>If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it.</p>
-<span id="cli-byline">
-<p>To decommission the system,</p>
-<ul>
-<li>Open a terminal window with elevated privileges</li>
-<li>Navigate to <code>C:\ProSoft\admin</code> with using <code>cd</code></li>
-<li>Run the <code>.\decomm_sys.ps</code> script to gather information about the current state of the resources the system uses. This script will generate a report named <code>res_info.csv</code> under the <code>.\admin</code> directory</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\users>decomm_sys.ps
->>> Initializing decommissioning system ...
->>> Resource list is being generated ...
->>> Done
-
-C:\ProSoft\users>ls *csv | ft Name
-
-sys_res.csv
-</pre>
-<ul>
-<li>Using the report, back up all the legacy data. These are the <code>*.dat</code>, <code>*.dbx</code>, <code>*.idx</code>, <code>*.cfg</code>, <code>*.ps</code>, and <code>*.md</code> files</li>
-<li>Release the certificates by running the <code>cert_rel.ps</code> script</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\users>cert_rel.ps
->>> Releasing certificates ...
->>> Done
-</pre>
-<ul>
-<li>Remove the licenses by running the <code>uninst_lic.ps</code> script</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\users>uninst_lic.ps
->>> Uninstalling license ...
->>> Done
-</pre>
+<p>If the system no longer meets your needs, decommission it as follows.
+All backups in this procedure are written to a single timestamped
+directory outside the installation directory, which the uninstaller does
+not touch.</p>
+<p><strong>Using the CLI</strong></p>
+<ol type="1">
+<li><p>Open PowerShell as an administrator, change to the
+<code>admin</code> directory, and define the backup directory:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;C:\Program Files\Nordvale\admin&quot;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="va">$backupDir</span> <span class="op">=</span> <span class="st">&quot;D:\Backups\Nordvale_</span><span class="op">$(</span><span class="fu">Get-Date</span> <span class="op">-</span>Format <span class="st">&#39;yyyyMMdd_HHmmss&#39;</span><span class="op">)</span><span class="st">&quot;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">New-Item</span> <span class="op">-</span>ItemType Directory <span class="op">-</span>Path <span class="va">$backupDir</span></span></code></pre></div></li>
+<li><p>Generate an inventory of all resources and dependencies:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\decomm_sys<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>GenerateReport <span class="op">-</span>BackupPath <span class="va">$backupDir</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Nordvale Decommissioning Tool 8.5.0
+Analyzing system configuration...
+Active user sessions: 7
+Project repositories: 156 projects, 45.2 GB
+Database schema: 47 tables, 2.3 million records
+Report saved: D:\Backups\Nordvale_20260926_140512\system_inventory.csv
+Decommissioning analysis complete</code></pre></li>
+<li><p>Notify users and stop all Nordvale services, so that no data
+changes during the backup:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\nordvalectl<span class="op">.</span><span class="fu">exe</span> stop <span class="op">--</span>notify-users <span class="op">--</span>grace-period <span class="dv">300</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Sending shutdown notification to 7 active users
+Grace period: 5 minutes
+Stopping Nordvale Core Service... STOPPED
+Stopping Nordvale Web Service... STOPPED
+Stopping Nordvale Build Engine... STOPPED
+All services stopped</code></pre></li>
+<li><p>Back up the database, configuration, license, certificates, and
+projects:</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export the database with schema and data</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\db_backup<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>BackupPath <span class="st">&quot;</span><span class="va">$backupDir</span><span class="st">\database_backup.sql&quot;</span> <span class="op">-</span>IncludeSchema <span class="op">-</span>IncludeData</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Back up configuration files, the license, and certificates</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Copy-Item</span> <span class="op">-</span>Path <span class="st">&quot;C:\Program Files\Nordvale\config&quot;</span> <span class="op">-</span>Destination <span class="st">&quot;</span><span class="va">$backupDir</span><span class="st">\config&quot;</span> <span class="op">-</span>Recurse</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Copy-Item</span> <span class="op">-</span>Path <span class="st">&quot;C:\Program Files\Nordvale\license&quot;</span> <span class="op">-</span>Destination <span class="st">&quot;</span><span class="va">$backupDir</span><span class="st">\license&quot;</span> <span class="op">-</span>Recurse</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Copy-Item</span> <span class="op">-</span>Path <span class="st">&quot;C:\Program Files\Nordvale\certs&quot;</span> <span class="op">-</span>Destination <span class="st">&quot;</span><span class="va">$backupDir</span><span class="st">\certs&quot;</span> <span class="op">-</span>Recurse</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Back up project repositories with their history</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\backup_projects<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>BackupPath <span class="st">&quot;</span><span class="va">$backupDir</span><span class="st">\projects&quot;</span> <span class="op">-</span>IncludeHistory</span></code></pre></div></li>
+<li><p>Remove the certificates from the certificate store and revoke all
+authentication tokens:</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\cert_manager<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>Action Release <span class="op">-</span>RevokeTokens</span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Removing certificates from the LocalMachine\My store...
+Revoking 10 seat credentials and 42 API tokens...
+Certificate cleanup completed</code></pre></li>
+<li><p>Deactivate the license so that its seats can be reused on another
+server:</p>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\license_manager<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>Action Deactivate <span class="op">-</span>LicenseFile <span class="st">&quot;C:\Program Files\Nordvale\license\nordvale.lic&quot;</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Deactivating Nordvale Professional license...
+Contacting licensing.nordvale.example...
+License deactivated; 25 seats released for reuse</code></pre></li>
+<li><p>Uninstall Nordvale Server, keeping the logs for audit
+purposes:</p>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\uninst_sys<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>RemoveData <span class="op">-</span>PreserveLogs</span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Nordvale System Uninstaller 8.5.0
+Removing application files...
+Removing Windows services...
+Cleaning registry entries...
+Preserving log files for audit trail...
+Uninstallation completed
+Preserved: C:\ProgramData\Nordvale\logs</code></pre></li>
+</ol>
+<h4 id="post-decommissioning-tasks">Post-decommissioning tasks</h4>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that no Nordvale services remain</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Service</span> <span class="op">-</span>Name <span class="st">&quot;Nordvale*&quot;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List startup entries that still reference Nordvale (remove any you find)</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-CimInstance</span> <span class="op">-</span>ClassName Win32_StartupCommand <span class="op">|</span> <span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Command</span> <span class="op">-like</span> <span class="st">&quot;*Nordvale*&quot;</span> <span class="op">}</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the firewall rules</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>Remove-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;Nordvale*&quot;</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the scheduled tasks</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>Get-ScheduledTask <span class="op">-</span>TaskName <span class="st">&quot;*Nordvale*&quot;</span> <span class="op">|</span> Unregister-ScheduledTask <span class="op">-</span>Confirm<span class="op">:</span><span class="va">$false</span></span></code></pre></div>
 <blockquote>
-<p><span id="warning-byline">Keep the certificates and licenses in a safe place in case the system needs to be reinstalled in the future<br>
-</span></p>
-</blockquote>
+<p><strong>Note:</strong> Store the following items securely in case you
+need to restore the system:</p>
 <ul>
-<li>Finally, uninstall the software by running the <code>uninst_sys.ps</code> script</li>
+<li>The database backup</li>
+<li>All certificate files, including private keys (in encrypted
+storage)</li>
+<li>The license file and activation records</li>
+<li>Configuration files and custom scripts</li>
+<li>User access logs and audit trails</li>
 </ul>
-<p>After the uninstall process completes, the <code>C:\ProSoft</code> root directory and the <code>.\admin</code> and <code>.\cert</code> directories under it will remain. You can delete these manually.</p>
-<blockquote>
-<p><span id="warning-byline">It is strongly recommended that you back up the <code>C:\ProSoft</code>, <code>C:\ProSoft\admin</code>, and the <code>C:\ProSoft\cert</code> directories before you delete them.</p>
-<p>It is also recommended that the directory structure of the resources at the time of decommissioning is not tampered with during or after the back up process.<br>
-</span></p>
+<p>Keep decommissioning backups for at least 3 years for compliance and
+disaster recovery purposes.</p>
 </blockquote>
-</span>
-<hr>
-<h2 id="prosoft-hotline"><strong>ProSoft</strong> Hotline</h2>
-<p>In case there are issues you are unable to resolve using available <em>User Assistance</em> material, you can reach <strong>ProSoft</strong> free of charge for expert advice through:</p>
-<p><em>Phone</em>: 850-555-6677</p>
-<p><em>E-mail</em>: <a href="support@prosoft.com">support@prosoft.com</a></p>
-<hr>
-
+<hr />
+<h2 id="nordvale-hotline">Nordvale hotline</h2>
+<p>If you cannot resolve an issue with the available user assistance
+material, contact Nordvale free of charge for expert advice:</p>
+<p><em>Phone</em>: +1 850-555-0167</p>
+<p><em>E-mail</em>: <a
+href="mailto:support@nordvale.example">support@nordvale.example</a></p>
 </body>
 </html>

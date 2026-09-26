@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Parsing Web Requests with the GoodWeb&amp;trade; API
+(JavaScript)</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
+</head>
+<body>
+<h1 id="parsing-web-requests-with-the-goodweb-api-javascript">Parsing
+Web Requests with the <em>GoodWeb</em>™ API (JavaScript)</h1>
+<p><a href="mailto:john.saysitall@goodcode.example"><em>John
+Saysitall</em></a></p>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#url-structure">URL Structure</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#core-functions">Core Functions</a>
+<ul>
+<li><a href="#createrequest">CreateRequest</a></li>
+<li><a href="#getprotocol">GetProtocol</a></li>
+<li><a href="#getrootdomain">GetRootDomain</a></li>
+<li><a href="#getsubdomain">GetSubdomain</a></li>
+<li><a href="#getendpoint">GetEndpoint</a></li>
+<li><a href="#getqueryparameters">GetQueryParameters</a></li>
+</ul></li>
+<li><a href="#utility-functions">Utility Functions</a>
+<ul>
+<li><a href="#validateurl">ValidateURL</a></li>
+<li><a href="#gethttpmethod">GetHTTPMethod</a></li>
+<li><a href="#getheaders">GetHeaders</a></li>
+<li><a href="#parserequestbody">ParseRequestBody</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>The <strong>GoodWeb</strong> API parses incoming web requests for a
+server written in JavaScript. The same API is also documented for the
+Kozmos language in <a href="parsing-web-requests-kozmos.html">Parsing
+Web Requests with the GoodWeb API (Kozmos)</a>; both bindings behave
+identically.</p>
+<p>When the server receives an HTTP request, it passes the request URL
+to <code>CreateRequest</code>. The returned <code>Request</code> object
+wraps the <em>whole</em> HTTP request:</p>
+<ul>
+<li>The <strong>core functions</strong> parse the request URL into its
+components.</li>
+<li>The <strong>utility functions</strong> validate URLs and read the
+other parts of the HTTP request: its method, headers, and body.</li>
+</ul>
+<p>Each example below ends with a <code>// →</code> comment showing the
+result for the sample URL.</p>
+<h2 id="url-structure">URL Structure</h2>
+<p>URLs contain up to five components, in this order:</p>
+<pre class="text"><code>https://www.goodfood.example/vegetarian/products?brand=elite
+└─1─┘   └2┘ └──────3───────┘└────────4─────────┘└────5─────┘</code></pre>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 23%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Component</th>
+<th>Required</th>
+<th>Example</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Protocol</strong></td>
+<td>Yes</td>
+<td><code>https</code>, <code>http</code>, <code>ftp</code></td>
+<td>Communication method</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Subdomain</strong></td>
+<td>No</td>
+<td><code>www</code>, <code>api</code>, <code>www.diabetic</code></td>
+<td>Service routing</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Root domain</strong></td>
+<td>Yes</td>
+<td><code>goodfood.example</code></td>
+<td>Site identification</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Endpoint</strong></td>
+<td>No</td>
+<td><code>/products</code>, <code>/vegetarian/products</code></td>
+<td>Resource path</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Query string</strong></td>
+<td>No</td>
+<td><code>?brand=elite&amp;price&lt;=15</code></td>
+<td>Parameter data</td>
+</tr>
+</tbody>
+</table>
+<p>The root domain is always the last two labels of the host name;
+everything before it is the subdomain. Query parameters use one of the
+relational operators <code>=</code>, <code>&lt;</code>,
+<code>&gt;</code>, <code>&lt;=</code>, or <code>&gt;=</code> between the
+name and the value.</p>
+<h2 id="setup">Setup</h2>
+<p>The examples below assume that the API has been loaded, and a server
+object and a database object have been created:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    WebServer<span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    Database<span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    MalformedURLException<span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ProtocolNotSupportedException<span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ParameterNotFoundException<span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    InvalidFormatException<span class="op">,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>} <span class="op">=</span> <span class="pp">require</span>(<span class="st">&quot;goodweb&quot;</span>)<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> server <span class="op">=</span> <span class="kw">new</span> <span class="fu">WebServer</span>()<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> database <span class="op">=</span> Database<span class="op">.</span><span class="fu">Instance</span>()<span class="op">;</span></span></code></pre></div>
+<p>All exception types are subclasses of JavaScript’s
+<code>Error</code>, so they carry a <code>message</code> property and
+can be told apart with <code>instanceof</code>.</p>
+<h2 id="core-functions">Core Functions</h2>
+<h3 id="createrequest">CreateRequest</h3>
+<p>Creates and validates a request object from the URL of an incoming
+HTTP request.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.CreateRequest(url: String): WebServer.Request</code></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>url</code>: the URL string to parse</li>
+</ul>
+<p><strong>Returns:</strong> a <code>WebServer.Request</code> object, or
+<code>null</code> if the URL is empty</p>
+<p><strong>Exceptions:</strong> <code>MalformedURLException</code> if
+the URL is not well formed, including when it has no protocol (the
+protocol is required)</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">handle</span>(url) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> request <span class="op">=</span> server<span class="op">.</span><span class="fu">CreateRequest</span>(url)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (request <span class="op">===</span> <span class="kw">null</span>) <span class="cf">return</span><span class="op">;</span> <span class="co">// empty URL: nothing to process</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Process request...</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> request<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> (e) {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (e <span class="kw">instanceof</span> MalformedURLException) {</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            server<span class="op">.</span><span class="fu">DisplayErrorPage</span>(e<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        } <span class="cf">else</span> {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">throw</span> e<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">handle</span>(<span class="st">&quot;https://api.goodfood.example/products&quot;</span>)<span class="op">;</span> <span class="co">// → Request object</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">handle</span>(<span class="st">&quot;api.goodfood.example/products&quot;</span>)<span class="op">;</span>         <span class="co">// → error page: protocol missing</span></span></code></pre></div>
+<h3 id="getprotocol">GetProtocol</h3>
+<p>Extracts the protocol (scheme) from the request URL. Because
+<code>CreateRequest</code> rejects URLs without a protocol, this
+function never returns an empty string.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.GetProtocol(): String</code></p>
+<p><strong>Returns:</strong> the protocol string: <code>http</code>,
+<code>https</code>, <code>ftp</code>, or <code>news</code></p>
+<p><strong>Exceptions:</strong>
+<code>ProtocolNotSupportedException</code> for any other protocol, such
+as <code>file</code></p>
+<p><strong>Supported protocols:</strong></p>
+<ul>
+<li><code>http</code>: standard web traffic</li>
+<li><code>https</code>: secure web traffic</li>
+<li><code>ftp</code>: file transfer</li>
+<li><code>news</code>: news feeds</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// request = server.CreateRequest(&quot;https://www.goodfood.example&quot;)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> protocol <span class="op">=</span> request<span class="op">.</span><span class="fu">GetProtocol</span>()<span class="op">;</span> <span class="co">// → &quot;https&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    request<span class="op">.</span><span class="fu">CommunicateOver</span>(protocol)<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">catch</span> (e) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (e <span class="kw">instanceof</span> ProtocolNotSupportedException) {</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        server<span class="op">.</span><span class="fu">DisplayErrorPage</span>(e<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">throw</span> e<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="getrootdomain">GetRootDomain</h3>
+<p>Extracts the root domain (the last two labels of the host name) from
+the URL. A host with fewer than two labels, such as
+<code>https://goodfood</code>, is already rejected by
+<code>CreateRequest</code>.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.GetRootDomain(): String</code></p>
+<p><strong>Returns:</strong> the root domain string</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// request = server.CreateRequest(&quot;https://www.diabetic.goodfood.example&quot;)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> <span class="bu">root</span> <span class="op">=</span> request<span class="op">.</span><span class="fu">GetRootDomain</span>()<span class="op">;</span> <span class="co">// → &quot;goodfood.example&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>request<span class="op">.</span><span class="fu">SetRootTo</span>(<span class="bu">root</span>)<span class="op">;</span></span></code></pre></div>
+<h3 id="getsubdomain">GetSubdomain</h3>
+<p>Extracts the subdomain (all labels before the root domain) from the
+URL.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.GetSubdomain(): String</code></p>
+<p><strong>Returns:</strong> the subdomain string, or an empty string if
+there is none</p>
+<p><strong>Results for sample URLs:</strong></p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://api.goodfood.example</code></td>
+<td><code>"api"</code></td>
+</tr>
+<tr>
+<td><code>https://www.diabetic.goodfood.example</code></td>
+<td><code>"www.diabetic"</code></td>
+</tr>
+<tr>
+<td><code>https://goodfood.example</code></td>
+<td><code>""</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// request = server.CreateRequest(&quot;https://api.goodfood.example&quot;)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> subdomain <span class="op">=</span> request<span class="op">.</span><span class="fu">GetSubdomain</span>()<span class="op">;</span> <span class="co">// → &quot;api&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (subdomain <span class="op">!==</span> <span class="st">&quot;&quot;</span> <span class="op">&amp;&amp;</span> subdomain <span class="op">!==</span> <span class="st">&quot;www&quot;</span>) {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span><span class="fu">RedirectTo</span>(subdomain)<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="getendpoint">GetEndpoint</h3>
+<p>Extracts the endpoint (the full path after the host name) from the
+URL.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.GetEndpoint(): String</code></p>
+<p><strong>Returns:</strong> the endpoint path, or <code>"/"</code> if
+the URL has no path</p>
+<p><strong>Results for sample URLs:</strong></p>
+<table>
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr>
+<th>URL</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://www.goodfood.example</code></td>
+<td><code>"/"</code></td>
+</tr>
+<tr>
+<td><code>https://www.goodfood.example/products</code></td>
+<td><code>"/products"</code></td>
+</tr>
+<tr>
+<td><code>https://www.goodfood.example/recipes/vegetarian</code></td>
+<td><code>"/recipes/vegetarian"</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// request = server.CreateRequest(&quot;https://www.goodfood.example/recipes/vegetarian&quot;)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> endpoint <span class="op">=</span> request<span class="op">.</span><span class="fu">GetEndpoint</span>()<span class="op">;</span> <span class="co">// → &quot;/recipes/vegetarian&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (server<span class="op">.</span><span class="at">Endpoints</span><span class="op">.</span><span class="fu">includes</span>(endpoint)) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span><span class="fu">RouteToEndpoint</span>(endpoint)<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span><span class="fu">DisplayNotFoundPage</span>(endpoint)<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="getqueryparameters">GetQueryParameters</h3>
+<p>Parses the query string into a <code>Map</code>. The keys are the
+parameter names; each value is an object of the form
+<code>{ operator, value }</code>.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.GetQueryParameters(): Map&lt;String, {operator: String, value: String}&gt;</code></p>
+<p><strong>Returns:</strong> a <code>Map</code> of parameter names and
+conditions, or an empty <code>Map</code> if the URL has no query
+string</p>
+<p><strong>Exceptions:</strong> <code>ParameterNotFoundException</code>
+if a parameter <em>name</em> is not recognized by the endpoint (for
+example, <code>?brnad=elite</code> on <code>/products</code>). Parameter
+values are not validated.</p>
+<p><strong>Query format:</strong>
+<code>?name1=value1&amp;name2&lt;=value2&amp;name3=value3</code></p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// request = server.CreateRequest(</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">//     &quot;https://www.goodfood.example/vegetarian/products?brand=elite&amp;price&lt;=15&amp;home-delivery=true&quot;)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span> {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> params <span class="op">=</span> request<span class="op">.</span><span class="fu">GetQueryParameters</span>()<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// → Map(3) {</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">//     &quot;brand&quot; =&gt; { operator: &quot;=&quot;, value: &quot;elite&quot; },</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">//     &quot;price&quot; =&gt; { operator: &quot;&lt;=&quot;, value: &quot;15&quot; },</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">//     &quot;home-delivery&quot; =&gt; { operator: &quot;=&quot;, value: &quot;true&quot; } }</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (params<span class="op">.</span><span class="at">size</span> <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> dataset <span class="op">=</span> database<span class="op">.</span><span class="fu">GetDatasetFor</span>(params)<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        server<span class="op">.</span><span class="fu">DisplayPageFor</span>(dataset)<span class="op">;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>} <span class="cf">catch</span> (e) {</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (e <span class="kw">instanceof</span> ParameterNotFoundException) {</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        server<span class="op">.</span><span class="fu">DisplayErrorPage</span>(e<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">throw</span> e<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="utility-functions">Utility Functions</h2>
+<h3 id="validateurl">ValidateURL</h3>
+<p>Checks whether a URL is well formed without creating a request
+object. It applies the same rules as <code>CreateRequest</code>, so a
+URL without a protocol is invalid.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.ValidateURL(url: String): Boolean</code></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>url</code>: the URL string to validate</li>
+</ul>
+<p><strong>Returns:</strong> <code>true</code> if the URL is well
+formed, <code>false</code> otherwise</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>WebServer<span class="op">.</span><span class="fu">ValidateURL</span>(<span class="st">&quot;https://api.goodfood.example&quot;</span>)<span class="op">;</span> <span class="co">// → true</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>WebServer<span class="op">.</span><span class="fu">ValidateURL</span>(<span class="st">&quot;api.goodfood.example&quot;</span>)<span class="op">;</span>         <span class="co">// → false (no protocol)</span></span></code></pre></div>
+<h3 id="gethttpmethod">GetHTTPMethod</h3>
+<p>Returns the method of the HTTP request that the request object
+wraps.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.GetHTTPMethod(): String</code></p>
+<p><strong>Returns:</strong> the HTTP method in upper case, such as
+<code>GET</code>, <code>POST</code>, <code>PUT</code>,
+<code>DELETE</code>, <code>PATCH</code>, or <code>OPTIONS</code></p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> method <span class="op">=</span> request<span class="op">.</span><span class="fu">GetHTTPMethod</span>()<span class="op">;</span> <span class="co">// → &quot;GET&quot; for a page load</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">switch</span> (method) {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">&quot;GET&quot;</span><span class="op">:</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        server<span class="op">.</span><span class="fu">HandleGetRequest</span>(request)<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">&quot;POST&quot;</span><span class="op">:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        server<span class="op">.</span><span class="fu">HandlePostRequest</span>(request)<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        server<span class="op">.</span><span class="fu">ReturnMethodNotAllowed</span>(method)<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="getheaders">GetHeaders</h3>
+<p>Returns the headers of the HTTP request that the request object
+wraps.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.GetHeaders(): Map&lt;String, String&gt;</code></p>
+<p><strong>Returns:</strong> a <code>Map</code> of header names and
+values. Header names are stored in lower case, because HTTP header names
+are case-insensitive.</p>
+<p><strong>Common headers:</strong> <code>content-type</code>,
+<code>authorization</code>, <code>accept</code>,
+<code>user-agent</code></p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> headers <span class="op">=</span> request<span class="op">.</span><span class="fu">GetHeaders</span>()<span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> contentType <span class="op">=</span> headers<span class="op">.</span><span class="fu">get</span>(<span class="st">&quot;content-type&quot;</span>)<span class="op">;</span> <span class="co">// → &quot;application/json&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> auth <span class="op">=</span> headers<span class="op">.</span><span class="fu">get</span>(<span class="st">&quot;authorization&quot;</span>)<span class="op">;</span>       <span class="co">// → undefined if not sent</span></span></code></pre></div>
+<h3 id="parserequestbody">ParseRequestBody</h3>
+<p>Parses the body of the HTTP request that the request object wraps.
+The body is typically sent with <code>POST</code>, <code>PUT</code>, and
+<code>PATCH</code> requests.</p>
+<p><strong>Syntax:</strong>
+<code>WebServer.Request.ParseRequestBody(format: String): Object</code></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>format</code>: the expected format: <code>json</code>,
+<code>form</code>, or <code>xml</code></li>
+</ul>
+<p><strong>Returns:</strong> a plain object containing the parsed
+data</p>
+<p><strong>Exceptions:</strong> <code>InvalidFormatException</code> if
+the body is not valid in the given format</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Body: {&quot;user_id&quot;: 42, &quot;email&quot;: &quot;jane@goodfood.example&quot;}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span> {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> request<span class="op">.</span><span class="fu">ParseRequestBody</span>(<span class="st">&quot;json&quot;</span>)<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> userId <span class="op">=</span> data<span class="op">.</span><span class="at">user_id</span><span class="op">;</span> <span class="co">// → 42</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> email <span class="op">=</span> data<span class="op">.</span><span class="at">email</span><span class="op">;</span>    <span class="co">// → &quot;jane@goodfood.example&quot;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    server<span class="op">.</span><span class="fu">UpdateUser</span>(userId<span class="op">,</span> email)<span class="op">;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">catch</span> (e) {</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (e <span class="kw">instanceof</span> InvalidFormatException) {</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        server<span class="op">.</span><span class="fu">ReturnBadRequest</span>(e<span class="op">.</span><span class="at">message</span>)<span class="op">;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">throw</span> e<span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li>The <strong>GoodWeb</strong> API Handbook, pp. 18–22</li>
+<li>The <a href="https://goodweb.example">GoodWeb Server</a> API
+discussion thread</li>
+<li>The <strong>GoodWeb</strong> message board on <a
+href="https://procoders.example">Pro-Coders</a></li>
+</ul>
+</body>
+</html>

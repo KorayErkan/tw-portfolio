@@ -1,6 +1,15 @@
 body {
-	font-family: "Calibri";
+	font-family: Calibri, Carlito, "Segoe UI", system-ui, sans-serif;
 	font-size: 14pt;
+	line-height: 1.45;
+	max-width: 62em;
+	margin: 0 auto;
+	padding: 0 1.5em 3em;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
 }
 
 a, b, h1, h2, h3, h4, th {
@@ -23,12 +32,13 @@ th {
 }
 
 code, pre {
-	font-family: "Monaco", monospace;
+	font-family: Consolas, Menlo, Monaco, monospace;
 	font-size: 14px;
 	color: black;
 }
 
-pre, div {
+pre {
+	overflow-x: auto;
 	border: 1px solid;
 	border-color: #7F7F7F;
 	background-color: #F0F0F0;
@@ -82,7 +92,7 @@ blockquote {
 }
 
 #url-segment {
-	font-family: "Monaco", monospace;
+	font-family: Consolas, Menlo, Monaco, monospace;
 	font-size: 14px;
 }
 
@@ -130,4 +140,20 @@ blockquote {
 	margin-right: 5px;
 	display: inline-block;
 	content: "Using the CLI";
+}
+
+/* Pandoc wraps highlighted code in div.sourceCode; box the <pre> only. */
+div.sourceCode {
+	margin-left: 50px;
+	margin-bottom: 10px;
+}
+
+div.sourceCode > pre {
+	margin-left: 0;
+}
+
+@media (max-width: 700px) {
+	body { font-size: 12pt; }
+	table, pre, div.sourceCode, #mail-address { margin-left: 0; }
+	table { display: block; overflow-x: auto; }
 }

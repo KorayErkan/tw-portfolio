@@ -4,153 +4,8 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>advanced-git-tutorial</title>
+  <title>Advanced Git Version Control</title>
   <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #1a1a1a;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -165,39 +20,64 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
 </head>
 <body>
-<p><link rel="stylesheet" href="../css/common-light.css" type="text/css" /></p>
 <h1 id="advanced-git-version-control">Advanced Git Version Control</h1>
-<p><a href="mailto:John.saysitall@goodcode.com"><em>John Saysitall</em></a></p>
-<p>This document explains how advanced Git commands can be used to manage complex project histories, collaborate effectively with teams, and maintain clean, professional codebases.</p>
+<p><a href="mailto:john.saysitall@goodcode.example"><em>John
+Saysitall</em></a></p>
+<p>This document explains how advanced Git commands can be used to
+manage complex project histories, collaborate effectively with teams,
+and maintain clean, professional codebases.</p>
 <hr />
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#essential-advanced-commands">Essential Advanced Commands</a></li>
-<li><a href="#visualizing-commit-history">Visualizing Commit History</a></li>
+<li><a href="#essential-advanced-commands">Essential Advanced
+Commands</a></li>
+<li><a href="#visualizing-commit-history">Visualizing Commit
+History</a></li>
 <li><a href="#interactive-rebasing">Interactive Rebasing</a></li>
-<li><a href="#branch-management-strategies">Branch Management Strategies</a></li>
+<li><a href="#branch-management-strategies">Branch Management
+Strategies</a></li>
 <li><a href="#stashing-work">Stashing Work</a></li>
 <li><a href="#cherry-picking-commits">Cherry-picking Commits</a></li>
 <li><a href="#recovery-and-debugging">Recovery and Debugging</a></li>
-<li><a href="#advanced-merging-techniques">Advanced Merging Techniques</a></li>
+<li><a href="#advanced-merging-techniques">Advanced Merging
+Techniques</a></li>
 <li><a href="#collaborative-workflows">Collaborative Workflows</a></li>
 <li><a href="#conclusion">Conclusion</a></li>
 </ul>
 <hr />
 <h2 id="introduction">Introduction</h2>
-<p>While basic Git commands like <code>add</code>, <code>commit</code>, and <code>push</code> are sufficient for simple projects, professional software development requires mastery of Git’s more sophisticated features. These advanced capabilities become essential when working with multiple developers, managing complex feature branches, or maintaining production codebases where history cleanliness and precise change control matter.</p>
-<p>The difference between a novice and expert Git user often lies not in knowing <em>more</em> commands, but in understanding <em>when</em> and <em>how</em> to use powerful tools like interactive rebasing, cherry-picking, and the reflog. These features can transform chaotic development workflows into clean, traceable histories that tell the story of how your project evolved.</p>
-<p>However, with this power comes responsibility. Advanced Git operations can rewrite history, and improper use can complicate collaboration or even lose work entirely. The key is understanding both the capabilities and the appropriate contexts for each tool.</p>
-<p>We will explore these advanced features systematically, building from fundamental visualization techniques to sophisticated history manipulation and recovery procedures.</p>
+<p>While basic Git commands like <code>add</code>, <code>commit</code>,
+and <code>push</code> are sufficient for simple projects, professional
+software development requires mastery of Git’s more sophisticated
+features. These advanced capabilities become essential when working with
+multiple developers, managing complex feature branches, or maintaining
+production codebases where history cleanliness and precise change
+control matter.</p>
+<p>The difference between a novice and expert Git user often lies not in
+knowing <em>more</em> commands, but in understanding <em>when</em> and
+<em>how</em> to use powerful tools like interactive rebasing,
+cherry-picking, and the reflog. These features can transform chaotic
+development workflows into clean, traceable histories that tell the
+story of how your project evolved.</p>
+<p>Several of these operations rewrite history, so for each one we note
+when it is safe to use.</p>
 <blockquote>
-<p><span id="note-byline">This tutorial assumes familiarity with basic Git concepts including repositories, commits, branches, and merging. We focus exclusively on advanced techniques that experienced developers use to manage complex projects.</span></p>
+<p><span id="note-byline">This tutorial assumes familiarity with basic
+Git concepts including repositories, commits, branches, and merging. We
+focus exclusively on advanced techniques that experienced developers use
+to manage complex projects.</span></p>
 </blockquote>
 <h2 id="essential-advanced-commands">Essential Advanced Commands</h2>
-<p>Before diving into specific workflows, let’s examine the core advanced commands that separate expert Git users from beginners. Each of these serves a specific purpose in professional development environments:</p>
+<p>Before diving into specific workflows, let’s examine the core
+advanced commands that separate expert Git users from beginners. Each of
+these serves a specific purpose in professional development
+environments:</p>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -236,56 +116,80 @@
 </tr>
 </tbody>
 </table>
-<p>Unlike basic Git commands that primarily add new information to your repository, these advanced tools frequently <em>modify</em> existing history or provide sophisticated views into that history. This makes them powerful but potentially dangerous if used incorrectly.</p>
-<p>The most important principle when using these commands is understanding whether you’re working with <em>local</em> history (safe to modify) or <em>shared</em> history (dangerous to modify after pushing). We’ll emphasize this distinction throughout our examples.</p>
+<p>Unlike basic Git commands that primarily add new information to your
+repository, these advanced tools frequently <em>modify</em> existing
+history or provide sophisticated views into that history. This makes
+them powerful but potentially dangerous if used incorrectly.</p>
+<p>The most important principle when using these commands is
+understanding whether you’re working with <em>local</em> history (safe
+to modify) or <em>shared</em> history (dangerous to modify after
+pushing). We’ll emphasize this distinction throughout our examples.</p>
 <h2 id="visualizing-commit-history">Visualizing Commit History</h2>
-<p>Before manipulating Git history, you need to understand what that history looks like. The <code>git log --oneline</code> command provides the most useful condensed view of your project’s development:</p>
+<p>Before manipulating Git history, you need to understand what that
+history looks like. The <code>git log --oneline</code> command provides
+the most useful condensed view of your project’s development:</p>
 <pre id="cmdln-text">
 $ git log --oneline
-a1b2c3d Fix authentication bug in login module
-e4f5g6h Add user profile picture upload feature
-i7j8k9l Refactor database connection pooling
-m0n1o2p Update README with installation instructions
-q3r4s5t Initial project setup
+3f9a2c1 Fix authentication bug in login module
+7b4e8d2 Add user profile picture upload feature
+c2d61a5 Refactor database connection pooling
+9e05b37 Update README with installation instructions
+1a7f4e0 Initial project setup
 </pre>
-<p>This format shows the abbreviated commit hash on the left and the commit message on the right, making it easy to quickly scan through project history. The most recent commits appear at the top.</p>
-<p>You can limit the output to see only recent commits by specifying a number:</p>
+<p>This format shows the abbreviated commit hash on the left and the
+commit message on the right, making it easy to quickly scan through
+project history. The most recent commits appear at the top.</p>
+<p>You can limit the output to see only recent commits by specifying a
+number:</p>
 <pre id="cmdln-text">
-$ git log --oneline -5
-a1b2c3d Fix authentication bug in login module
-e4f5g6h Add user profile picture upload feature
-i7j8k9l Refactor database connection pooling
-m0n1o2p Update README with installation instructions
-q3r4s5t Initial project setup
+$ git log --oneline -3
+3f9a2c1 Fix authentication bug in login module
+7b4e8d2 Add user profile picture upload feature
+c2d61a5 Refactor database connection pooling
 </pre>
-<p>For branches with complex histories, adding the <code>--graph</code> option reveals the branching structure:</p>
+<p>For branches with complex histories, adding the <code>--graph</code>
+option reveals the branching structure. On the <code>develop</code>
+branch of the same project, for example, the profile-upload work was
+merged in from a feature branch instead of being committed directly:</p>
 <pre id="cmdln-text">
-$ git log --oneline --graph
-* a1b2c3d Fix authentication bug in login module
-*   e4f5g6h Merge branch 'feature/profile-upload'
+$ git log --oneline --graph develop
+*   5d3c9f8 Merge branch 'feature/profile-upload' into develop
 |\
-| * i7j8k9l Add image validation to upload
-| * m0n1o2p Implement profile picture storage
+| * e81b0a6 Add image validation to upload
+| * 46fa2d9 Implement profile picture storage
 |/
-* q3r4s5t Refactor database connection pooling
+* c2d61a5 Refactor database connection pooling
+* 9e05b37 Update README with installation instructions
+* 1a7f4e0 Initial project setup
 </pre>
-<p>This visualization becomes invaluable when planning rebase operations or understanding how different branches relate to each other. The commit hashes shown here are what you’ll use with commands like <code>cherry-pick</code> and interactive rebase.</p>
+<p>This visualization becomes invaluable when planning rebase operations
+or understanding how different branches relate to each other. The commit
+hashes shown here are what you’ll use with commands like
+<code>cherry-pick</code> and interactive rebase.</p>
 <blockquote>
-<p><span id="note-byline">Commit hashes in Git are actually 40-character SHA-1 values, but Git allows you to use abbreviated versions (typically 7 characters) as long as they’re unique within your repository.</span></p>
+<p><span id="note-byline">Commit hashes in Git are actually 40-character
+SHA-1 values, but Git allows you to use abbreviated versions (typically
+the first 7 hexadecimal digits) as long as they’re unique within your
+repository.</span></p>
 </blockquote>
 <h2 id="interactive-rebasing">Interactive Rebasing</h2>
-<p>Interactive rebasing is Git’s most powerful history-editing tool. It allows you to rewrite commit history by combining, reordering, editing, or removing commits. This is essential for maintaining clean project histories before sharing work with others.</p>
+<p>Interactive rebasing is Git’s most powerful history-editing tool. It
+allows you to rewrite commit history by combining, reordering, editing,
+or removing commits. This is essential for maintaining clean project
+histories before sharing work with others.</p>
 <p>The basic syntax for interactive rebase is:</p>
 <pre id="cmdln-text">
 $ git rebase -i HEAD~3
 </pre>
-<p>This opens an editor showing the last 3 commits with options for how to handle each:</p>
+<p>This opens an editor listing the last 3 commits, <em>oldest
+first</em> (the reverse of <code>git log</code>), with options for how
+to handle each:</p>
 <pre id="cmdln-text">
-pick e4f5g6h Add user profile picture upload feature
-pick i7j8k9l Refactor database connection pooling
-pick a1b2c3d Fix authentication bug in login module
+pick c2d61a5 Refactor database connection pooling
+pick 7b4e8d2 Add user profile picture upload feature
+pick 3f9a2c1 Fix authentication bug in login module
 
-# Rebase q3r4s5t..a1b2c3d onto q3r4s5t (3 commands)
+# Rebase 9e05b37..3f9a2c1 onto 9e05b37 (3 commands)
 #
 # Commands:
 # p, pick = use commit
@@ -294,15 +198,20 @@ pick a1b2c3d Fix authentication bug in login module
 # s, squash = use commit, but meld into previous commit
 # f, fixup = like "squash", but discard this commit's log message
 # d, drop = remove commit
+# ...
 </pre>
 <p>The most common operations are:</p>
-<p><strong>Rewording commit messages</strong> using the <code>reword</code> command. Change <code>pick</code> to <code>reword</code> (or just <code>r</code>) for any commit whose message you want to improve:</p>
+<p><strong>Rewording commit messages</strong> using the
+<code>reword</code> command. Change <code>pick</code> to
+<code>reword</code> (or just <code>r</code>) for any commit whose
+message you want to improve:</p>
 <pre id="cmdln-text">
-r e4f5g6h Add user profile picture upload feature
-pick i7j8k9l Refactor database connection pooling
-pick a1b2c3d Fix authentication bug in login module
+pick c2d61a5 Refactor database connection pooling
+r 7b4e8d2 Add user profile picture upload feature
+pick 3f9a2c1 Fix authentication bug in login module
 </pre>
-<p>After saving and closing this file, Git will stop at the specified commit and allow you to edit its message:</p>
+<p>After you save and close this file, Git replays the commits in order
+and stops at the specified commit and allow you to edit its message:</p>
 <pre id="cmdln-text">
 Add comprehensive user profile picture upload feature
 
@@ -311,59 +220,93 @@ Add comprehensive user profile picture upload feature
 - Validates file size limits (max 5MB)
 - Integrates with existing user management system
 </pre>
-<p><strong>Squashing multiple commits</strong> combines several related commits into one. This is useful when you’ve made multiple small commits while developing a feature:</p>
+<p><strong>Squashing multiple commits</strong> combines several related
+commits into one. This is useful when you’ve made multiple small commits
+while developing a feature. For example, had we run
+<code>git rebase -i develop</code> on the
+<code>feature/profile-upload</code> branch before merging it, we could
+have folded its three commits into one:</p>
 <pre id="cmdln-text">
-pick e4f5g6h Add user profile picture upload feature
-squash i7j8k9l Add image validation to upload
-squash m0n1o2p Fix upload error handling
+pick 46fa2d9 Implement profile picture storage
+squash e81b0a6 Add image validation to upload
+squash 0c9d8e4 Fix upload error handling
 </pre>
-<p>Git will combine these commits and prompt you to write a new commit message that represents all the combined changes.</p>
-<p><strong>Reordering commits</strong> is accomplished by simply changing the order of lines in the interactive rebase file. However, be careful that reordered commits don’t have dependencies on each other.</p>
+<p>Git will combine these commits and prompt you to write a new commit
+message that represents all the combined changes.</p>
+<p><strong>Reordering commits</strong> is accomplished by simply
+changing the order of lines in the interactive rebase file. However, be
+careful that reordered commits don’t have dependencies on each
+other.</p>
 <blockquote>
-<p><span id="warning-byline">Never rebase commits that have already been pushed to shared repositories unless you’re absolutely certain no one else is working with those commits. Rewriting shared history can create serious problems for collaborators.</span></p>
+<p><span id="warning-byline">Never rebase commits that have already been
+pushed to shared repositories unless you’re absolutely certain no one
+else is working with those commits. Rewriting shared history can create
+serious problems for collaborators.</span></p>
 </blockquote>
-<p>The power of interactive rebase lies in its ability to present a clean, logical history that tells the story of your project’s development, rather than the messy reality of how the code was actually written.</p>
 <h2 id="branch-management-strategies">Branch Management Strategies</h2>
-<p>Effective branch management becomes crucial as projects grow in complexity. Advanced Git users leverage specific branching patterns to maintain clean histories and enable parallel development workflows.</p>
-<p>The key to professional branch management is understanding the relationship between different types of branches and when to use linear history versus merge commits:</p>
+<p>Effective branch management becomes crucial as projects grow in
+complexity. Advanced Git users leverage specific branching patterns to
+maintain clean histories and enable parallel development workflows.</p>
+<p>The key to professional branch management is understanding the
+relationship between different types of branches and when to use linear
+history versus merge commits:</p>
 <pre id="cmdln-text">
 $ git branch --list
-  main
-  feature/user-authentication
-* feature/payment-integration
-  hotfix/security-patch
   develop
+* feature/payment-integration
+  feature/user-authentication
+  hotfix/security-patch
+  main
 </pre>
-<p><strong>Feature branches</strong> should maintain clean, focused histories. Before merging a feature branch, use interactive rebase to ensure commits are logical and well-documented:</p>
+<p>Git lists branches alphabetically and marks the one you have checked
+out with an asterisk.</p>
+<p><strong>Feature branches</strong> should maintain clean, focused
+histories. Before merging a feature branch, use interactive rebase to
+ensure commits are logical and well-documented:</p>
 <pre id="cmdln-text">
 $ git checkout feature/payment-integration
 $ git rebase -i main
 </pre>
-<p>This rebases your feature branch onto the latest main branch and allows you to clean up commits before integration.</p>
-<p><strong>Cleaning up merged branches</strong> prevents repository clutter. After a feature branch has been successfully merged, remove both local and remote tracking references:</p>
+<p>This rebases your feature branch onto the latest main branch and
+allows you to clean up commits before integration.</p>
+<p><strong>Cleaning up merged branches</strong> prevents repository
+clutter. After a feature branch has been successfully merged, remove
+both local and remote tracking references:</p>
 <pre id="cmdln-text">
 $ git branch -d feature/user-authentication
 $ git push origin --delete feature/user-authentication
 $ git remote prune origin
 </pre>
-<p>The <code>-d</code> flag safely deletes branches that have been merged, while <code>--delete</code> removes the remote branch. The <code>prune</code> command cleans up stale remote-tracking branches.</p>
-<p><strong>Branch naming conventions</strong> improve team coordination. Use descriptive prefixes that indicate the branch purpose:</p>
+<p>The <code>-d</code> flag safely deletes branches that have been
+merged, while <code>--delete</code> removes the remote branch. The
+<code>prune</code> command cleans up stale remote-tracking branches.</p>
+<p><strong>Branch naming conventions</strong> improve team coordination.
+Use descriptive prefixes that indicate the branch purpose:</p>
 <ul>
 <li><code>feature/</code> for new functionality</li>
 <li><code>hotfix/</code> for urgent production fixes</li>
 <li><code>bugfix/</code> for non-urgent bug repairs</li>
-<li><code>refactor/</code> for code improvement without functional changes</li>
+<li><code>refactor/</code> for code improvement without functional
+changes</li>
 </ul>
-<p><strong>Fast-forward merges</strong> maintain linear history when possible. If your feature branch is based on the current tip of the target branch, Git can perform a fast-forward merge:</p>
+<p><strong>Fast-forward merges</strong> maintain linear history when
+possible. If your feature branch is based on the current tip of the
+target branch, Git can perform a fast-forward merge:</p>
 <pre id="cmdln-text">
 $ git checkout main
 $ git merge --ff-only feature/payment-integration
 </pre>
-<p>The <code>--ff-only</code> flag ensures the merge will fail if a fast-forward isn’t possible, preventing unexpected merge commits.</p>
-<p>This disciplined approach to branch management creates repository histories that are easy to understand, bisect, and maintain over time.</p>
+<p>The <code>--ff-only</code> flag ensures the merge will fail if a
+fast-forward isn’t possible, preventing unexpected merge commits.</p>
 <h2 id="stashing-work">Stashing Work</h2>
-<p>The <code>git stash</code> command provides a temporary storage mechanism for uncommitted changes, allowing you to quickly switch contexts without making premature commits. This becomes essential when you need to handle urgent tasks while in the middle of developing a feature.</p>
-<p><strong>Basic stashing</strong> saves both staged and unstaged changes:</p>
+<p>The <code>git stash</code> command provides a temporary storage
+mechanism for uncommitted changes, allowing you to quickly switch
+contexts without making premature commits. This becomes essential when
+you need to handle urgent tasks while in the middle of developing a
+feature.</p>
+<p><strong>Basic stashing</strong> saves both staged and unstaged
+changes to tracked files (add <code>-u</code> to include untracked files
+as well):</p>
 <pre id="cmdln-text">
 $ git status
 On branch feature/user-dashboard
@@ -373,15 +316,22 @@ Changes not staged for commit:
   modified:   src/utils.js
 
 $ git stash
-Saved working directory and index state WIP on feature/user-dashboard: e4f5g6h Add dashboard framework
+Saved working directory and index state WIP on feature/user-dashboard: 8c1e5fa Add dashboard framework
 
 $ git status
 On branch feature/user-dashboard
 nothing to commit, working tree clean
 </pre>
-<p>Your working directory is now clean, allowing you to switch branches or pull updates without conflicts.</p>
-<p><strong>Managing multiple stashes</strong> requires descriptive messages. Always provide meaningful descriptions for stashes you might need later:</p>
+<p>Your working directory is now clean, allowing you to switch branches
+or pull updates without conflicts.</p>
+<p><strong>Managing multiple stashes</strong> requires descriptive
+messages. Suppose that, back on the feature branch, you have started
+restyling the dashboard and have to switch context again. This time,
+give the stash a meaningful description:</p>
 <pre id="cmdln-text">
+$ git status --short
+ M src/dashboard.css
+
 $ git stash push -m "Dashboard styling in progress - responsive grid layout"
 Saved working directory and index state On feature/user-dashboard: Dashboard styling in progress - responsive grid layout
 </pre>
@@ -389,67 +339,98 @@ Saved working directory and index state On feature/user-dashboard: Dashboard sty
 <pre id="cmdln-text">
 $ git stash list
 stash@{0}: On feature/user-dashboard: Dashboard styling in progress - responsive grid layout
-stash@{1}: On feature/user-authentication: WIP login form validation
-stash@{2}: On main: Quick config file updates
+stash@{1}: WIP on feature/user-dashboard: 8c1e5fa Add dashboard framework
+stash@{2}: On feature/user-authentication: Login form validation
 </pre>
-<p><strong>Applying stashed changes</strong> can be done in several ways. To apply the most recent stash and remove it from the stash list:</p>
+<p><strong>Applying stashed changes</strong> can be done in several
+ways. To apply the most recent stash and remove it from the stash
+list:</p>
 <pre id="cmdln-text">
 $ git stash pop
 </pre>
-<p>To apply a specific stash without removing it from the list:</p>
+<p>Alternatively, to apply a specific stash without removing it from the
+list:</p>
 <pre id="cmdln-text">
 $ git stash apply stash@{1}
 </pre>
-<p>This is useful when you want to apply the same changes to multiple branches.</p>
-<p><strong>Selective stashing</strong> allows you to stash only specific files or even specific lines within files:</p>
+<p>Note that the indexes shift down whenever an entry is removed: after
+a <code>pop</code>, the former <code>stash@{1}</code> becomes
+<code>stash@{0}</code>.</p>
+<p>This is useful when you want to apply the same changes to multiple
+branches.</p>
+<p><strong>Selective stashing</strong> allows you to stash only specific
+files or even specific lines within files:</p>
 <pre id="cmdln-text">
 $ git stash push -m "Only utility functions" src/utils.js
 $ git stash push --patch -m "Selected dashboard changes"
 </pre>
-<p>The <code>--patch</code> option lets you interactively choose which changes to stash, providing fine-grained control over what gets saved.</p>
-<p><strong>Creating branches from stashes</strong> is useful when stashed work grows into a larger feature:</p>
+<p>The <code>--patch</code> option lets you interactively choose which
+changes to stash, providing fine-grained control over what gets
+saved.</p>
+<p><strong>Creating branches from stashes</strong> is useful when
+stashed work grows into a larger feature:</p>
 <pre id="cmdln-text">
 $ git stash branch feature/responsive-design stash@{0}
 </pre>
-<p>This creates a new branch from the commit where the stash was created and applies the stashed changes, providing a clean starting point for continued development.</p>
-<p>Effective stash management keeps your working directory flexible while ensuring no work is ever lost due to context switching.</p>
+<p>This creates a new branch from the commit where the stash was created
+and applies the stashed changes, providing a clean starting point for
+continued development.</p>
 <h2 id="cherry-picking-commits">Cherry-picking Commits</h2>
-<p>Cherry-picking allows you to apply specific commits from one branch to another, providing surgical precision when you need particular changes without merging entire branches. This technique is invaluable for applying hotfixes across multiple release branches or selectively incorporating features.</p>
-<p><strong>Basic cherry-picking</strong> uses the commit hash from <code>git log --oneline</code>:</p>
+<p>Cherry-picking allows you to apply specific commits from one branch
+to another, providing surgical precision when you need particular
+changes without merging entire branches. This technique is invaluable
+for applying hotfixes across multiple release branches or selectively
+incorporating features.</p>
+<p><strong>Basic cherry-picking</strong> uses the commit hash from
+<code>git log --oneline</code>:</p>
 <pre id="cmdln-text">
 $ git log --oneline feature/security-improvements
-a1b2c3d Add input validation to user forms
-e4f5g6h Implement rate limiting for API endpoints
-i7j8k9l Update password hashing algorithm
-m0n1o2p Fix SQL injection vulnerability
+b6e2f47 Add input validation to user forms
+58ad0c3 Implement rate limiting for API endpoints
+f13c9e8 Update password hashing algorithm
+2d7a4b9 Fix SQL injection vulnerability
 </pre>
-<p>To apply just the password hashing improvement to your current branch:</p>
+<p>To apply just the password hashing improvement to your current
+branch:</p>
 <pre id="cmdln-text">
-$ git cherry-pick i7j8k9l
-[feature/user-auth c4d5e6f] Update password hashing algorithm
+$ git cherry-pick f13c9e8
+[feature/user-auth 6a0d5e2] Update password hashing algorithm
  Date: Wed Oct 15 14:30:22 2023 -0400
  2 files changed, 15 insertions(+), 8 deletions(-)
 </pre>
-<p>Git creates a new commit with the same changes but a different hash, since the commit now exists in a different context.</p>
-<p><strong>Cherry-picking multiple commits</strong> can be done in sequence. To apply several specific commits:</p>
+<p>Git creates a new commit with the same changes but a different hash,
+since the commit now exists in a different context.</p>
+<p><strong>Cherry-picking multiple commits</strong> can be done in one
+command. To apply the SQL injection fix and the rate limiting
+change:</p>
 <pre id="cmdln-text">
-$ git cherry-pick m0n1o2p i7j8k9l
+$ git cherry-pick 2d7a4b9 58ad0c3
 </pre>
-<p>This applies the commits in the order specified, which may be different from their original chronological order.</p>
-<p><strong>Range cherry-picking</strong> applies a series of consecutive commits:</p>
+<p>This applies the commits in the order specified, which may be
+different from their original chronological order.</p>
+<p><strong>Range cherry-picking</strong> applies a series of consecutive
+commits:</p>
 <pre id="cmdln-text">
-$ git cherry-pick e4f5g6h..a1b2c3d
+$ git cherry-pick 2d7a4b9..58ad0c3
 </pre>
-<p>This picks all commits from <code>e4f5g6h</code> (exclusive) to <code>a1b2c3d</code> (inclusive). Be careful with ranges to ensure you’re picking the commits you intend.</p>
-<p><strong>Handling cherry-pick conflicts</strong> requires the same conflict resolution skills as merging:</p>
+<p>This picks all commits after <code>2d7a4b9</code> (exclusive) up to
+<code>58ad0c3</code> (inclusive), that is, <code>f13c9e8</code> and
+<code>58ad0c3</code>. To include the first commit as well, write
+<code>2d7a4b9^..58ad0c3</code>. Be careful with ranges to ensure you’re
+picking the commits you intend.</p>
+<p><strong>Handling cherry-pick conflicts</strong> requires the same
+conflict resolution skills as merging:</p>
 <pre id="cmdln-text">
-$ git cherry-pick m0n1o2p
+$ git cherry-pick 2d7a4b9
 Auto-merging src/auth.js
 CONFLICT (content): Merge conflict in src/auth.js
-error: could not apply m0n1o2p... Fix SQL injection vulnerability
-hint: after resolving the conflicts, mark the corrected paths
-hint: with 'git add <paths>' or 'git rm <paths>'
-hint: and commit the result with 'git commit'
+error: could not apply 2d7a4b9... Fix SQL injection vulnerability
+hint: After resolving the conflicts, mark them with
+hint: "git add/rm &lt;pathspec&gt;", then run
+hint: "git cherry-pick --continue".
+hint: You can instead skip this commit with "git cherry-pick --skip".
+hint: To abort and get back to the state before "git cherry-pick",
+hint: run "git cherry-pick --abort".
 </pre>
 <p>Resolve conflicts manually, then continue:</p>
 <pre id="cmdln-text">
@@ -460,105 +441,183 @@ $ git cherry-pick --continue
 <pre id="cmdln-text">
 $ git cherry-pick --abort
 </pre>
-<p><strong>Cherry-picking without committing</strong> allows you to review changes before finalizing them:</p>
+<p><strong>Cherry-picking without committing</strong> allows you to
+review changes before finalizing them:</p>
 <pre id="cmdln-text">
-$ git cherry-pick --no-commit i7j8k9l
+$ git cherry-pick --no-commit f13c9e8
 $ git status
 On branch feature/user-auth
 Changes to be committed:
   modified:   src/password-utils.js
   modified:   tests/auth-tests.js
 </pre>
-<p>This stages the changes but doesn’t create a commit, giving you the opportunity to modify or combine the changes before committing.</p>
-<p>Cherry-picking is particularly valuable in maintenance workflows where specific fixes need to be applied to multiple versions or branches without bringing along unrelated changes.</p>
+<p>This stages the changes but doesn’t create a commit, giving you the
+opportunity to modify or combine the changes before committing.</p>
 <h2 id="recovery-and-debugging">Recovery and Debugging</h2>
-<p>Even experienced Git users occasionally make mistakes that seem to lose work or create confusing repository states. Git’s reflog and bisect commands provide powerful recovery and debugging capabilities that can save both time and sanity.</p>
-<p><strong>The reflog is Git’s safety net.</strong> It records every change to HEAD, including commits, merges, resets, and rebases. Even if commits seem “lost,” they’re usually recoverable through the reflog:</p>
+<p>Even experienced Git users occasionally make mistakes that seem to
+lose work or create confusing repository states. Git’s reflog and bisect
+commands provide powerful recovery and debugging capabilities that can
+save both time and sanity.</p>
+<p><strong>The reflog is Git’s safety net.</strong> It records every
+change to HEAD, including commits, merges, resets, and rebases. Even if
+commits seem “lost,” they’re usually recoverable through the reflog.
+Here is the reflog of <code>main</code> after the reword rebase from the
+<a href="#interactive-rebasing">Interactive Rebasing</a> section:</p>
 <pre id="cmdln-text">
 $ git reflog
-a1b2c3d HEAD@{0}: commit: Fix authentication bug in login module
-e4f5g6h HEAD@{1}: rebase -i (finish): returning to refs/heads/feature/auth
-i7j8k9l HEAD@{2}: rebase -i (reword): Add user profile picture upload feature
-m0n1o2p HEAD@{3}: rebase -i (start): checkout HEAD~3
-q3r4s5t HEAD@{4}: commit: Add user profile picture upload feature
+0e6b7d5 HEAD@{0}: rebase (finish): returning to refs/heads/main
+0e6b7d5 HEAD@{1}: rebase (pick): Fix authentication bug in login module
+a4c19e3 HEAD@{2}: rebase (reword): Add comprehensive user profile picture upload feature
+7b4e8d2 HEAD@{3}: rebase: fast-forward
+c2d61a5 HEAD@{4}: rebase (start): checkout HEAD~3
+3f9a2c1 HEAD@{5}: commit: Fix authentication bug in login module
+7b4e8d2 HEAD@{6}: commit: Add user profile picture upload feature
 </pre>
-<p>If you accidentally reset to the wrong commit, you can recover by checking out the reflog entry:</p>
+<p>The rebase gave the reworded commit and every commit after it new
+hashes (<code>a4c19e3</code> and <code>0e6b7d5</code>), but the
+originals (<code>7b4e8d2</code> and <code>3f9a2c1</code>) are still
+listed. Resetting the branch to one of these entries, for example with
+<code>git reset --hard HEAD@{5}</code>, would bring back the pre-rebase
+history.</p>
+<p><strong>Recovering from hard resets</strong> is a common reflog use
+case. Suppose you accidentally ran <code>git reset --hard</code> and
+lost recent work:</p>
 <pre id="cmdln-text">
-$ git reset --hard HEAD@{1}
-</pre>
-<p><strong>Recovering from hard resets</strong> is a common reflog use case. Suppose you accidentally ran <code>git reset --hard</code> and lost recent work:</p>
-<pre id="cmdln-text">
-$ git reset --hard HEAD~5
+$ git reset --hard HEAD~4
+HEAD is now at 1a7f4e0 Initial project setup
 $ git log --oneline
-q3r4s5t Initial project setup
+1a7f4e0 Initial project setup
 
 $ git reflog
-q3r4s5t HEAD@{0}: reset: moving to HEAD~5
-a1b2c3d HEAD@{1}: commit: Fix authentication bug in login module
-e4f5g6h HEAD@{2}: commit: Add user profile picture upload feature
+1a7f4e0 HEAD@{0}: reset: moving to HEAD~4
+0e6b7d5 HEAD@{1}: rebase (finish): returning to refs/heads/main
+0e6b7d5 HEAD@{2}: rebase (pick): Fix authentication bug in login module
 </pre>
 <p>Your recent commits still exist and can be restored:</p>
 <pre id="cmdln-text">
 $ git reset --hard HEAD@{1}
+HEAD is now at 0e6b7d5 Fix authentication bug in login module
 $ git log --oneline
-a1b2c3d Fix authentication bug in login module
-e4f5g6h Add user profile picture upload feature
-i7j8k9l Refactor database connection pooling
+0e6b7d5 Fix authentication bug in login module
+a4c19e3 Add comprehensive user profile picture upload feature
+c2d61a5 Refactor database connection pooling
+9e05b37 Update README with installation instructions
+1a7f4e0 Initial project setup
 </pre>
-<p><strong>Binary search debugging with bisect</strong> helps locate the specific commit that introduced a bug. Start by identifying a known good commit and a known bad commit:</p>
+<blockquote>
+<p><span id="note-byline">The reflog is local to your clone, and its
+entries expire (by default, entries for commits no longer on any branch
+after 30 days). Recover lost work promptly.</span></p>
+</blockquote>
+<p><strong>Binary search debugging with bisect</strong> helps locate the
+specific commit that introduced a bug. Start by identifying a known good
+commit and a known bad commit:</p>
 <pre id="cmdln-text">
 $ git bisect start
 $ git bisect bad HEAD
 $ git bisect good v2.1.0
-Bisecting: 12 revisions left to test after this (roughly 4 steps)
-[m0n1o2p] Implement caching for database queries
+Bisecting: 6 revisions left to test after this (roughly 3 steps)
+[4f8b1c6e0a93d27f51b8c4e6a2d09f7b3c15e8a4] Implement caching for database queries
 </pre>
-<p>Git checks out a commit halfway between good and bad. Test your application, then mark the commit:</p>
+<p>Git checks out a commit halfway between good and bad. Test your
+application, then mark the commit:</p>
 <pre id="cmdln-text">
 $ npm test
 # Tests pass
 $ git bisect good
-Bisecting: 6 revisions left to test after this (roughly 3 steps)
-[x7y8z9a] Refactor user authentication flow
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[d93e2a7b5c18f04e6a2d9c7b31f58e0a4c6d2b19] Refactor user authentication flow
 </pre>
-<p>Continue testing and marking commits until Git identifies the problematic commit:</p>
+<p>Continue testing and marking commits until Git identifies the
+problematic commit:</p>
 <pre id="cmdln-text">
 $ npm test
 # Tests fail
 $ git bisect bad
-Bisecting: 2 revisions left to test after this (roughly 1 step)
-[b4c5d6e] Update session handling logic
+Bisecting: 1 revision left to test after this (roughly 1 step)
+[b4c5d6e8a1f23b907c4e5d6a8b2f19c03e7d4a56] Update session handling logic
 
 $ npm test
 # Tests fail
 $ git bisect bad
-b4c5d6e is the first bad commit
-commit b4c5d6e
-Author: Developer <dev@example.com>
-Date: Mon Oct 14 10:15:30 2023 -0400
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[5a2c7f9d3e81b4c60a7f2e9d5b18c34a6e0f7d21] Add session timeout setting
+
+$ npm test
+# Tests pass
+$ git bisect good
+b4c5d6e8a1f23b907c4e5d6a8b2f19c03e7d4a56 is the first bad commit
+commit b4c5d6e8a1f23b907c4e5d6a8b2f19c03e7d4a56
+Author: Jane Developer &lt;jane.developer@goodcode.example&gt;
+Date:   Mon Oct 14 10:15:30 2023 -0400
 
     Update session handling logic
+
+ src/session.js | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 </pre>
+<p>Bisect prints full 40-digit hashes; their first 7 digits are the
+abbreviated hashes you see elsewhere.</p>
 <p>End the bisect session and return to your original branch:</p>
 <pre id="cmdln-text">
 $ git bisect reset
 </pre>
-<p><strong>Automated bisect testing</strong> can run tests automatically at each step:</p>
+<p><strong>Automated bisect testing</strong> can run tests automatically
+at each step:</p>
 <pre id="cmdln-text">
 $ git bisect run npm test
 </pre>
-<p>This runs the test command at each bisect step, automatically marking commits as good (exit code 0) or bad (non-zero exit code) until the problematic commit is found.</p>
-<p>These recovery and debugging tools transform Git from a simple version control system into a comprehensive development safety net and diagnostic toolkit.</p>
+<p>Run <code>git bisect start</code>, <code>git bisect bad</code>, and
+<code>git bisect good</code> first, as above. Git then runs the test
+command at each step, marking the commit good if it exits with code 0
+and bad if it exits with a code from 1 to 127 (except 125, which means
+“skip this commit”), until the problematic commit is found.</p>
 <h2 id="advanced-merging-techniques">Advanced Merging Techniques</h2>
-<p>While basic merging handles most scenarios automatically, complex projects often require more sophisticated merge strategies to handle conflicts, preserve history, or integrate changes according to specific project requirements.</p>
-<p><strong>Merge strategies</strong> can be explicitly specified to control how Git combines branches. The most common strategies are:</p>
+<p>While basic merging handles most scenarios automatically, complex
+projects often require more sophisticated merge strategies to handle
+conflicts, preserve history, or integrate changes according to specific
+project requirements.</p>
+<p><strong>Merge strategies and strategy options</strong> control how
+Git combines branches. The two are easy to confuse: a <em>strategy</em>
+(<code>-s</code>) selects the merge algorithm, while a <em>strategy
+option</em> (<code>-X</code>) fine-tunes the default algorithm:</p>
 <pre id="cmdln-text">
-$ git merge --strategy=recursive feature/payment-system
-$ git merge --strategy=ours hotfix/critical-security-patch
-$ git merge --strategy=octopus feature/auth feature/payments feature/reporting
+$ git merge feature/payment-system
+$ git merge -X ours feature/payment-system
+$ git merge -X theirs feature/payment-system
+$ git merge feature/auth feature/payments feature/reporting
 </pre>
-<p>The <code>recursive</code> strategy is Git’s default for two-branch merges. The <code>ours</code> strategy resolves conflicts by always choosing the current branch’s version, useful when you want to record that a merge happened but ignore all changes from the other branch.</p>
-<p><strong>Three-way merge conflicts</strong> require understanding the conflict markers and the original common ancestor:</p>
+<ul>
+<li>The first command uses the default two-branch strategy,
+<code>ort</code> (Git 2.34 and later; earlier versions use
+<code>recursive</code>).</li>
+<li><code>-X ours</code> and <code>-X theirs</code> still merge every
+non-conflicting change from both branches. Only where the same lines
+conflict does Git automatically keep our side or their side,
+respectively.</li>
+<li>Merging more than two branches at once uses the <code>octopus</code>
+strategy automatically. It stops if any conflict needs manual
+resolution.</li>
+</ul>
+<blockquote>
+<p><span id="warning-byline">Do not confuse <code>-X ours</code> with
+<code>-s ours</code> (<code>--strategy=ours</code>). The
+<code>ours</code> <em>strategy</em> discards <strong>everything</strong>
+from the other branch and records a merge commit with your tree
+unchanged. Use it only to mark a branch as superseded (for example,
+<code>git merge -s ours legacy/old-api</code>), never to “prefer our
+side” when merging a branch whose changes you need, such as a security
+fix.</span></p>
+</blockquote>
+<p><strong>Three-way merge conflicts</strong> are easier to resolve when
+you can also see the original common ancestor. By default, Git shows
+only the two sides. To include the ancestor, enable the
+<code>diff3</code> conflict style (or <code>zdiff3</code>, available
+since Git 2.35, which also trims lines common to both sides):</p>
+<pre id="cmdln-text">
+$ git config --global merge.conflictStyle diff3
+</pre>
+<p>A conflict then looks like this:</p>
 <pre id="cmdln-text">
 $ git merge feature/api-refactor
 Auto-merging src/api-client.js
@@ -566,66 +625,89 @@ CONFLICT (content): Merge conflict in src/api-client.js
 
 $ cat src/api-client.js
 function makeRequest(url, options) {
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     return fetch(url, {
         ...options,
-        timeout: 5000,
-        retry: true
+        signal: AbortSignal.timeout(5000)
     });
-||||||| merged common ancestors
+||||||| 2b7e0c4
     return fetch(url, options);
 =======
-    return axios.get(url, {
-        ...options,
-        validateStatus: false
+    return fetch(url, options).then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response;
     });
->>>>>>> feature/api-refactor
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/api-refactor
 }
 </pre>
-<p>The section between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code>|||||||</code> shows your current branch’s version. The section between <code>|||||||</code> and <code>=======</code> shows the common ancestor, and the section between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> shows the incoming changes.</p>
-<p><strong>Resolving complex conflicts</strong> often requires understanding the intent of both sets of changes:</p>
+<p>The section between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>
+and <code>|||||||</code> shows your current branch’s version. The
+section between <code>|||||||</code> and <code>=======</code> shows the
+common ancestor (labelled with its abbreviated hash), and the section
+between <code>=======</code> and
+<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> shows the incoming changes.
+Comparing each side with the ancestor reveals what each branch intended:
+yours added a five-second timeout, and theirs added rejection of
+unsuccessful HTTP responses.</p>
+<p><strong>Resolving complex conflicts</strong> often requires keeping
+the intent of both sets of changes:</p>
 <pre id="cmdln-text">
 function makeRequest(url, options) {
     return fetch(url, {
         ...options,
-        timeout: 5000,
-        retry: true,
-        validateStatus: false
+        signal: AbortSignal.timeout(5000)
+    }).then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response;
     });
 }
 </pre>
-<p>After manually resolving the conflict by combining both improvements, mark the file as resolved:</p>
+<p>After manually resolving the conflict by combining both improvements,
+mark the file as resolved:</p>
 <pre id="cmdln-text">
 $ git add src/api-client.js
 $ git commit
 </pre>
-<p><strong>Merge conflict resolution tools</strong> can simplify complex conflicts. Configure a visual merge tool:</p>
+<p><strong>Merge conflict resolution tools</strong> can simplify complex
+conflicts. Configure a visual merge tool:</p>
 <pre id="cmdln-text">
 $ git config merge.tool vimdiff
 $ git mergetool
 </pre>
-<p>This opens a three-way diff view showing the base version, your changes, and the incoming changes, making it easier to understand and resolve conflicts.</p>
-<p><strong>Aborting problematic merges</strong> returns your repository to its pre-merge state:</p>
+<p>This opens a three-way diff view showing the base version, your
+changes, and the incoming changes, making it easier to understand and
+resolve conflicts.</p>
+<p><strong>Aborting problematic merges</strong> returns your repository
+to its pre-merge state:</p>
 <pre id="cmdln-text">
 $ git merge --abort
 </pre>
-<p>This is safer than trying to force through a complex merge that you don’t fully understand.</p>
-<p><strong>Fast-forward vs. true merges</strong> control whether Git creates merge commits. Sometimes you want to preserve the branching structure:</p>
+<p>This is safer than trying to force through a complex merge that you
+don’t fully understand.</p>
+<p><strong>Fast-forward vs. true merges</strong> control whether Git
+creates merge commits. Sometimes you want to preserve the branching
+structure:</p>
 <pre id="cmdln-text">
 $ git merge --no-ff feature/user-dashboard
 </pre>
-<p>The <code>--no-ff</code> flag forces creation of a merge commit even when a fast-forward merge would be possible, preserving the historical context that work was done on a separate branch.</p>
-<p>These advanced merging techniques ensure that complex integration scenarios result in clean, understandable repository histories that accurately reflect the development process.</p>
+<p>The <code>--no-ff</code> flag forces creation of a merge commit even
+when a fast-forward merge would be possible, preserving the historical
+context that work was done on a separate branch.</p>
 <h2 id="collaborative-workflows">Collaborative Workflows</h2>
-<p>Professional Git usage involves coordinating with team members while maintaining repository quality. Advanced collaborative workflows leverage Git’s distributed nature to enable effective teamwork without compromising project stability.</p>
-<p><strong>Upstream repository management</strong> becomes essential when contributing to open source projects or working with forked repositories:</p>
+<p>Professional Git usage involves coordinating with team members while
+maintaining repository quality. Advanced collaborative workflows
+leverage Git’s distributed nature to enable effective teamwork without
+compromising project stability.</p>
+<p><strong>Upstream repository management</strong> becomes essential
+when contributing to open source projects or working with forked
+repositories:</p>
 <pre id="cmdln-text">
-$ git remote add upstream https://github.com/original/project.git
+$ git remote add upstream https://git.goodcode.example/original/project.git
 $ git remote -v
-origin    https://github.com/yourfork/project.git (fetch)
-origin    https://github.com/yourfork/project.git (push)
-upstream  https://github.com/original/project.git (fetch)
-upstream  https://github.com/original/project.git (push)
+origin    https://git.goodcode.example/yourfork/project.git (fetch)
+origin    https://git.goodcode.example/yourfork/project.git (push)
+upstream  https://git.goodcode.example/original/project.git (fetch)
+upstream  https://git.goodcode.example/original/project.git (push)
 </pre>
 <p>Keep your fork synchronized with the upstream repository:</p>
 <pre id="cmdln-text">
@@ -634,17 +716,20 @@ $ git checkout main
 $ git merge upstream/main
 $ git push origin main
 </pre>
-<p><strong>Rebase-based workflow</strong> maintains linear history even in collaborative environments. Before pushing feature work, rebase onto the latest main branch:</p>
+<p><strong>Rebase-based workflow</strong> maintains linear history even
+in collaborative environments. Before pushing feature work, rebase onto
+the latest main branch:</p>
 <pre id="cmdln-text">
 $ git checkout feature/user-notifications
 $ git fetch origin
 $ git rebase origin/main
 </pre>
-<p>If there are conflicts during rebase, resolve them commit by commit:</p>
+<p>If there are conflicts during rebase, resolve them commit by
+commit:</p>
 <pre id="cmdln-text">
 $ git status
-rebase in progress; onto a1b2c3d
-You are currently rebasing branch 'feature/user-notifications' on 'a1b2c3d'.
+rebase in progress; onto 72c4a0f
+You are currently rebasing branch 'feature/user-notifications' on '72c4a0f'.
   (fix conflicts and then run "git rebase --continue")
 
 Unmerged paths:
@@ -654,37 +739,71 @@ $ vim src/notifications.js  # resolve conflicts
 $ git add src/notifications.js
 $ git rebase --continue
 </pre>
-<p><strong>Force pushing safely</strong> requires understanding when history rewriting is appropriate. Never force push to shared branches like <code>main</code>, but feature branches owned by a single developer can be force pushed after rebasing:</p>
+<p><strong>Force pushing safely</strong> requires understanding when
+history rewriting is appropriate. Never force push to shared branches
+like <code>main</code>, but a feature branch owned by a single developer
+can be force pushed after rebasing.</p>
+<p>A plain <code>--force-with-lease</code> is safer than
+<code>--force</code>: it refuses the push if the remote branch no longer
+matches your <em>remote-tracking</em> branch
+(<code>origin/feature/user-notifications</code>). However, that
+protection disappears as soon as you fetch. The
+<code>git fetch origin</code> above silently updates the remote-tracking
+branch, so if a teammate had pushed to your feature branch in the
+meantime, a plain <code>--force-with-lease</code> would overwrite their
+commits without complaint.</p>
+<p>To make the lease reliable, record the remote commit you last saw
+<em>before</em> fetching, and name it explicitly when pushing:</p>
 <pre id="cmdln-text">
-$ git push --force-with-lease origin feature/user-notifications
+$ expected=$(git rev-parse origin/feature/user-notifications)
+$ git fetch origin
+$ git rebase origin/main
+$ git push --force-with-lease=feature/user-notifications:$expected origin feature/user-notifications
 </pre>
-<p>The <code>--force-with-lease</code> option is safer than <code>--force</code> because it prevents accidentally overwriting work that others have pushed to the same branch.</p>
-<p><strong>Pull request preparation</strong> involves cleaning up commits and ensuring clear commit messages:</p>
+<p>If anyone has pushed to the branch since you recorded
+<code>$expected</code>, Git rejects the push with
+<code>(stale info)</code>, and you can fetch and integrate their work
+first. (Git 2.30 and later also offer <code>--force-if-includes</code>,
+which adds a similar check automatically.)</p>
+<p><strong>Pull request preparation</strong> involves cleaning up
+commits and ensuring clear commit messages:</p>
 <pre id="cmdln-text">
 $ git log --oneline origin/main..feature/user-notifications
-e4f5g6h Add email notification templates
-i7j8k9l Implement notification delivery service
-m0n1o2p Add user notification preferences
-q3r4s5t Create notification database schema
+6c2e9a1 Add email notification templates
+0b8f3d4 Implement notification delivery service
+a95e7c2 Add user notification preferences
+3d1b6f8 Create notification database schema
 </pre>
-<p>This shows all commits that will be included in the pull request. Use interactive rebase to clean up the history if necessary.</p>
-<p><strong>Handling feedback on pull requests</strong> often requires amending commits or adding new ones. If you need to modify an existing commit after review:</p>
+<p>This shows all commits that will be included in the pull request. Use
+interactive rebase to clean up the history if necessary.</p>
+<p><strong>Handling feedback on pull requests</strong> often requires
+amending commits or adding new ones. If you need to modify an existing
+commit after review:</p>
 <pre id="cmdln-text">
-$ git commit --fixup i7j8k9l
+$ git add src/delivery-service.js
+$ git commit --fixup 0b8f3d4
 $ git rebase -i --autosquash origin/main
 </pre>
-<p>The <code>--fixup</code> option creates a commit marked for squashing with an existing commit, and <code>--autosquash</code> automatically orders the interactive rebase to perform the fixup.</p>
-<p><strong>Branch protection and review workflows</strong> integrate with advanced Git techniques. Understanding how your team’s branching strategy affects which Git commands you can use is crucial for effective collaboration.</p>
-<p>These collaborative patterns ensure that advanced Git features enhance rather than complicate team development workflows.</p>
+<p>The <code>--fixup</code> option creates a commit marked for squashing
+with an existing commit, and <code>--autosquash</code> automatically
+orders the interactive rebase to perform the fixup.</p>
+<p><strong>Branch protection and review workflows</strong> integrate
+with advanced Git techniques. Understanding how your team’s branching
+strategy affects which Git commands you can use is crucial for effective
+collaboration.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>Mastering advanced Git techniques transforms how you approach software development. These tools—interactive rebasing, cherry-picking, stashing, reflog recovery, and sophisticated merging—provide the precision and safety needed for professional development workflows.</p>
-<p>The key to using these features effectively lies in understanding when each tool is appropriate. Interactive rebase shines when preparing clean feature branches for integration. Cherry-picking excels at applying specific fixes across multiple branches. The stash provides flexibility for context switching without premature commits. Reflog serves as a safety net for recovery operations. Advanced merging techniques handle complex integration scenarios with grace.</p>
-<p>Remember that with great power comes great responsibility. These commands can rewrite history, and inappropriate use in collaborative environments can create serious problems for your team. Always consider whether you’re modifying local or shared history, and establish clear team conventions for when and how to use these advanced features.</p>
-<p>The investment in learning these sophisticated Git capabilities pays dividends throughout your career. Projects become more maintainable, collaboration becomes smoother, and you gain confidence to experiment knowing that Git’s powerful recovery mechanisms have your back.</p>
-<p>Continue practicing these techniques in safe environments, and gradually incorporate them into your professional workflow as you become comfortable with their behavior and implications.</p>
+<p>Each of these tools has a clear use. Interactive rebase prepares
+clean feature branches for integration. Cherry-picking applies specific
+fixes across branches. The stash handles context switches without
+premature commits. The reflog recovers work after a bad reset or rebase,
+and bisect finds the commit that introduced a bug. Merge strategy
+options and the <code>diff3</code> conflict style make complex
+integrations manageable.</p>
+<p>Before running any history-rewriting command, ask whether the commits
+involved are local or already shared, and agree with your team on when
+rebasing and force pushing are acceptable. Practice these commands in a
+scratch repository first.</p>
 <hr>
 <p><em>Copyright© 2024, John Saysitall</em></p>
 </body>
 </html>
-
-<!-- Compiled by md-to-html.ps1 at 2025-09-10 12:38:21 -->

@@ -1,4 +1,4 @@
-= Spinomatic X7 — Cordless Drill User Manual - TorqueWorks Ltd.
+= Spinomatic X7 — Cordless Drill User Manual — TorqueWorks Ltd.
 :revnumber: 1.0
 :revdate: {docdate}
 :doctype: book
@@ -30,14 +30,14 @@ Power tools can cause serious injury if used improperly. Read and keep this manu
 ====
 
 === General Safety
-* Wear PPE: safety goggles, hearing protection, and work gloves.
+* Wear PPE: safety goggles and hearing protection. If you wear gloves, use close-fitting gloves only; loose gloves can catch in the rotating chuck.
 * Keep work area clean, dry, and well lit. Do not operate near flammable vapors.
 * Maintain stable footing and balance at all times.
 * Secure the workpiece (vise or clamps); never hold material in your hand.
 * Do not modify the tool. Use only accessories rated for the drill.
 
 === Electrical & Battery Safety
-* Use only charger **CHG-18V** and battery **BAT-18V** (or approved equivalents).
+* Use only charger *CHG-18V* and battery *BAT-18V* (or approved equivalents).
 * Do not short-circuit, crush, heat above 60 °C, or incinerate battery packs.
 * Charge only indoors, between 5 °C and 35 °C. Unplug the charger when not in use.
 * Inspect battery and charger before each use; replace if cracked, deformed, or leaking.
@@ -59,12 +59,12 @@ Power tools can cause serious injury if used improperly. Read and keep this manu
 
 == Product Overview
 
-The *Spinomatic X7* by TorqueWorks Ltd. is a versatile 18V cordless drill
+The *Spinomatic X7* by TorqueWorks Ltd. is a versatile 18 V cordless drill/driver
 designed for DIY enthusiasts and light professional use.
 
 === Package Contents
 * Drill body (x1)
-* 18V Li-Ion battery (x1)
+* 18 V Li-ion battery (x1)
 * Charger (x1)
 * Carry case (x1)
 
@@ -83,8 +83,7 @@ image::drill-labeled.jpg[alt="Labeled drill diagram", width=40%, align=left]
 . Trigger & reverse switch
 . Battery release
 
-[.small]
-*Tip:* Use this diagram to locate controls referenced throughout the manual.
+TIP: Use this diagram to locate controls referenced throughout the manual.
 
 === Exploded View (reference)
 .Exploded assembly (major external components)
@@ -96,8 +95,7 @@ image::drill-exploded.jpg[alt="Exploded view showing chuck, torque ring, gearbox
 . Body and handle
 . Battery pack
 
-[.small]
-*Note:* For reference only. Do not disassemble the tool; see <<Tool Maintenance>>.
+NOTE: For reference only. Do not disassemble the tool; see <<Tool Maintenance>>.
 
 == Assembly & Setup
 
@@ -106,7 +104,7 @@ image::drill-exploded.jpg[alt="Exploded view showing chuck, torque ring, gearbox
 .Battery attachment (slide until it clicks)
 image::battery-attach.jpg[alt="Attach battery to base of handle", width=50%, align=left]
 
-. Slide battery until it *clicks*.
+. Slide the battery onto the base of the handle from front to back until it *clicks*.
 . Verify it is seated and cannot pull free.
 
 .Battery removal (press latch, pull downward)
@@ -121,9 +119,10 @@ image::battery-remove.jpg[alt="Remove battery by pressing latch", width=25%, ali
 .Chuck open → insert bit → tighten clockwise
 image::insert-bit.jpg[alt="Insert and secure drill bit in chuck", width=30%, align=left]
 
-. Rotate chuck counter-clockwise to open jaws.
-. Insert bit; tighten clockwise.
-. Verify bit is secured.
+. Remove the battery, or set the direction switch to the center (lock) position.
+. Rotate the chuck sleeve counterclockwise (viewed from the front) to open the jaws.
+. Insert the bit; rotate the sleeve clockwise (viewed from the front) to tighten.
+. Verify the bit is secured.
 
 == Operating Instructions
 
@@ -131,39 +130,46 @@ image::insert-bit.jpg[alt="Insert and secure drill bit in chuck", width=30%, ali
 [cols="1,2,2", options="header"]
 |===
 |Material | Recommended Bit | Notes
-|Softwood | Wood twist, brad-point | Low torque, high speed.
+|Softwood | Wood twist, brad-point | Gear 2 (high speed) for small bits.
 |Hardwood | Brad-point | Pre-drill pilot holes; moderate speed.
-|Metal    | HSS twist        | Lubricate; low speed, steady pressure.
-|Masonry  | Masonry bit      | Use hammer mode if available; low speed.
+|Metal    | HSS twist        | Lubricate; Gear 1, low speed, steady pressure.
+|Masonry  | Masonry bit      | Not recommended: the X7 has no hammer mode. Use a hammer drill for masonry and concrete.
 |===
 
 === Speed & Torque
 .Gear selector: 1 = high torque / low speed, 2 = high speed / lower torque
 image::gear-selector.jpg[alt="Gear selector positions 1 and 2", width=20%, align=left]
 
-* *Gear 1* → High torque / low speed (screws, large bits).
-* *Gear 2* → Low torque / high speed (small holes in wood/soft material).
-* Start low; increase torque only if the bit stalls or the screw cams out.
+*Gear selector* (sets the speed range):
+
+* *Gear 1* → High torque / low speed (screws, large bits, metal).
+* *Gear 2* → Low torque / high speed (small holes in wood and soft materials).
+
+*Torque ring* (sets the clutch):
+
+* *Settings 1–20* are for driving screws. The clutch slips (ratchets) when the set torque is reached; low numbers slip early, high numbers slip late.
+* *Drill position* (drill-bit symbol) locks out the clutch and delivers full torque. Use it for all drilling.
+* For screws, start at a low setting. Increase the setting only if the clutch slips before the screw is seated.
 
 [IMPORTANT]
 ====
-Use the lowest speed that produces a clean cut. Excess speed overheats bits and dulls edges.
+Match the speed to the bit and material: small bits in wood cut cleanly at high speed; large bits and metal need low speed. Running a bit faster than its material allows overheats it and dulls the edges.
 ====
 
 === Pilot Holes (Guideline)
 [cols="1,1", options="header"]
 |===
 |Screw Size | Pilot Diameter
-|3 mm (≈#4) | 2.0-2.2 mm
-|4 mm (≈#8) | 3.0-3.2 mm
-|5 mm (≈#10)| 3.5-4.0 mm
+|3 mm (≈#4) | 2.0–2.2 mm
+|4 mm (≈#8) | 3.0–3.2 mm
+|5 mm (≈#10)| 3.5–4.0 mm
 |===
 
 === Basic Drilling Technique
 
 [CAUTION]
 ====
-Always mark your drilling point and secure your workpiece before starting. Loose materials can cause injury.
+*Spinning workpiece hazard.* A workpiece that is not clamped can catch on the bit and spin, causing hand and wrist injuries. Secure the workpiece in a vise or with clamps before you start.
 ====
 
 .Correct stance and perpendicular approach
@@ -171,10 +177,11 @@ image::drill-technique.jpg[alt="Proper grip and perpendicular drilling into wood
 
 .Step-by-step drilling procedure:
 . *Prepare the work area*: Clear debris, ensure adequate lighting, and secure the workpiece in a vise or with clamps.
-. *Mark the drilling point*: Use a center punch on metal surfaces to prevent bit wandering.
+. *Set the tool*: Turn the torque ring to the drill position and select the gear for the bit and material.
+. *Mark the drilling point*: Mark the point with a pencil; use a center punch on metal surfaces to prevent bit wandering.
 . *Position the drill*: Hold the drill perpendicular to the surface with both hands. Brace your wrist for stability.
 . *Start slowly*: Squeeze the trigger gently to begin drilling at low speed.
-. *Apply steady pressure*: Increase speed gradually as needed, maintaining consistent downward pressure.
+. *Apply steady pressure*: Increase speed gradually as needed, maintaining consistent pressure.
 . *Before breakthrough*: Reduce pressure when nearing the far side to prevent tear-out and splintering.
 
 [WARNING]
@@ -185,11 +192,11 @@ image::drill-technique.jpg[alt="Proper grip and perpendicular drilling into wood
 === Screw Driving Technique
 
 .Proper screw driving procedure:
-. *Select correct bit*: Ensure driver bit fully fits the screw head with no gaps.
-. *Set appropriate torque*: Start with low torque setting; increase only if screws cam out.
-. *Pre-drill pilot holes*: Use pilot hole chart (above) for proper sizing.
-. *Drive steadily*: Maintain perpendicular angle and steady pressure.
-. *Stop at clutch click*: When clutch engages, the screw is properly seated.
+. *Select correct bit*: Ensure the driver bit fully fits the screw head with no gaps.
+. *Set appropriate torque*: Start with a low torque-ring setting. Increase the setting only if the clutch slips before the screw is seated.
+. *Pre-drill pilot holes*: Use the pilot hole chart (above) for proper sizing.
+. *Drive steadily*: Maintain a perpendicular angle and firm, steady pressure so the bit does not cam out.
+. *Stop at clutch click*: When the clutch engages, the screw is seated.
 
 [IMPORTANT]
 ====
@@ -221,10 +228,10 @@ image::led-states.jpg[alt="Charging, Full, Fault/Overheat, No Power", width=40%,
 
 [IMPORTANT]
 ====
-Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents clear.
+Charge only between *5 °C and 35 °C*. Do not cover the charger; keep vents clear.
 ====
 
-*Typical time:* ~60-90 min for a 2.0 Ah pack.
+*Typical time:* ~60–90 min for a 2.0 Ah pack.
 
 === Battery Health
 * Store at ~50% charge if unused for > 1 month.
@@ -233,16 +240,16 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 
 === Tool Maintenance
 * Inspect chuck jaws and remove debris.
-* Check ventilation slots; clear dust with dry brush or air.
+* Clear dust from the ventilation slots with a dry brush.
 * Tighten exterior screws if loosened by vibration.
-* Do **not** open the tool body or lubricate internal parts.
+* Do *not* open the tool body or lubricate internal parts.
 
 === Cleaning
 * Remove the battery before cleaning.
-* Wipe with a dry or slightly damp cloth; avoid solvents and compressed air near bearings.
+* Wipe with a dry or slightly damp cloth. Do not use solvents or compressed air; compressed air can drive dust into the bearings and switch.
 
 === Storage
-* Dry, indoor location at **10-25 °C**.
+* Dry, indoor location at *10–25 °C*.
 * Remove battery from tool for storage/transport.
 
 === Consumables & Parts
@@ -251,39 +258,38 @@ Charge only between **5 °C and 35 °C**. Do not cover the charger; keep vents c
 |Item | Example
 |Battery pack | BAT-18V (2.0 Ah / 4.0 Ah)
 |Charger | CHG-18V
-|Driver bits | PH2, PZ2, T20, hex 3-6 mm
+|Driver bits | PH2, PZ2, T20, hex 3–6 mm
 |===
 
 == Troubleshooting
-
-[.small]
-*Icon note:* Use the warning triangle where safety-critical symptoms appear.
-
-image::warning.jpg[alt="Warning icon", width=10%]
 
 [cols="1,2,2", options="header"]
 |===
 |Problem | Possible Cause | Corrective Action
 
 |Drill does not start when trigger is pulled
-|Battery not seated / discharged
-|Remove and reinsert battery until it clicks; recharge or try a known-good pack.
+|Direction switch in center (lock) position; battery not seated or discharged
+|Move the direction switch fully to forward or reverse; remove and reinsert the battery until it clicks; recharge or try a known-good pack.
 
 |Power cuts out intermittently during use
 |Dirty battery contacts or debris in trigger
-|Power off and remove battery; clean contacts with dry cloth; blow out trigger area gently.
+|Remove the battery; clean contacts with a dry cloth; brush debris away from the trigger area with a dry brush.
 
 |Chuck slips and bit spins freely
 |Bit not fully seated or jaws dirty
 |Reseat bit and tighten; clean jaws; replace worn bits.
 
-|Screw head strips or bit slips out
-|Wrong driver bit size or excessive torque
-|Use correct bit size/profile; reduce torque or switch to Gear 1.
+|Clutch ratchets before the screw is seated
+|Torque-ring setting too low; pilot hole too small
+|Increase the torque-ring setting one step at a time; check pilot hole size against the chart.
+
+|Screw head strips or bit cams out
+|Wrong driver bit size/profile, worn bit, or too little pressure
+|Use the correct, undamaged bit; apply firm, steady pressure in line with the screw; lower the torque-ring setting so the clutch slips before the head strips.
 
 |Drill cuts slowly or stalls frequently
-|Wrong gear selection, dull bit, or insufficient pressure
-|Switch to Gear 1 for more torque; maintain steady pressure; replace bit; for metal, use cutting lubricant and slower speed.
+|Torque ring not in drill position, wrong gear, dull bit, or insufficient pressure
+|Set the torque ring to the drill position; switch to Gear 1 for more torque; maintain steady pressure; replace bit; for metal, use cutting lubricant and slower speed.
 
 |Overheating / hot housing
 |Prolonged heavy load or blocked vents
@@ -304,15 +310,15 @@ image::warning.jpg[alt="Warning icon", width=10%]
 |===
 |Parameter | Value
 |Voltage | 18 V (Li-ion)
-|Battery capacity | 2.0 Ah (example)
-|No-load speed | 0-450 / 0-1600 RPM (2-speed)
-|Max torque | 45 Nm
+|Battery capacity | 2.0 Ah
+|No-load speed | 0–450 / 0–1600 rpm (2-speed)
+|Max torque | 45 N·m
 |Clutch settings | 20 + drill
-|Chuck capacity | 1.5-13 mm
-|Charging time | ~60-90 min (2.0 Ah)
+|Chuck capacity | 1.5–13 mm
+|Charging time | ~60–90 min (2.0 Ah)
 |Weight (with battery) | ~1.6 kg
-|Operating temperature | 0-40 °C (tool)
-|Charging temperature | 5-35 °C (battery/charger)
+|Operating temperature | 0–40 °C (tool)
+|Charging temperature | 5–35 °C (battery/charger)
 |Manufacturer | TorqueWorks Ltd., 221B Tool Street, Inventon, NY 10001
 |===
 
@@ -330,4 +336,23 @@ Retain proof of purchase.
 
 [appendix]
 == Compliance & Disposal
-This product is manufactured by TorqueWorks Ltd., a fictional company established for demonstration purposes.
+
+=== Standards Conformity
+The Spinomatic X7 drill is designed to conform to UL 62841-1 / IEC 62841-1 (Electric motor-operated hand-held tools — Safety — General requirements) and UL 62841-2-1 / IEC 62841-2-1 (Particular requirements for hand-held drills and impact drills).
+
+=== FCC Statement (Charger CHG-18V)
+This device complies with Part 15 of the FCC Rules.
+Operation is subject to the following two conditions: (1) this device may not cause harmful interference, and (2) this device must accept any interference received, including interference that may cause undesired operation.
+Changes or modifications not expressly approved by TorqueWorks Ltd. could void the user's authority to operate the equipment.
+
+=== Battery Recycling
+The BAT-18V pack contains lithium-ion cells.
+
+* Do not dispose of batteries with household waste.
+* Tape over the terminals, then take the pack to a battery recycling point or a retailer take-back program.
+* Follow local regulations for battery disposal; some jurisdictions prohibit discarding Li-ion batteries in the trash.
+
+=== Tool and Charger Disposal
+Dispose of the drill and charger at an electronic-waste collection point according to local regulations.
+
+NOTE: TorqueWorks Ltd. is a fictional company established for demonstration purposes.

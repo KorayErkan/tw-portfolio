@@ -1,579 +1,577 @@
-# CloudFlow Pro User Manual
+# Orbitask User Manual
 
 **Author:** John Saysitall  
-**Version:** 2.1 — December 2024  
-**Product Version:** CloudFlow Pro 3.4.2
+**Version:** Orbitask 1.8.0 · August 2026
 
 ---
 
-## About This Manual
+## About this manual
 
-- **Product name**: _CloudFlow Pro_ by Goodweb, Inc. (fictional SaaS product for demonstration)
-- **Audience**: End-users, project managers, and workspace administrators
-- **Prerequisites**: Active account with workspace access, modern web browser (Chrome 90+, Firefox 88+, Safari 14+)
-- **Supported platforms**: Web application, CLI tools, REST API integration
+- **Product:** Orbitask, a fictional cloud project-management service used for demonstration
+- **Audience:** Team members, project managers, and workspace administrators
+- **Before you start:** You need an account in an Orbitask workspace and the latest or previous version of Chrome, Edge, Firefox, or Safari.
+- **Ways to work:** The web app at `https://app.orbitask.example`, the `orbitask` command-line tool (CLI), and the REST API
 
 ---
 
-## Quick Start Guide
+## Quick start
 
-### Initial Setup
+1. **Activate your account.**
+   Open the invitation email and click **Accept invitation**. If your workspace uses single sign-on, you sign in through your company's identity provider; otherwise, set a password and turn on two-factor authentication (recommended).
 
-1. **Account Activation**
-   - Navigate to https://cloudflow.goodweb.com
-   - Complete email verification using the activation link
-   - Set up two-factor authentication (recommended)
+2. **Install the CLI (optional).**
+   Download the CLI for your operating system from `https://downloads.orbitask.example/cli/1.8.0/`, then sign in and set a default project:
 
-2. **Workspace Configuration**
    ```bash
-   # CLI setup (optional)
-   npm install -g @cloudflow/cli
-   cloudflow login --workspace=your-org
-   cloudflow config set default-project "getting-started"
+   orbitask login --workspace acme-eng
+   orbitask config set default-project "getting-started"
    ```
 
-3. **First Project Creation**
-   - Dashboard → **New Project** → Select template
-   - Configure project settings and team permissions
-   - Import existing data (CSV, JSON, or API sync)
+3. **Create your first project.**
+   On the dashboard, click **New project**, choose a template, and invite your team. You can import existing tasks from CSV; see [Import and export data](#import-and-export-data).
 
-![User Onboarding Flow](./img/user-onboarding-flow.svg)
+![User onboarding flow](./img/user-onboarding-flow.svg)
 
 ---
 
-## Core Features
+## Projects
 
-### Project Management
+A project groups related tasks, milestones, and dashboards. Everyone in the workspace can see a project according to their [workspace role](#roles-and-permissions).
 
-#### Creating Projects
+### Project templates
 
-Projects serve as containers for related tasks and team collaboration:
+| Template | Use case | Includes |
+|----------|----------|----------|
+| **Agile sprint** | Software development | Story points, burndown chart, sprint planning board |
+| **Marketing campaign** | Content and promotion | Asset library, campaign timeline, budget tracking |
+| **Event planning** | Conferences and meetings | Vendor list, budget tracking, attendee list |
+| **General purpose** | Anything else | Tasks, milestones, and file sharing |
 
-| Project Template | Use Case | Default Features |
-|------------------|----------|-----------------|
-| **Agile Sprint** | Software development | Story points, burndown charts, sprint planning |
-| **Marketing Campaign** | Content and promotion | Asset library, campaign timeline, ROI tracking |
-| **Event Planning** | Conference, meetings | Vendor management, budget tracking, attendee lists |
-| **General Purpose** | Custom workflows | Basic tasks, milestones, document sharing |
+### Create a project
 
-**Step-by-step project creation:**
+1. Go to **Projects → New project**.
+2. Choose a template, or click **Start blank**.
+3. Enter the project details, for example:
 
-1. Access **Projects** → **New Project**
-2. Choose template or start blank
-3. Configure basic settings:
+   ```text
+   Project name: Q1 Product Launch
+   Description:  Customer portal 2.0 release preparation
+   Timeline:     90 days
    ```
-   Project Name: Q1 Product Launch
-   Description: Mobile app v2.0 release preparation
-   Team Size: 8-12 members
-   Timeline: 90 days
-   Budget: $150,000
-   ```
-4. Set team permissions and notification preferences
-5. Import initial task list or create from template
 
-#### Project Settings Configuration
+4. Choose notification settings, then click **Create**.
 
-Access **Project Settings** → **General** for advanced configuration:
+   *Result:* The project opens on its task board. If you chose a template, the board already contains the template's starter tasks.
+
+To do the same from the CLI:
 
 ```bash
-# CLI project configuration
-cloudflow project create "Q1-Product-Launch" \
-  --template=agile \
-  --team-size=10 \
-  --duration=90d \
-  --budget=150000
-
-# Set project-specific preferences
-cloudflow project config set notifications.daily_digest=true
-cloudflow project config set integrations.slack_channel="#product-team"
-cloudflow project config set reporting.auto_export="weekly"
+orbitask project create "Q1-Product-Launch" --template agile --duration 90d
+orbitask project config set notifications.daily_digest=true
+orbitask project config set reporting.auto_export=weekly
 ```
 
-### Task Management
+---
 
-#### Task Creation and Configuration
+## Tasks
 
-Tasks are the fundamental work units in CloudFlow Pro:
+A task is one piece of work. Tasks move through a status workflow from **Backlog** to **Done**.
 
-**Task Properties:**
+### Task fields
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| **Title** | Text (100 chars) | ✓ | Brief task description |
-| **Description** | Rich text | ✗ | Detailed specifications |
-| **Assignee** | User reference | ✓ | Responsible team member |
-| **Priority** | Low/Medium/High/Critical | ✓ | Impact and urgency level |
-| **Due Date** | DateTime | ✗ | Target completion |
-| **Estimated Hours** | Numeric | ✗ | Time allocation |
-| **Tags** | Array | ✗ | Categorization labels |
-| **Dependencies** | Task references | ✗ | Blocking relationships |
+| **Title** | Text, up to 100 characters | Yes | Short description of the work |
+| **Description** | Rich text | No | Details and acceptance criteria |
+| **Assignee** | Workspace member | No | The person responsible. A task without an assignee stays in **Backlog** until someone is assigned. |
+| **Priority** | Low, Medium, High, Critical | Yes | Defaults to Medium |
+| **Due date** | Date and time | No | Target completion |
+| **Estimate** | Hours | No | Expected effort |
+| **Tags** | List of labels | No | For filtering and reports |
+| **Dependencies** | Other tasks | No | Tasks that must finish first |
 
-**Creating tasks via web interface:**
+### Create a task in the web app
 
-1. Navigate to project workspace
-2. Click **+ New Task** button
-3. Fill required fields:
+1. Open the project.
+2. Click **New task**, or press `C`.
+3. Fill in the fields, for example:
+
+   ```text
+   Title:     Implement user authentication API
+   Assignee:  sarah.developer@acme.example
+   Priority:  High
+   Due date:  2026-10-02
+   Estimate:  16
+   Tags:      backend, security, api
    ```
-   Title: Implement user authentication API
-   Assignee: sarah.developer@company.com
-   Priority: High
-   Due Date: 2024-12-20
-   Estimated Hours: 16
-   Tags: backend, security, api
-   ```
 
-**Creating tasks via CLI:**
+4. Click **Save**.
+
+   *Result:* The task appears in the **Backlog** column of the board. Drag it to **In progress** when work starts.
+
+### Create tasks from the CLI
 
 ```bash
-# Basic task creation
-cloudflow task create \
+# Create one task
+orbitask task create \
   --title "Implement user authentication API" \
-  --assignee "sarah.developer@company.com" \
+  --assignee "sarah.developer@acme.example" \
   --priority high \
-  --due "2024-12-20" \
+  --due 2026-10-02 \
   --estimate 16h \
   --tags "backend,security,api"
 
-# Task with dependencies
-cloudflow task create \
+# Create a task that depends on another
+orbitask task create \
   --title "Deploy authentication to staging" \
   --depends-on TASK-123 \
-  --assignee "devops@company.com"
-
-# Bulk task creation from CSV
-cloudflow task import --file tasks.csv --project "Q1-Product-Launch"
+  --assignee "devops@acme.example"
 ```
 
-**Sample CSV format for bulk import:**
-```csv
-title,assignee,priority,due_date,estimate_hours,tags,description
-"Design login UI","ui.designer@company.com","Medium","2024-12-15",8,"frontend,design","Create mockups for authentication screens"
-"Write API documentation","tech.writer@company.com","Low","2024-12-25",4,"documentation,api","Document authentication endpoints"
-"Set up monitoring","devops@company.com","High","2024-12-18",12,"infrastructure,monitoring","Configure alerts for auth service"
-```
+To create many tasks at once, use `orbitask import tasks`; see [Import and export data](#import-and-export-data).
 
-#### Task Status Management
+### Task statuses
 
-CloudFlow Pro uses a customizable workflow with default states:
+Workspace Admins can rename or add statuses. The defaults are:
 
-| Status | Description | Automated Actions |
-|--------|-------------|------------------|
-| **Backlog** | Awaiting assignment | No notifications |
-| **In Progress** | Active development | Daily standup inclusion |
-| **Code Review** | Pending peer review | Reviewer notifications |
-| **Testing** | QA validation | Test assignment alerts |
-| **Staging** | Production-ready | Deployment eligibility |
-| **Done** | Completed work | Time tracking closure |
-| **Blocked** | External dependency | Escalation notifications |
+| Status | Meaning | Automatic actions |
+|--------|---------|-------------------|
+| **Backlog** | Not yet assigned or scheduled | None |
+| **In progress** | Someone is working on it | Included in the daily digest |
+| **Code review** | Waiting for peer review | Notifies reviewers |
+| **Testing** | In QA | Notifies the QA assignee |
+| **Staging** | Ready for release | Marked as releasable |
+| **Done** | Complete | Stops time tracking |
+| **Blocked** | Waiting on something outside the team | Notifies the project's Admins |
 
-**Status transitions via CLI:**
+Change statuses from the CLI:
+
 ```bash
-# Update single task status
-cloudflow task update TASK-123 --status "in-progress"
+# One task
+orbitask task update TASK-123 --status in-progress
 
-# Bulk status updates with filters
-cloudflow task update --assignee "sarah.developer@company.com" \
-  --current-status "backlog" \
-  --new-status "in-progress"
+# All of one person's backlog tasks
+orbitask task update --assignee "sarah.developer@acme.example" \
+  --current-status backlog \
+  --new-status in-progress
 
-# Add blocking reason
-cloudflow task update TASK-456 --status "blocked" \
+# Block a task and record why
+orbitask task update TASK-456 --status blocked \
   --reason "Waiting for API specification approval"
 ```
 
-### Team Collaboration
+---
 
-#### User Roles and Permissions
+## Roles and permissions
 
-CloudFlow Pro implements role-based access control:
+Roles are assigned **per workspace**. Every project in the workspace inherits the member's workspace role; there are no separate project roles. A workspace always has at least one Owner.
 
-| Role | Project Access | Task Management | Admin Functions | API Access |
-|------|----------------|-----------------|----------------|------------|
-| **Viewer** | Read-only | View tasks | None | Read-only endpoints |
-| **Member** | Full access | Create/edit own | None | Standard CRUD |
-| **Lead** | Full access | Manage all tasks | Project settings | Extended permissions |
-| **Admin** | All projects | Full management | User management | Administrative API |
+| What you can do | Owner | Admin | Member | Viewer |
+|-----------------|:-----:|:-----:|:------:|:------:|
+| View projects, tasks, dashboards, and reports | Yes | Yes | Yes | Yes |
+| Create and edit tasks and comments | Yes | Yes | Yes | — |
+| Create projects and generate reports | Yes | Yes | Yes | — |
+| Edit project settings, archive or delete projects | Yes | Yes | — | — |
+| Invite and remove members, change roles (except Owner) | Yes | Yes | — | — |
+| Manage webhooks, connectors, and the self-hosted agent | Yes | Yes | — | — |
+| Configure SSO, SCIM, and domain verification | Yes | — | — | — |
+| Manage billing, assign the Owner role, delete the workspace | Yes | — | — | — |
 
-**Managing team members:**
+**API tokens** act with the role of the user who created them. Token scopes can narrow that access but never widen it.
 
-```bash
-# Invite new team member
-cloudflow team invite user@company.com \
-  --role member \
-  --projects "Q1-Product-Launch,Q2-Planning"
+If you use SCIM, map IdP groups to these roles in **Admin → Security → Provisioning**; see [SCIM provisioning](installation-setup-guide.md#scim-provisioning).
 
-# Update user permissions
-cloudflow team update-role user@company.com --role lead
-
-# List team members with roles
-cloudflow team list --format table
-```
-
-**Sample team management output:**
-```
-┌─────────────────────────┬────────────┬──────────────┬─────────────┐
-│ Email                   │ Role       │ Last Active  │ Projects    │
-├─────────────────────────┼────────────┼──────────────┼─────────────┤
-│ sarah.dev@company.com   │ Lead       │ 2 hours ago  │ 3 active    │
-│ mike.pm@company.com     │ Member     │ 1 day ago    │ 5 active    │
-│ anna.qa@company.com     │ Member     │ 4 hours ago  │ 2 active    │
-│ john.admin@company.com  │ Admin      │ 30 min ago   │ All         │
-└─────────────────────────┴────────────┴──────────────┴─────────────┘
-```
-
-#### Communication and Notifications
-
-**Comment System:**
-
-Tasks include threaded comments for collaboration:
+### Manage members
 
 ```bash
-# Add comment to task
-cloudflow task comment TASK-123 \
-  --message "Updated API endpoint to use OAuth 2.0" \
-  --mention "@mike.pm@company.com"
+# Invite a member
+orbitask team invite user@acme.example --role member
 
-# List recent comments
-cloudflow task comments TASK-123 --since "2024-12-01"
+# Change a role
+orbitask team update-role user@acme.example --role admin
+
+# List members and roles
+orbitask team list --format table
 ```
 
-**Notification Preferences:**
+Sample output:
 
-| Notification Type | Email | In-app | Slack | Teams |
-|------------------|-------|--------|-------|-------|
-| Task assigned | ✓ | ✓ | ✓ | ✗ |
-| Due date approaching | ✓ | ✓ | ✗ | ✗ |
-| Status changed | ✗ | ✓ | ✓ | ✓ |
-| Comments added | ✗ | ✓ | ✓ | ✗ |
-| Project milestones | ✓ | ✓ | ✓ | ✓ |
-
-Configure notifications via **Settings** → **Notifications** or CLI:
-
-```bash
-cloudflow user config set notifications.email.task_assigned=true
-cloudflow user config set notifications.slack.status_changes=true
-cloudflow user config set notifications.digest_frequency="daily"
+```text
+┌──────────────────────────┬────────┬──────────────┐
+│ Email                    │ Role   │ Last active  │
+├──────────────────────────┼────────┼──────────────┤
+│ dana.owner@acme.example  │ Owner  │ 1 day ago    │
+│ john.admin@acme.example  │ Admin  │ 30 min ago   │
+│ sarah.dev@acme.example   │ Member │ 2 hours ago  │
+│ anna.qa@acme.example     │ Member │ 4 hours ago  │
+│ finance@acme.example     │ Viewer │ 3 days ago   │
+└──────────────────────────┴────────┴──────────────┘
 ```
 
-### Reporting and Analytics
+---
 
-#### Dashboard Overview
+## Comments and notifications
 
-The main dashboard provides real-time project metrics:
+### Comments
 
-**Key Performance Indicators:**
-
-| Metric | Calculation | Benchmark |
-|--------|-------------|-----------|
-| **Velocity** | Story points/sprint | Team average ±20% |
-| **Burndown Rate** | Tasks completed/day | Project timeline adherence |
-| **Cycle Time** | Average task duration | Historical comparison |
-| **Team Utilization** | Active tasks/team size | 80-90% optimal |
-| **Quality Score** | (Passed tests)/(Total tests) | >95% target |
-
-**Generating reports via CLI:**
+Each task has a comment thread. Mention people with `@name`.
 
 ```bash
-# Project summary report
-cloudflow report generate --type summary \
+orbitask task comment TASK-123 \
+  --message "Switched the endpoint to OAuth 2.0" \
+  --mention "mike.pm@acme.example"
+
+orbitask task comments TASK-123 --since 2026-09-01
+```
+
+### Notification defaults
+
+| Notification | Email | In-app | Slack | Microsoft Teams |
+|--------------|:-----:|:------:|:-----:|:---------------:|
+| Task assigned to you | Yes | Yes | Yes | — |
+| Due date approaching | Yes | Yes | — | — |
+| Status changed | — | Yes | Yes | Yes |
+| New comment | — | Yes | Yes | — |
+| Project milestone reached | Yes | Yes | Yes | Yes |
+
+Change these in **Settings → Notifications**, or from the CLI:
+
+```bash
+orbitask user config set notifications.email.task_assigned=true
+orbitask user config set notifications.slack.status_changes=true
+orbitask user config set notifications.digest_frequency=daily
+```
+
+---
+
+## Reports and dashboards
+
+### Dashboard metrics
+
+| Metric | How it is calculated | Typical target |
+|--------|----------------------|----------------|
+| **Velocity** | Story points completed per sprint | Within 20% of the team average |
+| **Burndown rate** | Tasks completed per day | On track for the project end date |
+| **Cycle time** | Average time from **In progress** to **Done** | Shorter than the previous period |
+| **Utilization** | Active tasks per team member | 80–90% |
+
+### Generate reports from the CLI
+
+```bash
+# Project summary as PDF
+orbitask report generate --type summary \
   --project "Q1-Product-Launch" \
-  --period "last-30-days" \
+  --period last-30-days \
   --format pdf \
-  --output "reports/project-summary-dec2024.pdf"
+  --output reports/q1-summary-2026-09.pdf
 
-# Team performance analytics
-cloudflow report generate --type team-performance \
-  --include-charts \
-  --format html \
-  --email-to "stakeholders@company.com"
-
-# Custom report with specific metrics
-cloudflow report custom \
+# Custom CSV report
+orbitask report generate --type custom \
   --metrics "velocity,burndown,cycle_time" \
-  --filters "priority:high,status:done" \
-  --groupby assignee \
-  --export csv
+  --filter "priority:high,status:done" \
+  --group-by assignee \
+  --format csv
 ```
 
-**Sample report output:**
-```
+Sample summary:
+
+```text
 Project: Q1 Product Launch
-Period: November 1-30, 2024
-Total Tasks: 127 | Completed: 89 | Remaining: 38
+Period:  August 1–31, 2026
+Tasks:   127 total | 89 done | 38 open
 
-Team Performance:
-┌──────────────────┬───────────┬─────────────┬──────────────┬─────────────┐
-│ Team Member      │ Assigned  │ Completed   │ Avg Duration │ Quality     │
-├──────────────────┼───────────┼─────────────┼──────────────┼─────────────┤
-│ Sarah Developer  │ 23        │ 21 (91%)    │ 2.3 days     │ 97%         │
-│ Mike PM          │ 15        │ 14 (93%)    │ 1.8 days     │ 100%        │
-│ Anna QA          │ 18        │ 16 (89%)    │ 3.1 days     │ 94%         │
-└──────────────────┴───────────┴─────────────┴──────────────┴─────────────┘
+┌──────────────────┬──────────┬───────────┬──────────────┐
+│ Member           │ Assigned │ Done      │ Avg duration │
+├──────────────────┼──────────┼───────────┼──────────────┤
+│ Sarah Developer  │ 23       │ 21 (91%)  │ 2.3 days     │
+│ Mike PM          │ 15       │ 14 (93%)  │ 1.8 days     │
+│ Anna QA          │ 18       │ 16 (89%)  │ 3.1 days     │
+└──────────────────┴──────────┴───────────┴──────────────┘
 ```
 
-### Advanced Features
+Large reports run in the background; Orbitask emails you a download link when they are ready.
 
-#### API Integration
+---
 
-CloudFlow Pro provides comprehensive REST API access:
+## API
 
-**Authentication:**
+API v2 is the current version for all endpoints. API v1 is deprecated and stops working on **2026-11-16**; see [Release Notes](release-notes.md#deprecations).
+
+### Authenticate
+
 ```bash
-# Generate API token
-cloudflow auth token create --name "ci-cd-integration" --scope "projects:read,tasks:write"
+# Create a token with only the scopes you need
+orbitask auth token create --name "ci-integration" --scope "projects:read,tasks:write"
 
-# Configure API access
-export CLOUDFLOW_API_TOKEN="cf_live_1234567890abcdef"
-export CLOUDFLOW_API_URL="https://api.cloudflow.goodweb.com/v2"
+export ORBITASK_API_TOKEN="<TOKEN>"
+export ORBITASK_API_URL="https://api.orbitask.example/v2"
 ```
 
-**Common API operations:**
+### Common requests
 
 ```bash
-# Fetch project data
-curl -H "Authorization: Bearer $CLOUDFLOW_API_TOKEN" \
-     -H "Content-Type: application/json" \
-     "$CLOUDFLOW_API_URL/projects/Q1-Product-Launch/tasks?status=in-progress"
+# List in-progress tasks in a project
+curl -H "Authorization: Bearer $ORBITASK_API_TOKEN" \
+     "$ORBITASK_API_URL/projects/Q1-Product-Launch/tasks?status=in-progress"
 
-# Create task via API
+# Create a task (the Idempotency-Key makes retries safe)
 curl -X POST \
-     -H "Authorization: Bearer $CLOUDFLOW_API_TOKEN" \
+     -H "Authorization: Bearer $ORBITASK_API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{
-       "title": "Fix authentication bug",
-       "assignee": "sarah.developer@company.com",
-       "priority": "high",
-       "tags": ["bugfix", "security"]
-     }' \
-     "$CLOUDFLOW_API_URL/projects/Q1-Product-Launch/tasks"
+     -H "Idempotency-Key: 6f1c2e0a-5d7b-4b1e-9a57-0c3e8a1d2f44" \
+     -d '{"title": "Fix authentication bug", "assignee": "sarah.developer@acme.example",
+          "priority": "high", "tags": ["bugfix", "security"]}' \
+     "$ORBITASK_API_URL/projects/Q1-Product-Launch/tasks"
 
-# Bulk status update via API
+# Move all of one person's tasks from Code review to Testing
 curl -X PATCH \
-     -H "Authorization: Bearer $CLOUDFLOW_API_TOKEN" \
+     -H "Authorization: Bearer $ORBITASK_API_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{
-       "filter": {"assignee": "sarah.developer@company.com", "status": "code-review"},
-       "update": {"status": "testing"}
-     }' \
-     "$CLOUDFLOW_API_URL/tasks/bulk-update"
+     -d '{"filter": {"assignee": "sarah.developer@acme.example", "status": "code-review"},
+          "update": {"status": "testing"}}' \
+     "$ORBITASK_API_URL/tasks/bulk-update"
 ```
 
-#### Webhook Configuration
+Each token can make up to 1,000 requests per minute. See [API errors and rate limits](maintenance-troubleshooting.md#api-errors-and-rate-limits).
 
-Set up real-time notifications for external systems:
+---
+
+## Webhook configuration
+
+Webhooks send an HTTPS `POST` to your endpoint when something happens in Orbitask. Workspace Owners and Admins manage them in **Admin → Webhooks**, or from the CLI:
 
 ```bash
-# Create webhook endpoint
-cloudflow webhook create \
-  --url "https://your-app.com/cloudflow-webhook" \
-  --events "task.created,task.completed,project.milestone" \
-  --secret "your-webhook-secret"
+# Create a webhook; Orbitask generates the signing secret and shows it once
+orbitask webhook create \
+  --url "https://hooks.acme.example/orbitask" \
+  --events "task.created,task.completed,project.milestone"
 
-# Test webhook delivery
-cloudflow webhook test --endpoint webhook-123 --event task.created
+# Send a test event
+orbitask webhook test wh_123 --event task.created
 
-# List active webhooks
-cloudflow webhook list --format table
+# List webhooks
+orbitask webhook list --format table
 ```
 
-**Sample webhook payload:**
+### Payload
+
 ```json
 {
+  "id": "evt_01J9X4K2T7Q8M3N5P6R",
   "event": "task.completed",
-  "timestamp": "2024-12-10T14:30:00Z",
-  "workspace": "goodweb-engineering",
+  "timestamp": "2026-09-10T14:30:00Z",
+  "workspace": "acme-eng",
   "project": "Q1-Product-Launch",
   "data": {
     "task_id": "TASK-123",
     "title": "Implement user authentication API",
-    "assignee": "sarah.developer@company.com",
-    "completed_at": "2024-12-10T14:29:45Z",
+    "assignee": "sarah.developer@acme.example",
+    "completed_at": "2026-09-10T14:29:45Z",
     "duration_hours": 14.5
   }
 }
 ```
 
-#### Data Import/Export
+Every event has a unique `id`. Orbitask can deliver the same event more than once (for example, after a retry), so store the IDs you have processed and skip repeats.
 
-**Supported formats:**
+### Delivery and retries
 
-| Format | Import | Export | Use Case |
-|--------|--------|--------|----------|
-| **CSV** | ✓ | ✓ | Bulk task management, reporting |
-| **JSON** | ✓ | ✓ | API integration, backups |
-| **Excel** | ✓ | ✓ | Stakeholder reports, planning |
-| **PDF** | ✗ | ✓ | Executive summaries, archives |
-| **XML** | ✓ | ✗ | Legacy system integration |
+- Your endpoint must return a 2xx status within 10 seconds.
+- Any other result is retried with exponential backoff, up to 8 attempts over about 24 hours.
+- After the last attempt, the delivery is marked **Failed**. You can redeliver it from **Admin → Webhooks → Deliveries**.
 
-**Import operations:**
+![Webhook delivery topology](./img/webhooks-eventing-topology.svg)
 
-```bash
-# Import tasks from CSV
-cloudflow import tasks \
-  --file "project-tasks.csv" \
-  --project "Q1-Product-Launch" \
-  --skip-validation=false \
-  --dry-run
+### Verifying webhook signatures
 
-# Import project structure from JSON
-cloudflow import project \
-  --file "project-template.json" \
-  --create-users=true \
-  --send-invites=false
+Each request carries an `Orbitask-Signature` header:
 
-# Import from external system
-cloudflow import external \
-  --source jira \
-  --project-key "PROJ" \
-  --mapping-file "jira-cloudflow-mapping.json"
+```text
+Orbitask-Signature: t=1789000000,v1=5257a869e7ecebeda32affa62cdca3fa51cad7e77a0e56ff536d0ce8e108d8bd
 ```
 
-**Export operations:**
+- `t` is the Unix time when Orbitask signed the request.
+- `v1` is a hex-encoded HMAC-SHA256 of the string `<t>.<raw request body>`, keyed with your webhook's signing secret. While you rotate a secret, the header contains one `v1` value per active secret.
 
-```bash
-# Export all project data
-cloudflow export project "Q1-Product-Launch" \
-  --format json \
-  --include-comments \
-  --include-attachments \
-  --output "backup-q1-launch.json"
+To verify a request:
 
-# Export specific task data for analysis
-cloudflow export tasks \
-  --filter "priority:high,status:done" \
-  --format csv \
-  --fields "title,assignee,created_at,completed_at,duration" \
-  --output "high-priority-completed.csv"
+1. Read the **raw** request body, before any JSON parsing. Re-serialized JSON will not match.
+2. Reject the request if `t` is more than 300 seconds from your server's current time. This blocks replayed requests.
+3. Compute the HMAC and compare it to each `v1` value with a constant-time comparison.
+4. Return `401` if verification fails; otherwise process the event and return `2xx`.
+
+Python example (standard library only):
+
+```python
+import hashlib
+import hmac
+import time
+
+TOLERANCE_SECONDS = 300  # reject deliveries signed more than 5 minutes ago
+
+
+def verify_signature(secret, header, raw_body, now=None):
+    """Return True if an Orbitask-Signature header matches the raw request body."""
+    timestamp, signatures = None, []
+    for item in header.split(","):
+        key, _, value = item.strip().partition("=")
+        if key == "t" and value.isdigit():
+            timestamp = int(value)
+        elif key == "v1":
+            signatures.append(value)
+    if timestamp is None or not signatures:
+        return False
+
+    now = time.time() if now is None else now
+    if abs(now - timestamp) > TOLERANCE_SECONDS:
+        return False
+
+    signed_payload = str(timestamp).encode() + b"." + raw_body
+    expected = hmac.new(secret.encode(), signed_payload, hashlib.sha256).hexdigest()
+    # During secret rotation the header carries one v1 value per active secret.
+    return any(hmac.compare_digest(expected, sig) for sig in signatures)
+
+
+if __name__ == "__main__":
+    # Self-test: sign a body the way Orbitask does, then verify it.
+    secret = "whsec_test_secret"
+    body = b'{"id":"evt_01J9X4K2T7","event":"task.completed"}'
+    t = int(time.time())
+    sig = hmac.new(secret.encode(), f"{t}.".encode() + body, hashlib.sha256).hexdigest()
+    header = f"t={t},v1={sig}"
+
+    assert verify_signature(secret, header, body)
+    assert not verify_signature(secret, header, body + b" ")          # body changed
+    assert not verify_signature("wrong", header, body)                 # wrong secret
+    assert not verify_signature(secret, header, body, now=t + 301)     # too old
+    print("signature checks passed")
 ```
+
+Save it as `verify_orbitask.py` and run `python verify_orbitask.py`; it prints `signature checks passed`. In your web framework, call `verify_signature()` with the secret, the `Orbitask-Signature` header, and the raw body bytes.
 
 ---
 
-## Keyboard Shortcuts
+## Import and export data
 
-Improve efficiency with built-in keyboard shortcuts:
+### Supported formats
 
-| Action | Windows/Linux | macOS | Description |
-|--------|---------------|-------|-------------|
-| **Global Search** | `Ctrl + K` | `Cmd + K` | Search tasks, projects, users |
-| **Quick Task** | `Ctrl + N` | `Cmd + N` | Create new task |
-| **Navigation** | `Ctrl + 1-9` | `Cmd + 1-9` | Switch between main sections |
-| **Command Palette** | `Ctrl + Shift + P` | `Cmd + Shift + P` | Access all commands |
-| **Focus Mode** | `F11` | `Cmd + Ctrl + F` | Hide navigation sidebar |
-| **Refresh Data** | `F5` | `Cmd + R` | Reload current view |
-| **Bulk Select** | `Ctrl + Click` | `Cmd + Click` | Multi-select tasks |
-| **Mark Complete** | `Ctrl + Enter` | `Cmd + Enter` | Complete selected tasks |
+| Format | Import | Export | Typical use |
+|--------|:------:|:------:|-------------|
+| **CSV** | Yes | Yes | Bulk task changes, spreadsheets |
+| **JSON** | Yes | Yes | Integrations, full backups |
+| **Excel (.xlsx)** | Yes | Yes | Planning and stakeholder reports |
+| **PDF** | — | Yes | Summaries and archives |
+
+### Import
+
+```bash
+# Check a CSV file without importing it
+orbitask import tasks --file project-tasks.csv --project "Q1-Product-Launch" --dry-run
+
+# Import it
+orbitask import tasks --file project-tasks.csv --project "Q1-Product-Launch"
+
+# Import from Jira using a field mapping
+orbitask import tasks --source jira --project-key PROJ \
+  --mapping-file jira-orbitask-mapping.json --project "Q1-Product-Launch"
+```
+
+Sample CSV (only `title` is required):
+
+```csv
+title,assignee,priority,due_date,estimate_hours,tags,description
+"Design login UI","ui.designer@acme.example","Medium","2026-09-25",8,"frontend,design","Mockups for the sign-in screens"
+"Write API documentation","","Low","2026-10-09",4,"documentation,api","Document the authentication endpoints"
+"Set up monitoring","devops@acme.example","High","2026-09-30",12,"infrastructure","Alerts for the auth service"
+```
+
+The second row has no assignee, so that task is created in **Backlog**.
+
+### Export
+
+```bash
+# Everything in one project, with comments and attachments
+orbitask export project "Q1-Product-Launch" \
+  --format json --include-comments --include-attachments \
+  --output backup-q1-launch.json
+
+# Selected fields of completed high-priority tasks
+orbitask export tasks \
+  --filter "priority:high,status:done" \
+  --format csv \
+  --fields "title,assignee,created_at,completed_at" \
+  --output high-priority-done.csv
+```
+
+To export a whole workspace, see [Export your data](maintenance-troubleshooting.md#export-your-data).
+
+---
+
+## Keyboard shortcuts
+
+Single-key shortcuts do not work while you are typing in a text field. Press `?` in the app to see the full list.
+
+| Action | Windows / Linux | macOS |
+|--------|-----------------|-------|
+| Search and run commands | `Ctrl+K` | `Cmd+K` |
+| Create a task | `C` | `C` |
+| Go to projects | `G` then `P` | `G` then `P` |
+| Go to my tasks | `G` then `M` | `G` then `M` |
+| Move to the next / previous task | `J` / `K` | `J` / `K` |
+| Select the focused task | `X` | `X` |
+| Mark selected tasks complete | `Ctrl+Enter` | `Cmd+Enter` |
+| Show or hide the sidebar | `[` | `[` |
+| Show all shortcuts | `?` | `?` |
 
 ---
 
 ## Troubleshooting
 
-### Common Issues and Solutions
+| Problem | What to try |
+|---------|-------------|
+| You cannot sign in with SSO | Sign out of your identity provider, then try again. If it still fails, ask your workspace Admin; see [SSO and SCIM issues](maintenance-troubleshooting.md#sso-and-scim-issues). |
+| A project or task is missing | Check the board filters. If the project is still missing, you may not have access; ask a workspace Admin. |
+| Dashboards load slowly | Narrow the date range or filter by project. |
+| CLI says `ORB001` | Your token expired or was revoked. Run `orbitask login` again or create a new token. |
 
-#### Performance Issues
+Workspace Admins can find more fixes in [Maintenance & Troubleshooting](maintenance-troubleshooting.md).
 
-**Slow dashboard loading:**
-```bash
-# Clear local cache
-cloudflow cache clear --all
+### Error codes
 
-# Check system status
-cloudflow status --include-performance
+| Code | HTTP status | Meaning | What to do |
+|------|-------------|---------|------------|
+| **ORB001** | 401 | Token missing, expired, or revoked | Sign in again or create a new token |
+| **ORB002** | 403 | Your role or the token's scopes do not allow this | Ask a workspace Admin; check the [roles table](#roles-and-permissions) |
+| **ORB003** | 429 | Rate limit exceeded | Wait for the time in the `Retry-After` header |
+| **ORB004** | 400 | Invalid data, such as a missing title | Fix the fields named in the error message |
+| **ORB005** | 503 | Service temporarily unavailable | Check `https://status.orbitask.example` and retry later |
+| **ORB006** | 410 | API v1 endpoint called after 2026-11-16 | Switch to API v2 |
 
-# Optimize workspace settings
-cloudflow workspace optimize --project "Q1-Product-Launch"
-```
+### Getting support
 
-**Large dataset handling:**
-```bash
-# Enable pagination for large task lists
-cloudflow config set ui.pagination.enabled=true
-cloudflow config set ui.pagination.size=50
+- **Help center:** `https://help.orbitask.example`
+- **Support:** `support@orbitask.example`, or **Help → Contact support** in the app
+- **Service status:** `https://status.orbitask.example`
 
-# Use filters to reduce data load
-cloudflow tasks list --limit 100 --status "in-progress,testing"
-```
-
-#### Authentication Problems
-
-**Token expiration:**
-```bash
-# Refresh authentication token
-cloudflow auth refresh
-
-# Check token validity
-cloudflow auth verify --token $CLOUDFLOW_API_TOKEN
-
-# Generate new long-term token
-cloudflow auth token create --name "backup-token" --expires-in "90d"
-```
-
-**SSO integration issues:**
-```bash
-# Test SAML configuration
-cloudflow auth test-saml --provider okta
-
-# Check SCIM sync status
-cloudflow users sync-status --provider azure-ad
-
-# Manual user sync
-cloudflow users sync --dry-run
-```
-
-#### Data Sync Issues
-
-**Missing tasks or outdated information:**
-```bash
-# Force data synchronization
-cloudflow sync --force --project "Q1-Product-Launch"
-
-# Check sync conflicts
-cloudflow sync conflicts --resolve-strategy "server-wins"
-
-# Verify data integrity
-cloudflow validate --project "Q1-Product-Launch" --fix-errors
-```
-
-### Error Codes Reference
-
-| Code | Category | Description | Resolution |
-|------|----------|-------------|------------|
-| **CF001** | Authentication | Invalid API token | Refresh or regenerate token |
-| **CF002** | Authorization | Insufficient permissions | Contact workspace admin |
-| **CF003** | Rate Limiting | API quota exceeded | Wait or upgrade plan |
-| **CF004** | Validation | Invalid task data | Check required fields |
-| **CF005** | System | Service unavailable | Check status.goodweb.com |
-
-### Support Contacts
-
-For additional assistance:
-
-- **Knowledge Base:** https://help.cloudflow.goodweb.com
-- **Community Forum:** https://community.cloudflow.goodweb.com  
-- **Technical Support:** support@goodweb.com (24/7 for Pro customers)
-- **Status Updates:** https://status.goodweb.com
-- **Feature Requests:** features@goodweb.com
-
-**Enterprise Support:**
-- **Dedicated Support Manager:** Available for Enterprise plans
-- **Phone Support:** 1-800-CLOUDFLOW (Enterprise only)
-- **SLA Response Times:** 1 hour (Critical), 4 hours (High), 24 hours (Standard)
+Support response times depend on your plan and the severity of the issue; see [Contact support](maintenance-troubleshooting.md#contact-support).
 
 ---
 
 ## Glossary
 
-- **Workspace** — Top-level organizational container managing projects and users
-- **Project** — Collection of related tasks, milestones, and team members
-- **Task** — Individual work item with assignee, status, and metadata
-- **Sprint** — Time-boxed iteration for agile project management
-- **Milestone** — Significant project checkpoint or deliverable
-- **Burndown** — Visual representation of work remaining over time
-- **Velocity** — Team's rate of task completion over time
-- **Cycle Time** — Average duration from task start to completion
-- **Admin** — User role with elevated workspace and user management permissions
-- **API Token** — Authentication credential for programmatic access
-- **Webhook** — HTTP callback for real-time event notifications
+- **Workspace**: The top-level container for projects, members, and settings.
+- **Project**: A set of related tasks, milestones, and dashboards.
+- **Task**: One piece of work, with a status and an optional assignee.
+- **Role**: One of Owner, Admin, Member, or Viewer; assigned per workspace.
+- **Sprint**: A fixed-length iteration in agile projects.
+- **Milestone**: A significant checkpoint or deliverable in a project.
+- **Burndown**: A chart of the work remaining over time.
+- **Velocity**: How much work a team completes per sprint.
+- **Cycle time**: Average time from starting a task to finishing it.
+- **API token**: A credential for calling the API or using the CLI.
+- **Webhook**: An HTTPS callback that Orbitask sends when an event happens.
+- **Agent**: The optional self-hosted service that connects Orbitask to systems in your network.
 
 ---
 
-*CloudFlow Pro and Goodweb, Inc. are fictional entities created for portfolio demonstration purposes. All features, URLs, and contact information are imaginary.*
+*Orbitask is a fictional product created for portfolio demonstration. All features, URLs, and contact details are imaginary.*

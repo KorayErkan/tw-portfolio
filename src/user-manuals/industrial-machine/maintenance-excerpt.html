@@ -215,7 +215,7 @@ dl dd{ color: var(--muted); margin: 0 0 .6rem 0; }
 <h1>CNC-5000 Industrial Machining Center — Maintenance Manual</h1>
 <div class="details">
 <span id="author" class="author">IronClad Machinery GmbH</span><br>
-<span id="revnumber">version 0.9,</span>
+<span id="revnumber">version 1.0,</span>
 <span id="revdate">2026-09-26</span>
 </div>
 <div id="toc" class="toc2">
@@ -285,11 +285,11 @@ This document is created for demonstration purposes only.
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a><a class="link" href="#_introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Manufacturer:</strong> IronClad Machinery GmbH, 2210 Werkstrasse, Düsseldorf, Germany
-<strong>Support:</strong> support@ironclad-machinery.example · +49-221-555-0199</p>
+<p><strong>Manufacturer:</strong> IronClad Machinery GmbH, 2210 Werkstrasse, Düsseldorf, Germany<br>
+<strong>Support:</strong> support@ironclad-machinery.example · +49-211-555-0199</p>
 </div>
 <div class="paragraph">
-<p><strong>Intended audience:</strong> certified maintenance technicians and supervisors.
+<p><strong>Intended audience:</strong> certified maintenance technicians and supervisors.<br>
 <strong>Scope:</strong> routine service, selected fault codes, and recordkeeping templates.</p>
 </div>
 <div class="sect2">
@@ -366,7 +366,7 @@ This document is created for demonstration purposes only.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Notify affected operators and stop the machine; press <strong>E-Stop</strong>.</p>
+<p>Notify affected employees that the machine will be shut down and locked out; stop the machine with a normal cycle stop, then press <strong>E-Stop</strong>.</p>
 </li>
 <li>
 <p>Isolate <strong>electrical energy</strong>: set main disconnect to <strong>OFF</strong>; apply personal lock and tag.</p>
@@ -375,17 +375,23 @@ This document is created for demonstration purposes only.
 <p>Isolate <strong>pneumatic/hydraulic energy</strong>: close supply valves; bleed off stored pressure; apply locks/tags.</p>
 </li>
 <li>
-<p>Isolate <strong>mechanical/kinetic energy</strong>: block or brace moving parts as required.</p>
+<p>Isolate <strong>mechanical/kinetic energy</strong>: block or brace moving parts (for example, a vertical axis that can drop under gravity) as required.</p>
+</li>
+<li>
+<p><strong>Discharge stored electrical energy</strong>: wait at least <strong>5 minutes</strong> for the servo-drive DC-bus capacitors to discharge. Verify <strong>&lt; 50 V DC</strong> at the DC-bus test points before touching any drive terminal.</p>
 </li>
 <li>
 <p><strong>Verify zero energy</strong>:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Attempt a normal start to confirm isolation (machine must not power).</p>
+<p>With isolation in place, attempt a normal start at the <strong>operator panel</strong> (cycle start, spindle start, axis jog). The machine must not respond.</p>
 </li>
 <li>
-<p>Use appropriate test devices: absence-of-voltage indicator; gauges at <strong>0</strong> pressure.</p>
+<p>Use appropriate test devices: absence-of-voltage tester on the load side of the disconnect; gauges at <strong>0</strong> pressure.</p>
+</li>
+<li>
+<p>Return all operator controls to <strong>OFF</strong>/neutral.</p>
 </li>
 </ol>
 </div>
@@ -394,10 +400,13 @@ This document is created for demonstration purposes only.
 <p>Perform maintenance.</p>
 </li>
 <li>
-<p>Remove tools/fixtures, reinstall guards, clear work area.</p>
+<p>Remove tools/fixtures, reinstall guards, clear work area; confirm all personnel are clear of the machine.</p>
 </li>
 <li>
-<p>Remove personal locks/tags; restore energy in reverse order; perform a controlled test run.</p>
+<p>Notify affected employees that locks are being removed and the machine is about to be re-energized.</p>
+</li>
+<li>
+<p>Each person removes their own lock and tag; restore energy in reverse order; perform a controlled test run.</p>
 </li>
 </ol>
 </div>
@@ -419,6 +428,20 @@ This document is created for demonstration purposes only.
 <p>Pneumatic supply ball valve — closed, with valve lockout device and padlock.</p>
 </li>
 </ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Stored electrical energy.</strong> Servo-drive DC-bus capacitors stay charged at hazardous voltage after the main disconnect is OFF. Contact can cause electric shock, burns, or death. Wait at least 5 minutes, then verify &lt; 50 V DC at the DC-bus test points before touching drive terminals.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -442,19 +465,22 @@ This document is created for demonstration purposes only.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Press E-Stop immediately</strong> — red mushroom button on control panel and pendant</p>
+<p><strong>Press E-Stop immediately</strong> — red mushroom button on control panel and pendant.</p>
 </li>
 <li>
-<p><strong>Turn main disconnect to OFF</strong> — located at electrical cabinet</p>
+<p><strong>Turn main disconnect to OFF</strong> — located at the electrical cabinet — only if it can be reached safely.</p>
 </li>
 <li>
-<p><strong>Do not attempt to restart</strong> until hazard is eliminated</p>
+<p><strong>Evacuate a 3-meter radius</strong> if sparking, smoke, or unusual odors are present.</p>
 </li>
 <li>
-<p><strong>Call maintenance supervisor</strong> and facility emergency response team</p>
+<p><strong>From a safe location, call</strong> the maintenance supervisor and the facility emergency response team.</p>
 </li>
 <li>
-<p><strong>Evacuate 3-meter radius</strong> if sparking, smoke, or unusual odors present</p>
+<p><strong>Fight a small fire only if trained and it is safe to do so</strong>, using a CO<sub>2</sub> or dry-chemical extinguisher rated for Class C (electrical) fires. Never use water on electrical equipment.</p>
+</li>
+<li>
+<p><strong>Do not attempt to restart</strong> until the hazard is eliminated.</p>
 </li>
 </ol>
 </div>
@@ -483,6 +509,20 @@ This document is created for demonstration purposes only.
 </div>
 <div class="sect3">
 <h4 id="_hydrauliccoolant_leak"><a class="anchor" href="#_hydrauliccoolant_leak"></a><a class="link" href="#_hydrauliccoolant_leak">2.3.3. Hydraulic/Coolant Leak</a></h4>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>High-pressure fluid injection hazard.</strong> A pinhole leak in a pressurized hydraulic line can inject fluid through the skin, causing serious injury, tissue death, or amputation. Never check for leaks with your hand or fingers; use a piece of cardboard or wood. If fluid penetrates the skin, seek medical attention immediately, even if the wound looks minor.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -526,7 +566,7 @@ This document is created for demonstration purposes only.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spindle bearing lubrication</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pinch points, rotating parts</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure spindle stop; use lockable grease gun</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full LOTO; spindle stopped; use clean grease gun and NLGI-2 grease</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Way cover inspection</p></td>
@@ -537,8 +577,8 @@ This document is created for demonstration purposes only.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Hydraulic filter change</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pressurized fluid, chemical exposure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Full system depressurization; chemical-resistant PPE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pressurized fluid, fluid injection, chemical exposure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full system depressurization; chemical-resistant PPE; never check leaks by hand</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Coolant concentration testing</p></td>
@@ -580,6 +620,22 @@ This document is created for demonstration purposes only.
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Coolant concentration</strong> is stated in % (volume). A refractometer reads in °Brix; multiply the reading by the coolant&#8217;s refractometer factor to get concentration:
+concentration (%) = reading (°Brix) × factor.
+Example: the fictional IronCool 500 coolant has a factor of 1.0, so a 6–8% target corresponds to a reading of 6–8 °Brix. Use the factor on your coolant&#8217;s data sheet.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 12.5%;">
@@ -603,14 +659,14 @@ This document is created for demonstration purposes only.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clean chips/swarf; empty conveyors &amp; bins</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enclosure, conveyors</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scraper/brush; PPE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Power off; check for jams at discharge points.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run chip conveyor and chip flush with doors closed; empty bins from outside the enclosure. Reaching into the enclosure or conveyor requires full LOTO.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Daily</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Check coolant level &amp; concentration (6–8%)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Coolant system</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Refractometer; premix</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Top up with premix; skim tramp oil if present.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Concentration = °Brix × refractometer factor. Top up with premix; skim tramp oil if present.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Daily</p></td>
@@ -621,10 +677,10 @@ This document is created for demonstration purposes only.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Weekly</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lubricate spindle bearings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lubricate spindle bearings (grease-lubricated spindle)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spindle</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Grease gun (NLGI-2)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2–3 pumps per fitting; do not over-pack.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Per OEM lubrication chart: 2–3 pumps per fitting; do not over-pack. Full LOTO.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Weekly</p></td>
@@ -642,10 +698,10 @@ This document is created for demonstration purposes only.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Monthly</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Replace hydraulic filter; check ΔP gauge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace hydraulic filter; check ΔP indicator</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Hydraulics</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wrench set; new element</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Depressurize first; log hours since last change.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Depressurize first; log ΔP and hours since last change. Replace earlier if the ΔP indicator shows red between scheduled changes.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Monthly</p></td>
@@ -680,21 +736,21 @@ This document is created for demonstration purposes only.
 <td class="tableblock halign-left valign-top"><p class="tableblock">Thermal imaging survey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Electrical panels, drives</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Thermal camera</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Max acceptable: 40°C above ambient for electrical connections.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compare with similar components under similar load: ΔT &gt; 15 °C = investigate; ΔT &gt; 40 °C = immediate repair.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annual</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spindle runout measurement</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spindle</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dial indicator (0.001 mm res.)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Radial: &lt;0.005 mm; axial: &lt;0.003 mm at tool holder taper.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Radial: &lt; 0.005 mm; axial: &lt; 0.003 mm at tool holder taper.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annual</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ballscrew backlash verification</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">X/Y/Z axes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Laser interferometer or dial indicator</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;0.01 mm at mid-stroke; document drift over time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt; 0.01 mm at mid-stroke; document drift over time.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annual</p></td>
@@ -712,10 +768,10 @@ This document is created for demonstration purposes only.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">24 Months</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Geometric accuracy check (ISO 10791-7)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometric accuracy check (ISO 10791-2) and circular test (ISO 230-4)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Machine structure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ballbar; laser tracker</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Full 21-point test per ISO standard; contact OEM for acceptance criteria.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Precision level; straightedge; dial indicators; ballbar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometric tests per ISO 10791-2; ballbar circular test per ISO 230-4. Compare with OEM acceptance criteria.</p></td>
 </tr>
 </tbody>
 </table>
@@ -752,7 +808,7 @@ This document is created for demonstration purposes only.
 </ul>
 </div>
 <div class="paragraph">
-<p>Apply 2–3 pumps of NLGI-2 grease per fitting with the spindle stopped and locked out. Do not over-pack: excess grease raises bearing temperature.</p>
+<p>The CNC-5000 spindle is grease-lubricated. Per the OEM lubrication chart, apply 2–3 pumps of NLGI-2 grease per fitting with the spindle stopped and locked out. Do not over-pack: excess grease raises bearing temperature.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -779,12 +835,60 @@ This document is created for demonstration purposes only.
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>Check the ΔP indicator at every monthly visit; if it shows red between scheduled changes, replace the element early.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_fault_codes"><a class="anchor" href="#_fault_codes"></a><a class="link" href="#_fault_codes">4. Fault Codes</a></h2>
 <div class="sectionbody">
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<caption class="title">Table 1. Priority scale</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Critical</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop the machine; do not restart; escalate to OEM service immediately.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop production until the fault is corrected.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correct before the next production cycle or shift.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Correct at the next scheduled maintenance.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Fault actions that involve drive terminals or connectors require full LOTO first. Wait at least 5 minutes after isolation and verify &lt; 50 V DC at the DC-bus test points before touching drive terminals.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all stripes-even stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -804,13 +908,13 @@ This document is created for demonstration purposes only.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-101</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Axis overtravel</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Press <strong>RESET</strong>; home machine; verify limit switch operation (24VDC expected); check soft limits in parameters.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Press <strong>RESET</strong>; home machine; verify limit switch operation (24 V DC expected); check soft limits in parameters.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-102</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spindle overheating</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stop immediately; verify coolant flow rate &gt;15 L/min; check fan operation; inspect for blocked air passages; allow &gt;30min cooldown.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop immediately; verify the spindle chiller is running and at set point; clean chiller filter and condenser; check spindle fan; inspect for blocked air passages; allow ≥ 30 min cooldown.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
@@ -828,25 +932,25 @@ This document is created for demonstration purposes only.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-105</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Probe signal lost</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Check probe battery (&gt;6V); verify cable continuity; clean probe tip contacts; test signal with multimeter (5V expected).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check probe battery (&gt; 6 V); verify cable continuity; clean probe tip contacts; test signal with multimeter (5 V expected).</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-201</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">X-axis servo fault</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify 24 V DC control supply at the drive; after LOTO and DC-bus discharge (&lt; 50 V DC), reseat drive connectors.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-202</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Y-axis servo fault</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify 24 V DC control supply at the drive; after LOTO and DC-bus discharge (&lt; 50 V DC), reseat drive connectors.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-203</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Z-axis servo fault</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Record drive status LEDs; check encoder cable for damage; verify 24 V DC control supply at the drive; after LOTO and DC-bus discharge (&lt; 50 V DC), reseat drive connectors.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
@@ -858,7 +962,7 @@ This document is created for demonstration purposes only.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-205</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Encoder communication error</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Inspect encoder cable for cuts/pinch; verify encoder supply voltage 5VDC ±0.25V; clean encoder scale if linear type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inspect encoder cable for cuts/pinch; verify encoder supply voltage 5 V DC ±0.25 V; clean encoder scale if linear type.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
@@ -870,25 +974,25 @@ This document is created for demonstration purposes only.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-302</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Hydraulic temperature high</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Check oil level; verify cooling fan operation; clean heat exchanger fins; oil temp must be &lt;60°C under load.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check oil level; verify cooling fan operation; clean heat exchanger fins; oil temp must be &lt; 60 °C under load.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-303</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Tool clamp pressure low</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Test manual tool release; verify hydraulic pressure &gt;40 bar; check tool holder for damage; inspect drawbar assembly.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test manual tool release; verify hydraulic pressure ≥ 42 bar; check tool holder for damage; inspect drawbar assembly.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-401</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Door interlock failure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Verify all doors fully closed; check interlock switch alignment; test continuity (closed = 0Ω); inspect door seals.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify all doors fully closed; check interlock switch alignment; test continuity (closed = 0 Ω); inspect door seals.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-402</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Light curtain interrupted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clear obstruction from beam path; clean lens surfaces; verify 24VDC supply; test beam alignment per manual.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear obstruction from beam path; clean lens surfaces; verify 24 V DC supply; test beam alignment per manual.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
@@ -900,25 +1004,25 @@ This document is created for demonstration purposes only.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-501</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Coolant flow insufficient</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clean intake screen; verify pump operation; check flow rate &gt;15 L/min; inspect nozzles for blockage.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clean intake screen; verify pump operation; check flow rate &gt; 15 L/min; inspect nozzles for blockage.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-502</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Coolant concentration error</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Test with refractometer; adjust to 6-8% Brix; replace if contaminated; check additive mixing system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test with refractometer; adjust to 6–8% concentration (°Brix × refractometer factor); replace if contaminated; check additive mixing system.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-503</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Chip conveyor overload</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clear conveyor jam; inspect for oversized chips; verify conveyor motor current &lt;8A; check drive belt tension.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear conveyor jam (full LOTO); inspect for oversized chips; verify conveyor motor current &lt; 8 A; check drive belt tension.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">E-601</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pneumatic pressure low</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Verify supply pressure 6-8 bar; drain water separator; check regulator operation; inspect for air leaks with soap solution.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify supply pressure 6–8 bar; drain water separator; check regulator operation; inspect for air leaks with soap solution.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
 </tr>
 <tr>
@@ -1044,7 +1148,7 @@ This document is created for demonstration purposes only.
 <p>Record <strong>machine hours</strong> at the start of each task.</p>
 </li>
 <li>
-<p>Note torque values, measurements, and test results (e.g., coolant 7.2% Brix, backlash 0.006 mm).</p>
+<p>Note torque values, measurements, and test results (e.g., coolant 7.2% concentration from a 7.2 °Brix reading × factor 1.0; backlash 0.006 mm).</p>
 </li>
 <li>
 <p>Attach supporting checklists (E-Stop/door interlock tests) and reference their file IDs in the log.</p>
@@ -1069,6 +1173,9 @@ This document is created for demonstration purposes only.
 <div class="ulist">
 <ul>
 <li>
+<p>ISO 12100 — Safety of machinery — General principles for design — Risk assessment and risk reduction</p>
+</li>
+<li>
 <p>ISO 16090-1 — Machine tool safety</p>
 </li>
 <li>
@@ -1078,13 +1185,19 @@ This document is created for demonstration purposes only.
 <p>IEC 60204-1 — Safety of machinery — Electrical equipment of machines</p>
 </li>
 <li>
+<p>NFPA 79 — Electrical Standard for Industrial Machinery</p>
+</li>
+<li>
 <p>ISO 4413 — Hydraulic fluid power — General rules and safety requirements</p>
 </li>
 <li>
 <p>ISO 8573-1 — Compressed air — Contaminants and purity classes</p>
 </li>
 <li>
-<p>NFPA 70 (NEC) — National Electrical Code</p>
+<p>ISO 10791-2 — Test conditions for machining centres — Geometric tests</p>
+</li>
+<li>
+<p>ISO 230-4 — Test code for machine tools — Circular tests for numerically controlled machine tools</p>
 </li>
 </ul>
 </div>
@@ -1095,7 +1208,7 @@ This document is created for demonstration purposes only.
 <div class="sectionbody">
 <div class="paragraph">
 <p>Doc ID: CNC-5000-MNT-EX-01<br>
-Revision: 0.9 (Portfolio Sample)<br>
+Revision: 1.0 (Portfolio Sample)<br>
 Manufacturer: IronClad Machinery GmbH<br>
 Figures: machine overview, LOTO isolation points, spindle lubrication points, hydraulic unit service points</p>
 </div>
@@ -1104,8 +1217,8 @@ Figures: machine overview, LOTO isolation points, spindle lubrication points, hy
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.9<br>
-Last updated 2026-09-26 13:40:08 +0300
+Version 1.0<br>
+Last updated 2026-09-26 14:09:23 +0300
 </div>
 </div>
 </body>

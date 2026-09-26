@@ -1,310 +1,847 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-<title>lang-reference-chart.md</title>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common-light.css" type="text/css">
-<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Kozmos Language Reference</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
 </head>
 <body>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
-          ? 'dark'
-          : 'default'
-    });
-  </script>
-<h1 id="kozmos-operators-constants-and-data-structures"><strong>Kozmos</strong> Operators,  Constants, and Data Structures</h1>
-<p>The following chart lists the built-in operators, constants, and data structures of the <strong>Kozmos</strong> programming language:</p>
+<h1 id="kozmos-language-reference">Kozmos Language Reference</h1>
+<p>The following chart provides a quick reference for
+<strong>Kozmos</strong> syntax, operators, and built-in constructs.</p>
+<blockquote>
+<p><strong>Note:</strong> Kozmos is a fictitious language. This is a
+portfolio sample.</p>
+</blockquote>
+<h2 id="language-grammar-ebnf">Language grammar (EBNF)</h2>
+<p>The grammar uses W3C-style EBNF: <code>::=</code> defines a rule,
+quoted text is literal, <code>[...]</code> is a character class, and
+<code>?</code>, <code>*</code>, and <code>+</code> mean
+<em>optional</em>, <em>zero or more</em>, and <em>one or more</em>. The
+grammar describes structure only; operator precedence is not encoded in
+it.</p>
+<pre class="text"><code>program         ::= (statement | function-def | type-def)*
+statement       ::= declaration | assignment | control-flow | expression
+declaration     ::= &quot;var&quot; identifier &quot;:&quot; type (&quot;:=&quot; expression)?
+assignment      ::= lvalue assign-op expression
+assign-op       ::= &quot;:=&quot; | &quot;:&quot; binary-op &quot;=&quot;
+lvalue          ::= identifier | array-access | field-access | list-pattern
+
+control-flow    ::= if-stmt | while-stmt | for-stmt | match-stmt | return-stmt
+                  | try-stmt | throw-stmt
+if-stmt         ::= &quot;if&quot; expression &quot;then&quot; statement* (&quot;else&quot; statement*)? &quot;end&quot;
+while-stmt      ::= &quot;while&quot; expression &quot;do&quot; statement* &quot;end&quot;
+for-stmt        ::= &quot;for&quot; identifier &quot;in&quot; expression &quot;do&quot; statement* &quot;end&quot;
+match-stmt      ::= &quot;match&quot; expression (&quot;case&quot; pattern &quot;=&gt;&quot; statement*)+ &quot;end&quot;
+return-stmt     ::= &quot;return&quot; expression?
+try-stmt        ::= &quot;try&quot; statement* &quot;catch&quot; identifier statement* &quot;end&quot;
+throw-stmt      ::= &quot;throw&quot; expression
+
+function-def    ::= &quot;fn&quot; identifier type-params? &quot;(&quot; parameter-list? &quot;)&quot; (&quot;:&quot; type)?
+                    statement* &quot;end&quot;
+function-sig    ::= &quot;fn&quot; identifier type-params? &quot;(&quot; parameter-list? &quot;)&quot; (&quot;:&quot; type)?
+parameter-list  ::= parameter (&quot;,&quot; parameter)*
+parameter       ::= identifier &quot;:&quot; type
+
+type-def        ::= &quot;trait&quot; identifier type-params? (&quot;:&quot; trait-constraint)? function-sig* &quot;end&quot;
+                  | &quot;record&quot; identifier type-params? (&quot;:&quot; trait-constraint)?
+                    (identifier &quot;:&quot; type)* function-def* &quot;end&quot;
+type-params     ::= &quot;&lt;&quot; type-param (&quot;,&quot; type-param)* &quot;&gt;&quot;
+type-param      ::= identifier (&quot;:&quot; trait-constraint)?
+trait-constraint::= identifier (&quot;&amp;&quot; identifier)*
+type            ::= primitive-type | generic-type | named-type
+primitive-type  ::= &quot;Int&quot; | &quot;Float&quot; | &quot;String&quot; | &quot;Bool&quot; | &quot;Nil&quot;
+generic-type    ::= identifier &quot;&lt;&quot; type (&quot;,&quot; type)* &quot;&gt;&quot;
+named-type      ::= identifier
+
+expression      ::= lambda | unary-op expression | expression binary-op expression
+                  | postfix-expr
+lambda          ::= &quot;|&quot; (identifier (&quot;,&quot; identifier)*)? &quot;|&quot; expression
+unary-op        ::= &quot;not&quot; | &quot;-&quot; | &quot;~&quot;
+binary-op       ::= &quot;+&quot; | &quot;-&quot; | &quot;*&quot; | &quot;/&quot; | &quot;div&quot; | &quot;mod&quot; | &quot;**&quot;
+                  | &quot;=&quot; | &quot;&lt;&gt;&quot; | &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;&lt;=&quot; | &quot;&gt;=&quot; | &quot;in&quot;
+                  | &quot;and&quot; | &quot;or&quot; | &quot;xor&quot; | &quot;eqv&quot; | &quot;imp&quot;
+                  | &quot;&amp;&quot; | &quot;|&quot; | &quot;!&quot; | &quot;&lt;&lt;&quot; | &quot;&gt;&gt;&quot; | &quot;++&quot; | &quot;::&quot;
+postfix-expr    ::= primary | array-access | slice | field-access | call-expr
+array-access    ::= postfix-expr &quot;[&quot; expression &quot;]&quot;
+slice           ::= postfix-expr &quot;[&quot; expression &quot;..&quot; expression &quot;]&quot;
+field-access    ::= postfix-expr &quot;.&quot; identifier
+call-expr       ::= postfix-expr &quot;(&quot; (expression (&quot;,&quot; expression)*)? &quot;)&quot;
+primary         ::= literal | identifier | &quot;(&quot; expression &quot;)&quot;
+                  | &quot;[&quot; (expression (&quot;,&quot; expression)*)? &quot;]&quot;
+                  | &quot;[&quot; expression &quot;..&quot; expression &quot;]&quot;
+
+pattern         ::= literal | identifier | &quot;_&quot; | list-pattern
+                  | identifier &quot;(&quot; pattern (&quot;,&quot; pattern)* &quot;)&quot;
+list-pattern    ::= &quot;{&quot; pattern &quot;:&quot; pattern &quot;}&quot;
+literal         ::= integer | float | string | &quot;True&quot; | &quot;False&quot; | &quot;Nil&quot;
+                  | &quot;+Inf&quot; | &quot;-Inf&quot; | &quot;NaN&quot;
+integer         ::= [0-9]+
+float           ::= [0-9]+ &quot;.&quot; [0-9]+
+string          ::= &#39;&quot;&#39; [^&quot;]* &#39;&quot;&#39;
+identifier      ::= [A-Za-z_] [A-Za-z0-9_]*</code></pre>
+<h2 id="operators">Operators</h2>
+<h3 id="arithmetic">Arithmetic</h3>
 <table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 31%" />
+</colgroup>
 <thead>
 <tr>
-<th>Category</th>
-<th>Purpose</th>
-<th>Operator</th>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Arithmetic</td>
-<td>addition</td>
+<td>Addition</td>
+<td><code>+</code></td>
 <td><code>a + b</code></td>
+<td>Numeric addition</td>
 </tr>
 <tr>
-<td></td>
-<td>subtraction</td>
+<td>Subtraction</td>
+<td><code>-</code></td>
 <td><code>a - b</code></td>
+<td>Numeric subtraction</td>
 </tr>
 <tr>
-<td></td>
-<td>multiplication</td>
+<td>Multiplication</td>
+<td><code>*</code></td>
 <td><code>a * b</code></td>
+<td>Numeric multiplication</td>
 </tr>
 <tr>
-<td></td>
-<td>division</td>
-<td><code>a / b</code></td>
+<td>Division</td>
+<td><code>/</code>, <code>div</code></td>
+<td><code>a / b</code>, <code>a div b</code></td>
+<td>Float division, integer division</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td><code>a div b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>modulus</td>
+<td>Modulus</td>
+<td><code>mod</code></td>
 <td><code>a mod b</code></td>
+<td>Remainder</td>
 </tr>
 <tr>
-<td></td>
-<td>extrema</td>
-<td><code>a min b</code> -or- <code>min(a, b, c, ...)</code><br/><code>a max b</code> -or- <code>max(a, b, c, ...)</code></td>
+<td>Power</td>
+<td><code>**</code></td>
+<td><code>a ** b</code></td>
+<td>Exponentiation</td>
 </tr>
 <tr>
-<td>Relational</td>
-<td>equals</td>
-<td><code>a = b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>not equals</td>
-<td><code>a &lt;&gt; b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>less than</td>
-<td><code>a &lt; b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>greater than</td>
-<td><code>a &gt; b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>at least</td>
-<td><code>a &gt;= b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>at most</td>
-<td><code>a &lt;= b</code></td>
-</tr>
-<tr>
-<td>Logical</td>
-<td>conjunction</td>
-<td><code>a and b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>disjunction</td>
-<td><code>a or b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>equivalence</td>
-<td><code>a eqv b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>implication</td>
-<td><code>a imp b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>negation</td>
-<td><code>not a</code></td>
-</tr>
-<tr>
-<td>Bitwise</td>
-<td>and</td>
-<td><code>a &amp; b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>inclusive or</td>
-<td><code>a \| b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>exclusive or</td>
-<td><code>a ! b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>not</td>
-<td><code>~a</code></td>
-</tr>
-<tr>
-<td></td>
-<td>left shift</td>
-<td><code>a &lt;&lt; b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>right shift</td>
-<td><code>a &gt;&gt; b</code></td>
+<td>Minimum/maximum</td>
+<td><code>min</code>, <code>max</code></td>
+<td><code>min(a, b)</code>, <code>max(a, b, c)</code></td>
+<td>Built-in functions</td>
 </tr>
 </tbody>
 </table>
-<p>The following are the assignment operators:</p>
+<h3 id="comparison">Comparison</h3>
 <table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equal</td>
+<td><code>=</code></td>
+<td><code>a = b</code></td>
+<td>Equality test</td>
+</tr>
+<tr>
+<td>Not equal</td>
+<td><code>&lt;&gt;</code></td>
+<td><code>a &lt;&gt; b</code></td>
+<td>Inequality test</td>
+</tr>
+<tr>
+<td>Less than</td>
+<td><code>&lt;</code></td>
+<td><code>a &lt; b</code></td>
+<td>Ordering comparison</td>
+</tr>
+<tr>
+<td>Greater than</td>
+<td><code>&gt;</code></td>
+<td><code>a &gt; b</code></td>
+<td>Ordering comparison</td>
+</tr>
+<tr>
+<td>Less than or equal</td>
+<td><code>&lt;=</code></td>
+<td><code>a &lt;= b</code></td>
+<td>Ordering comparison</td>
+</tr>
+<tr>
+<td>Greater than or equal</td>
+<td><code>&gt;=</code></td>
+<td><code>a &gt;= b</code></td>
+<td>Ordering comparison</td>
+</tr>
+</tbody>
+</table>
+<h3 id="logical">Logical</h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AND</td>
+<td><code>and</code></td>
+<td><code>a and b</code></td>
+<td>Logical conjunction</td>
+</tr>
+<tr>
+<td>OR</td>
+<td><code>or</code></td>
+<td><code>a or b</code></td>
+<td>Logical disjunction</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td><code>not</code></td>
+<td><code>not a</code></td>
+<td>Logical negation</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td><code>xor</code></td>
+<td><code>a xor b</code></td>
+<td>Exclusive or</td>
+</tr>
+<tr>
+<td>Equivalence</td>
+<td><code>eqv</code></td>
+<td><code>a eqv b</code></td>
+<td>Logical equivalence</td>
+</tr>
+<tr>
+<td>Implication</td>
+<td><code>imp</code></td>
+<td><code>a imp b</code></td>
+<td>Logical implication</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bitwise">Bitwise</h3>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bitwise AND</td>
+<td><code>&amp;</code></td>
+<td><code>a &amp; b</code></td>
+<td>Binary AND</td>
+</tr>
+<tr>
+<td>Bitwise OR</td>
+<td><code>\|</code></td>
+<td><code>a \| b</code></td>
+<td>Binary OR</td>
+</tr>
+<tr>
+<td>Bitwise XOR</td>
+<td><code>!</code></td>
+<td><code>a ! b</code></td>
+<td>Binary XOR</td>
+</tr>
+<tr>
+<td>Bitwise NOT</td>
+<td><code>~</code></td>
+<td><code>~a</code></td>
+<td>Binary complement</td>
+</tr>
+<tr>
+<td>Left shift</td>
+<td><code>&lt;&lt;</code></td>
+<td><code>a &lt;&lt; b</code></td>
+<td>Shift bits left</td>
+</tr>
+<tr>
+<td>Right shift</td>
+<td><code>&gt;&gt;</code></td>
+<td><code>a &gt;&gt; b</code></td>
+<td>Shift bits right</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> <strong>Kozmos</strong> does
+<strong>not</strong> support operator <em>overloading</em>. Instead, it
+supports operator <em>extension</em>: an operator can be extended for a
+<code>record</code> or a <code>trait</code> only if the extended
+expression reduces to one of the operator’s built-in uses.</p>
+</blockquote>
+<h3 id="assignment">Assignment</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 20%" />
+<col style="width: 22%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
 <tr>
 <th>Category</th>
 <th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Simple</td>
-<td><code>a := b</code></td>
+<td><strong>Declaration</strong></td>
+<td><code>var name: Type := value</code></td>
+<td><code>var x: Int := 42</code></td>
+<td>Declare a variable, optionally with an initial value</td>
 </tr>
 <tr>
-<td>Compound</td>
-<td><code>A[i] :&lt;operator&gt;= v</code></td>
+<td><strong>Simple</strong></td>
+<td><code>:=</code></td>
+<td><code>x := 42</code></td>
+<td>Assign to an existing variable</td>
 </tr>
 <tr>
-<td></td>
-<td><code>{l:_} :&lt;operator&gt;= v</code></td>
+<td><strong>Compound</strong></td>
+<td><code>:+=</code>, <code>:*=</code>, and so on</td>
+<td><code>x :+= 5</code>, <code>count :*= 2</code></td>
+<td>Apply a binary operator, then assign</td>
+</tr>
+<tr>
+<td><strong>Array element</strong></td>
+<td><code>name[index] :=</code></td>
+<td><code>arr[i] := value</code></td>
+<td>Assign to an array element</td>
+</tr>
+<tr>
+<td><strong>List pattern</strong></td>
+<td><code>{head:tail} :=</code></td>
+<td><code>{h:t} := mylist</code></td>
+<td>Destructure a list into its head and tail</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Kozmos</strong> provides the following built-in constants:</p>
+<h2 id="control-flow-statements">Control flow statements</h2>
 <table>
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 28%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th>Statement</th>
+<th>Syntax</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>If-then-else</strong></td>
+<td><code>if cond then ... else ... end</code></td>
+<td><code>if x &gt; 0 then print("positive") end</code></td>
+</tr>
+<tr>
+<td><strong>While loop</strong></td>
+<td><code>while cond do ... end</code></td>
+<td><code>while i &lt; 10 do i := i + 1 end</code></td>
+</tr>
+<tr>
+<td><strong>For loop</strong></td>
+<td><code>for name in iterable do ... end</code></td>
+<td><code>for x in [1..10] do print(x) end</code></td>
+</tr>
+<tr>
+<td><strong>Pattern match</strong></td>
+<td><code>match expr case pattern =&gt; ... end</code></td>
+<td><code>match x case 0 =&gt; "zero" case _ =&gt; "other" end</code></td>
+</tr>
+<tr>
+<td><strong>Return</strong></td>
+<td><code>return expr?</code></td>
+<td><code>return x + y</code>, <code>return</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="function-definition">Function definition</h2>
+<table>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 30%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr>
+<th>Element</th>
+<th>Syntax</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basic function</strong></td>
+<td><code>fn name(params): Type ... end</code></td>
+<td><code>fn add(a: Int, b: Int): Int return a + b end</code></td>
+</tr>
+<tr>
+<td><strong>No parameters</strong></td>
+<td><code>fn name() ... end</code></td>
+<td><code>fn hello() print("Hello!") end</code></td>
+</tr>
+<tr>
+<td><strong>No return type</strong></td>
+<td><code>fn name(params) ... end</code></td>
+<td><code>fn process(data: String) print(data) end</code></td>
+</tr>
+<tr>
+<td><strong>Generic function</strong></td>
+<td><code>fn name&lt;T: Trait&gt;(params) ... end</code></td>
+<td><code>fn largest&lt;T: Ord&gt;(items: Array&lt;T&gt;): T ... end</code></td>
+</tr>
+<tr>
+<td><strong>Lambda</strong></td>
+<td><code>\|params\| expr</code></td>
+<td><code>map(\|x\| x * 2, numbers)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="built-in-constants">Built-in constants</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 15%" />
+<col style="width: 33%" />
+</colgroup>
 <thead>
 <tr>
 <th>Category</th>
 <th>Constant</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Arithmetic</td>
+<td><strong>Numeric</strong></td>
 <td><code>+Inf</code></td>
+<td>Float</td>
+<td>Positive infinity</td>
 </tr>
 <tr>
 <td></td>
 <td><code>-Inf</code></td>
+<td>Float</td>
+<td>Negative infinity</td>
 </tr>
 <tr>
 <td></td>
 <td><code>NaN</code></td>
+<td>Float</td>
+<td>Not a number</td>
 </tr>
 <tr>
-<td>Boolean</td>
+<td></td>
+<td><code>PI</code></td>
+<td>Float</td>
+<td>π (3.14159…)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>E</code></td>
+<td>Float</td>
+<td>Euler’s number (2.71828…)</td>
+</tr>
+<tr>
+<td><strong>Boolean</strong></td>
 <td><code>True</code></td>
+<td>Bool</td>
+<td>Boolean true value</td>
 </tr>
 <tr>
 <td></td>
 <td><code>False</code></td>
+<td>Bool</td>
+<td>Boolean false value</td>
 </tr>
 <tr>
-<td>Reference</td>
+<td><strong>Reference</strong></td>
 <td><code>Nil</code></td>
+<td>Nil</td>
+<td>Empty reference; assignable to any type</td>
+</tr>
+<tr>
+<td><strong>String</strong></td>
+<td><code>""</code></td>
+<td>String</td>
+<td>Empty string literal</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Kozmos</strong> has the following built-in data structures:</p>
+<h2 id="data-types-and-structures">Data types and structures</h2>
 <table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 31%" />
+<col style="width: 21%" />
+<col style="width: 31%" />
+</colgroup>
 <thead>
 <tr>
-<th>Category</th>
+<th>Type</th>
 <th>Declaration</th>
+<th>Example</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Array</td>
+<td><strong>Primitives</strong></td>
+<td><code>Int</code>, <code>Float</code>, <code>String</code>,
+<code>Bool</code></td>
+<td><code>var x: Int := 42</code></td>
+<td>Basic data types</td>
+</tr>
+<tr>
+<td><strong>Array</strong></td>
 <td><code>Array&lt;T&gt;</code></td>
+<td><code>var numbers: Array&lt;Int&gt; := [1, 2, 3]</code></td>
+<td>Fixed-size, indexed collection</td>
 </tr>
 <tr>
-<td>Linked list</td>
+<td><strong>List</strong></td>
 <td><code>List&lt;T&gt;</code></td>
+<td><code>var items: List&lt;String&gt; := ["a", "b"]</code></td>
+<td>Growable linked list</td>
 </tr>
 <tr>
-<td>Hash Map</td>
-<td><code>Map&lt;K -&gt; V&gt;</code></td>
+<td><strong>Map</strong></td>
+<td><code>Map&lt;K, V&gt;</code></td>
+<td><code>var lookup: Map&lt;String, Int&gt;</code></td>
+<td>Key-value hash table</td>
 </tr>
 <tr>
-<td>Hash Set</td>
+<td><strong>Set</strong></td>
 <td><code>Set&lt;T&gt;</code></td>
+<td><code>var unique: Set&lt;Int&gt;</code></td>
+<td>Collection of unique values</td>
 </tr>
 <tr>
-<td>Priority Queue</td>
+<td><strong>Queue</strong></td>
 <td><code>Queue&lt;T&gt;</code></td>
+<td><code>var tasks: Queue&lt;String&gt;</code></td>
+<td>FIFO queue</td>
 </tr>
 <tr>
-<td>Minima Heap</td>
-<td><code>Heap&lt;T&gt;</code></td>
+<td><strong>Heap</strong></td>
+<td><code>Heap&lt;T: Ord&gt;</code></td>
+<td><code>var priority: Heap&lt;Int&gt;</code></td>
+<td>Min-heap (element type must implement <code>Ord</code>)</td>
+</tr>
+<tr>
+<td><strong>Range</strong></td>
+<td><code>[start..end]</code></td>
+<td><code>[1..10]</code>, <code>[0..n]</code></td>
+<td>Inclusive integer sequence</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><span id="note-byline"></span> <strong>Kozmos</strong> does not support general-purpose <em>generics</em>. Instead, it has <em>trait compliance</em> where the type parameter has to be with one of the built-in root traits such as <code>Eq</code>, <code>Ord</code>, <code>Sync</code>, etc., or a user designed trait that implements those root traits.<br>
-In a data structure declaration, the type parameter has to be a known trait, e.g. <code>&lt;Ord&gt;</code>; a descendant of a trait, e.g. <code>&lt;T: Ord&gt;</code>; or a descendant of multiple traits (i.e. a <em>union</em> of them), e.g. <code>&lt;T: Ord | Sync&gt;</code>.</p>
+<p><strong>Note:</strong> <strong>Kozmos</strong> supports
+<em>generics</em>: records, traits, and functions can declare type
+parameters. A type parameter can be unconstrained
+(<code>&lt;T&gt;</code>), constrained by one trait
+(<code>&lt;T: Ord&gt;</code>), or constrained by several traits, in
+which case the type must implement <em>all</em> of them (an
+<em>intersection</em>, written with <code>&amp;</code>), for example
+<code>&lt;T: Ord &amp; Sync&gt;</code>. Constraints can use the built-in
+root traits, such as <code>Eq</code>, <code>Ord</code>, and
+<code>Sync</code>, or user-defined traits.</p>
 </blockquote>
-<p>The following operations are available for built-in data structures</p>
+<h2 id="data-structure-operations">Data structure operations</h2>
+<h3 id="array-operations">Array operations</h3>
+<p>Arrays have a fixed size. Operations that combine arrays return a new
+array.</p>
 <table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 31%" />
+</colgroup>
 <thead>
 <tr>
-<th>Category</th>
-<th>Subcategory</th>
-<th>Operator</th>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Catenation</td>
-<td>Two arrays (Strings incl.)</td>
-<td><code>a ++ b</code></td>
+<td><strong>Indexing</strong></td>
+<td><code>arr[i]</code></td>
+<td><code>numbers[0]</code></td>
+<td>Access an element by index</td>
 </tr>
 <tr>
-<td></td>
-<td>Array with single item</td>
-<td><code>a ++ [b]</code></td>
+<td><strong>Slicing</strong></td>
+<td><code>arr[i..j]</code></td>
+<td><code>numbers[1..2]</code></td>
+<td>Return a new subarray</td>
 </tr>
 <tr>
-<td>Slicing</td>
-<td></td>
-<td><code>a[i .. j]</code></td>
+<td><strong>Length</strong></td>
+<td><code>len(arr)</code></td>
+<td><code>len(numbers)</code></td>
+<td>Number of elements</td>
 </tr>
 <tr>
-<td>Range</td>
-<td></td>
-<td><code>[a .. b]</code></td>
+<td><strong>Concatenation</strong></td>
+<td><code>arr1 ++ arr2</code></td>
+<td><code>[1, 2] ++ [3, 4]</code></td>
+<td>Return a new, joined array</td>
 </tr>
 <tr>
-<td>Indexing</td>
-<td></td>
-<td><code>a[i]</code></td>
-</tr>
-<tr>
-<td>List access</td>
-<td>Head</td>
-<td><code>{l:_}</code></td>
-</tr>
-<tr>
-<td></td>
-<td>Tail</td>
-<td><code>{_:l}</code></td>
-</tr>
-<tr>
-<td></td>
-<td>Append</td>
-<td><code>{a} ++ b</code></td>
-</tr>
-<tr>
-<td></td>
-<td>Prepend</td>
-<td><code>b ++ {a}</code></td>
+<td><strong>Contains</strong></td>
+<td><code>item in arr</code></td>
+<td><code>5 in numbers</code></td>
+<td>Check membership</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><span id="note-byline"></span> <strong>Kozmos</strong> does <strong>not</strong> support operator <em>overloading</em>. Instead, it supports operator <em>extension</em>: operators can be extended for a certain type (i.e. a <code>record</code>, a <code>trait</code>, or a <code>class</code>) only on the condition that the expression reduces to one of the built-in uses.</p>
-</blockquote>
-
+<h3 id="list-operations">List operations</h3>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Head</strong></td>
+<td><code>{head:_}</code></td>
+<td><code>{h:_} := mylist</code></td>
+<td>Get the first element</td>
+</tr>
+<tr>
+<td><strong>Tail</strong></td>
+<td><code>{_:tail}</code></td>
+<td><code>{_:t} := mylist</code></td>
+<td>Get the remaining elements</td>
+</tr>
+<tr>
+<td><strong>Prepend</strong></td>
+<td><code>item :: list</code></td>
+<td><code>1 :: [2, 3, 4]</code></td>
+<td>Add to the front</td>
+</tr>
+<tr>
+<td><strong>Append</strong></td>
+<td><code>list ++ [item]</code></td>
+<td><code>mylist ++ [3]</code></td>
+<td>Add to the end</td>
+</tr>
+<tr>
+<td><strong>Empty check</strong></td>
+<td><code>isEmpty(list)</code></td>
+<td><code>isEmpty(mylist)</code></td>
+<td>Test whether the list is empty</td>
+</tr>
+</tbody>
+</table>
+<h3 id="map-operations">Map operations</h3>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Get</strong></td>
+<td><code>map[key]</code></td>
+<td><code>users["john"]</code></td>
+<td>Retrieve a value</td>
+</tr>
+<tr>
+<td><strong>Set</strong></td>
+<td><code>map[key] := value</code></td>
+<td><code>users["jane"] := 25</code></td>
+<td>Store a key-value pair</td>
+</tr>
+<tr>
+<td><strong>Has key</strong></td>
+<td><code>key in map</code></td>
+<td><code>"john" in users</code></td>
+<td>Check whether a key exists</td>
+</tr>
+<tr>
+<td><strong>Remove</strong></td>
+<td><code>delete(map, key)</code></td>
+<td><code>delete(users, "john")</code></td>
+<td>Remove an entry</td>
+</tr>
+<tr>
+<td><strong>Keys</strong></td>
+<td><code>keys(map)</code></td>
+<td><code>keys(users)</code></td>
+<td>Get all keys</td>
+</tr>
+<tr>
+<td><strong>Values</strong></td>
+<td><code>values(map)</code></td>
+<td><code>values(users)</code></td>
+<td>Get all values</td>
+</tr>
+</tbody>
+</table>
+<h3 id="string-operations">String operations</h3>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 19%" />
+<col style="width: 21%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Length</strong></td>
+<td><code>len(str)</code></td>
+<td><code>len("hello")</code></td>
+<td>String length</td>
+</tr>
+<tr>
+<td><strong>Concatenation</strong></td>
+<td><code>str1 ++ str2</code></td>
+<td><code>"hello" ++ "world"</code></td>
+<td>Join strings</td>
+</tr>
+<tr>
+<td><strong>Substring</strong></td>
+<td><code>str[i..j]</code></td>
+<td><code>"hello"[1..3]</code></td>
+<td>Extract a substring</td>
+</tr>
+<tr>
+<td><strong>Contains</strong></td>
+<td><code>substr in str</code></td>
+<td><code>"ell" in "hello"</code></td>
+<td>Substring search</td>
+</tr>
+<tr>
+<td><strong>Split</strong></td>
+<td><code>split(str, delim)</code></td>
+<td><code>split("a,b,c", ",")</code></td>
+<td>Split into an array</td>
+</tr>
+</tbody>
+</table>
+<h2 id="error-handling">Error handling</h2>
+<table>
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 28%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr>
+<th>Construct</th>
+<th>Syntax</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Try-catch</strong></td>
+<td><code>try ... catch err ... end</code></td>
+<td><code>try risky() catch e print(e) end</code></td>
+</tr>
+<tr>
+<td><strong>Throw</strong></td>
+<td><code>throw error</code></td>
+<td><code>throw "Invalid input"</code></td>
+</tr>
+<tr>
+<td><strong>Option type</strong></td>
+<td><code>Some(value)</code>, <code>None</code></td>
+<td><code>var result: Option&lt;Int&gt; := Some(42)</code></td>
+</tr>
+<tr>
+<td><strong>Result type</strong></td>
+<td><code>Ok(value)</code>, <code>Err(error)</code></td>
+<td><code>var parsed: Result&lt;Int, String&gt; := Ok(7)</code></td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>

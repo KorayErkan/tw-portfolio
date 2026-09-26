@@ -1,37 +1,47 @@
+// OpenID Connect authorization code flow as a sequence diagram.
+// Node positions are pinned (layout=neato), so render with:  dot -Tsvg sso-flow.dot -o sso-flow.svg
+// Columns sit at x = 1.6 / 6.4 / 11.2 in; message rows are 1 inch apart; labels sit just above each arrow.
 digraph G {
-  graph [rankdir=TB, splines=false, bgcolor="transparent", nodesep=1.2, ranksep=0.8];
-  node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
-  edge [arrowsize=0.8, penwidth=1.5, fontname="Calibri", fontsize=14];
+  graph [layout=neato, splines=line, bgcolor="transparent", fontname="Calibri", fontsize=15,
+         labelloc=t, label="OIDC authorization code flow: signing in to Orbitask with SSO"];
+  node  [fontname="Calibri", fontsize=13];
+  edge  [penwidth=1.5, arrowsize=0.8, color="#37474f"];
 
-  // Actors at the top
-  user [label="User", fillcolor="#e3f2fd", shape=ellipse];
-  app [label="CloudFlow App", fillcolor="#fff3e0"];
-  idp [label="Identity Provider\n(SAML/OIDC)", fillcolor="#e8f5e9"];
+  // Participants
+  b_head [shape=box, style="rounded,filled", fillcolor="#e3f2fd", fontsize=14, width=2.4, height=0.7, pos="1.6,0.0!", label="User's browser"];
+  b_foot [shape=point, width=0.01, pos="1.6,-10.0!"];
+  b_head -> b_foot [style=dashed, arrowhead=none, color="#bdbdbd", penwidth=1];
+  a_head [shape=box, style="rounded,filled", fillcolor="#fff3e0", fontsize=14, width=2.4, height=0.7, pos="6.4,0.0!", label="Orbitask\napp.orbitask.example"];
+  a_foot [shape=point, width=0.01, pos="6.4,-10.0!"];
+  a_head -> a_foot [style=dashed, arrowhead=none, color="#bdbdbd", penwidth=1];
+  i_head [shape=box, style="rounded,filled", fillcolor="#e8f5e9", fontsize=14, width=2.4, height=0.7, pos="11.2,0.0!", label="Identity provider\n(Okta, Entra ID, ...)"];
+  i_foot [shape=point, width=0.01, pos="11.2,-10.0!"];
+  i_head -> i_foot [style=dashed, arrowhead=none, color="#bdbdbd", penwidth=1];
 
-  // Sequence steps - top to bottom
-  step1 [label="1. Login Request", fillcolor="#f0f0f0", shape=note];
-  step2 [label="2. Redirect to IdP", fillcolor="#f0f0f0", shape=note];
-  step3 [label="3. User Authentication\n(Username/Password + MFA)", fillcolor="#f0f0f0", shape=note];
-  step4 [label="4. SAML/OIDC Response", fillcolor="#f0f0f0", shape=note];
-  step5 [label="5. Token Validation", fillcolor="#f0f0f0", shape=note];
-  step6 [label="6. Session Created", fillcolor="#c8e6c9", shape=note];
-
-  // Flow connections
-  user -> step1;
-  step1 -> app;
-  app -> step2;
-  step2 -> idp;
-  idp -> step3;
-  step3 -> user;
-  user -> step4;
-  step4 -> app;
-  app -> step5;
-  step5 -> idp;
-  idp -> step6;
-  step6 -> app;
-
-  // Result
-  success [label="✓ Authenticated Session\nUser can access application",
-           fillcolor="#c8e6c9", shape=ellipse];
-  step6 -> success;
+  // Messages: each row has two anchor points and a label placed just above the arrow
+  m1s [shape=point, width=0.01, pos="1.6,-1.0!"];  m1d [shape=point, width=0.01, pos="6.4,-1.0!"];
+  m1s -> m1d;
+  m1l [shape=plaintext, pos="4.0,-0.78!", label="1. User clicks Sign in with SSO"];
+  m2s [shape=point, width=0.01, pos="6.4,-2.0!"];  m2d [shape=point, width=0.01, pos="1.6,-2.0!"];
+  m2s -> m2d;
+  m2l [shape=plaintext, pos="4.0,-1.68!", label="2. Redirect to IdP /authorize\n(client_id, redirect_uri, state, nonce, PKCE challenge)"];
+  m3s [shape=point, width=0.01, pos="1.6,-3.0!"];  m3d [shape=point, width=0.01, pos="11.2,-3.0!"];
+  m3s -> m3d;
+  m3l [shape=plaintext, pos="6.4,-2.78!", label="3. Browser follows the redirect; user authenticates at the IdP (password + MFA)"];
+  m4s [shape=point, width=0.01, pos="11.2,-4.0!"];  m4d [shape=point, width=0.01, pos="1.6,-4.0!"];
+  m4s -> m4d;
+  m4l [shape=plaintext, pos="6.4,-3.78!", label="4. Redirect back to /auth/callback with ?code=...&state=..."];
+  m5s [shape=point, width=0.01, pos="1.6,-5.0!"];  m5d [shape=point, width=0.01, pos="6.4,-5.0!"];
+  m5s -> m5d;
+  m5l [shape=plaintext, pos="4.0,-4.78!", label="5. GET /auth/callback?code&state"];
+  m6s [shape=point, width=0.01, pos="6.4,-6.0!"];  m6d [shape=point, width=0.01, pos="11.2,-6.0!"];
+  m6s -> m6d [color="#2e7d32"];
+  m6l [shape=plaintext, pos="8.8,-5.68!", label="6. Back channel: POST code to token endpoint\n(client authentication + PKCE verifier)", fontcolor="#2e7d32"];
+  m7s [shape=point, width=0.01, pos="11.2,-7.0!"];  m7d [shape=point, width=0.01, pos="6.4,-7.0!"];
+  m7s -> m7d [color="#2e7d32"];
+  m7l [shape=plaintext, pos="8.8,-6.78!", label="7. ID token (+ access token)", fontcolor="#2e7d32"];
+  s8 [shape=box, style="rounded,filled", fillcolor="#fff3e0", width=3.6, pos="6.4,-8.0!", label="8. Validate ID token: signature (IdP JWKS),\niss, aud, exp, nonce; check state"];
+  m9s [shape=point, width=0.01, pos="6.4,-9.0!"];  m9d [shape=point, width=0.01, pos="1.6,-9.0!"];
+  m9s -> m9d;
+  m9l [shape=plaintext, pos="4.0,-8.68!", label="9. Create session: set cookie,\nopen the workspace"];
 }

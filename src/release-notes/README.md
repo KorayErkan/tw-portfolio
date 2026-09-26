@@ -4,11 +4,13 @@
 **Purpose:** Communicate software changes, compatibility impacts, and upgrade procedures in a clear, organized format that serves both technical and non-technical audiences.
 
 ## What's Inside
-- **Release Notes** — Comprehensive change documentation covering new features, bug fixes, security updates, deprecations, and known issues with detailed impact analysis
+
+- **[Release Notes](release-notes.md)** — Release notes for version 8.5.0 of a fictitious server product (Nordvale Server), covering upgrade requirements, new features, performance results, security fixes, permission changes, bug fixes, deprecations, and known issues
 
 ## Highlights
-- Executive summary with key highlights for quick scanning
-- Structured sections for features, fixes, and compatibility changes
-- Clear upgrade and migration guidance with step-by-step procedures
-- Impact assessment for breaking changes
-- Cross-references to related documentation and resources
+
+- Short summary of the release, its compatibility, and who should upgrade
+- Table of changed prerequisites and a step-by-step upgrade procedure
+- Security fixes with IDs, severity, and affected versions
+- Deprecations with replacements and a removal version
+- Known issues with workarounds where available

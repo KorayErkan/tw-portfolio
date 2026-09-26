@@ -1,60 +1,39 @@
 digraph G {
-  graph [rankdir=TB, splines=false, bgcolor="transparent", nodesep=2.0, ranksep=1.5];
-  node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14, width=2.5, height=0.8];
-  edge [arrowsize=1.0, penwidth=2, fontname="Calibri", fontsize=14];
+  graph [rankdir=TB, bgcolor="transparent", nodesep=0.8, ranksep=0.6, fontname="Calibri", fontsize=14];
+  node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14, width=3.2, height=0.7];
+  edge [arrowsize=0.9, penwidth=1.8, fontname="Calibri", fontsize=13];
 
-  // Security Layers - Top to Bottom
+  external [label="Clients and users\n(browser, CLI, API, agent)", fillcolor="#e3f2fd"];
 
-  // Layer 1: External Access
-  external [label="Client Applications\n& External Users", fillcolor="#e3f2fd"];
-
-  // Layer 2: Network Security
   subgraph cluster_network {
-    label="Network Security Layer";
-    style="rounded,filled";
-    fillcolor="#f0fff0";
-    fontname="Calibri";
-    fontsize=14;
-
-    tls [label="TLS 1.2+ Encryption\n(In Transit)", fillcolor="#c8e6c9"];
-    firewall [label="Web Application\nFirewall (WAF)", fillcolor="#c8e6c9"];
+    label="Network layer (Orbitask edge)";
+    style="rounded,filled"; fillcolor="#f0fff0";
+    edge_waf [label="Edge / WAF\nTLS 1.2+ terminates here", fillcolor="#c8e6c9"];
+    ratelimit [label="API gateway\nrate limiting (per token / IP)", fillcolor="#c8e6c9"];
   }
 
-  // Layer 3: Application Security
   subgraph cluster_application {
-    label="Application Security Layer";
-    style="rounded,filled";
-    fillcolor="#fffaf0";
-    fontname="Calibri";
-    fontsize=14;
-
-    authentication [label="SSO/MFA\nAuthentication", fillcolor="#ffe0b2"];
-    authorization [label="Role-Based Access\nControl (RBAC)", fillcolor="#ffe0b2"];
-    gateway [label="API Gateway\n& Rate Limiting", fillcolor="#ffe0b2"];
+    label="Application layer";
+    style="rounded,filled"; fillcolor="#fffaf0";
+    authentication [label="Authentication\n(SSO + MFA, sessions, API tokens)", fillcolor="#ffe0b2"];
+    authorization [label="Authorization\n(workspace roles, token scopes)", fillcolor="#ffe0b2"];
+    services [label="Orbitask services", fillcolor="#ffe0b2"];
   }
 
-  // Layer 4: Data Security
   subgraph cluster_data {
-    label="Data Security Layer";
-    style="rounded,filled";
-    fillcolor="#f9f5ff";
-    fontname="Calibri";
-    fontsize=14;
-
-    encryption [label="AES-256 Encryption\n(At Rest)", fillcolor="#e1bee7"];
-    keys [label="Key Management\nService (KMS)", fillcolor="#e1bee7"];
-    database [label="Encrypted Database\nStorage", fillcolor="#e1bee7", shape=cylinder];
+    label="Data layer";
+    style="rounded,filled"; fillcolor="#f9f5ff";
+    storage [label="Database, cache snapshots,\nbackups, object storage\n(AES-256 at rest)", fillcolor="#e1bee7", shape=cylinder, height=1.1];
+    keys [label="Key management\nservice (KMS)", fillcolor="#e1bee7"];
+    { rank=same; storage; keys; }
   }
 
-  // Flow through security layers
-  external -> tls [label="HTTPS Request"];
-  tls -> firewall [label="Encrypted Traffic"];
-  firewall -> authentication [label="Validated Request"];
-  authentication -> authorization [label="Authenticated User"];
-  authorization -> gateway [label="Authorized Access"];
-  gateway -> encryption [label="API Call"];
-  encryption -> database [label="Encrypted Data"];
+  external -> edge_waf [label="HTTPS (TLS 1.2+)"];
+  edge_waf -> ratelimit [label="filtered request\n(re-encrypted internally)"];
+  ratelimit -> authentication [label="within limits"];
+  authentication -> authorization [label="identified user"];
+  authorization -> services [label="allowed action"];
+  services -> storage [label="encrypted read/write"];
+  keys -> storage [label="data keys,\n12-month rotation", style=dashed];
 
-  // Key management
-  keys -> encryption [label="Key Rotation\n& Management", style=dashed];
 }

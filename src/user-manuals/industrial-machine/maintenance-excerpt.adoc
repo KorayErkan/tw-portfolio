@@ -1,6 +1,6 @@
 = CNC-5000 Industrial Machining Center — Maintenance Manual
 IronClad Machinery GmbH
-:revnumber: 0.9
+:revnumber: 1.0
 :revdate: {docdate}
 :doctype: book
 :toc: left
@@ -24,10 +24,10 @@ All company names, addresses, and contact details are fictional.
 This document is created for demonstration purposes only.
 
 == Introduction
-*Manufacturer:* IronClad Machinery GmbH, 2210 Werkstrasse, Düsseldorf, Germany
-*Support:* support@ironclad-machinery.example · +49-221-555-0199
+*Manufacturer:* IronClad Machinery GmbH, 2210 Werkstrasse, Düsseldorf, Germany +
+*Support:* support@ironclad-machinery.example · +49-211-555-0199
 
-*Intended audience:* certified maintenance technicians and supervisors.
+*Intended audience:* certified maintenance technicians and supervisors. +
 *Scope:* routine service, selected fault codes, and recordkeeping templates.
 
 === Machine Overview
@@ -56,16 +56,19 @@ Maintenance must be performed only by trained personnel. Lockout/Tagout (LOTO) i
 * Protective clothing free of loose items (no jewelry, secure long hair)
 
 === Lockout/Tagout (LOTO) — Summary
-. Notify affected operators and stop the machine; press **E-Stop**.
+. Notify affected employees that the machine will be shut down and locked out; stop the machine with a normal cycle stop, then press **E-Stop**.
 . Isolate **electrical energy**: set main disconnect to **OFF**; apply personal lock and tag.
 . Isolate **pneumatic/hydraulic energy**: close supply valves; bleed off stored pressure; apply locks/tags.
-. Isolate **mechanical/kinetic energy**: block or brace moving parts as required.
+. Isolate **mechanical/kinetic energy**: block or brace moving parts (for example, a vertical axis that can drop under gravity) as required.
+. **Discharge stored electrical energy**: wait at least **5 minutes** for the servo-drive DC-bus capacitors to discharge. Verify **< 50 V DC** at the DC-bus test points before touching any drive terminal.
 . **Verify zero energy**:
-.. Attempt a normal start to confirm isolation (machine must not power).
-.. Use appropriate test devices: absence-of-voltage indicator; gauges at **0** pressure.
+.. With isolation in place, attempt a normal start at the **operator panel** (cycle start, spindle start, axis jog). The machine must not respond.
+.. Use appropriate test devices: absence-of-voltage tester on the load side of the disconnect; gauges at **0** pressure.
+.. Return all operator controls to **OFF**/neutral.
 . Perform maintenance.
-. Remove tools/fixtures, reinstall guards, clear work area.
-. Remove personal locks/tags; restore energy in reverse order; perform a controlled test run.
+. Remove tools/fixtures, reinstall guards, clear work area; confirm all personnel are clear of the machine.
+. Notify affected employees that locks are being removed and the machine is about to be re-energized.
+. Each person removes their own lock and tag; restore energy in reverse order; perform a controlled test run.
 
 .Energy isolation points, locked out
 image::cnc-loto.jpg[Main disconnect locked in the OFF position with a padlock and tag, and a pneumatic ball valve locked closed, width=60%]
@@ -73,6 +76,11 @@ image::cnc-loto.jpg[Main disconnect locked in the OFF position with a padlock an
 . Main electrical disconnect — rotated to *OFF*.
 . Personal padlock and blank tag — write your name, date, and reason on the tag.
 . Pneumatic supply ball valve — closed, with valve lockout device and padlock.
+
+[WARNING]
+====
+*Stored electrical energy.* Servo-drive DC-bus capacitors stay charged at hazardous voltage after the main disconnect is OFF. Contact can cause electric shock, burns, or death. Wait at least 5 minutes, then verify < 50 V DC at the DC-bus test points before touching drive terminals.
+====
 
 [NOTE]
 ====
@@ -82,11 +90,12 @@ Follow facility-specific procedures in addition to this summary. Reference: OSHA
 === Emergency Shutdown Procedures
 
 ==== Electrical Emergency
-. **Press E-Stop immediately** — red mushroom button on control panel and pendant
-. **Turn main disconnect to OFF** — located at electrical cabinet
-. **Do not attempt to restart** until hazard is eliminated
-. **Call maintenance supervisor** and facility emergency response team
-. **Evacuate 3-meter radius** if sparking, smoke, or unusual odors present
+. **Press E-Stop immediately** — red mushroom button on control panel and pendant.
+. **Turn main disconnect to OFF** — located at the electrical cabinet — only if it can be reached safely.
+. **Evacuate a 3-meter radius** if sparking, smoke, or unusual odors are present.
+. **From a safe location, call** the maintenance supervisor and the facility emergency response team.
+. **Fight a small fire only if trained and it is safe to do so**, using a CO~2~ or dry-chemical extinguisher rated for Class C (electrical) fires. Never use water on electrical equipment.
+. **Do not attempt to restart** until the hazard is eliminated.
 
 ==== Mechanical Emergency (Collision, Jam, Broken Tool)
 . **Press E-Stop** — do not attempt to clear obstruction while powered
@@ -96,6 +105,12 @@ Follow facility-specific procedures in addition to this summary. Reference: OSHA
 . **Contact OEM service** for spindle impact assessment if collision occurred
 
 ==== Hydraulic/Coolant Leak
+
+[WARNING]
+====
+*High-pressure fluid injection hazard.* A pinhole leak in a pressurized hydraulic line can inject fluid through the skin, causing serious injury, tissue death, or amputation. Never check for leaks with your hand or fingers; use a piece of cardboard or wood. If fluid penetrates the skin, seek medical attention immediately, even if the wound looks minor.
+====
+
 . **Stop machine immediately** — E-Stop if leak is active/spraying
 . **Contain spill** with absorbent materials and drain pans
 . **Ventilate area** — hydraulic fluid vapors can be hazardous
@@ -111,7 +126,7 @@ Follow facility-specific procedures in addition to this summary. Reference: OSHA
 |Spindle bearing lubrication
 |Medium
 |Pinch points, rotating parts
-|Ensure spindle stop; use lockable grease gun
+|Full LOTO; spindle stopped; use clean grease gun and NLGI-2 grease
 
 |Way cover inspection
 |Low
@@ -120,8 +135,8 @@ Follow facility-specific procedures in addition to this summary. Reference: OSHA
 
 |Hydraulic filter change
 |High
-|Pressurized fluid, chemical exposure
-|Full system depressurization; chemical-resistant PPE
+|Pressurized fluid, fluid injection, chemical exposure
+|Full system depressurization; chemical-resistant PPE; never check leaks by hand
 
 |Coolant concentration testing
 |Medium
@@ -146,6 +161,13 @@ Follow facility-specific procedures in addition to this summary. Reference: OSHA
 Intervals assume two-shift operation in clean, indoor conditions. Increase frequency for abrasive materials (cast iron, composites) or heavy coolant carryout. Record each task in the maintenance log.
 ====
 
+[NOTE]
+====
+*Coolant concentration* is stated in % (volume). A refractometer reads in °Brix; multiply the reading by the coolant's refractometer factor to get concentration:
+concentration (%) = reading (°Brix) × factor.
+Example: the fictional IronCool 500 coolant has a factor of 1.0, so a 6–8% target corresponds to a reading of 6–8 °Brix. Use the factor on your coolant's data sheet.
+====
+
 [cols="1,2,1,2,2", options="header"]
 |===
 |Interval | Task | Area | Tools/Materials | Notes
@@ -154,13 +176,13 @@ Intervals assume two-shift operation in clean, indoor conditions. Increase frequ
 |Clean chips/swarf; empty conveyors & bins
 |Enclosure, conveyors
 |Scraper/brush; PPE
-|Power off; check for jams at discharge points.
+|Run chip conveyor and chip flush with doors closed; empty bins from outside the enclosure. Reaching into the enclosure or conveyor requires full LOTO.
 
 |Daily
 |Check coolant level & concentration (6–8%)
 |Coolant system
 |Refractometer; premix
-|Top up with premix; skim tramp oil if present.
+|Concentration = °Brix × refractometer factor. Top up with premix; skim tramp oil if present.
 
 |Daily
 |Wipe/inspect way covers & wipers
@@ -169,10 +191,10 @@ Intervals assume two-shift operation in clean, indoor conditions. Increase frequ
 |Replace if torn, dragging, or leaking.
 
 |Weekly
-|Lubricate spindle bearings
+|Lubricate spindle bearings (grease-lubricated spindle)
 |Spindle
 |Grease gun (NLGI-2)
-|2–3 pumps per fitting; do not over-pack.
+|Per OEM lubrication chart: 2–3 pumps per fitting; do not over-pack. Full LOTO.
 
 |Weekly
 |Verify auto-lube reservoir; inspect lines
@@ -187,10 +209,10 @@ Intervals assume two-shift operation in clean, indoor conditions. Increase frequ
 |Maintain 6–8 bar; replace filter element if saturated.
 
 |Monthly
-|Replace hydraulic filter; check ΔP gauge
+|Replace hydraulic filter; check ΔP indicator
 |Hydraulics
 |Wrench set; new element
-|Depressurize first; log hours since last change.
+|Depressurize first; log ΔP and hours since last change. Replace earlier if the ΔP indicator shows red between scheduled changes.
 
 |Monthly
 |Inspect/tension belts
@@ -220,19 +242,19 @@ Intervals assume two-shift operation in clean, indoor conditions. Increase frequ
 |Thermal imaging survey
 |Electrical panels, drives
 |Thermal camera
-|Max acceptable: 40°C above ambient for electrical connections.
+|Compare with similar components under similar load: ΔT > 15 °C = investigate; ΔT > 40 °C = immediate repair.
 
 |Annual
 |Spindle runout measurement
 |Spindle
 |Dial indicator (0.001 mm res.)
-|Radial: <0.005 mm; axial: <0.003 mm at tool holder taper.
+|Radial: < 0.005 mm; axial: < 0.003 mm at tool holder taper.
 
 |Annual
 |Ballscrew backlash verification
 |X/Y/Z axes
 |Laser interferometer or dial indicator
-|<0.01 mm at mid-stroke; document drift over time.
+|< 0.01 mm at mid-stroke; document drift over time.
 
 |Annual
 |Coolant system deep clean
@@ -247,10 +269,10 @@ Intervals assume two-shift operation in clean, indoor conditions. Increase frequ
 |Max wear: 0.05 mm; replace if approaching limit.
 
 |24 Months
-|Geometric accuracy check (ISO 10791-7)
+|Geometric accuracy check (ISO 10791-2) and circular test (ISO 230-4)
 |Machine structure
-|Ballbar; laser tracker
-|Full 21-point test per ISO standard; contact OEM for acceptance criteria.
+|Precision level; straightedge; dial indicators; ballbar
+|Geometric tests per ISO 10791-2; ballbar circular test per ISO 230-4. Compare with OEM acceptance criteria.
 |===
 
 [TIP]
@@ -267,7 +289,7 @@ image::cnc-spindle-lube.jpg[Cut-away spindle head with a grease gun connected to
 * *A* — upper bearing housing fitting.
 * *B* — front bearing housing fitting.
 
-Apply 2–3 pumps of NLGI-2 grease per fitting with the spindle stopped and locked out. Do not over-pack: excess grease raises bearing temperature.
+The CNC-5000 spindle is grease-lubricated. Per the OEM lubrication chart, apply 2–3 pumps of NLGI-2 grease per fitting with the spindle stopped and locked out. Do not over-pack: excess grease raises bearing temperature.
 
 .Hydraulic power unit (monthly filter change)
 image::cnc-hydraulic-unit.jpg[Hydraulic power unit with five numbered service points, width=60%]
@@ -278,37 +300,54 @@ image::cnc-hydraulic-unit.jpg[Hydraulic power unit with five numbered service po
 . Oil-level sight glass — keep level above the 75% mark.
 . Reservoir drain valve — use for oil sampling and complete drain-down.
 
+Check the ΔP indicator at every monthly visit; if it shows red between scheduled changes, replace the element early.
+
 == Fault Codes
+
+.Priority scale
+[cols="1,3", options="header"]
+|===
+|Priority |Meaning
+|Critical |Stop the machine; do not restart; escalate to OEM service immediately.
+|High |Stop production until the fault is corrected.
+|Medium |Correct before the next production cycle or shift.
+|Low |Correct at the next scheduled maintenance.
+|===
+
+[WARNING]
+====
+Fault actions that involve drive terminals or connectors require full LOTO first. Wait at least 5 minutes after isolation and verify < 50 V DC at the DC-bus test points before touching drive terminals.
+====
 
 [cols="1,2,3,1", options="header"]
 |===
 |Code | Meaning | Corrective Action | Priority
 
-|E-101 | Axis overtravel | Press *RESET*; home machine; verify limit switch operation (24VDC expected); check soft limits in parameters. | Medium
-|E-102 | Spindle overheating | Stop immediately; verify coolant flow rate >15 L/min; check fan operation; inspect for blocked air passages; allow >30min cooldown. | High
+|E-101 | Axis overtravel | Press *RESET*; home machine; verify limit switch operation (24 V DC expected); check soft limits in parameters. | Medium
+|E-102 | Spindle overheating | Stop immediately; verify the spindle chiller is running and at set point; clean chiller filter and condenser; check spindle fan; inspect for blocked air passages; allow ≥ 30 min cooldown. | High
 |E-103 | Spindle load excessive | Reduce feed rate by 25%; verify tool sharpness; check workpiece clamping; inspect for chip buildup on cutting tool. | Medium
 |E-104 | Tool changer fault | Verify tool pot alignment; check ATC motor operation; inspect tool retention bolts; cycle ATC manually in test mode. | Medium
-|E-105 | Probe signal lost | Check probe battery (>6V); verify cable continuity; clean probe tip contacts; test signal with multimeter (5V expected). | Low
+|E-105 | Probe signal lost | Check probe battery (> 6 V); verify cable continuity; clean probe tip contacts; test signal with multimeter (5 V expected). | Low
 
-|E-201 | X-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors. | High
-|E-202 | Y-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors. | High
-|E-203 | Z-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify +/-15VDC at drive terminals; reseat drive connectors. | High
+|E-201 | X-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify 24 V DC control supply at the drive; after LOTO and DC-bus discharge (< 50 V DC), reseat drive connectors. | High
+|E-202 | Y-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify 24 V DC control supply at the drive; after LOTO and DC-bus discharge (< 50 V DC), reseat drive connectors. | High
+|E-203 | Z-axis servo fault | Record drive status LEDs; check encoder cable for damage; verify 24 V DC control supply at the drive; after LOTO and DC-bus discharge (< 50 V DC), reseat drive connectors. | High
 |E-204 | Servo following error | Check axis for mechanical binding; verify ballscrew lubrication; inspect coupling for wear; reduce rapid traverse rate 20%. | High
-|E-205 | Encoder communication error | Inspect encoder cable for cuts/pinch; verify encoder supply voltage 5VDC ±0.25V; clean encoder scale if linear type. | High
+|E-205 | Encoder communication error | Inspect encoder cable for cuts/pinch; verify encoder supply voltage 5 V DC ±0.25 V; clean encoder scale if linear type. | High
 
 |E-301 | Hydraulic pressure low | Verify pump operation; check reservoir level (min 75%); inspect filters for blockage; test pressure at 42 bar minimum. | High
-|E-302 | Hydraulic temperature high | Check oil level; verify cooling fan operation; clean heat exchanger fins; oil temp must be <60°C under load. | Medium
-|E-303 | Tool clamp pressure low | Test manual tool release; verify hydraulic pressure >40 bar; check tool holder for damage; inspect drawbar assembly. | High
+|E-302 | Hydraulic temperature high | Check oil level; verify cooling fan operation; clean heat exchanger fins; oil temp must be < 60 °C under load. | Medium
+|E-303 | Tool clamp pressure low | Test manual tool release; verify hydraulic pressure ≥ 42 bar; check tool holder for damage; inspect drawbar assembly. | High
 
-|E-401 | Door interlock failure | Verify all doors fully closed; check interlock switch alignment; test continuity (closed = 0Ω); inspect door seals. | Medium
-|E-402 | Light curtain interrupted | Clear obstruction from beam path; clean lens surfaces; verify 24VDC supply; test beam alignment per manual. | Medium
+|E-401 | Door interlock failure | Verify all doors fully closed; check interlock switch alignment; test continuity (closed = 0 Ω); inspect door seals. | Medium
+|E-402 | Light curtain interrupted | Clear obstruction from beam path; clean lens surfaces; verify 24 V DC supply; test beam alignment per manual. | Medium
 |E-403 | Emergency stop activated | Identify activated E-Stop button; inspect for mechanical damage; reset all E-Stops; verify control circuit continuity. | High
 
-|E-501 | Coolant flow insufficient | Clean intake screen; verify pump operation; check flow rate >15 L/min; inspect nozzles for blockage. | Medium
-|E-502 | Coolant concentration error | Test with refractometer; adjust to 6-8% Brix; replace if contaminated; check additive mixing system. | Low
-|E-503 | Chip conveyor overload | Clear conveyor jam; inspect for oversized chips; verify conveyor motor current <8A; check drive belt tension. | Medium
+|E-501 | Coolant flow insufficient | Clean intake screen; verify pump operation; check flow rate > 15 L/min; inspect nozzles for blockage. | Medium
+|E-502 | Coolant concentration error | Test with refractometer; adjust to 6–8% concentration (°Brix × refractometer factor); replace if contaminated; check additive mixing system. | Low
+|E-503 | Chip conveyor overload | Clear conveyor jam (full LOTO); inspect for oversized chips; verify conveyor motor current < 8 A; check drive belt tension. | Medium
 
-|E-601 | Pneumatic pressure low | Verify supply pressure 6-8 bar; drain water separator; check regulator operation; inspect for air leaks with soap solution. | Medium
+|E-601 | Pneumatic pressure low | Verify supply pressure 6–8 bar; drain water separator; check regulator operation; inspect for air leaks with soap solution. | Medium
 |E-602 | Air filter saturation | Replace filter element; drain moisture; check compressor operation; verify automatic drain valve function. | Low
 
 |E-701 | Control system fault | Record error details; perform controlled power cycle; check system logs; contact technical support if persistent. | Critical
@@ -343,7 +382,7 @@ Do **not** clear and restart repeatedly without investigation. Recurrent or inte
 === Usage Rules
 * Complete entries in **permanent ink**; no erasures. Use single strike-through for corrections and add initials/date.
 * Record **machine hours** at the start of each task.
-* Note torque values, measurements, and test results (e.g., coolant 7.2% Brix, backlash 0.006 mm).
+* Note torque values, measurements, and test results (e.g., coolant 7.2% concentration from a 7.2 °Brix reading × factor 1.0; backlash 0.006 mm).
 * Attach supporting checklists (E-Stop/door interlock tests) and reference their file IDs in the log.
 * After any safety or motion-related maintenance, run a **controlled test program** and record results.
 
@@ -351,17 +390,20 @@ Do **not** clear and restart repeatedly without investigation. Recurrent or inte
 Maintain maintenance logs and checklists for **5 years** (or per facility policy). Provide on request to auditors or OEM service.
 
 == References & Standards
+* ISO 12100 — Safety of machinery — General principles for design — Risk assessment and risk reduction
 * ISO 16090-1 — Machine tool safety
 * OSHA 29 CFR 1910.147 — Control of hazardous energy (LOTO)
 * IEC 60204-1 — Safety of machinery — Electrical equipment of machines
+* NFPA 79 — Electrical Standard for Industrial Machinery
 * ISO 4413 — Hydraulic fluid power — General rules and safety requirements
 * ISO 8573-1 — Compressed air — Contaminants and purity classes
-* NFPA 70 (NEC) — National Electrical Code
+* ISO 10791-2 — Test conditions for machining centres — Geometric tests
+* ISO 230-4 — Test code for machine tools — Circular tests for numerically controlled machine tools
 
 [appendix]
 == Controlled Document Info
 Doc ID: CNC-5000-MNT-EX-01 +
-Revision: 0.9 (Portfolio Sample) +
+Revision: 1.0 (Portfolio Sample) +
 Manufacturer: IronClad Machinery GmbH +
 Figures: machine overview, LOTO isolation points, spindle lubrication points, hydraulic unit service points
 

@@ -1,43 +1,31 @@
 digraph G {
-  graph [rankdir=TD, splines=false, bgcolor="transparent", nodesep=1.5, ranksep=1.0];
+  graph [rankdir=LR, bgcolor="transparent", nodesep=0.6, ranksep=0.9, fontname="Calibri", fontsize=14];
   node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
-  edge [arrowsize=0.9, penwidth=2, fontname="Calibri", fontsize=14];
+  edge [arrowsize=0.9, penwidth=2, fontname="Calibri", fontsize=13];
 
-  // Timeline - Software Versions
   subgraph cluster_timeline {
-    label="Software Release Timeline";
-    style="rounded,filled";
-    fillcolor="#fafafa";
-    fontname="Calibri";
-    fontsize=14;
-
-    v16 [label="v1.6.x\nLegacy", fillcolor="#ffebee"];
-    v17 [label="v1.7.2\nSecurity Fixes", fillcolor="#fff3e0"];
-    v18 [label="v1.8.0\nCurrent Stable", fillcolor="#e8f5e9"];
-    v19 [label="v1.9.0\nPlanned (Q2)", fillcolor="#e3f2fd", style="rounded,dashed"];
+    label="Orbitask releases";
+    style="rounded,filled"; fillcolor="#fafafa";
+    v16 [label="1.6.x\nsupport ends 2026-09-30", fillcolor="#ffebee"];
+    v17 [label="1.7.0 / 1.7.2\nJune–July 2026", fillcolor="#fff3e0"];
+    v18 [label="1.8.0 (current)\n2026-08-18", fillcolor="#e8f5e9", penwidth=2];
+    v19 [label="1.9.0\nplanned Q2 2027", fillcolor="#e3f2fd", style="rounded,dashed,filled"];
   }
 
-  // API Evolution
   subgraph cluster_api {
-    label="API Versions";
-    style="rounded,filled";
-    fillcolor="#f9f5ff";
-    fontname="Calibri";
-    fontsize=14;
-
-    api_v1 [label="API v1\nDeprecated", fillcolor="#ffcdd2"];
-    api_v2 [label="API v2\nRecommended", fillcolor="#c8e6c9"];
+    label="API versions";
+    style="rounded,filled"; fillcolor="#f9f5ff";
+    api_v2 [label="API v2\ncurrent for all endpoints", fillcolor="#c8e6c9"];
+    api_v1 [label="API v1\ndeprecated", fillcolor="#ffcdd2"];
+    api_v1_eol [label="API v1 end of life\n2026-11-16\n(v1 calls return 410 Gone)", fillcolor="#ffebee", shape=note];
   }
 
-  // Upgrade path
-  v16 -> v17 [label="Security\nPatches"];
-  v17 -> v18 [label="Feature\nUpgrade"];
-  v18 -> v19 [label="90 Days", style=dashed];
+  v16 -> v17;
+  v17 -> v18;
+  v18 -> v19 [style=dashed];
 
-  // API migration
-  api_v1 -> api_v2 [label="Migration\nRequired"];
-
-  // Support timeline
-  migration_note [label="⚠ API v1 End-of-Life:\n90 days from v1.9.0 release",
-                  fillcolor="#fffaf0", shape=note];
+  v18 -> api_v1 [label="deprecates", style=dashed];
+  v18 -> api_v2 [label="completes", style=dashed];
+  api_v1 -> api_v1_eol [label="90 days"];
+  api_v1 -> api_v2 [label="migrate", constraint=false];
 }

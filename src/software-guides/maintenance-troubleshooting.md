@@ -1,627 +1,237 @@
 # Maintenance and Troubleshooting
 
 **Author:** John Saysitall  
-**Version:** 2.3 — December 2024  
-**Product Version:** CloudFlow Pro 3.4.2
+**Version:** Orbitask 1.8.0 · August 2026
+
+> **Who this is for:** Workspace Owners and Admins.
+> Orbitask runs and maintains the service itself: servers, databases, service backups, and failover. This guide covers what you control: your workspace, members, integrations, and self-hosted agents. For service-wide incidents, check `https://status.orbitask.example`.
 
 ---
 
-## Routine Maintenance
+## Routine maintenance
 
-### Backup and Recovery Operations
+| Task | How often | Where | Role needed |
+|------|-----------|-------|-------------|
+| [Check workspace health](#check-workspace-health) | Weekly | **Admin → Workspace health** | Admin |
+| Review members and remove people who have left | Monthly | **Admin → Members** | Admin |
+| [Rotate API tokens and webhook secrets](#rotate-api-tokens-and-webhook-secrets) | Every 12 months, and when someone with access leaves | **Settings → API tokens**, **Admin → Webhooks** | Admin |
+| [Update self-hosted agents](#update-the-agent) | Within 30 days of each release | Agent host | Admin (plus `sudo` on the host) |
+| [Export your data](#export-your-data) | Monthly, or as your retention policy requires | **Admin → Data export** | Owner |
+| Review the audit log | Monthly | **Admin → Audit log** | Owner |
+| Read the [release notes](release-notes.md) for deprecations | Each release | This documentation | Any |
 
-- **[ ] Validate backup completion and integrity (weekly schedule)**
-  
-  CloudFlow Pro performs automated daily backups at 02:00 UTC. Weekly validation ensures data integrity and recovery readiness.
+> **Upcoming deadline:** API v1 stops working on **2026-11-16**. Use the **API v1 calls** tile in workspace health to find integrations that still use it.
 
-  ```bash
-  # Verify latest backup completion
-  cloudflow admin backup status --last-7-days
-  
-  # Test backup integrity
-  cloudflow admin backup verify --date "2024-12-08" --full-check
-  
-  # Generate backup report
-  cloudflow admin backup report --format pdf --output "backup-weekly-report.pdf"
-  ```
+Role details are in [Roles and permissions](user-manual.md#roles-and-permissions).
 
-  **Backup validation checklist:**
-  - [ ] Database snapshot completeness (primary + replica consistency)
-  - [ ] File storage synchronization (attachments, exports, logs)  
-  - [ ] Encryption key availability and rotation status
-  - [ ] Cross-region replication validation (Enterprise only)
-  - [ ] Backup retention policy adherence (90 days standard, 7 years compliance)
+### Check workspace health
 
-  **Expected backup sizes by deployment:**
-  | Deployment Size | Daily Backup | Weekly Full | Monthly Archive |
-  |-----------------|--------------|-------------|-----------------|
-  | Small (< 1K users) | 2-5 GB | 15-25 GB | 100-150 GB |
-  | Medium (1-5K users) | 10-20 GB | 75-125 GB | 500-750 GB |
-  | Large (5-10K users) | 25-50 GB | 200-350 GB | 1.2-2TB |
-  | Enterprise (10K+ users) | 50-100 GB | 400-700 GB | 2.5-5TB |
+1. Go to **Admin → Workspace health**.
+2. Review each tile. Tiles turn yellow at the warning level and red at the critical level.
 
-- **[ ] Execute test restoration procedures (monthly validation)**
+| Tile | Healthy | Warning | Critical | If it is not healthy |
+|------|---------|---------|----------|----------------------|
+| **API latency (p95)**, your workspace | Under 500 ms | 500–999 ms | 1,000 ms or more | Check the status page; see [API errors and rate limits](#api-errors-and-rate-limits) |
+| **Webhook success rate** (24 h) | 99% or more | 95–98.9% | Under 95% | See [Webhook delivery failures](#webhook-delivery-failures) |
+| **Agents** | All **Healthy** | Any **Degraded** | Any **Offline** for 15 minutes | See [Agent troubleshooting](#agent-troubleshooting) |
+| **SCIM sync** | Last sync succeeded | Warnings in last sync | Last sync failed | See [SSO and SCIM issues](#sso-and-scim-issues) |
+| **API v1 calls** (7 days) | 0 | Any | — | Move the listed integrations to API v2 |
 
-  Monthly disaster recovery testing ensures RTO (Recovery Time Objective) compliance and operational readiness.
+The same data is available from the CLI:
 
-  ```bash
-  # Create isolated test environment
-  cloudflow admin restore create-test-env \
-    --backup-date "2024-11-30" \
-    --environment "disaster-recovery-test" \
-    --network-isolation=true
+```bash
+orbitask workspace health
+```
 
-  # Execute restoration workflow
-  cloudflow admin restore execute \
-    --environment "disaster-recovery-test" \
-    --components "database,file-storage,cache,search-index" \
-    --validation-mode=true
+### Rotate API tokens and webhook secrets
 
-  # Performance validation post-restore
-  cloudflow admin validate performance \
-    --environment "disaster-recovery-test" \
-    --load-test-suite "standard" \
-    --duration 30m
-  ```
+**API tokens**
 
-  **Recovery Time Objectives (RTO):**
-  - Database restore: < 2 hours (Standard), < 30 minutes (Enterprise)
-  - File storage sync: < 4 hours (Standard), < 1 hour (Enterprise)  
-  - Search index rebuild: < 6 hours (Standard), < 2 hours (Enterprise)
-  - Full system availability: < 8 hours (Standard), < 4 hours (Enterprise)
+1. Create a new token with the same scopes: `orbitask auth token create --name "ci-integration-2026" --scope "projects:read,tasks:write"`.
+2. Update the integration to use the new token and confirm that it works.
+3. Revoke the old token: `orbitask auth token revoke <OLD-TOKEN-ID>`.
 
-  **Restoration validation metrics:**
-  - [ ] User authentication success rate > 99.5%
-  - [ ] API response latency < 500ms (p95)
-  - [ ] Data consistency across all services
-  - [ ] Real-time notification delivery functionality
-  - [ ] Third-party integration connectivity
+**Webhook signing secrets**
 
-- **[ ] Audit data retention policy compliance (quarterly review)**
+1. In **Admin → Webhooks**, open the webhook and click **Rotate secret**. For 24 hours, Orbitask signs each request with both the old and the new secret, so the `Orbitask-Signature` header contains two `v1` values.
+2. Deploy the new secret to your endpoint within those 24 hours. The verification code in [Verifying webhook signatures](user-manual.md#verifying-webhook-signatures) accepts either value.
+3. Click **Expire old secret**, or let it expire automatically.
 
-  Quarterly compliance audits ensure adherence to data protection regulations and organizational policies.
+### Update the agent
 
-  ```bash
-  # Generate data retention compliance report
-  cloudflow admin compliance audit \
-    --type "data-retention" \
-    --regulations "GDPR,CCPA,SOX" \
-    --export-format "xlsx" \
-    --include-remediation-plan
+Agents 1.7.x keep working with Orbitask 1.8.0, but update within 30 days of a release to get fixes.
 
-  # Review data classification and retention schedules  
-  cloudflow admin data-classification review \
-    --classification-levels "public,internal,confidential,restricted" \
-    --retention-periods "30d,1y,7y,permanent" \
-    --auto-purge-preview
+1. Download and verify the new version as in [Install the agent](installation-setup-guide.md#install-the-agent), steps 1–2.
+2. Replace the binary and restart the service:
 
-  # Execute data purging for expired records
-  cloudflow admin data-purge execute \
-    --dry-run \
-    --categories "deleted-projects,inactive-users,audit-logs" \
-    --older-than "7y" \
-    --confirmation-required
-  ```
+   ```bash
+   tar -xzf orbitask-agent_1.8.0_linux_amd64.tar.gz
+   sudo install -m 0755 orbitask-agent /usr/local/bin/orbitask-agent
+   sudo systemctl restart orbitask-agent
+   ```
 
-  **Data retention schedules:**
-  | Data Type | Retention Period | Purge Method | Compliance Requirement |
-  |-----------|------------------|--------------|------------------------|
-  | User activity logs | 2 years | Automated soft delete | GDPR Article 17 |
-  | Project data (active) | Indefinite | User-controlled | Business requirement |
-  | Project data (deleted) | 90 days | Secure wipe | Data minimization |
-  | Audit trail | 7 years | Encrypted archive | SOX compliance |
-  | Personal data (GDPR) | User-requested deletion | Crypto shredding | Right to erasure |
-  | Security logs | 1 year | Secure deletion | ISO 27001 |
+3. Run `orbitask-agent status`. *Result:* `Agent: 1.8.0` and `Connection: connected`.
 
-- **[ ] Implement API key and secret rotation (annual cycle or upon compromise)**
+You do not need to enroll the agent again.
 
-  Regular credential rotation reduces security exposure and maintains compliance with enterprise security policies.
+### Monitor the agent from your own tools
 
-  ```bash
-  # Generate API key rotation plan
-  cloudflow admin security key-rotation plan \
-    --scope "all-integrations" \
-    --notification-window "30d" \
-    --rollback-window "7d"
+**Admin → Workspace health** alerts Admins by email when an agent goes offline. If you also want your own monitoring to check the agent, run a check every minute with cron. For example, save this script as `/usr/local/bin/check-orbitask-agent`:
 
-  # Execute staged rotation (non-breaking)
-  cloudflow admin security key-rotation execute \
-    --stage "prepare" \
-    --new-key-overlap "72h" \
-    --notify-integrations=true
+```bash
+#!/bin/sh
+# Exits non-zero, and logs to syslog, if the Orbitask agent is not running and connected.
+if ! systemctl is-active --quiet orbitask-agent; then
+  logger -p user.err "orbitask-agent: service is not running"
+  exit 1
+fi
+if ! orbitask-agent status --quiet; then
+  logger -p user.warning "orbitask-agent: running but not connected"
+  exit 2
+fi
+```
 
-  # Validate integration health during rotation
-  cloudflow admin security validate-integrations \
-    --test-endpoints \
-    --check-authentication \
-    --monitor-error-rates
+Make it executable (`sudo chmod 0755 /usr/local/bin/check-orbitask-agent`) and add this line to root's crontab with `sudo crontab -e`:
 
-  # Complete rotation and deprecate old keys
-  cloudflow admin security key-rotation complete \
-    --deprecate-old-keys \
-    --grace-period "24h" \
-    --force-update-webhooks
-  ```
+```text
+* * * * * /usr/local/bin/check-orbitask-agent
+```
 
-  **Rotation schedule and procedures:**
-  | Credential Type | Rotation Frequency | Advance Notice | Rollback Window |
-  |-----------------|-------------------|----------------|-----------------|
-  | API keys (integration) | Annual | 30 days | 7 days |
-  | Service tokens | Bi-annual | 14 days | 24 hours |
-  | Database passwords | Quarterly | N/A (automatic) | 1 hour |
-  | Encryption keys | Annual | 60 days | 30 days |
-  | SSL certificates | Before expiry | 90 days | 24 hours |
-  | OAuth secrets | Bi-annual | 30 days | 7 days |
+Point your log monitoring at the `orbitask-agent:` messages.
+
+### Export your data
+
+Orbitask backs up the service so it can recover from its own failures. Those backups are not a way to restore individual items you deleted. For your own records, compliance archives, or leaving the service, export your data.
+
+1. Go to **Admin → Data export** and click **Export workspace**. Choose JSON (full fidelity, including comments and history) and **Include attachments**.
+   Or use the CLI:
+
+   ```bash
+   orbitask export workspace --format json --include-attachments --output acme-eng-2026-09.zip
+   ```
+
+2. Wait for the email with the download link. Large workspaces can take several hours. Links expire after 7 days.
+3. Check the export. The archive contains `manifest.json` with an item count and a SHA-256 checksum for each file:
+
+   ```bash
+   orbitask export verify acme-eng-2026-09.zip
+   ```
+
+   *Result:* `Export OK: 12 projects, 4,318 tasks, 1,902 attachments`.
+4. Store the export somewhere your organization controls, with access limited to the people who need it. The export contains personal data.
+
+How long Orbitask keeps deleted items and logs is described in [Data retention](security-compliance.md#data-retention).
 
 ---
 
-## Monitoring
+## Troubleshooting
 
-### System Health and Performance Monitoring
+Before you start, check `https://status.orbitask.example`. If there is an active incident, you do not need to troubleshoot your workspace.
 
-- **[ ] Monitor system health endpoints (`/health`, `/status`) for availability**
+### Agent troubleshooting
 
-  Continuous monitoring ensures proactive identification of system degradation and service interruptions.
-
-  ```bash
-  # Configure comprehensive health monitoring
-  cloudflow admin monitoring configure \
-    --endpoints "/health,/status,/metrics,/readiness" \
-    --check-interval "30s" \
-    --timeout "10s" \
-    --retry-attempts 3
-
-  # Set up automated health checks with alerting
-  cloudflow admin monitoring health-check \
-    --services "api,database,cache,queue,search" \
-    --thresholds "response_time:500ms,error_rate:1%,uptime:99.9%" \
-    --alert-channels "email,slack,pagerduty"
-  ```
-
-  **Health check endpoints and expected responses:**
-
-  | Endpoint | Purpose | Healthy Response | Critical Thresholds |
-  |----------|---------|------------------|-------------------|
-  | `/health` | Overall system status | HTTP 200, < 100ms | > 500ms response time |
-  | `/status` | Component-level status | All services "UP" | Any service "DOWN" |
-  | `/metrics` | Performance metrics | Prometheus format | Memory > 85%, CPU > 80% |
-  | `/readiness` | Traffic acceptance | HTTP 200 | Database connectivity failure |
-
-  Sample health check automation:
-  ```bash
-  #!/bin/bash
-  # Health monitoring script (run every 30 seconds via cron)
-  
-  HEALTH_URL="https://api.cloudflow.goodweb.com/v1/health"
-  STATUS_URL="https://api.cloudflow.goodweb.com/v1/status"
-  
-  # Check overall health
-  HEALTH_RESPONSE=$(curl -s -w "%{http_code}" -o /tmp/health.json "$HEALTH_URL")
-  
-  if [ "$HEALTH_RESPONSE" != "200" ]; then
-    echo "CRITICAL: Health check failed with status $HEALTH_RESPONSE"
-    # Trigger alert
-    cloudflow admin alert send \
-      --severity critical \
-      --message "CloudFlow API health check failure" \
-      --escalate-to "oncall-engineer"
-  fi
-  
-  # Validate component status
-  UNHEALTHY_SERVICES=$(curl -s "$STATUS_URL" | jq -r '.services[] | select(.status != "UP") | .name')
-  
-  if [ ! -z "$UNHEALTHY_SERVICES" ]; then
-    echo "WARNING: Unhealthy services detected: $UNHEALTHY_SERVICES"
-    cloudflow admin alert send \
-      --severity warning \
-      --message "Service degradation: $UNHEALTHY_SERVICES" \
-      --auto-remediate=true
-  fi
-  ```
-
-- **[ ] Centralize log aggregation through SIEM/ELK infrastructure**
-
-  Centralized logging enables comprehensive security monitoring, performance analysis, and troubleshooting capabilities.
-
-  ```bash
-  # Configure log shipping to ELK stack
-  cloudflow admin logging configure \
-    --destination "elasticsearch://elk.company.com:9200" \
-    --index-pattern "cloudflow-logs-{YYYY.MM.dd}" \
-    --retention "30d" \
-    --compression "gzip"
-
-  # Set up structured logging with proper fields
-  cloudflow admin logging format \
-    --format "json" \
-    --fields "timestamp,level,service,user_id,session_id,request_id,message" \
-    --sensitive-data-masking=true
-
-  # Configure log levels by service
-  cloudflow admin logging levels \
-    --api-service "INFO" \
-    --auth-service "WARN" \
-    --webhook-service "DEBUG" \
-    --background-jobs "INFO"
-  ```
-
-  **Log aggregation configuration:**
-
-  | Log Source | Volume (per day) | Retention | Index Strategy |
-  |------------|------------------|-----------|----------------|
-  | API Gateway | 50-100 GB | 30 days | Daily rolling |
-  | Application logs | 20-40 GB | 90 days | Weekly rolling |
-  | Security logs | 5-10 GB | 1 year | Monthly rolling |
-  | Performance metrics | 10-20 GB | 30 days | Daily rolling |
-  | Audit trail | 1-5 GB | 7 years | Yearly archive |
-
-  **SIEM integration and alerting rules:**
-  ```bash
-  # Configure security event detection
-  cloudflow admin siem rules create \
-    --rule-name "suspicious-login-patterns" \
-    --condition "failed_logins > 10 AND time_window = 5m" \
-    --action "block-ip,send-alert" \
-    --severity "high"
-
-  cloudflow admin siem rules create \
-    --rule-name "unusual-api-usage" \
-    --condition "api_calls > 1000/minute AND user_type != 'service'" \
-    --action "rate-limit,notify-admin" \
-    --severity "medium"
-
-  # Set up compliance logging
-  cloudflow admin siem compliance \
-    --frameworks "SOC2,ISO27001,PCI-DSS" \
-    --audit-events "login,data-access,admin-action,config-change" \
-    --reporting-schedule "monthly"
-  ```
-
-- **[ ] Evaluate alerting thresholds for CPU, memory, latency, and error rates**
-
-  Proactive threshold monitoring prevents performance degradation and ensures optimal user experience.
-
-  ```bash
-  # Configure performance monitoring thresholds
-  cloudflow admin monitoring thresholds set \
-    --cpu-warning "75%" \
-    --cpu-critical "90%" \
-    --memory-warning "80%" \
-    --memory-critical "95%" \
-    --disk-warning "85%" \
-    --disk-critical "95%"
-
-  # Set application-specific thresholds
-  cloudflow admin monitoring app-thresholds \
-    --api-latency-p95 "500ms" \
-    --api-latency-p99 "2000ms" \
-    --error-rate-warning "0.5%" \
-    --error-rate-critical "2%" \
-    --queue-depth-warning "1000" \
-    --queue-depth-critical "5000"
-  ```
-
-  **Performance threshold matrix:**
-
-  | Metric | Warning Level | Critical Level | Alert Frequency | Auto-remediation |
-  |--------|---------------|----------------|-----------------|------------------|
-  | **CPU Usage** | 75% (5 min avg) | 90% (1 min avg) | Immediate | Scale up |
-  | **Memory Usage** | 80% (5 min avg) | 95% (1 min avg) | Immediate | Restart service |
-  | **Disk Usage** | 85% | 95% | Daily digest | Log rotation |
-  | **API Latency (p95)** | 500ms | 1000ms | Every occurrence | Cache warming |
-  | **Error Rate** | 0.5% (5 min) | 2% (1 min) | Every occurrence | Circuit breaker |
-  | **Queue Depth** | 1,000 messages | 5,000 messages | Immediate | Add workers |
-  | **Database Connections** | 80% of pool | 95% of pool | Immediate | Connection cleanup |
-
-Example health check with enhanced monitoring:
+Start with the agent's own status and logs on the host:
 
 ```bash
-# Enhanced health check with detailed metrics
-curl -s https://api.cloudflow.goodweb.com/v1/health | jq '{
-  status: .status,
-  timestamp: .timestamp,
-  services: .services,
-  performance: {
-    response_time_ms: .metrics.response_time,
-    cpu_usage_percent: .metrics.system.cpu,
-    memory_usage_percent: .metrics.system.memory,
-    active_connections: .metrics.database.connections,
-    queue_depth: .metrics.background_jobs.pending
-  },
-  health_score: .overall_health_score
-}'
-
-# Sample output:
-{
-  "status": "UP",
-  "timestamp": "2024-12-10T14:30:00Z",
-  "services": {
-    "api": "UP",
-    "database": "UP", 
-    "cache": "UP",
-    "search": "UP",
-    "background_jobs": "UP"
-  },
-  "performance": {
-    "response_time_ms": 145,
-    "cpu_usage_percent": 68,
-    "memory_usage_percent": 72,
-    "active_connections": 45,
-    "queue_depth": 12
-  },
-  "health_score": 98
-}
+orbitask-agent status
+journalctl -u orbitask-agent --since "1 hour ago"
+orbitask-agent check-connectivity
 ```
 
-![Webhooks Eventing Topology](./img/webhooks-eventing-topology.svg)
+`check-connectivity` tests DNS, the proxy (if configured), TLS, and authentication, and names the first step that fails.
+
+| Symptom | Likely cause | What to do |
+|---------|--------------|------------|
+| `Service: inactive` or `failed` | The service stopped or cannot start | Run `sudo systemctl start orbitask-agent`, then read `journalctl` for the error |
+| `DNS lookup failed for agent.orbitask.example` | Internal DNS cannot resolve the domain | Ask your network team to allow resolution of `*.orbitask.example` |
+| `TLS handshake failed` or `certificate signed by unknown authority` | A proxy inspects TLS traffic | Exempt `agent.orbitask.example` from TLS inspection, or add your proxy's CA with `orbitask-agent config set tls.ca_file /path/to/ca.pem` |
+| `401 agent credentials rejected` | The agent was removed in **Admin → Connectors**, or its credentials were revoked | Create a new enrollment token and run `sudo orbitask-agent enroll --token <TOKEN> --force` |
+| Agent shows **Degraded** | Clock drift of more than 5 minutes, or disk more than 90% full | Enable NTP on the host; free disk space under `/var/lib/orbitask-agent` |
+
+### SSO and SCIM issues
+
+| Symptom | Likely cause | What to do |
+|---------|--------------|------------|
+| Sign-in loops back to the sign-in page | Redirect URI, ACS URL, or audience does not match | Compare the IdP settings with [Single sign-on](installation-setup-guide.md#single-sign-on-saml-or-oidc) |
+| `Assertion expired` or `Token not yet valid` | Clock drift between the IdP and Orbitask | Make sure the IdP's clock is synchronized with NTP |
+| SAML sign-in fails after working before | The IdP signing certificate changed or expired | Upload the IdP's new metadata in **Admin → Security → Single sign-on** |
+| New employees cannot sign in: `No account` | SCIM has not provisioned them yet | In **Admin → Security → Provisioning**, click **Sync now** and read the sync log |
+| Users have the wrong role | IdP group mapped to the wrong role, or the user is in several mapped groups | Check the group mappings. When a user is in several groups, Orbitask gives the highest role |
+| Microsoft Entra ID groups do not sync | Entra ID SCIM is in preview and syncs only assigned groups, not nested groups | Assign the groups directly to the Orbitask application in Entra ID |
+
+If SSO is broken and nobody can sign in, an Owner can still sign in at `https://app.orbitask.example/login?sso=bypass` with the email address and password set when the workspace was created, then fix or turn off **Require SSO**.
+
+### Webhook delivery failures
+
+1. Go to **Admin → Webhooks**, open the webhook, and select **Deliveries**.
+2. Filter by **Failed** and open a delivery to see the request, the response status, and the response body your endpoint returned.
+3. Use this table to find the cause:
+
+| What the delivery log shows | Likely cause | What to do |
+|-----------------------------|--------------|------------|
+| `Timeout after 10 s` | Your endpoint does slow work before responding | Return `2xx` right away and process the event in the background |
+| `Connection refused` or `DNS error` | Endpoint is down, or its address changed | Check that the URL is correct and reachable from the internet |
+| `401` or `403` from your endpoint | Your signature check rejects the request | Verify against the **raw** body, use the current secret, and make sure your server clock is correct (tolerance is 300 s) |
+| `4xx` other than 401/403 | Your endpoint rejects the payload | Check your endpoint's logs for the reason |
+| `5xx` | Your endpoint failed | Fix the endpoint; Orbitask keeps retrying for about 24 hours |
+
+1. After you fix the endpoint, redeliver failed events: select them and click **Redeliver**, or run `orbitask webhook redeliver --webhook wh_123 --status failed --since 2026-09-01`.
+
+Because events can arrive more than once after a redelivery, de-duplicate them by their `id` field.
+
+### API errors and rate limits
+
+Each API token can make up to 1,000 requests per minute. Every response includes these headers:
+
+| Header | Meaning |
+|--------|---------|
+| `X-RateLimit-Limit` | Requests allowed per minute (1000) |
+| `X-RateLimit-Remaining` | Requests left in the current minute |
+| `X-RateLimit-Reset` | Unix time when the limit resets |
+| `Retry-After` | On a `429` response only: seconds to wait before retrying |
+
+When you receive an error:
+
+- **429 Too Many Requests (ORB003):** Wait for the `Retry-After` time, then retry. Spread bulk jobs over time or use bulk endpoints such as `/v2/tasks/bulk-update`.
+- **5xx errors:** Retry with exponential backoff (for example, 1 s, 2 s, 4 s, up to 5 attempts). Send an `Idempotency-Key` header with writes so that a retry cannot create a duplicate.
+- **410 Gone (ORB006):** The request used API v1 after 2026-11-16. Change the URL from `/v1/` to `/v2/`; see [Release Notes](release-notes.md#deprecations).
+- Until then, API v1 responses include `Deprecation` and `Sunset` headers, which many HTTP clients can log as warnings.
+
+The full list of error codes is in [Error codes](user-manual.md#error-codes).
+
+### Slow reports and exports
+
+- Filter large reports by project, date range, or status.
+- Reports with more than 10,000 rows always run in the background; Orbitask emails a link when they are ready.
+- Scheduled reports run between 00:00 and 06:00 in the workspace time zone. Stagger them if many start at the same time.
 
 ---
 
-## Troubleshooting Playbooks
+## Contact support
 
-### Comprehensive Issue Resolution Matrix
+If you cannot fix a problem, contact support with a diagnostics bundle. It helps support find the cause without back-and-forth.
 
-| Symptom | Likely Cause | Immediate Actions | Resolution Steps | Prevention |
-|---------|--------------|-------------------|------------------|------------|
-| **Authentication loops** | Identity provider misconfiguration | 1. Check system status<br>2. Validate certificates<br>3. Review recent config changes | **Step-by-step resolution:**<br>```bash<br># Validate SAML configuration<br>cloudflow admin auth validate-saml \<br>  --provider okta \<br>  --check-certificates \<br>  --test-endpoints<br><br># Check system time sync<br>cloudflow admin system time-sync \<br>  --ntp-servers "time.nist.gov" \<br>  --tolerance 30s<br><br># Refresh metadata cache<br>cloudflow admin auth refresh-metadata \<br>  --provider okta \<br>  --force-update<br>```<br>**Expected resolution time:** 15-30 minutes | • Automated certificate monitoring<br>• NTP synchronization checks<br>• Configuration change approval process |
-| **Webhook delivery failures** | Network connectivity or DNS issues | 1. Test endpoint availability<br>2. Check DNS resolution<br>3. Review firewall rules | **Diagnostic commands:**<br>```bash<br># Test webhook endpoint connectivity<br>cloudflow admin webhook test-endpoint \<br>  --url "https://client.com/webhook" \<br>  --method POST \<br>  --timeout 30s<br><br># Check DNS resolution<br>nslookup client.com<br>dig +trace client.com<br><br># Review delivery queue<br>cloudflow admin webhook queue-status \<br>  --failed-only \<br>  --last-24h \<br>  --retry-analysis<br><br># Manual retry with debugging<br>cloudflow admin webhook retry \<br>  --webhook-id "wh_123456" \<br>  --debug-mode \<br>  --capture-response<br>```<br>**Resolution time:** 5-15 minutes | • Webhook endpoint health monitoring<br>• DNS resolution alerts<br>• Network path redundancy |
-| **Slow report exports** | Large dataset processing | 1. Check current system load<br>2. Review report parameters<br>3. Enable pagination/filtering | **Optimization strategies:**<br>```bash<br># Check report generation queue<br>cloudflow admin reports queue-status \<br>  --show-processing-time \<br>  --identify-large-reports<br><br># Optimize report parameters<br>cloudflow admin reports optimize \<br>  --report-id "rpt_789" \<br>  --enable-incremental \<br>  --add-filters "date_range,status"<br><br># Enable async processing<br>cloudflow admin reports configure \<br>  --async-threshold "1000-records" \<br>  --notification-email=true \<br>  --progress-updates=true<br><br># Database query optimization<br>cloudflow admin database analyze-queries \<br>  --slow-query-log \<br>  --suggest-indexes \<br>  --execution-plan<br>```<br>**Resolution time:** 30-60 minutes | • Query performance monitoring<br>• Automatic report optimization<br>• Resource scaling policies |
-| **High API latency** | Database query performance | 1. Check database connections<br>2. Review slow query log<br>3. Monitor cache hit ratios | **Performance tuning:**<br>```bash<br># Database performance analysis<br>cloudflow admin database performance \<br>  --slow-queries \<br>  --connection-pool-status \<br>  --index-usage-stats<br><br># Cache analysis and optimization<br>cloudflow admin cache analyze \<br>  --hit-ratio-threshold 85% \<br>  --identify-hotkeys \<br>  --memory-usage<br><br># Connection pool optimization<br>cloudflow admin database pool-tune \<br>  --max-connections 100 \<br>  --idle-timeout 300s \<br>  --connection-lifetime 3600s<br><br># Query optimization<br>cloudflow admin database optimize \<br>  --rebuild-statistics \<br>  --suggest-indexes \<br>  --query-plan-analysis<br>```<br>**Resolution time:** 1-4 hours | • Automated query performance monitoring<br>• Connection pool auto-tuning<br>• Cache warming strategies |
-| **Memory consumption spikes** | Resource leak or inefficient processing | 1. Identify memory hotspots<br>2. Review recent deployments<br>3. Check for memory leaks | **Memory analysis and remediation:**<br>```bash<br># Generate heap dump for analysis<br>cloudflow admin diagnostics heap-dump \<br>  --service api-server \<br>  --include-gc-info \<br>  --output /tmp/heapdump.hprof<br><br># Memory usage breakdown<br>cloudflow admin diagnostics memory \<br>  --by-service \<br>  --include-cache-usage \<br>  --trend-analysis 7d<br><br># Garbage collection tuning<br>cloudflow admin jvm gc-tune \<br>  --gc-algorithm G1GC \<br>  --heap-size 8g \<br>  --gc-log-rotation=true<br><br># Memory leak detection<br>cloudflow admin diagnostics leak-check \<br>  --duration 30m \<br>  --sample-rate 1000ms \<br>  --report-format html<br>```<br>**Resolution time:** 2-6 hours | • Memory usage alerting<br>• Automated heap dump collection<br>• Resource limit enforcement |
+1. **Create a workspace diagnostics bundle.** Go to **Admin → Workspace health → Download diagnostics**, or run:
 
-### Advanced Troubleshooting Procedures
+   ```bash
+   orbitask diagnostics bundle --since "24 hours ago" --output orbitask-diag.zip
+   ```
 
-#### Database Performance Issues
+   The bundle contains workspace settings, recent error logs, webhook delivery results, and SSO/SCIM sync logs. It does **not** contain task content, comments, attachments, or secrets; tokens and secrets are redacted.
+2. **If the problem involves the agent**, also create an agent bundle on the host:
 
-When database performance degrades, follow this systematic approach:
+   ```bash
+   sudo orbitask-agent diagnostics --output orbitask-agent-diag.tar.gz
+   ```
 
-```bash
-# 1. Immediate assessment
-cloudflow admin database quick-check \
-  --connection-test \
-  --replication-lag \
-  --blocking-queries \
-  --disk-space
+3. **Open a support request** from **Help → Contact support**, or email `support@orbitask.example`. Include:
+   - What you expected and what happened instead
+   - When it started, and whether anything changed around that time
+   - The request ID (`X-Request-Id` header) of a failing API call, if you have one
+   - The diagnostics bundles
 
-# 2. Detailed performance analysis  
-cloudflow admin database performance-report \
-  --time-range "last-4-hours" \
-  --include-query-plans \
-  --export-format html \
-  --auto-recommendations
-
-# 3. Index optimization
-cloudflow admin database index-analysis \
-  --unused-indexes \
-  --missing-indexes \
-  --duplicate-indexes \
-  --fragmentation-check
-
-# 4. Query optimization
-cloudflow admin database query-tune \
-  --top-slowest-queries 20 \
-  --suggest-optimizations \
-  --test-explain-plans \
-  --benchmark-improvements
-```
-
-#### Network Connectivity Troubleshooting
-
-For network-related issues affecting integrations or user access:
-
-```bash
-# 1. Network path analysis
-cloudflow admin network traceroute \
-  --destination api.cloudflow.goodweb.com \
-  --include-latency \
-  --check-mtu \
-  --dns-resolution-time
-
-# 2. Load balancer health
-cloudflow admin network lb-status \
-  --backend-health \
-  --connection-distribution \
-  --ssl-certificate-expiry \
-  --response-time-stats
-
-# 3. CDN performance check
-cloudflow admin network cdn-analysis \
-  --cache-hit-ratio \
-  --edge-server-performance \
-  --purge-status \
-  --geographic-latency
-
-# 4. Security group validation
-cloudflow admin network security-check \
-  --inbound-rules \
-  --outbound-rules \
-  --port-connectivity \
-  --protocol-validation
-```
-
-#### Authentication and Authorization Issues
-
-Systematic approach to identity-related problems:
-
-```bash
-# 1. User account status verification
-cloudflow admin auth user-status \
-  --user-id "user@company.com" \
-  --include-permissions \
-  --session-history \
-  --mfa-status
-
-# 2. SAML/OIDC configuration validation
-cloudflow admin auth provider-check \
-  --provider okta \
-  --test-login-flow \
-  --certificate-validation \
-  --metadata-sync
-
-# 3. Permission inheritance analysis  
-cloudflow admin auth permissions-trace \
-  --user-id "user@company.com" \
-  --resource-path "/projects/Q1-Launch" \
-  --show-inheritance-chain \
-  --identify-conflicts
-
-# 4. Session management diagnosis
-cloudflow admin auth session-debug \
-  --session-id "sess_123456" \
-  --token-validation \
-  --expiry-check \
-  --refresh-token-status
-```
-
-#### Integration Failures
-
-When third-party integrations experience issues:
-
-```bash
-# 1. Integration health check
-cloudflow admin integrations health-check \
-  --provider slack \
-  --test-authentication \
-  --verify-permissions \
-  --check-rate-limits
-
-# 2. API key validation
-cloudflow admin integrations validate-keys \
-  --all-providers \
-  --test-endpoints \
-  --check-expiration \
-  --rotation-schedule
-
-# 3. Webhook delivery analysis
-cloudflow admin integrations webhook-analysis \
-  --failed-deliveries \
-  --retry-patterns \
-  --response-codes \
-  --payload-validation
-
-# 4. Data sync verification
-cloudflow admin integrations sync-status \
-  --provider jira \
-  --data-consistency-check \
-  --conflict-resolution \
-  --sync-history
-```
-
-### Emergency Response Procedures
-
-#### Service Outage Response
-
-**Severity Level 1 (Critical - Service Down)**
-
-```bash
-# Immediate response (first 5 minutes)
-1. Acknowledge incident
-cloudflow admin incident create \
-  --severity critical \
-  --title "Service Unavailable" \
-  --assign-to "oncall-engineer"
-
-2. Status page update
-cloudflow admin status-page update \
-  --status "investigating" \
-  --message "We are investigating reports of service unavailability"
-
-3. Quick diagnostics
-cloudflow admin quick-diag \
-  --services all \
-  --export-logs last-30m \
-  --system-snapshot
-
-# Recovery actions (5-15 minutes)
-4. Service restart attempt
-cloudflow admin service restart \
-  --services "api-server,database" \
-  --rolling-restart \
-  --health-check-wait 60s
-
-5. Database failover (if needed)
-cloudflow admin database failover \
-  --primary-to-replica \
-  --data-consistency-check \
-  --connection-string-update
-
-6. Traffic rerouting
-cloudflow admin network route-traffic \
-  --backup-region us-west-2 \
-  --dns-update \
-  --ssl-certificate-sync
-```
-
-**Post-Incident Activities:**
-
-```bash
-# 1. Root cause analysis
-cloudflow admin incident root-cause-analysis \
-  --incident-id "inc_123456" \
-  --timeline-reconstruction \
-  --contributing-factors \
-  --export-report
-
-# 2. Performance impact assessment  
-cloudflow admin incident impact-analysis \
-  --affected-users \
-  --data-integrity-check \
-  --financial-impact \
-  --sla-breach-calculation
-
-# 3. Prevention measures
-cloudflow admin incident prevention-plan \
-  --based-on incident-id "inc_123456" \
-  --monitoring-improvements \
-  --process-updates \
-  --training-requirements
-```
-
-### Performance Optimization Guidelines
-
-#### System Tuning Recommendations
-
-**Database Optimization:**
-```bash
-# Regular maintenance tasks
-cloudflow admin database maintenance \
-  --update-statistics \
-  --rebuild-indexes \
-  --cleanup-old-data \
-  --optimize-query-cache
-
-# Performance baseline establishment
-cloudflow admin database benchmark \
-  --workload-simulation \
-  --response-time-targets \
-  --throughput-measurement \
-  --resource-utilization
-```
-
-**Application Server Tuning:**
-```bash
-# JVM optimization
-cloudflow admin jvm optimize \
-  --heap-size auto \
-  --gc-tuning \
-  --thread-pool-sizing \
-  --connection-pool-optimization
-
-# Cache configuration
-cloudflow admin cache optimize \
-  --memory-allocation \
-  --eviction-policies \
-  --ttl-optimization \
-  --cache-warming
-```
-
-**Resource Scaling Guidelines:**
-
-| Resource Metric | Scale Up Trigger | Scale Down Trigger | Scaling Action |
-|-----------------|------------------|-------------------|----------------|
-| CPU Usage | > 70% for 10 min | < 30% for 30 min | Add/remove 1 instance |
-| Memory Usage | > 80% for 5 min | < 40% for 20 min | Increase/decrease heap size |
-| Queue Depth | > 500 messages | < 50 messages | Add/remove background workers |
-| Response Time | > 1000ms (p95) | < 200ms (p95) | Adjust connection pools |
-
-This comprehensive maintenance and troubleshooting guide ensures CloudFlow Pro maintains optimal performance, security, and availability while providing systematic approaches to issue resolution and prevention.
+| Severity | Example | First response: Standard plan | First response: Enterprise plan |
+|----------|---------|-------------------------------|---------------------------------|
+| **Critical** | No one in the workspace can sign in | 4 hours | 1 hour, 24/7 |
+| **High** | Webhooks or an agent have stopped working | 8 business hours | 4 hours |
+| **Normal** | A report is slow; a how-to question | 2 business days | 1 business day |

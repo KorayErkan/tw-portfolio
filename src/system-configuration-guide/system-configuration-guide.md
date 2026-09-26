@@ -1,26 +1,26 @@
-# ProSoft v8.4.11 System Configuration Guide
+# Nordvale Server 8.5.0 System Configuration Guide
 
-This document includes ProSoft proprietary or confidential information and may not be redistributed or disclosed without prior written permission.
-
-All information contained herein is provided "*AS IS*" based on the state of the ProSoft system as of the release date. ProSoft reserves the right to make changes to this document without prior notice.
+All information contained herein is provided "*AS IS*" based on the state of Nordvale Server as of its release date. Nordvale reserves the right to make changes to this document without prior notice.
 
 ---
 
 ## Disclaimer
 
-NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT REGARDING INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL PROSOFT BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.
+NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT, INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL NORDVALE BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.
 
 ---
 
 ## Copyright
 
-__ProSoft__ is a registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners.
+__Nordvale__ is a registered trademark of Nordvale Corporation. Other products mentioned in this document may be trademarks of their respective owners.
 
-&copy; ProSoft 2024.
+&copy; Nordvale Corporation 2026.
+
+> __Note:__ Nordvale, its products, and all hostnames in this document are fictitious. This is a portfolio sample.
 
 ---
 
-## Table of Contents
+## Table of contents
 
 * [About this guide](#about-this-guide)
 * [Preliminary tasks](#preliminary-tasks)
@@ -33,679 +33,651 @@ __ProSoft__ is a registered trademark of ProSoft Corporation. Other products men
   * [Availability and provisioning](#availability-and-provisioning)
   * [Troubleshooting](#troubleshooting)
   * [Decommissioning](#decommissioning)
+* [Nordvale hotline](#nordvale-hotline)
 
 ---
 
 ## About this guide
 
-This guide was prepared to aid administrators in configuring, administrating, and troubleshooting the software system. It is assumed that the software system has been installed previously with the required hadrware configuration and networking infrastructure.
+This guide helps administrators configure, administer, and troubleshoot Nordvale Server 8.5.0 on Windows Server 2022 or Windows Server 2019. It assumes that Nordvale Server has already been installed in the default directory, `C:\Program Files\Nordvale`, on hardware and network infrastructure that meet the requirements below. For the installation procedure, see the *Nordvale Server Installation Guide*.
+
+The examples in this guide use a *Professional* edition system (25 seats) whose web interface is published as `nordvale.corp.example`.
+
+All command-line procedures run in an elevated PowerShell session (__Run as administrator__). Code blocks labeled *PowerShell* contain only commands that you can copy and paste; the output you should expect appears in a separate block.
 
 ## Preliminary tasks
 
-In order for the configuration procedure to continue without any errors or interruption, the servers where the system was installed, the network devices to be used to access the server and the clients, and the licenses and certificates required to use the software system must be ready and in place. To meet these prerequisites, follow the instructions below.
+For the configuration procedure to complete without errors or interruptions, the server where Nordvale Server is installed, the network devices used to reach it, and the required licenses and certificates must be ready and in place. To meet these prerequisites, follow the instructions below.
 
 ### Server requirements
 
-The system requires server hardware that meets specific performance and reliability criteria based on your deployment size and user load.
+Size the server according to your license edition, which determines the maximum number of users (seats).
 
-#### Minimum Configuration (Small Teams: 10-50 users)
+| Component | Standard (up to 10 users) | Professional (11&ndash;25 users) | Enterprise (26&ndash;250 users) |
+|-----------|---------------------------|----------------------------------|---------------------------------|
+| __CPU__ | 4 cores, 2.5 GHz or faster | 8 cores, 2.5 GHz or faster | 16 cores, 2.5 GHz or faster |
+| __Memory__ | 16 GB | 32 GB | 64 GB ECC |
+| __Primary storage__ | 250 GB SSD | 500 GB NVMe SSD | 1 TB NVMe SSD, RAID 1 |
+| __Backup storage__ | 1 TB HDD | 2 TB HDD, RAID 1 | 8 TB HDD, RAID 6 |
+| __Network__ | 1 Gigabit Ethernet | Dual 1 Gigabit Ethernet with failover | Dual 10 Gigabit Ethernet with link aggregation |
+| __Power__ | 550 W PSU with UPS | Redundant 750 W PSUs with UPS | Redundant 1,600 W PSUs with N+1 UPS |
 
-| Component | Specification | Purpose |
-|-----------|---------------|---------|
-| **CPU** | Intel Xeon E5-2690 v4 (14 cores, 2.6GHz) or AMD EPYC 7351P (16 cores, 2.4GHz) | Core processing and build management |
-| **Memory** | 64GB DDR4-2133 ECC RAM | System operations and build caching |
-| **Primary Storage** | 1TB NVMe SSD (PCIe 3.0, minimum 3,000 MB/s read) | Operating system and application data |
-| **Secondary Storage** | 4TB SATA III HDD (7200 RPM) | Long-term data storage and backups |
-| **Network** | Dual 1GbE NICs with failover support | Redundant network connectivity |
-| **Power** | Redundant 750W PSUs with UPS backup | High availability power management |
+#### Environmental specifications
 
-#### Recommended Configuration (Medium Teams: 50-150 users)
+* Operating temperature: 10&nbsp;°C to 35&nbsp;°C (50&nbsp;°F to 95&nbsp;°F)
+* Humidity: 20% to 80%, non-condensing
+* Cooling: plan for about 3,412 BTU/hr per kilowatt of power drawn. A fully loaded Enterprise server drawing 1,600 W needs about 5,460 BTU/hr of cooling capacity.
 
-| Component | Specification | Purpose |
-|-----------|---------------|---------|
-| **CPU** | Intel Xeon Gold 6248R (24 cores, 3.0GHz) or AMD EPYC 7542 (32 cores, 2.9GHz) | Enhanced processing for concurrent operations |
-| **Memory** | 128GB DDR4-2666 ECC RAM | Improved performance for large repositories |
-| **Primary Storage** | 2TB NVMe SSD RAID 1 (PCIe 4.0, minimum 5,000 MB/s read) | High-performance redundant storage |
-| **Secondary Storage** | 8TB SAS HDD RAID 5 (10,000 RPM) | Enterprise-grade backup storage |
-| **Network** | Dual 10GbE NICs with LACP aggregation | High-bandwidth network connectivity |
-| **Power** | Redundant 1000W PSUs with extended UPS | Enhanced power reliability |
-
-#### Enterprise Configuration (Large Teams: 150+ users)
-
-| Component | Specification | Purpose |
-|-----------|---------------|---------|
-| **CPU** | Dual Intel Xeon Platinum 8280 (56 cores total, 2.7GHz) or AMD EPYC 7742 (64 cores, 2.25GHz) | Maximum processing capability |
-| **Memory** | 256GB+ DDR4-3200 ECC RAM | Large-scale concurrent user support |
-| **Primary Storage** | 4TB NVMe SSD RAID 10 (PCIe 4.0, minimum 7,000 MB/s read) | Enterprise-grade performance and redundancy |
-| **Secondary Storage** | 16TB+ SAS HDD RAID 6 (15,000 RPM) with hot-swap capability | Maximum data protection and capacity |
-| **Network** | Dual 25GbE NICs with redundant switch connections | Enterprise network performance |
-| **Power** | Redundant 1600W PSUs with N+1 UPS configuration | Maximum uptime assurance |
-
-#### Additional Hardware Requirements
-
-**Server Form Factor Recommendations:**
-- **Small/Medium**: 2U rack-mount server or tower server
-- **Enterprise**: 4U rack-mount server with hot-swappable components
-
-**Environmental Specifications:**
-- Operating temperature: 10°C to 35°C (50°F to 95°F)
-- Humidity: 20% to 80% non-condensing
-- Cooling: Minimum 2,000 BTU/hr cooling capacity for enterprise configurations
-
-> **Security Note**: Deploy the server behind a network firewall and proxy server. For enterprise deployments, implement a DMZ configuration with intrusion detection systems.
+> __Note:__ Deploy the server behind a perimeter firewall. For Enterprise deployments, place the server in a DMZ that is monitored by an intrusion detection system.
 
 ### Networking
 
-The ProSoft system requires a robust network infrastructure to ensure reliable performance and security for all connected users and services.
+Nordvale Server uses a single, fixed network model:
 
-#### Network Infrastructure Requirements
+* IIS on the Nordvale server acts as the reverse proxy. It terminates TLS on port 443 and publishes both the web interface and the REST API (`/api/v1`).
+* IIS forwards requests to the Nordvale Web Service, which listens only on the loopback address at `https://127.0.0.1:8443`. Port 8443 is never opened in the firewall.
+* Build agents and desktop clients connect directly to the communications port, 6650.
+
+#### Network infrastructure requirements
 
 | Component | Specification | Purpose |
 |-----------|---------------|---------|
-| **Core Switch** | Managed Layer 3 switch with 24+ GbE ports, VLAN support | Primary network backbone |
-| **Firewall** | Enterprise firewall with IDS/IPS capabilities (minimum 1Gbps throughput) | Security perimeter defense |
-| **Proxy Server** | Reverse proxy with SSL termination and load balancing | Traffic management and security |
-| **DNS Server** | Primary and secondary DNS with Active Directory integration | Name resolution and directory services |
-| **Network Monitoring** | SNMP-capable monitoring with 24/7 alerting | Infrastructure health monitoring |
+| __Core switch__ | Managed Layer 3 switch with VLAN support | Network backbone |
+| __Perimeter firewall__ | Enterprise firewall with IDS/IPS (1 Gbps throughput or higher) | Security perimeter |
+| __Reverse proxy__ | IIS 10 with URL Rewrite and Application Request Routing, on the Nordvale server | TLS termination on port 443 |
+| __DNS server__ | Primary and secondary DNS, integrated with Active Directory | Name resolution |
+| __Network monitoring__ | SNMP-capable monitoring with 24/7 alerting | Infrastructure health |
 
-#### Required Network Ports
+#### Required network ports
 
-| Port | Protocol | Direction | Service | Security Level |
-|------|----------|-----------|---------|----------------|
-| 443 | HTTPS | Inbound | Web interface (secure) | Public |
-| 4096 | TCP | Inbound/Outbound | API services | Restricted |
-| 6650 | TCP | Inbound | Client connections | Internal only |
-| 9595 | TCP | Inbound | Proxy management | Admin only |
-| 22/3389 | SSH/RDP | Inbound | Administrative access | VPN only |
+| Port | Protocol | Direction | Service | Access |
+|------|----------|-----------|---------|--------|
+| 443 | HTTPS | Inbound | Web interface and REST API (IIS) | Corporate network |
+| 6650 | TCP (TLS) | Inbound | Communications port for build agents and clients | Internal networks only |
+| 8443 | HTTPS | Local only | Nordvale Web Service behind IIS | Loopback only; blocked in the firewall |
+| 3389 | RDP | Inbound | Administrative access | VPN only |
+| 443 | HTTPS | Outbound | License validation (`licensing.nordvale.example`) | Allowed |
+| 5432 or 1433 | TCP | Outbound | External PostgreSQL or SQL Server database | Database server only |
 | 53 | UDP/TCP | Outbound | DNS resolution | Allowed |
 | 123 | UDP | Outbound | NTP time synchronization | Allowed |
-| 25/587 | TCP | Outbound | Email notifications | Restricted |
+| 587 | TCP | Outbound | E-mail notifications (SMTP submission) | Mail relay only |
 
-#### Firewall Configuration
+#### Firewall configuration
 
-**Recommended firewall rules for ProSoft deployment:**
+The installer creates basic inbound rules. To restrict the communications port to internal networks and to block the local web service port explicitly, replace them with the following rules in Windows Defender Firewall:
 
-```bash
-# Allow HTTPS traffic to ProSoft web interface
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+```powershell
+# Remove the default rules created by the installer
+Remove-NetFirewallRule -DisplayName "Nordvale*"
 
-# Allow API communication from internal networks only
-iptables -A INPUT -p tcp --dport 4096 -s 192.168.0.0/16 -j ACCEPT
-iptables -A INPUT -p tcp --dport 4096 -s 10.0.0.0/8 -j ACCEPT
+# Allow HTTPS to the IIS reverse proxy
+New-NetFirewallRule -DisplayName "Nordvale Web (HTTPS)" -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow
 
-# Allow client connections from corporate network
-iptables -A INPUT -p tcp --dport 6650 -s 10.0.0.0/8 -j ACCEPT
+# Allow the communications port from internal networks only
+New-NetFirewallRule -DisplayName "Nordvale Communications" -Direction Inbound -Protocol TCP -LocalPort 6650 -RemoteAddress 10.0.0.0/8, 192.168.0.0/16 -Action Allow
 
-# Block all other traffic to ProSoft ports
-iptables -A INPUT -p tcp --dport 4096 -j DROP
-iptables -A INPUT -p tcp --dport 6650 -j DROP
-iptables -A INPUT -p tcp --dport 9595 -j DROP
+# Block the local web service port from the network
+New-NetFirewallRule -DisplayName "Nordvale Web Service (block)" -Direction Inbound -Protocol TCP -LocalPort 8443 -Action Block
 ```
 
-#### Network Performance Requirements
+#### Network performance requirements
 
-| User Count | Minimum Bandwidth | Recommended Bandwidth | Latency Requirement |
-|------------|------------------|---------------------|-------------------|
-| 10-50 users | 100 Mbps | 500 Mbps | <50ms |
-| 50-150 users | 500 Mbps | 1 Gbps | <30ms |
-| 150+ users | 1 Gbps | 10 Gbps | <20ms |
+| Edition | Minimum bandwidth | Recommended bandwidth | Maximum latency |
+|---------|-------------------|-----------------------|-----------------|
+| Standard (up to 10 users) | 100 Mbps | 500 Mbps | 50 ms |
+| Professional (11&ndash;25 users) | 500 Mbps | 1 Gbps | 30 ms |
+| Enterprise (26&ndash;250 users) | 1 Gbps | 10 Gbps | 20 ms |
 
-#### DNS and Domain Configuration
+#### DNS and domain configuration
 
-**Required DNS records:**
-```dns
-prosoft.company.com.     A     10.0.1.100
-api.prosoft.company.com. A     10.0.1.100
-proxy.prosoft.company.com. A  10.0.1.101
+Create one DNS record for the server. The web interface and the REST API share this name.
+
+```text
+nordvale.corp.example.    A    10.0.1.100
 ```
 
-**Domain requirements:**
-- Active Directory domain membership (recommended)
-- Kerberos authentication support
-- LDAP connectivity for user management
-- Certificate authority for SSL certificates
+Domain requirements:
 
-#### Proxy Server Configuration
+* Active Directory domain membership (recommended)
+* Kerberos authentication support
+* LDAP connectivity for user management
+* A certificate authority for TLS certificates
 
-The ProSoft system requires a reverse proxy for security and performance optimization.
+#### Reverse proxy configuration
 
-**Recommended proxy settings (nginx example):**
-```nginx
-upstream prosoft_backend {
-    server 10.0.1.100:8080;
-    server 10.0.1.101:8080 backup;
-}
+The installer configures IIS as the reverse proxy. For reference, the rewrite rule it adds to `C:\inetpub\nordvale\web.config` is shown below. Do not change the target address: the Nordvale Web Service accepts connections only on `127.0.0.1:8443`.
 
-server {
-    listen 9595 ssl;
-    server_name proxy.prosoft.company.com;
-
-    ssl_certificate /etc/ssl/certs/prosoft.crt;
-    ssl_certificate_key /etc/ssl/private/prosoft.key;
-
-    location / {
-        proxy_pass http://prosoft_backend;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_connect_timeout 30s;
-        proxy_read_timeout 300s;
-    }
-}
+```xml
+<configuration>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Nordvale reverse proxy" stopProcessing="true">
+          <match url="(.*)" />
+          <action type="Rewrite" url="https://127.0.0.1:8443/{R:1}" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
 ```
 
-> **Wireless Security Warning**: Wireless access to ProSoft systems must be secured with WPA3-Enterprise authentication minimum. All wireless traffic should be isolated in a separate VLAN with additional monitoring. The ProSoft application does not perform network-level security validation beyond initial authentication.
+The rule requires the proxy feature of Application Request Routing to be enabled at the server level. The installer enables it; to check or enable it manually, run:
+
+```powershell
+Set-WebConfigurationProperty -PSPath "MACHINE/WEBROOT/APPHOST" -Filter "system.webServer/proxy" -Name "enabled" -Value "True"
+```
+
+> __Warning:__ Wireless access to Nordvale Server must be secured with WPA3-Enterprise authentication at minimum. Isolate all wireless traffic in a separate, monitored VLAN. Nordvale Server does not perform network-level security validation beyond initial authentication.
 
 ### Licenses and certificates
 
-During the configuration of the system, licenses (i.e. the `*.lic` files) and certificates (i.e. the `*.cert` files) will be required for the system to validate the installation and give access to users with various roles. Make sure that
+During configuration, Nordvale Server needs a license file and TLS certificates to validate the installation and to grant access to users with various roles. Before you continue, make sure that:
 
-* *Licenses* are in the root directory where the server is to be installed&mdash;assuming the default is not changed, that will be `C:\ProSoft`
-* *Authentification Certificates* are in the `.\cert` directory under the root
+* The *license file*, `nordvale.lic`, is in `C:\Program Files\Nordvale\license\`
+* The *authentication certificates* (`*.crt` files) and the private key are in `C:\Program Files\Nordvale\certs\`
 
-#### ProSoft Licensing Scheme
+#### Nordvale license editions
 
-| License Edition | Duration | Max Users | Available User Roles | Annual Cost (USD) | Support Level |
-|----------------|----------|-----------|---------------------|-------------------|---------------|
-| **Enterprise** | 1 Year | 250 | Auditor, Admin, Supervisor, Developer, Client | $25,000 | 24/7 Premium |
-| **Professional** | 1 Year | 100 | Admin, Supervisor, Developer, Client | $12,500 | Business Hours |
-| **SMB** | 1 Year | 50 | Admin, Developer, Client | $6,000 | Email Support |
-| **Startup** | 1 Year | 25 | Admin, Developer, Client | $2,500 | Community Forum |
+| Edition | Term | Maximum users | Available user roles | Support level |
+|---------|------|---------------|----------------------|---------------|
+| __Standard__ | 1 year | 10 | Admin, Developer, Client | E-mail |
+| __Professional__ | 1 year | 25 | Admin, Supervisor, Developer, Client | Business hours |
+| __Enterprise__ | 1 year | 250 | Auditor, Admin, Supervisor, Developer, Client | 24/7 |
 
-#### User Role Definitions
+#### User role definitions
 
-| Role | Permissions | Typical Usage |
+| Role | Permissions | Typical usage |
 |------|-------------|---------------|
-| **Auditor** | Read-only access to all projects, compliance reporting | Security audits, compliance reviews |
-| **Admin** | Full system administration, user management | System configuration, troubleshooting |
-| **Supervisor** | Project oversight, team management, reporting | Project management, resource allocation |
-| **Developer** | Code repository access, build management | Daily development tasks, code commits |
-| **Client** | Limited project access, view-only dashboards | Stakeholder reviews, progress monitoring |
+| __Auditor__ | Read-only access to all projects, compliance reporting | Security audits, compliance reviews |
+| __Admin__ | Full system administration, user management | System configuration, troubleshooting |
+| __Supervisor__ | Project oversight, team management, reporting | Project management, resource allocation |
+| __Developer__ | Code repository access, build management | Daily development tasks, code commits |
+| __Client__ | Limited project access, view-only dashboards | Stakeholder reviews, progress monitoring |
 
-#### Certificate Requirements
+#### Certificate requirements
 
-**SSL/TLS Certificates:**
-- Must be issued by a trusted Certificate Authority (CA)
-- Minimum 2048-bit RSA or 256-bit ECC encryption
-- Subject Alternative Names (SAN) for all ProSoft hostnames
-- Wildcard certificates supported for subdomain flexibility
+* Issued by a trusted certificate authority (CA)
+* RSA keys of at least 2048 bits, or ECC keys of at least 256 bits
+* Subject Alternative Name (SAN) entry for `nordvale.corp.example`
+* Wildcard certificates are supported
 
-**Certificate File Locations:**
+#### Certificate file locations
+
+```text
+C:\Program Files\Nordvale\certs\
+├── server.crt          (server certificate)
+├── server.key          (private key; restrict access to Administrators)
+├── intermediate.crt    (intermediate CA certificate)
+├── root.crt            (root CA certificate)
+└── client-auth.crt     (optional: client authentication)
 ```
-C:\ProSoft\cert\
-├── server.crt          (Primary SSL certificate)
-├── server.key          (Private key - SECURE)
-├── intermediate.crt    (CA intermediate certificates)
-├── root.crt           (Root CA certificate)
-└── client-auth.crt    (Optional: Client authentication)
-```
 
-**Certificate Renewal Schedule:**
-- SSL certificates: Renew 30 days before expiration
-- Client authentication certificates: Renew 60 days before expiration
-- Automated renewal available with CloudFlow protocol (Let's Encrypt compatible)
+#### Certificate renewal schedule
+
+* Server certificates: renew 30 days before expiration
+* Client authentication certificates: renew 60 days before expiration
+* Automated renewal is available through the ACME protocol, for example with Let's Encrypt
 
 ## Configuration
 
-The system's configuration involves making the correct settings required by the server. This can be done either through the GUI or the CLI.
+Configuring the system means applying the settings that the server needs. You can do this either through the GUI or through the command line. Both methods write the settings to the system configuration files (`*.scf`) in `C:\Program Files\Nordvale\config\`. For the file syntax and all available properties, see the *Nordvale Server Configuration File Reference*.
 
-<span id="gui-byline">
+__Using the GUI__
 
-This involves using the application's __Administration Console__.
+Use the Nordvale __Administration Console__:
 
-* Double click the __ProSoft__ icon on the desktop to launch the console
-* In the console window, pick the __Tools > Settings__ menu item. A window will pop up
-* In the __Settings__ window, various settings can be found grouped according to the functionality they are related to:
-  * The __Users__ group on the left is where you can add or remove users, set their credentials and the security groups they belong to, and assign them the directories under which the resources managed by __ProSoft&copy;__ are located
-  * The __Resources__ group in the middle is for setting the directories the system uses to store various resources it generates and manages
-  * The __System__ group on the right is for assigning the various values the system uses as defaults for marshalling and managing its data
+1. From the __Start__ menu, open __Nordvale Administration Console__.
+2. Select __Tools > Settings__. The __Settings__ window opens.
+3. Review the settings, which are grouped by function:
+   * In the __Users__ group on the left, add or remove users, set their credentials and security groups, and assign the directories that hold the resources Nordvale Server manages for them.
+   * In the __Resources__ group in the middle, set the directories where the system stores the resources it generates and manages.
+   * In the __System__ group on the right, set the default values the system uses for storing and managing its data.
+4. Click __Apply__, and then click __OK__.
 
-</span>
+__Using the CLI__
 
-<span id="cli-byline">
+Use the configuration scripts in the `admin` directory:
 
-This involves running certain scripts&mdash;found in the `.\admin` directory under the root&mdash;through the command line. The script to be run depends on the settings to be configured.
+1. Open PowerShell as an administrator.
+2. Change to the `admin` directory:
 
-* Launch a terminal with elevated (i.e. __admin__) privileges
-* On the command line, navigate to the root directory
+   ```powershell
+   Set-Location "C:\Program Files\Nordvale\admin"
+   ```
 
-<pre id="cmdln-text">
-C:\> cd C:\ProSoft\admin
-C:\ProSoft\admin>
-</pre>
+3. Check that the license file is in `C:\Program Files\Nordvale\license\` and the certificates are in `C:\Program Files\Nordvale\certs\`.
+4. Run the `sys_config.ps1` script:
 
-* At this point, you should have the licenses (the `*.lic` files) under the root&mdash;i.e. the `C:\ProSoft\` directory&mdash;and the certificates (the `*.crt` files) under the `C:\ProSoft\cert\` directory. Run the PowerShell script named `sys_config.ps1` and check the output messages
+   ```powershell
+   .\sys_config.ps1
+   ```
 
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\sys_config.ps1
->>> ProSoft System Configuration v8.4.11
->>> Checking prerequisites...
->>> Licenses discovered: 1 valid license found
->>> Certificates discovered: SSL certificate valid until 2025-12-31
->>> Initializing database schema...
->>> Database initialization: 100% complete
->>> Creating search indexes...
->>> Search indexes: 100% complete
->>> Configuration completed successfully
-C:\ProSoft\admin>
-</pre>
+   Expected output:
 
-* If any of these messages do not appear, you should suspend the configuration procedure and troubleshoot. For this, see the [Troubleshooting](#troubleshooting) section below
-* After the script has completed, you can exit the terminal
+   ```text
+   Nordvale System Configuration 8.5.0
+   Checking prerequisites...
+   License: 1 valid license found (Professional, 25 seats)
+   Certificates: server certificate valid until 2027-12-31
+   Initializing database schema... 100% complete
+   Creating search indexes... 100% complete
+   Configuration completed successfully
+   ```
 
-</span>
+5. If any of these messages does not appear, stop the configuration procedure and see [Troubleshooting](#troubleshooting).
 
 ## System initialization
 
-Before it can be used, the system has to be initialized to verify that its configured state is intact and that all the resources and connections it needs are in place and accessible. The initialization process is carried out as follows.
+Before it can be used, the system must be initialized. Initialization verifies that the configured state is intact and that all required resources and connections are in place and accessible.
 
-<span id="cli-byline">
+__Using the CLI__
 
-To carry out system initialization using the command line,
+1. Open PowerShell as an administrator and change to the `admin` directory:
 
-* Open a terminal with elevated privileges and navigate to the admin directory
-* Run the `sys_init.ps1` script with the required parameters, and monitor the initialization progress
+   ```powershell
+   Set-Location "C:\Program Files\Nordvale\admin"
+   ```
 
-<pre id="cmdln-text">
-C:\> cd C:\ProSoft\admin
-C:\ProSoft\admin> .\sys_init.ps1 -CertDir "..\cert" -LicenseFile ".\purchased.lic"
->>> ProSoft System Initialization v8.4.11
->>> Validating system prerequisites...
->>> Checking license validity...
-</pre>
+2. Run the `sys_init.ps1` script with the certificate directory and the license file:
 
-As the system proceeds with initialization, detailed status information is displayed:
+   ```powershell
+   .\sys_init.ps1 -CertDir "C:\Program Files\Nordvale\certs" -LicenseFile "C:\Program Files\Nordvale\license\nordvale.lic"
+   ```
 
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\sys_init.ps1 -CertDir "..\cert" -LicenseFile ".\purchased.lic"
->>> ProSoft System Initialization v8.4.11
->>> Validating system prerequisites...
->>> License validation: PASSED (Enterprise, 250 seats, expires 2025-12-31)
->>> SSL certificate validation: PASSED (valid until 2025-12-31)
->>> Database connectivity test: PASSED (PostgreSQL 14.5)
->>> Admin module initialization: COMPLETED
->>> User management module: INITIALIZING [████████████████████░] 95%
-</pre>
+   The script reports the status of each module as it initializes:
 
-If required files are missing or invalid, the initialization process will halt with specific error messages:
+   ```text
+   Nordvale System Initialization 8.5.0
+   Validating system prerequisites...
+   License validation: PASSED (Professional, 25 seats, expires 2027-12-31)
+   Certificate validation: PASSED (valid until 2027-12-31)
+   Database connectivity: PASSED (PostgreSQL 16.4)
+   Admin module: OK
+   Users module: OK
+   Networking module: OK
+   Initialization completed successfully
+   ```
 
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\sys_init.ps1 -CertDir "..\cert" -LicenseFile ".\purchased.lic"
->>> ProSoft System Initialization v8.4.11
->>> Validating system prerequisites...
->>> License validation: PASSED
->>> SSL certificate validation: FAILED
-    ERROR: Certificate file 'server.crt' not found in C:\ProSoft\cert\
-    Required certificates:
-    - server.crt (SSL certificate)
-    - server.key (Private key)
-    - intermediate.crt (CA chain)
+3. If a required file is missing or invalid, initialization pauses with an error message and a prompt. For example:
 
-    Please install valid certificates and press [R] to retry, or [Q] to quit:
-</pre>
+   ```text
+   Certificate validation: FAILED
+     ERROR 1122: Certificate file 'server.crt' not found in C:\Program Files\Nordvale\certs\
+     Required files:
+     - server.crt (server certificate)
+     - server.key (private key)
+     - intermediate.crt (CA chain)
+   Install valid certificates, then press [R] to retry or [Q] to quit:
+   ```
 
-In that case, follow the instructions to resolve the issue, and resume the process by typing `Y` at the prompt.
-
-After the errors are resolved and the system initialization is completed, the process prompts the user with a status:
-
-<pre id="cmdln-text">
-C:\>cd \ProSoft\admin
-C:\ProSoft\admin>sys_init.ps --cert-dir=..\cert --licence-files=.\purchased.lic
->>> Initializing system...
->>> Licenses: Found
->>> Admin module: OK
->>> Users module: OK
->>> Networking module initializing: 24% -> ERROR
-    Certificate(s) required to initialize the module missing.
-    Place a valid certificate in the "..\cert" directory: Resume? [Y/N] Y
->>> Networking module: OK
->>> PROCESS COMPLETED!
-C:\ProSoft\admin>
-</pre>
-
-</span>
+4. Resolve the problem (in this example, copy the missing certificate files to `C:\Program Files\Nordvale\certs\`), and then press __R__ to retry. Initialization resumes from the failed check. If you press __Q__, run the script again from step 2 after you fix the problem.
 
 ## System administration
 
-The system has a number of facilities which cannot be offered unattended. To provide them, the system administrator has to perform the following tasks.
+Some tasks cannot be performed unattended. The system administrator performs them as described below.
 
 ### Availability and provisioning
 
-Availability is measured based on the following criteria:
+Availability is determined by:
 
-* The purchased number of seats with the license
+* The number of seats purchased with the license
 * The number of seats that have already been provisioned
-* Whether the seat and the resources available to it are accessible via the network and using the assigned roles
+* Whether each seat, and the resources available to it, can be reached over the network with the assigned role
 
-To provide seats to users, the following procedure must be performed:
+To provision a seat for a user, use one of the following methods.
 
-<span id="gui-byline">
+__Using the GUI__
 
-To carry out this task using the graphical interface,
+1. In the Administration Console, select __Properties > Seats__.
+2. In the left panel, check the number of seats in use. If no seats are left, purchase additional seats or upgrade the license edition.
+3. Check that the user's group matches that of an available seat.
+4. In the middle panel, enter the user's credentials.
+5. Click __Provision__.
 
-* From the __Properties__ menu, open the __Seats__ window
-* Check the number of seats already in use in the left panel. If there are no seats left, you have to purchase additional seats
-* Check the group that the user is a member of to see whether it matches that of any of the available seats
-* Assign the user to the seat by filling in his credentials in the middle panel
-* Finally, click on the __Provision__ button on the bottom right
+__Using the CLI__
 
-</span>
+1. Open PowerShell as an administrator and change to the `users` directory:
 
-<span id="cli-byline">
+   ```powershell
+   Set-Location "C:\Program Files\Nordvale\users"
+   Get-ChildItem | Format-Table Name
+   ```
 
-To carry out this task using the command line,
+   Expected output (9 seats in use):
 
-* Open a terminal with elevated privileges
-* Navigate to `users` directory under the root, i.e. `C:\ProSoft\users`, and list the files in the directory
+   ```text
+   Name
+   ----
+   adm-3c47db38aa86f032.seat
+   adm-78fc4496f3aa5b3f.seat
+   cli-4a83c96fe68dfea5.seat
+   cli-58c8dab0dd8c8fce.seat
+   cli-869861562d411ee1.seat
+   cli-d6407ede475985f0.seat
+   cli-fb6985abc41894f4.seat
+   cli-fc586256b8cbf654.seat
+   sup-b51ae4a5c25e1658.seat
+   prov_config.scf
+   prov_seat.ps1
+   ```
 
-<pre id="cmdln-text">
-C:\ProSoft\users>ls * | ft Name
+   Each provisioned seat is a `*.seat` file named after its role prefix and a 16-digit hexadecimal identifier. The `prov_config.scf` file contains the seat allocation settings of the `[provisioning]` component.
 
-adm-3c47db38aa86f032.seat
-adm-78fc4496f3aa5b3f.seat
-cli-4a83c96fe68dfea5.seat
-cli-d6407ede475985f0.seat
-cli-58c8dab0dd8c8fce.seat
-cli-869861562d411ee1.seat
-cli-fc586256b8cbf654.seat
-cli-fb6985abc41894f4.seat
-sup-b51ae4a5c25e1658.seat
-prov_seat.ps
-prov_config.cfg
-</pre>
+2. Check the maximum number of seats:
 
-* The seats already in use are listed as `*.seat` files with hexadecimal identifiers. The configuration file `prov_config.cfg` contains seat allocation settings. Query the maximum available seats using PowerShell:
+   ```powershell
+   Select-String -Pattern "max_seats" -Path "prov_config.scf"
+   ```
 
-<pre id="cmdln-text">
-C:\ProSoft\users> Select-String -Pattern "MAX_USER" -Path "prov_config.cfg"
+   Expected output:
 
-prov_config.cfg:18:MAX_USER=50
-</pre>
+   ```text
+   prov_config.scf:18:max_seats = 25
+   ```
 
-* Use the PowerShell script `prov_seat.ps1` to automatically provision user seats. The script validates license availability and creates the appropriate seat configuration:
+3. Run the `prov_seat.ps1` script to provision the seat. The script checks license availability and creates the seat file:
 
-<pre id="cmdln-text">
-C:\ProSoft\users> .\prov_seat.ps1 -UserType "client" -Username "john.doe" -Email "john.doe@company.com"
->>> ProSoft Seat Provisioning v8.4.11
->>> Checking license availability...
->>> Available seats: 42 of 50 (8 seats in use)
->>> Creating user profile for: john.doe
->>> Generating security credentials...
->>> Seat provisioned successfully
->>> Seat ID: cli-747ba03cab6fe9c
->>> User can now access ProSoft with provided credentials
-</pre>
+   ```powershell
+   .\prov_seat.ps1 -UserType "client" -Username "jane.roe" -Email "jane.roe@corp.example"
+   ```
 
-* Verify seat provisioning by listing the newly created seat file:
+   Expected output:
 
-<pre id="cmdln-text">
-C:\ProSoft\users> Get-ChildItem -Filter "*747ba03cab6fe9c*" | Format-Table Name
+   ```text
+   Nordvale Seat Provisioning 8.5.0
+   Checking license availability...
+   Seats in use: 9 of 25 (16 available)
+   Creating user profile for: jane.roe
+   Generating security credentials...
+   Seat provisioned successfully
+   Seat ID: cli-747ba03cab6fe9c2
+   Seats in use: 10 of 25 (15 available)
+   ```
 
-Name
-----
-cli-747ba03cab6fe9c.seat
-</pre>
+4. Verify that the seat file was created:
 
-</span>
+   ```powershell
+   Get-ChildItem -Filter "*747ba03cab6fe9c2*" | Format-Table Name
+   ```
+
+   Expected output:
+
+   ```text
+   Name
+   ----
+   cli-747ba03cab6fe9c2.seat
+   ```
 
 ### Troubleshooting
 
-Effective troubleshooting requires a systematic approach to identify, diagnose, and resolve system issues. Follow this structured methodology for all ProSoft-related problems.
+Troubleshoot systematically to identify, diagnose, and resolve problems.
 
-#### General Troubleshooting Procedure
+#### General troubleshooting procedure
 
-1. **Collect Error Information**: Note the exact error code, message, timestamp, and user context
-2. **Check System Status**: Verify service status, resource utilization, and network connectivity
-3. **Consult Error Reference**: Use the comprehensive error table below for initial diagnosis
-4. **Apply Systematic Testing**: Test solutions in isolated environments before production
-5. **Document Resolution**: Record successful resolution steps for future reference
-6. **Escalate if Necessary**: Contact [ProSoft support](#prosoft-hotline) for complex issues
+1. __Collect error information:__ note the error ID, message, timestamp, and user context.
+2. __Check system status:__ verify service status, resource usage, and network connectivity.
+3. __Consult the error reference:__ use the [error reference table](#error-reference-table) for an initial diagnosis.
+4. __Test the fix:__ where possible, test the solution in a non-production environment first.
+5. __Document the resolution:__ record the steps that resolved the issue.
+6. __Escalate if necessary:__ contact the [Nordvale hotline](#nordvale-hotline).
 
-#### Log File Locations
+#### Log file locations
 
-| Component | Log File Path | Purpose |
-|-----------|---------------|---------|
-| **System Core** | `C:\ProSoft\logs\system.log` | Core system operations and errors |
-| **Authentication** | `C:\ProSoft\logs\auth.log` | User authentication and authorization |
-| **API Services** | `C:\ProSoft\logs\api.log` | REST API requests and responses |
-| **Database** | `C:\ProSoft\logs\database.log` | Database queries and connection issues |
-| **Build Engine** | `C:\ProSoft\logs\builds.log` | Build processing and compilation errors |
-| **Network** | `C:\ProSoft\logs\network.log` | Network connectivity and proxy issues |
+| Component | Log file | Contents |
+|-----------|----------|----------|
+| __System core__ | `C:\ProgramData\Nordvale\logs\system.log` | Core system operations and errors |
+| __Authentication__ | `C:\ProgramData\Nordvale\logs\auth.log` | User authentication and authorization |
+| __REST API__ | `C:\ProgramData\Nordvale\logs\api.log` | API requests and responses |
+| __Database__ | `C:\ProgramData\Nordvale\logs\database.log` | Database queries and connection issues |
+| __Build engine__ | `C:\ProgramData\Nordvale\logs\builds.log` | Build processing and compilation errors |
+| __Network__ | `C:\ProgramData\Nordvale\logs\network.log` | Connectivity and reverse proxy issues |
 
-#### Diagnostic Commands
+#### Diagnostic commands
 
-**System Health Check:**
+Run these commands from `C:\Program Files\Nordvale\admin`:
+
 ```powershell
-# Check ProSoft service status
-C:\ProSoft\admin> .\prosoftctl.ps1 -Action "status" -Verbose
+# Check the status of the Nordvale services
+.\nordvalectl.exe status
 
 # Verify database connectivity
-C:\ProSoft\admin> .\db_test.ps1 -ConnectionTest -ReportHealth
+.\db_test.ps1 -ConnectionTest -ReportHealth
 
-# Test API endpoints
-C:\ProSoft\admin> .\api_test.ps1 -TestAll -ShowLatency
+# Test the REST API endpoints
+.\api_test.ps1 -TestAll -ShowLatency
 ```
 
-#### Comprehensive Error Reference Table
+#### Error reference table
 
-| Error ID | Error Message | Category | Root Cause | Recommended Action | Urgency |
-|----------|---------------|----------|------------|-------------------|---------|
-| **1001** | Service startup failed | System | Insufficient memory or disk space | Free up resources; check system requirements | High |
-| **1002** | Database connection timeout | Database | Network issues or database server down | Verify database server status and connectivity | Critical |
-| **1003** | License validation failed | Licensing | Invalid, expired, or corrupted license file | Reinstall valid license; contact licensing support | High |
-| **1004** | SSL certificate error | Security | Certificate expired, invalid, or missing | Renew/replace SSL certificate; verify CA chain | High |
-| **1122** | Authentication certificates not found | Security | Missing certificate files for user authentication | Install required authentication certificates | Medium |
-| **1123** | Certificate authority not trusted | Security | CA not in trusted store | Import CA certificate to trusted root store | Medium |
-| **2001** | Memory allocation error | Performance | Insufficient RAM or memory leak | Restart services; upgrade RAM if persistent | High |
-| **2002** | Disk space critically low | Storage | Less than 5% free disk space | Free up disk space; expand storage capacity | Critical |
-| **2003** | Network connection lost | Network | Network infrastructure failure | Check network cables, switches, DNS resolution | High |
-| **2004** | Proxy server unreachable | Network | Proxy configuration or network routing | Verify proxy settings and network routes | Medium |
-| **2244** | Certificate validation failed | Security | Certificate not recognized by authority | Replace with valid CA-signed certificate | High |
-| **3001** | User authentication failed | Security | Invalid credentials or account lockout | Reset password; check account status | Low |
-| **3002** | Access denied to resource | Security | Insufficient user permissions | Review and adjust user role permissions | Medium |
-| **3003** | Session expired | Security | User session timeout reached | Re-authenticate; adjust session timeout settings | Low |
-| **3344** | Certificate expired | Security | SSL certificate past expiration date | Renew certificate immediately | High |
-| **4001** | Build process failed | Build | Source code errors or missing dependencies | Review build logs; fix compilation errors | Medium |
-| **4002** | Repository synchronization error | Version Control | Git/SVN connectivity or authentication | Check version control credentials and connectivity | Medium |
-| **4003** | API rate limit exceeded | API | Too many requests from single source | Implement request throttling; review API usage | Low |
-| **5001** | Database query timeout | Performance | Slow query or database lock | Optimize queries; check database performance | Medium |
-| **5002** | Search index corruption | Performance | Index files damaged or incomplete | Rebuild search indexes; verify disk integrity | Medium |
-| **6001** | Email notification failed | Integration | SMTP server configuration error | Verify SMTP settings and authentication | Low |
-| **6002** | External API integration error | Integration | Third-party service unavailable | Check third-party service status; review API keys | Medium |
-| **7001** | Backup process failed | Maintenance | Insufficient space or permission issues | Check backup destination and permissions | Medium |
-| **7002** | System cleanup failed | Maintenance | File system permissions or locks | Run cleanup with elevated privileges | Low |
+| Error ID | Error message | Category | Root cause | Recommended action | Urgency |
+|----------|---------------|----------|------------|--------------------|---------|
+| __1001__ | Service startup failed | System | Insufficient memory or disk space | Free up resources; check the server requirements | High |
+| __1002__ | Database connection timeout | Database | Network issues or database server down | Verify database server status and connectivity | Critical |
+| __1003__ | License validation failed | Licensing | Invalid, expired, or corrupted license file | Reinstall a valid license; contact licensing support | High |
+| __1004__ | TLS certificate error | Security | Certificate expired, invalid, or missing | Renew or replace the certificate; verify the CA chain | High |
+| __1122__ | Authentication certificates not found | Security | Missing certificate files | Install the required certificates in the `certs` directory | Medium |
+| __1123__ | Certificate authority not trusted | Security | CA not in the trusted store | Import the CA certificate into the trusted root store | Medium |
+| __2001__ | Memory allocation error | Performance | Insufficient RAM or memory leak | Restart the services; add RAM if the error persists | High |
+| __2002__ | Disk space critically low | Storage | Less than 5% free disk space | Free up disk space; expand storage | Critical |
+| __2003__ | Network connection lost | Network | Network infrastructure failure | Check cabling, switches, and DNS resolution | High |
+| __2004__ | Reverse proxy unreachable | Network | IIS stopped or rewrite rule misconfigured | Check the IIS site and the rewrite rule | Medium |
+| __2244__ | Certificate validation failed | Security | Certificate not recognized by the authority | Replace with a valid CA-signed certificate | High |
+| __3001__ | User authentication failed | Security | Invalid credentials or account lockout | Reset the password; check the account status | Low |
+| __3002__ | Access denied to resource | Security | Insufficient user permissions | Review and adjust the user's role | Medium |
+| __3003__ | Session expired | Security | Session timeout reached | Log in again; adjust the session timeout | Low |
+| __3344__ | Certificate expired | Security | Certificate past its expiration date | Renew the certificate immediately | High |
+| __4001__ | Build process failed | Build | Source code errors or missing dependencies | Review the build log; fix compilation errors | Medium |
+| __4002__ | Repository synchronization error | Version control | Repository connectivity or authentication | Check version control credentials and connectivity | Medium |
+| __4003__ | API rate limit exceeded | API | Too many requests from a single source | Throttle requests; review API usage | Low |
+| __5001__ | Database query timeout | Performance | Slow query or database lock | Optimize queries; check database performance | Medium |
+| __5002__ | Search index corruption | Performance | Index files damaged or incomplete | Rebuild the search indexes; check disk integrity | Medium |
+| __6001__ | E-mail notification failed | Integration | SMTP configuration error | Verify the SMTP settings and credentials | Low |
+| __6002__ | External API integration error | Integration | Third-party service unavailable | Check the third-party service; review API keys | Medium |
+| __7001__ | Backup process failed | Maintenance | Insufficient space or permissions | Check the backup destination and its permissions | Medium |
+| __7002__ | System cleanup failed | Maintenance | File system permissions or locks | Run the cleanup from an elevated prompt | Low |
 
-#### Performance Troubleshooting
+#### Performance troubleshooting
 
-**System Performance Monitoring:**
 ```powershell
-# Monitor system performance metrics
-C:\ProSoft\admin> .\perf_monitor.ps1 -Duration 300 -Interval 10 -ExportCSV
+# Record performance metrics every 10 seconds for 5 minutes
+.\perf_monitor.ps1 -Duration 300 -Interval 10 -ExportCSV
 
-# Identify resource-intensive processes
-C:\ProSoft\admin> Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
+# List the 10 processes using the most CPU time
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
 
-# Check disk I/O performance
-C:\ProSoft\admin> .\disk_io_test.ps1 -TestPath "C:\ProSoft\data" -Duration 60
+# Test disk I/O on the data directory
+.\disk_io_test.ps1 -TestPath "C:\Program Files\Nordvale\data" -Duration 60
 ```
 
-**Database Performance:**
+The following PostgreSQL queries help diagnose database performance. The slow-query check requires the `pg_stat_statements` extension; the `mean_exec_time` column is available in PostgreSQL 13 and later.
+
 ```sql
--- Check database connection count
-SELECT COUNT(*) as active_connections FROM pg_stat_activity WHERE state = 'active';
+-- Count active connections
+SELECT COUNT(*) AS active_connections FROM pg_stat_activity WHERE state = 'active';
 
--- Identify slow queries
-SELECT query, mean_time, calls FROM pg_stat_statements
-WHERE mean_time > 1000 ORDER BY mean_time DESC LIMIT 10;
+-- List the 10 slowest queries (mean execution time over 1 second)
+SELECT query, mean_exec_time, calls FROM pg_stat_statements
+WHERE mean_exec_time > 1000 ORDER BY mean_exec_time DESC LIMIT 10;
 
--- Check table sizes and indexes
-SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename))
-FROM pg_tables WHERE schemaname = 'prosoft' ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
+-- List Nordvale tables by total size, including indexes
+SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname || '.' || tablename)) AS total_size
+FROM pg_tables WHERE schemaname = 'nordvale'
+ORDER BY pg_total_relation_size(schemaname || '.' || tablename) DESC;
 ```
 
-#### Network Troubleshooting
+#### Network troubleshooting
 
-**Network Connectivity Tests:**
 ```powershell
-# Test ProSoft API connectivity
-C:\ProSoft\admin> Test-NetConnection -ComputerName "api.prosoft.company.com" -Port 4096
+# Test the web interface and REST API through IIS
+Test-NetConnection -ComputerName "nordvale.corp.example" -Port 443
+
+# Test the communications port
+Test-NetConnection -ComputerName "nordvale.corp.example" -Port 6650
 
 # Check DNS resolution
-C:\ProSoft\admin> Resolve-DnsName "prosoft.company.com" -Type A
-
-# Test proxy server connectivity
-C:\ProSoft\admin> Test-NetConnection -ComputerName "proxy.prosoft.company.com" -Port 9595
+Resolve-DnsName "nordvale.corp.example" -Type A
 ```
 
-#### Security Issue Resolution
+#### Certificate troubleshooting
 
-**Certificate Management:**
 ```powershell
-# Check certificate expiration
-C:\ProSoft\admin> .\cert_check.ps1 -CertPath "C:\ProSoft\cert" -WarnDays 30
+# Report certificates that expire within 30 days
+.\cert_check.ps1 -CertDir "C:\Program Files\Nordvale\certs" -WarnDays 30
 
-# Test SSL certificate validity
-C:\ProSoft\admin> openssl x509 -in C:\ProSoft\cert\server.crt -text -noout
+# Verify the certificate chain with the built-in Windows tool
+certutil -verify "C:\Program Files\Nordvale\certs\server.crt"
+```
 
-# Verify certificate chain
-C:\ProSoft\admin> openssl verify -CAfile C:\ProSoft\cert\root.crt C:\ProSoft\cert\server.crt
+If OpenSSL is installed on the server, you can inspect the certificate and verify the full chain, supplying the intermediate certificate as untrusted input:
+
+```powershell
+openssl x509 -in "C:\Program Files\Nordvale\certs\server.crt" -text -noout
+openssl verify -CAfile "C:\Program Files\Nordvale\certs\root.crt" -untrusted "C:\Program Files\Nordvale\certs\intermediate.crt" "C:\Program Files\Nordvale\certs\server.crt"
 ```
 
 ### Decommissioning
 
-If for some reason the system fails to meet your needs, there are a number of steps to take to decommission it.
+If the system no longer meets your needs, decommission it as follows. All backups in this procedure are written to a single timestamped directory outside the installation directory, which the uninstaller does not touch.
 
-<span id="cli-byline">
+__Using the CLI__
 
-#### System Backup Procedures (Before Decommissioning)
+1. Open PowerShell as an administrator, change to the `admin` directory, and define the backup directory:
 
-Before decommissioning ProSoft, create a comprehensive backup of all system data, configurations, and licenses.
+   ```powershell
+   Set-Location "C:\Program Files\Nordvale\admin"
+   $backupDir = "D:\Backups\Nordvale_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
+   New-Item -ItemType Directory -Path $backupDir
+   ```
 
-**Complete System Backup:**
+2. Generate an inventory of all resources and dependencies:
+
+   ```powershell
+   .\decomm_sys.ps1 -GenerateReport -BackupPath $backupDir
+   ```
+
+   Expected output:
+
+   ```text
+   Nordvale Decommissioning Tool 8.5.0
+   Analyzing system configuration...
+   Active user sessions: 7
+   Project repositories: 156 projects, 45.2 GB
+   Database schema: 47 tables, 2.3 million records
+   Report saved: D:\Backups\Nordvale_20260926_140512\system_inventory.csv
+   Decommissioning analysis complete
+   ```
+
+3. Notify users and stop all Nordvale services, so that no data changes during the backup:
+
+   ```powershell
+   .\nordvalectl.exe stop --notify-users --grace-period 300
+   ```
+
+   Expected output:
+
+   ```text
+   Sending shutdown notification to 7 active users
+   Grace period: 5 minutes
+   Stopping Nordvale Core Service... STOPPED
+   Stopping Nordvale Web Service... STOPPED
+   Stopping Nordvale Build Engine... STOPPED
+   All services stopped
+   ```
+
+4. Back up the database, configuration, license, certificates, and projects:
+
+   ```powershell
+   # Export the database with schema and data
+   .\db_backup.ps1 -BackupPath "$backupDir\database_backup.sql" -IncludeSchema -IncludeData
+
+   # Back up configuration files, the license, and certificates
+   Copy-Item -Path "C:\Program Files\Nordvale\config" -Destination "$backupDir\config" -Recurse
+   Copy-Item -Path "C:\Program Files\Nordvale\license" -Destination "$backupDir\license" -Recurse
+   Copy-Item -Path "C:\Program Files\Nordvale\certs" -Destination "$backupDir\certs" -Recurse
+
+   # Back up project repositories with their history
+   .\backup_projects.ps1 -BackupPath "$backupDir\projects" -IncludeHistory
+   ```
+
+5. Remove the certificates from the certificate store and revoke all authentication tokens:
+
+   ```powershell
+   .\cert_manager.ps1 -Action Release -RevokeTokens
+   ```
+
+   Expected output:
+
+   ```text
+   Removing certificates from the LocalMachine\My store...
+   Revoking 10 seat credentials and 42 API tokens...
+   Certificate cleanup completed
+   ```
+
+6. Deactivate the license so that its seats can be reused on another server:
+
+   ```powershell
+   .\license_manager.ps1 -Action Deactivate -LicenseFile "C:\Program Files\Nordvale\license\nordvale.lic"
+   ```
+
+   Expected output:
+
+   ```text
+   Deactivating Nordvale Professional license...
+   Contacting licensing.nordvale.example...
+   License deactivated; 25 seats released for reuse
+   ```
+
+7. Uninstall Nordvale Server, keeping the logs for audit purposes:
+
+   ```powershell
+   .\uninst_sys.ps1 -RemoveData -PreserveLogs
+   ```
+
+   Expected output:
+
+   ```text
+   Nordvale System Uninstaller 8.5.0
+   Removing application files...
+   Removing Windows services...
+   Cleaning registry entries...
+   Preserving log files for audit trail...
+   Uninstallation completed
+   Preserved: C:\ProgramData\Nordvale\logs
+   ```
+
+#### Post-decommissioning tasks
+
 ```powershell
-# Create backup directory with timestamp
-C:\ProSoft\admin> $backupDir = "C:\ProSoft_Backup_$(Get-Date -Format 'yyyyMMdd_HHmmss')"
-C:\ProSoft\admin> New-Item -ItemType Directory -Path $backupDir
+# Verify that no Nordvale services remain
+Get-Service -Name "Nordvale*"
 
-# Export database with full schema and data
-C:\ProSoft\admin> .\db_backup.ps1 -BackupPath "$backupDir\database_backup.sql" -IncludeSchema -IncludeData
+# List startup entries that still reference Nordvale (remove any you find)
+Get-CimInstance -ClassName Win32_StartupCommand | Where-Object { $_.Command -like "*Nordvale*" }
 
-# Backup configuration files
-C:\ProSoft\admin> Copy-Item -Path "C:\ProSoft\config\*" -Destination "$backupDir\config" -Recurse
+# Remove the firewall rules
+Remove-NetFirewallRule -DisplayName "Nordvale*"
 
-# Backup licenses and certificates
-C:\ProSoft\admin> Copy-Item -Path "C:\ProSoft\cert\*" -Destination "$backupDir\certificates" -Recurse
-C:\ProSoft\admin> Copy-Item -Path "C:\ProSoft\*.lic" -Destination "$backupDir\licenses" -Recurse
-
-# Backup user data and project repositories
-C:\ProSoft\admin> .\backup_projects.ps1 -BackupPath "$backupDir\projects" -IncludeHistory
+# Remove the scheduled tasks
+Get-ScheduledTask -TaskName "*Nordvale*" | Unregister-ScheduledTask -Confirm:$false
 ```
 
-#### Decommissioning Procedure
-
-To safely decommission the ProSoft system:
-
-* Open an elevated PowerShell terminal and navigate to the admin directory
-* Run the system analysis script to catalog all resources and dependencies
-
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\decomm_sys.ps1 -GenerateReport -BackupPath "C:\ProSoft_Decommission"
->>> ProSoft Decommissioning Tool v8.4.11
->>> Analyzing system configuration...
->>> Cataloging active user sessions: 23 active users found
->>> Scanning project repositories: 156 projects, 45.2 GB data
->>> Analyzing database schema: 47 tables, 2.3 million records
->>> Generating resource inventory report...
->>> Report saved: C:\ProSoft_Decommission\system_inventory.csv
->>> Decommissioning analysis complete
-</pre>
-
-* Create final data backup using the comprehensive backup procedure above
-* Gracefully stop all ProSoft services and notify users
-
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\service_manager.ps1 -Action Stop -NotifyUsers -GracePeriod 300
->>> Sending shutdown notification to 23 active users
->>> Grace period: 5 minutes
->>> Stopping ProSoft Core Service... STOPPED
->>> Stopping ProSoft API Service... STOPPED
->>> Stopping ProSoft Build Engine... STOPPED
->>> All services stopped successfully
-</pre>
-
-* Release SSL certificates and revoke authentication tokens
-
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\cert_manager.ps1 -Action Release -RevokeTokens
->>> Releasing SSL certificates from certificate store...
->>> Revoking 156 active authentication tokens...
->>> Clearing certificate cache...
->>> Certificate cleanup completed successfully
-</pre>
-
-* Deactivate software license to free up seat allocation
-
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\license_manager.ps1 -Action Deactivate -License "Enterprise" -Confirm
->>> Deactivating ProSoft Enterprise license...
->>> Contacting licensing server...
->>> License deactivated successfully
->>> 250 seats released for reuse
->>> License key archived for future reactivation
-</pre>
-
-* Perform final system cleanup and uninstallation
-
-<pre id="cmdln-text">
-C:\ProSoft\admin> .\uninst_sys.ps1 -RemoveData -PreserveLogs
->>> ProSoft System Uninstaller v8.4.11
->>> Removing application files...
->>> Cleaning registry entries...
->>> Preserving log files for audit trail...
->>> Removing Windows services...
->>> Uninstallation completed successfully
->>>
->>> Preserved directories:
->>> - C:\ProSoft\logs (system logs)
->>> - C:\ProSoft\backup (backup files)
->>> - C:\ProSoft\decommission (decommission data)
-</pre>
-
-#### Post-Decommissioning Tasks
-
-**Final Cleanup:**
-```powershell
-# Verify all services are stopped
-Get-Service | Where-Object {$_.Name -like "*ProSoft*"}
-
-# Remove ProSoft from Windows startup programs
-Get-WmiObject -Class Win32_StartupCommand | Where-Object {$_.Command -like "*ProSoft*"}
-
-# Clean up firewall rules
-Remove-NetFirewallRule -DisplayName "ProSoft*"
-
-# Remove scheduled tasks
-Get-ScheduledTask | Where-Object {$_.TaskName -like "*ProSoft*"} | Unregister-ScheduledTask -Confirm:$false
-```
-
-> **Critical Data Preservation**: Store the following items securely for potential system restoration:
-> - Complete database backup with transaction logs
-> - All certificate files including private keys (encrypted storage required)
-> - License files and activation records
-> - System configuration files and custom scripts
-> - User access logs and audit trails
+> __Note:__ Store the following items securely in case you need to restore the system:
 >
-> **Recommended Retention**: Keep decommissioning backups for minimum 3 years for compliance and disaster recovery purposes.
-
-</span>
-
----
-
-## __ProSoft__ Hotline
-
-In case there are issues you are unable to resolve using available *User Assistance* material, you can reach __ProSoft__ free of charge for expert advice through:
-
-*Phone*: 850-555-6677
-
-*E-mail*: [support@prosoft.com](support@prosoft.com)
+> * The database backup
+> * All certificate files, including private keys (in encrypted storage)
+> * The license file and activation records
+> * Configuration files and custom scripts
+> * User access logs and audit trails
+>
+> Keep decommissioning backups for at least 3 years for compliance and disaster recovery purposes.
 
 ---
+
+## Nordvale hotline
+
+If you cannot resolve an issue with the available user assistance material, contact Nordvale free of charge for expert advice:
+
+*Phone*: +1 850-555-0167
+
+*E-mail*: [support@nordvale.example](mailto:support@nordvale.example)

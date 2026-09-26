@@ -1,75 +1,75 @@
 # Introduction
 
 **Author:** John Saysitall  
-**Version:** 0.1 — <update date here>
+**Version:** Orbitask 1.8.0 · August 2026
 
 ---
 
-## Welcome to CloudFlow Pro
+## Welcome to Orbitask
 
-CloudFlow Pro is a comprehensive cloud-based project management and collaboration platform designed to streamline workflows for modern organizations. Built by Goodweb, Inc., this SaaS solution empowers teams to organize work, track progress, and achieve project objectives through intuitive task management and robust reporting capabilities.
-
----
-
-## What CloudFlow Pro Does
-
-CloudFlow Pro provides organizations with a centralized workspace where teams can:
-
-- **Manage Projects** — Create and organize work initiatives with clear objectives and deliverables
-- **Assign & Track Tasks** — Define actionable items with ownership, deadlines, and progress monitoring
-- **Collaborate Seamlessly** — Invite teammates and manage role-based access across workspaces
-- **Generate Reports** — Export progress summaries and analytics in CSV and PDF formats
-- **Integrate Systems** — Connect with existing tools through REST APIs, webhooks, and identity providers
+Orbitask is a cloud-based project-management service. Teams use it to plan work in projects, track tasks from backlog to done, and report on progress. Organizations that need to connect on-premises systems can add a small self-hosted agent.
 
 ---
 
-## Key Features
+## What Orbitask does
 
-### Workspace Organization
-- Multi-project containers with team-based access control
-- Role-based permissions (Admin, Member, Viewer)
-- Customizable workspace settings and preferences
+Orbitask gives each organization one or more workspaces where teams can:
 
-### Task Management
-- Intuitive task creation with descriptions, deadlines, and priority levels
-- Bulk operations for efficient workflow management
-- Status tracking with visual progress indicators
-
-### Integration Capabilities
-- SAML/OIDC authentication with SCIM user provisioning
-- REST API with rate limiting and idempotent operations
-- Webhook notifications for real-time event processing
-- CSV imports and S3-based data connectors
-
-### Performance & Scale
-- Redis caching layer for optimized performance
-- Asynchronous job processing for reports and notifications
-- Support for up to 10,000 users per organizational instance
+- **Manage projects**: Group related work, milestones, and dashboards.
+- **Assign and track tasks**: Set owners, due dates, priorities, and status.
+- **Work together**: Invite teammates and control access with four workspace roles.
+- **Report on progress**: Export summaries and analytics as CSV or PDF.
+- **Connect other systems**: Use the REST API, webhooks, your identity provider, and the self-hosted agent.
 
 ---
 
-## Documentation Overview
+## Key features
 
-This comprehensive guide provides everything needed to successfully deploy, configure, and use CloudFlow Pro:
+### Workspaces and access
 
-- **Architecture documentation** for system administrators and developers
-- **Installation procedures** for various deployment environments  
-- **User guidance** for end-users and workspace administrators
-- **Security protocols** for compliance and audit requirements
-- **Troubleshooting resources** for ongoing maintenance
-- **Quick references** for common commands and configurations
-- **Release information** for version planning and upgrades
+- Workspaces contain projects, members, and settings.
+- Four roles (Owner, Admin, Member, Viewer) are assigned per workspace; projects inherit them. See [Roles and permissions](user-manual.md#roles-and-permissions).
+
+### Task management
+
+- Tasks with descriptions, due dates, priorities, tags, and dependencies
+- Bulk updates from the web app, CLI, or API
+- A configurable status workflow, from **Backlog** to **Done**
+
+### Integrations
+
+- Single sign-on with SAML 2.0 or OpenID Connect (Okta, Microsoft Entra ID, Google Workspace)
+- SCIM user provisioning (Okta; Microsoft Entra ID in preview)
+- REST API v2 with rate limiting and idempotent writes
+- Signed webhooks for task, project, and member events
+- CSV import and connectors for S3-compatible object storage
+
+### Scale
+
+- Up to 10,000 users per workspace. Larger organizations use several workspaces under an Enterprise plan.
 
 ---
 
-## Getting Help
+## How this documentation is organized
 
-For technical support, feature requests, or general questions about CloudFlow Pro, contact:
-
-- **Support Portal:** https://support.goodweb.com
-- **Documentation:** https://docs.cloudflow.goodweb.com  
-- **Status Page:** https://status.goodweb.com
+| Page | Read it when you want to |
+|------|--------------------------|
+| [Conceptual Architecture](conceptual-architecture.md) | Understand the components and how data flows |
+| [Installation & Setup](installation-setup-guide.md) | Set up a workspace, SSO, SCIM, and the agent |
+| [User Manual](user-manual.md) | Use projects, tasks, reports, the CLI, API, and webhooks |
+| [Maintenance & Troubleshooting](maintenance-troubleshooting.md) | Keep a workspace healthy and fix common problems |
+| [Quick Reference](quick-reference-chart.md) | Look up status codes, API versions, and CLI commands |
+| [Security & Compliance](security-compliance.md) | Review encryption, retention, and incident handling |
+| [Release Notes](release-notes.md) | See what changed in 1.8.0 and what to do about it |
 
 ---
 
-*CloudFlow Pro and Goodweb, Inc. are fictional entities created for portfolio demonstration purposes.*
+## Getting help
+
+- **Help center:** `https://help.orbitask.example`
+- **Support:** `support@orbitask.example`, or **Help → Contact support** in the app
+- **Service status:** `https://status.orbitask.example`
+
+---
+
+*Orbitask is a fictional product created for portfolio demonstration. All names, URLs, and figures are imaginary.*

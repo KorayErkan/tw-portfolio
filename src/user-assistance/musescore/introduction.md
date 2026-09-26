@@ -1,25 +1,27 @@
 # MuseScore Music Notation App
 
+*Applies to MuseScore 3.6.2. The menus and toolbars in MuseScore 4 are different, so some steps in these topics do not match MuseScore 4.*
+
 ## What is MuseScore?
 
-MuseScore is an open-source program to create music scores. Scores for an extensive palette of classical, jazz, rock, popular, and other traditional and modern ensembles as well as a rich variety of solo instruments can be created easily and accurately with all the required symbols for clefs, keys, accidentals, dynamics, articulation, phrasing, and interpretation for various comtemporary page sizes.
+MuseScore is an open-source program for writing music scores. You can write for solo instruments or for ensembles of any style, from classical to rock, with the symbols a score needs: clefs, key and time signatures, accidentals, dynamics, articulations, and phrasing marks. Scores can be laid out for common contemporary page sizes.
 
 ## Overview
 
-Before the digital technology arrived, creating music scores was a time-consuming and expensive process that required very skilled craftsmen to design and print. Computer software now makes this much more intuitive and inexpensive. Ordinary musicians can use their computers to create music scores.
+Engraving music used to take skilled craftspeople and expensive printing. With notation software, musicians can write and print scores on their own computers.
 
-MuseScore is probably one of the best available on the market. And it's free.
+You can enter notes with the mouse, the computer keyboard, or a MIDI keyboard. MuseScore saves scores as `.mscz` files: compressed files that contain the score in MuseScore's own XML format, similar to MusicXML. You can play a score back on the computer, export it as MIDI, MusicXML, PDF, or audio, and print it.
 
-Users can enter music parts by using a mouse, a computer keyboard, a digital music keyboard, etc. The entered information conforms to the MIDI standard, and is stored in files structured in an XML-based format. The parts can then be played back on the computer, on MIDI-compliant music instruments, or printed on paper-based media.
-
-Below, you can see a small example of the generated output:
+Here is a short example of a finished score:
 
 ![A sample score](pictures/score-sample.png)
 
-In the following pages, we will illustrate how the program is used to create music parts.
+The following topics show how to create a score and enter a part:
+
+1. [Creating a score file](creating-a-score-file.md)
+2. [Creating a music part](creating-a-music-part.md)
+3. [Frequently used features](frequently-used-features.md)
 
 ---
 
-The installation files of the program for Windows, Mac OS, and Linux can be downloaded from the official [MuseScore](https://www.musescore.com) site.
-
-As of this writing MuseScore is at version 4.1.1, but in this documentation we will use version 3.6.2.
+Installers for Windows, macOS, and Linux are available from the official MuseScore site, [musescore.org](https://musescore.org). These topics and their screenshots use MuseScore 3.6.2, which is listed with the older releases on the same site.

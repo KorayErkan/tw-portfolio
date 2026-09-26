@@ -4,153 +4,8 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>command-line-tutorial</title>
+  <title>Searching Files With PowerShell</title>
   <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    svg {
-      height: auto;
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #1a1a1a;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -165,19 +20,27 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
 </head>
 <body>
-<p><link rel="stylesheet" href="../css/common-light.css" type="text/css" /></p>
-<h1 id="searching-files-with-powershell">Searching Files With PowerShell</h1>
-<p><a href="mailto:John.saysitall@goodcode.com"><em>John Saysitall</em></a></p>
-<p>This document explains how some <em>PowerShell</em> cmdlets—i.e. programs you can run from a terminal as commands—can be used to manage files in batch.</p>
+<h1 id="searching-files-with-powershell">Searching Files With
+PowerShell</h1>
+<p><a href="mailto:john.saysitall@goodcode.example"><em>John
+Saysitall</em></a></p>
+<p>This document explains how some <em>PowerShell</em> cmdlets (small
+programs you can run from a terminal as commands) can be used to manage
+files in batch.</p>
 <hr />
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#some-commonly-used-cmdlets">Some Commonly Used Cmdlets</a></li>
-<li><a href="#listing-directory-objects">Listing Directory Objects</a></li>
+<li><a href="#some-commonly-used-cmdlets">Some Commonly Used
+Cmdlets</a></li>
+<li><a href="#the-sample-folder">The Sample Folder</a></li>
+<li><a href="#listing-directory-objects">Listing Directory
+Objects</a></li>
 <li><a href="#listing-subdirectories">Listing Subdirectories</a></li>
 <li><a href="#searching-by-file-type">Searching By File Type</a></li>
 <li><a href="#composing-cmdlets">Composing Cmdlets</a></li>
@@ -190,16 +53,38 @@
 </ul>
 <hr />
 <h2 id="introduction">Introduction</h2>
-<p>Command line use may not be popular among ordinary users, but once mastered, it <em>does</em> provide quite a few advantages the biggest one of which can be to avoid the tedium of manually managing large numbers of files. A simple command, when used with judiciously selected parameters and piped through a formatting cmdlet, can quickly get the types of documents we want.</p>
-<p>The reason the command line is not as popular as the graphical user interface is the necessity to remember the specific (and frequently cryptic) <em>names</em> of various commands, their <em>switches</em>, and their <em>parameter types</em>, etc. No doubt, there is a learning curve. With the GUI, you find your way around just by using the visual cues the graphical layout on the screen provides, which is much simpler and intuitive in the beginning.</p>
-<p>However, using the command line for a few weeks may reveal that because you can adjust the granularity of what you intend to do at every level, it is much more powerful. You can set the parameters with a very concise syntax to express the details of what you want to achieve. Once you get the hang of the specifics of the commands involved (i.e. what their output looks like, what can be garnered from that output, etc.), you can carry out multiple tasks with just a few lines.</p>
+<p>Command line use may not be popular among ordinary users, but once
+mastered, it <em>does</em> provide quite a few advantages, the biggest
+of which is avoiding the tedium of manually managing large numbers of
+files. A simple command, used with judiciously selected parameters and
+piped through a formatting cmdlet, can quickly find the documents we
+want.</p>
+<p>The command line is less popular than the graphical user interface
+because you have to remember the specific (and frequently cryptic)
+<em>names</em> of commands, their <em>switches</em>, their <em>parameter
+types</em>, and so on. There is no doubt a learning curve. With the GUI,
+you find your way around by using the visual cues on the screen, which
+is simpler and more intuitive in the beginning.</p>
+<p>However, a few weeks of command-line use may reveal that it is much
+more powerful, because you can adjust the granularity of what you do at
+every level. Once you get the hang of the commands involved (what their
+output looks like and what can be garnered from it), you can carry out
+multiple tasks with just a few lines.</p>
 <p>We will try to illustrate these points below.</p>
 <blockquote>
-<p><span id="note-byline">We will touch upon only the aspects of the PowerShell cmdlets (pronounced ‘<em>command-let</em>’) that are relevant to the task at hand. We will <em>not</em> do a thorough investigation of each of them. </span></p>
+<p><span id="note-byline">We will touch upon only the aspects of the
+PowerShell cmdlets (pronounced ‘<em>command-let</em>’) that are relevant
+to the task at hand. We will <em>not</em> do a thorough investigation of
+each of them.</span></p>
 </blockquote>
 <h2 id="some-commonly-used-cmdlets">Some Commonly Used Cmdlets</h2>
-<p>Before we begin, make sure you have opened a <em>Windows Terminal</em> and navigated to a typical folder such as <code>Documents</code> with the <code>cd</code> command.</p>
-<p>The list of cmdlets we will learn are quite small, but they are most commonly used for searching the contents of directories, filtering them based on certain criteria, looking for certain strings in them, updating their contents in batch, etc.:</p>
+<p>Before we begin, open a <em>Windows Terminal</em> running PowerShell
+7 and navigate to the sample folder described in the next section with
+the <code>cd</code> command.</p>
+<p>The list of cmdlets we will learn is quite short, but they are the
+ones most commonly used for listing the contents of directories,
+filtering them based on certain criteria, and looking for certain
+strings in them:</p>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -218,7 +103,7 @@
 </tr>
 <tr>
 <td><code>Format-Table</code></td>
-<td>Format the output of a command’s output for easier reading on the screen</td>
+<td>Format a command’s output for easier reading on the screen</td>
 </tr>
 <tr>
 <td><code>Where-Object</code></td>
@@ -234,49 +119,113 @@
 </tr>
 </tbody>
 </table>
-<p>Each of these, except <code>Where-Object</code>, can be used independently or in combination with the others. We will take a closer look at each of these below and explain them in isolation. Later on, we will learn how to combine them for more accurate results.</p>
-<p>We will start with the first which is also the simplest.</p>
-<h2 id="listing-directory-objects">Listing Directory Objects</h2>
-<p>One of the most commonly used cmdlets of PowerShell is <code>Get-ChildItem</code> which lists the contents of the current directory. Its basic syntax (i.e. its most frequently-used switches and parameters) is as follows:</p>
-<pre id="ebnf-text">
-get-childitem-statement ::= Get-ChildItem [-Recurse]
-    [-Path] &lt;path&gt;
-    [(-Include | -Exclude) &lt;file-types&gt;]
-    [(-Fıle | -Directory) &lt;regular-expression&gt;]
+<p>Each of these, except <code>Where-Object</code>, can be used
+independently or in combination with the others. We will first look at
+each of them in isolation, and later learn how to combine them for more
+accurate results.</p>
+<h2 id="the-sample-folder">The Sample Folder</h2>
+<p>All the examples in this tutorial run against the same (imaginary)
+<code>Documents</code> folder of a user named <em>John</em>:</p>
+<pre id="cmdln-text">
+C:\Users\John\Documents
+├── Links\               (read-only directory)
+├── Minutes\
+│   ├── Notes.txt
+│   ├── Q2-2021.docx
+│   └── Q3-2021.txt
+├── My Music\            (hidden system junction to C:\Users\John\Music)
+├── My Pictures\         (hidden system junction to C:\Users\John\Pictures)
+├── Reports\
+│   ├── Notes.txt
+│   ├── Q1-2020.txt
+│   └── Q3-2021.docx
+├── Drafts.docx
+├── Notes.txt
+├── Proposal.docx
+├── Survey.csv
+├── ToC.html
+└── Tutoring.docx
 </pre>
+<p>The dates in the outputs below are shown in the <em>dd/MM/yyyy</em>
+format; your terminal displays them according to your regional
+settings.</p>
+<h2 id="listing-directory-objects">Listing Directory Objects</h2>
+<p>One of the most commonly used PowerShell cmdlets is
+<code>Get-ChildItem</code>, which lists the contents of a directory. Its
+basic syntax (that is, its most frequently used switches and parameters)
+is as follows:</p>
+<pre id="ebnf-text">
+get-childitem-statement ::= Get-ChildItem
+    [[-Path] &lt;path&gt; {"," &lt;path&gt;}]
+    [[-Filter] &lt;wildcard&gt;]
+    [(-Include | -Exclude) &lt;wildcard&gt; {"," &lt;wildcard&gt;}]
+    [-Recurse]
+    [-File | -Directory]
+    [-Attributes &lt;attribute-expression&gt;]
+    [-Force]
+</pre>
+<p><code>-Recurse</code>, <code>-File</code>, <code>-Directory</code>,
+and <code>-Force</code> are <em>switches</em>: they take no value, and
+simply turn a behavior on.</p>
 <p>Its typical use is pretty straightforward:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem .
+PS C:\Users\John\Documents> Get-ChildItem .
 </pre>
-<p>Here, the dot after the command is a shorthand for specifying the directory we are in. The cmdlet assumes that this is the parameter for its <code>Path</code> switch.</p>
+<p>Here, the dot after the command is a shorthand for the directory we
+are in. The cmdlet assumes that this is the value of its
+<code>-Path</code> parameter.</p>
 <blockquote>
-<p><span id="note-byline">In most command line interpreter implementations on various operating systems, it is a widely-adopted convention to represent the current directory with ‘<code>.</code>’ and the parent directory with ‘<code>..</code>’</span></p>
+<p><span id="note-byline">In most command-line interpreters, on various
+operating systems, it is a widely adopted convention to represent the
+current directory with ‘<code>.</code>’ and the parent directory with
+‘<code>..</code>’.</span></p>
 </blockquote>
-<p>Using that switch, any arbitrary directory—including those on other drives—can be listed regardless of what the current directory is. It is also possible to list multiple directories by separating their names with a comma:</p>
+<p>Using that parameter, any directory—including those on other
+drives—can be listed regardless of what the current directory is. It is
+also possible to list multiple directories by separating their names
+with commas:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem -Path ".\Documents", ".\Reports", "H:\Backup\Reports"
+PS C:\Users\John\Documents> Get-ChildItem -Path ".\Reports", ".\Minutes", "D:\Backup\Reports"
 </pre>
-<p>You can also list the contents of the directories above the current one equally easily by typing:</p>
-<pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem ..
-</pre>
+<p>Here, the ‘<code>.\</code>’ before the directory names tells the
+cmdlet to look for these directories under the current one. You can omit
+it, since relative paths are resolved from the current directory
+anyway.</p>
 <blockquote>
-<p><span id="note-byline">Certain switches of cmdlets allow multiple values if it is reasonable to do so. The values should be specified as a comma-separated list, and although it is not necessary to place them in quotes (single or double), it is a good practice to do so for readability</span></p>
+<p><span id="note-byline">Certain parameters of cmdlets accept multiple
+values when it is reasonable to do so. The values are specified as a
+comma-separated list, and although it is not necessary to place them in
+quotes (single or double) unless they contain spaces, it is a good
+practice to do so for readability.</span></p>
 </blockquote>
-<p>Here, the ‘<code>.\</code>’ before the directory names tells the cmdlet to look for these directories under the current one. You can omit it since it is the default.</p>
-<p>Getting back to our example of listing the contents of the current directory, here’s a typical output:</p>
+<p>You can also list the contents of the directory above the current one
+equally easily by typing:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem .
+PS C:\Users\John\Documents> Get-ChildItem ..
+</pre>
+<p>Getting back to our example of listing the contents of the current
+directory, here is the output:</p>
+<pre id="cmdln-text">
+PS C:\Users\John\Documents> Get-ChildItem .
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        24/12/2022     12:03                PowerShell
-d-r---        07/12/2020     11:58                Links
--a----        21/10/2023     14:59           2365 Notes.txt
+d-r--          07/12/2020    11:58                Links
+d----          10/10/2021    10:05                Minutes
+d----          10/01/2022    08:20                Reports
+-a---          01/08/2023    16:15          17510 Drafts.docx
+-a---          21/10/2023    14:59             55 Notes.txt
+-a---          02/07/2021    12:24          15872 Proposal.docx
+-a---          01/06/2021    11:34           1204 Survey.csv
+-a---          02/09/2023    16:15           2580 ToC.html
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 </pre>
-<p>The first column (the one with the heading <code>Mode</code>) where we have either certain letters or dashes (6 placeholders in total) indicates what is known as the <em>attributes</em> of the objects. A dash indicates that the object does not have that attribute:</p>
+<p>The first column (the one with the heading <code>Mode</code>)
+contains letters or dashes in five positions, which indicate the
+<em>attributes</em> of the objects. A dash means that the object does
+not have that attribute:</p>
 <table>
 <thead>
 <tr>
@@ -286,368 +235,551 @@ d-r---        07/12/2020     11:58                Links
 </thead>
 <tbody>
 <tr>
-<td><code>d-----</code></td>
+<td><code>d----</code></td>
 <td>Directory</td>
 </tr>
 <tr>
-<td><code>-a----</code></td>
+<td><code>l----</code></td>
+<td>Link (a reparse point such as a symbolic link or junction)</td>
+</tr>
+<tr>
+<td><code>-a---</code></td>
 <td>Archive</td>
 </tr>
 <tr>
-<td><code>--r---</code></td>
-<td>Read Only</td>
+<td><code>--r--</code></td>
+<td>Read-only</td>
 </tr>
 <tr>
-<td><code>---h--</code></td>
+<td><code>---h-</code></td>
 <td>Hidden</td>
 </tr>
 <tr>
-<td><code>----s-</code></td>
+<td><code>----s</code></td>
 <td>System</td>
-</tr>
-<tr>
-<td><code>-----l</code></td>
-<td>Link -or- ReparsePoint</td>
 </tr>
 </tbody>
 </table>
-<p>The above output indicates that <code>PowerShell</code> is a directory, <code>Links</code> is a read-only directory, and <code>Notes.txt</code> (a text file) is an archive. By default, hidden and system directories and files are <em>not</em> listed. If we wanted to see, for example, the hidden directories under the current directory, we use the <code>-Attributes</code> switch of this cmdlet.</p>
 <blockquote>
-<p><span id="note-byline">A <code>ReparsePoint</code> in <em>Windows</em> is known as a <em>hard link</em> in UNIX operating systems. It is a direct link to a directory, and nagivating to and from it as simple as a typical <code>cd</code> call</span></p>
+<p><span id="note-byline">This tutorial uses PowerShell 7. The older
+<em>Windows PowerShell 5.1</em> displays a six-character
+<code>Mode</code> column, with the link flag <code>l</code> in the last
+position instead of the first.</span></p>
 </blockquote>
+<p>The above output indicates that <code>Links</code> is a read-only
+directory, <code>Minutes</code> and <code>Reports</code> are ordinary
+directories, and the rest are files with the archive attribute set. By
+default, hidden and system objects are <em>not</em> listed. To see, for
+example, the hidden objects under the current directory, we use the
+<code>-Attributes</code> parameter:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . -Attributes Hidden
+PS C:\Users\John\Documents> Get-ChildItem . -Attributes Hidden
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d--hsl        07/12/2020     07:39                Music
-d--hsl        07/12/2020     07:39                Pictures
+l--hs          07/12/2020    07:39                My Music -> C:\Users\John\Music
+l--hs          07/12/2020    07:39                My Pictures -> C:\Users\John\Pictures
 </pre>
-<p>The mode indicates that these two objects are <strong>d</strong>irectories, they are <strong>h</strong>idden, they are <strong>s</strong>ystem directories, and they are <strong>l</strong>inks.</p>
-<p>Multiple attributes can be specified to refine the query. For this, we have to list the attributes separating them with commas. The following lists objects that are read only and are reparse points:</p>
+<p>The mode indicates that these two objects are <strong>l</strong>inks,
+they are <strong>h</strong>idden, and they are <strong>s</strong>ystem
+objects. The arrow shows the directory each link points to.</p>
+<blockquote>
+<p><span id="note-byline">A <em>reparse point</em> is the NTFS mechanism
+behind symbolic links and directory junctions. A junction is closer to a
+UNIX <em>symbolic link</em> than to a hard link: it is a separate entry
+that redirects to another directory. Navigating into it is as simple as
+a typical <code>cd</code> call.</span></p>
+</blockquote>
+<p>Multiple attributes can be combined to refine the query:</p>
+<ul>
+<li>Joining attributes with a plus sign (<code>+</code>) means
+<strong>AND</strong>: the object must have <em>all</em> of them.</li>
+<li>Separating attributes with a comma (<code>,</code>) means
+<strong>OR</strong>: the object must have <em>at least one</em> of
+them.</li>
+</ul>
+<p>The following lists objects that are hidden <strong>and</strong>
+reparse points:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . -Attributes Hidden, ReadOnly, RepoarsePoint
+PS C:\Users\John\Documents> Get-ChildItem . -Attributes Hidden+ReparsePoint
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-dar--l        29/07/2024     23:43                OneDrive
-d--hsl        07/12/2020     07:39                PrintHood
-d--hsl        07/12/2020     07:39                Recent
+l--hs          07/12/2020    07:39                My Music -> C:\Users\John\Music
+l--hs          07/12/2020    07:39                My Pictures -> C:\Users\John\Pictures
 </pre>
-<p>We are not limited with seeing only what is inside the directory we have specified, though. We can use that directory as a starting point for a search.</p>
+<p>The following lists objects that are read-only <strong>or</strong>
+reparse points. Because the reparse points here are also hidden, we add
+the <code>-Force</code> switch, which includes hidden and system objects
+in the listing:</p>
+<pre id="cmdln-text">
+PS C:\Users\John\Documents> Get-ChildItem . -Attributes ReadOnly, ReparsePoint -Force
+
+    Directory: C:\Users\John\Documents
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r--          07/12/2020    11:58                Links
+l--hs          07/12/2020    07:39                My Music -> C:\Users\John\Music
+l--hs          07/12/2020    07:39                My Pictures -> C:\Users\John\Pictures
+</pre>
+<p>We are not limited to seeing only what is inside the directory we
+have specified, though. We can use that directory as a starting point
+for a search.</p>
 <h2 id="listing-subdirectories">Listing Subdirectories</h2>
-<p>It is possible to list everything under the current directory including the nested ones. Using its <code>-Recurse</code> switch, we can check what is inside the current directory as well as all its subdirectories.</p>
+<p>Using the <code>-Recurse</code> switch, we can list what is inside
+the current directory as well as inside all its subdirectories:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem -Recurse .
+PS C:\Users\John\Documents> Get-ChildItem -Recurse .
 
-    Directory: C:\Users\john\Documents
-
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
-dar--l        29/07/2024     23:43                OneDrive
-d-----        11/06/2018     11:15                Reports
-d-----        11/06/2018     11:15                Minutes
-a-----        16/09/2021     09:56                ToC.html
-
-    Directory: C:\Users\john\Documents\Reports
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        08/09/2020     06:41                Q1-2020.txt
--a----        15/06/2020     05:32                Q3-2021.txt
+d-r--          07/12/2020    11:58                Links
+d----          10/10/2021    10:05                Minutes
+d----          10/01/2022    08:20                Reports
+-a---          01/08/2023    16:15          17510 Drafts.docx
+-a---          21/10/2023    14:59             55 Notes.txt
+-a---          02/07/2021    12:24          15872 Proposal.docx
+-a---          01/06/2021    11:34           1204 Survey.csv
+-a---          02/09/2023    16:15           2580 ToC.html
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 
-    Directory: C:\Users\john\Documents\Minutes
+    Directory: C:\Users\John\Documents\Minutes
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        09/05/2020     16:24                Q3-2021.txt
+-a---          10/10/2021    10:05             57 Notes.txt
+-a---          02/07/2021    13:07          14750 Q2-2021.docx
+-a---          09/10/2021    16:24            164 Q3-2021.txt
+
+    Directory: C:\Users\John\Documents\Reports
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          10/01/2022    08:20             47 Notes.txt
+-a---          08/04/2020    09:41            172 Q1-2020.txt
+-a---          15/10/2021    17:32          14212 Q3-2021.docx
 </pre>
-<p>The command first lists the objects under the current directory, then those under each those under it, repeating the same process for each directory in turn. It terminates when there are no more subdirectories to look into.</p>
+<p>The command first lists the objects in the current directory, then
+those in each of its subdirectories, repeating the same process for
+every directory it finds. It stops when there are no more subdirectories
+to look into. (<code>Links</code> is empty, so it has no section of its
+own.)</p>
 <h2 id="searching-by-file-type">Searching By File Type</h2>
-<p>One of the primary uses of enumerating the objects in directories is to look for files of a specific type, disregarding the rest. A common technique to search them is to use the file extension. The following looks for <em>Microsoft Word</em> documents. Note that we are using the regular expression “<code>*.docx</code>” for this:</p>
+<p>One of the primary uses of listing directories is to look for files
+of a specific type. A common technique is to use the file extension. The
+following looks for <em>Microsoft Word</em> documents. Note that
+“<code>*.docx</code>” is a <em>wildcard</em> pattern, not a regular
+expression: <code>*</code> stands for any sequence of characters.</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . "*.docx"
+PS C:\Users\John\Documents> Get-ChildItem . "*.docx"
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        01/08/2023     16:15          17510 Drafts.docx
--a----        21/08/2023     10:36          16803 Tutoring.docx
+-a---          01/08/2023    16:15          17510 Drafts.docx
+-a---          02/07/2021    12:24          15872 Proposal.docx
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 </pre>
-<p>The cmdlet assumes that the “<code>*.docx</code>” parameter specified is for the <code>-Include</code> switch. Using this switch, we can look for multiple file types by specifying their extensions:</p>
+<p>The cmdlet binds the second positional value, “<code>*.docx</code>”,
+to its <code>-Filter</code> parameter. <code>-Filter</code> accepts only
+a single pattern. To look for multiple file types, we use the
+<code>-Include</code> parameter instead:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . -Include "*.docx", "*.html"
+PS C:\Users\John\Documents> Get-ChildItem .\* -Include "*.docx", "*.html"
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        01/08/2023     16:15          17510 Drafts.docx
--a----        21/08/2023     10:36          16803 Tutoring.docx
--a----        03/06/2023     11:48          17510 Report.html
+-a---          01/08/2023    16:15          17510 Drafts.docx
+-a---          02/07/2021    12:24          15872 Proposal.docx
+-a---          02/09/2023    16:15           2580 ToC.html
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 </pre>
-<p>We can also <code>-Exclude</code> certain objects from our seach if we are not interested in them. For example:</p>
+<blockquote>
+<p><span id="warning-byline"><code>-Include</code> only takes effect
+when the path ends in a wildcard (<code>.\*</code>, as above) or when
+<code>-Recurse</code> is used.
+<code>Get-ChildItem . -Include "*.docx", "*.html"</code> returns nothing
+at all.</span></p>
+</blockquote>
+<p>We can also <code>-Exclude</code> certain objects from our search if
+we are not interested in them. For example:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . -Exclude "*.html"
+PS C:\Users\John\Documents> Get-ChildItem . -Exclude "*.html"
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        01/08/2023     16:15          17510 Drafts.docx
--a----        21/08/2023     10:36          16803 Tutoring.docx
--a----        02/07/2021     12:24          17510 Proposal.docx
--a----        01/06/2021     11:34          16803 Survey.csv
+d-r--          07/12/2020    11:58                Links
+d----          10/10/2021    10:05                Minutes
+d----          10/01/2022    08:20                Reports
+-a---          01/08/2023    16:15          17510 Drafts.docx
+-a---          21/10/2023    14:59             55 Notes.txt
+-a---          02/07/2021    12:24          15872 Proposal.docx
+-a---          01/06/2021    11:34           1204 Survey.csv
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 </pre>
-<p>Here, we see every file under the current directory except for those with the “<code>*.html</code>” extension.</p>
-<p>Finally, we can also specify that we’re only looking for directories in our search without specifying their names:</p>
+<p>Here, we see every object in the current directory except
+<code>ToC.html</code>, the only one matching “<code>*.html</code>”.</p>
+<p>Finally, we can ask for directories only, without specifying their
+names, by using the <code>-Directory</code> switch (its counterpart,
+<code>-File</code>, lists files only):</p>
+<pre id="cmdln-text">
+PS C:\Users\John\Documents> Get-ChildItem . -Directory
+
+    Directory: C:\Users\John\Documents
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-r--          07/12/2020    11:58                Links
+d----          10/10/2021    10:05                Minutes
+d----          10/01/2022    08:20                Reports
+</pre>
 <h2 id="composing-cmdlets">Composing Cmdlets</h2>
-<p>At this point, we will mention a technique known as <em>piping</em>. This is a technique used to <em>compose</em> the functionality of multiple commands. It is achieved by placing a ‘|’ character after the command and its parameters to feed the output to another command:</p>
-<pre -id="ebnf-text">
+<p>At this point, we will introduce a technique known as
+<em>piping</em>, which <em>composes</em> the functionality of multiple
+commands. It is achieved by placing a ‘<code>|</code>’ character after a
+command and its parameters to feed its output to another command:</p>
+<pre id="ebnf-text">
 &lt;command&gt; &lt;parameters&gt; '|' &lt;command&gt; &lt;parameters&gt;
 </pre>
-<p>The purpose of this is to avoid having to manually manipulate the output of a command to use it as input for the next one. To illustrate, after listing the objects in the current directory, we can pipe the results to a call to <code>Get-Content</code> to see what is inside them.</p>
+<p>The purpose of this is to avoid having to manually manipulate the
+output of one command to use it as input for the next. To illustrate,
+after listing the objects in the current directory and its
+subdirectories, we can pipe the results to <code>Get-Content</code> to
+see what is inside them:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem -Recurse . -Include "Notes.txt" | Get-Content
-Reports\Notes.txt:1:Don't forget to write the report for Q1-2022
-
-Minutes\Notes.txt:1:The minutes for the Q3-2021 meeting must be summarized.
+PS C:\Users\John\Documents> Get-ChildItem -Recurse . -Include "Notes.txt" | Get-Content
+The minutes for the Q3-2021 meeting must be summarized.
+Don't forget to write the report for Q1-2022.
+Back up the Reports and Minutes folders every Friday.
 </pre>
-<p>Here, we have iterated through the subdirectories of the current one to spot files named “Notes.txt” (which means there may be multiple files in different directories name “Notes.txt”), and printed their contents to the terminal window too see what is inside them</p>
+<p>Here, we have searched the current directory and its subdirectories
+for files named <code>Notes.txt</code> (there is one in each of
+<code>Minutes</code>, <code>Reports</code>, and <code>Documents</code>
+itself), and printed their contents to the terminal window. Note that
+<code>Get-Content</code> prints only the lines of the files; it does not
+say which file each line came from.</p>
 <blockquote>
-<p><span id="warning-byline">This technique will not work with every cmdlet. If a command does not read the standard input for data entry, you won’t be able to pipe the output of a command to it.</span></p>
+<p><span id="warning-byline">Unlike UNIX shells, PowerShell does not
+pipe plain text: it passes <em>objects</em>. The receiving cmdlet binds
+each incoming object (or one of its properties, such as a file’s path)
+to one of its parameters. If a cmdlet has no parameter that accepts
+pipeline input of that kind, piping to it will fail.</span></p>
 </blockquote>
-<p>A much more common use of piping, however, is manipulating the output of the previous command for further processing.</p>
+<p>A much more common use of piping, however, is manipulating the output
+of the previous command for further processing.</p>
 <h2 id="formatting-output">Formatting Output</h2>
-<p>We do not have to settle for the default output of a command if the output is too complicated and therefore difficult to read. We can pick certain elements in it and present them in a simpler style using the <code>Format-Table</code> cmdlet:</p>
+<p>We do not have to settle for the default output of a command if it is
+too detailed to read easily. We can pick certain properties and present
+them in a simpler style using the <code>Format-Table</code> cmdlet:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . "*.docx" | Format-Table Fullname
+PS C:\Users\John\Documents> Get-ChildItem . "*.docx" | Format-Table FullName
 
-Fullname
+FullName
 --------
 C:\Users\John\Documents\Drafts.docx
+C:\Users\John\Documents\Proposal.docx
 C:\Users\John\Documents\Tutoring.docx
 </pre>
-<p>Here, the parameter <code>Fullname</code> tells <code>Format-Table</code> to output only the full path of the file from the root.</p>
-<p>We can select other attributes of the objects using this cmdlet if we specify them in a comma-separated list:</p>
+<p>Here, the property name <code>FullName</code> tells
+<code>Format-Table</code> to output only the full path of each file.</p>
+<p>We can select several properties if we specify them in a
+comma-separated list:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . "*.docx" | Format-Table -Property Fullname, Length -HideTableHeaders
+PS C:\Users\John\Documents> Get-ChildItem . "*.docx" | Format-Table -Property FullName, Length -HideTableHeaders
 
-C:\Users\john\Documents\Drafts.docx         17510
-C:\Users\john\Documents\Tutoring.docx       16803
+C:\Users\John\Documents\Drafts.docx    17510
+C:\Users\John\Documents\Proposal.docx  15872
+C:\Users\John\Documents\Tutoring.docx  16803
 </pre>
-<p>Here, we see only the paths of the files we were looking for and their sizes in bytes. The comma-separated list is for the <code>-Property</code> switch to pick the properties we consider relevant, and the <code>-HideTableHeaders</code> removes their headers since we already know the order these will be presented in.</p>
-<p>We can also use the <code>-GroupBy</code> switch for further streamlining of the output. This is especially useful when we recurse to the subdirectories.</p>
+<p>Here, we see only the paths of the files and their sizes in bytes.
+The comma-separated list is the value of the <code>-Property</code>
+parameter, and the <code>-HideTableHeaders</code> switch removes the
+column headers, since we already know the order the properties are
+presented in.</p>
+<p>We can also use the <code>-GroupBy</code> parameter to organize the
+output further. This is especially useful when we recurse into
+subdirectories:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . -Recurse -Include "*.docx", "*.txt" | Format-Table -Property Fullname -GroupBy Directory -HideTableHeaders
-
-   Directory: C:\Users\John\Documents
-
-C:\Users\john\Documents\Drafts.docx
-C:\Users\john\Documents\Tutoring.docx
-
-   Directory: C:\Users\John\Documents\Reports
-
-C:\Users\john\Documents\Reports\Q1-2021.txt
-C:\Users\john\Documents\Reports\Q3-2021.docx
+PS C:\Users\John\Documents> Get-ChildItem . -Recurse -Include "*.docx", "*.txt" | Format-Table -Property FullName -GroupBy Directory -HideTableHeaders
 
    Directory: C:\Users\John\Documents\Minutes
 
-C:\Users\john\Documents\Minutes\Q2-2021.docx
+C:\Users\John\Documents\Minutes\Notes.txt
+C:\Users\John\Documents\Minutes\Q2-2021.docx
+C:\Users\John\Documents\Minutes\Q3-2021.txt
+
+   Directory: C:\Users\John\Documents\Reports
+
+C:\Users\John\Documents\Reports\Notes.txt
+C:\Users\John\Documents\Reports\Q1-2020.txt
+C:\Users\John\Documents\Reports\Q3-2021.docx
+
+   Directory: C:\Users\John\Documents
+
+C:\Users\John\Documents\Drafts.docx
+C:\Users\John\Documents\Notes.txt
+C:\Users\John\Documents\Proposal.docx
+C:\Users\John\Documents\Tutoring.docx
 </pre>
-<p>Experimenting with various combinations of the two commands should yield results closer to what you would like to see reported on the screen.</p>
+<p>Experimenting with various combinations of the two cmdlets should
+yield results closer to what you would like to see on the screen.</p>
 <h2 id="using-variables">Using Variables</h2>
-<p>At this point, we should mention one of the very useful features of PowerShell: being able to use variables.</p>
-<p>As our command line entries become more complicated, they may become unwieldy and difficult to manipulate. If we’re working deeply nested directory structures, it may become difficult to fit the text in the terminal window. It may also become tedious to type certains strings such as paths of filenames. In such situations, defining variables and assigning various command line tokens we are using to them will most certainly become handy.</p>
+<p>At this point, we should mention one of the very useful features of
+PowerShell: variables.</p>
+<p>As our command lines become more complicated, they may become
+unwieldy. If we are working in deeply nested directory structures, the
+text may not fit in the terminal window, and it may become tedious to
+type certain strings, such as paths or file names, again and again. In
+such situations, assigning the tokens we use to variables comes in
+handy.</p>
 <p>The basic syntax is very simple:</p>
 <pre id="ebnf-text">
 '$'&lt;variable-name&gt; '=' &lt;expression&gt;
 </pre>
-<p>Defining variables in order to avoid typing the same lengthy pieces of text—paths, properties, phrases to be found in files, etc—is always good practice when using complicated use of the command line.</p>
-<p>For example, if we’re searching things in multiple directories, it makes sense to declare a variable for this:</p>
+<p>Defining variables to avoid typing the same lengthy pieces of
+text—paths, properties, phrases to be found in files, and so on—is
+always good practice when your command lines grow complicated.</p>
+<p>For example, if we are searching in multiple directories, it makes
+sense to declare a variable for them:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>$directories = "Reports", "Minutes"
-C:\Users\John\Documents>Get-ChildItem $directories
+PS C:\Users\John\Documents> $directories = "Reports", "Minutes"
+PS C:\Users\John\Documents> Get-ChildItem $directories
 
-   Directory: C:\Users\John\Documents\Reports
+    Directory: C:\Users\John\Documents\Reports
 
-C:\Users\john\Documents\Reports\Q1-2021.txt
-C:\Users\john\Documents\Reports\Q3-2021.docx
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          10/01/2022    08:20             47 Notes.txt
+-a---          08/04/2020    09:41            172 Q1-2020.txt
+-a---          15/10/2021    17:32          14212 Q3-2021.docx
 
-   Directory: C:\Users\John\Documents\Minutes
+    Directory: C:\Users\John\Documents\Minutes
 
-C:\Users\john\Documents\Minutes\Q2-2021.docx
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          10/10/2021    10:05             57 Notes.txt
+-a---          02/07/2021    13:07          14750 Q2-2021.docx
+-a---          09/10/2021    16:24            164 Q3-2021.txt
 </pre>
-<p>Here, we have specified only two directories to look for items in, and calling that list was enough to get the items in those directories.</p>
+<p>Here, we have stored two directory names in a variable, and passing
+that variable to <code>Get-ChildItem</code> was enough to list the items
+in both directories.</p>
 <blockquote>
-<p><span id="warning-byline">When storing a list of values such as two or more directory names in a variable, each of these items must be quoted, and they must be separated by commas. That is because in order for what is stored in variables to be correctly interpreted by <em>PowerShell</em>, the value stored in the variable must be an <em>expression</em>.</p>
-<p>This can get confusing because a string is also an expression. However, a string is interpreted only as a value. If an expression involving switches or other cmdlets are entered as a string, those will <em>not</em> be evaluated.</span></p>
+<p><span id="warning-byline">To store a list of values, such as two or
+more directory names, in a variable, quote each item and separate the
+items with commas. PowerShell then stores an <em>array</em> of strings.
+If you instead put the whole list inside a single pair of quotes, you
+store one string, and PowerShell will look for a single directory with
+that literal name.</span></p>
 </blockquote>
-<p>We will see what other types of variables we can create to streamline our work below.</p>
+<p>We will see what other kinds of values we can store in variables to
+streamline our work below.</p>
 <h2 id="refining-queries">Refining Queries</h2>
-<p>It is frequently not enough to list objects by their name and type. We may want to pick those that possess other properties such as having a specific phrase in its name, being above a certain size, having been created before a specific date, etc. In that case, we have to use the <code>Where-Object</code> cmdlet.</p>
-<p>This cmdlet makes it possible to specify qualifies that the object should possess with the following syntax:</p>
+<p>It is frequently not enough to list objects by their name and type.
+We may want to pick those that possess other properties, such as having
+a specific phrase in their name, being above a certain size, or having
+been modified after a specific date. In that case, we use the
+<code>Where-Object</code> cmdlet.</p>
+<p>This cmdlet makes it possible to specify the qualities that an object
+should possess, with the following syntax:</p>
 <pre id="ebnf-text">
-where-statement ::= Where-Object { $_.&lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt; }
-                  | Where-Object -Property &lt;property-name&gt; &lt;comparison&gt; &lt;parameter&gt;
+where-statement ::= Where-Object { $_.&lt;property-name&gt; &lt;comparison&gt; &lt;value&gt; }
+                  | Where-Object -Property &lt;property-name&gt; &lt;comparison&gt; &lt;value&gt;
 comparison ::= -match | -notmatch
              | -like | -notlike
              | -contains
-             | -gt | -ge | -lt | -le | -eq | -neq
+             | -gt | -ge | -lt | -le | -eq | -ne
 </pre>
+<p>In the first form, <code>$_</code> stands for the object currently
+passing through the pipeline.</p>
 <p>Let’s illustrate its use with an example:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . "*.docx" | Where-Object {$_.Name -like "Tutor"}
+PS C:\Users\John\Documents> Get-ChildItem . "*.docx" | Where-Object {$_.Name -like "*Tutor*"}
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        21/08/2023     10:36          16803 Tutoring.docx
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 </pre>
-<p>We have queried for all <em>Microsoft Word</em> documents that has the phrase “Tutor” in its name. Here is another one:</p>
+<p>We have queried for all <em>Microsoft Word</em> documents that have
+the phrase “Tutor” in their names. <code>-like</code> compares against a
+wildcard pattern, so the asterisks on both sides are needed:
+<code>-like "Tutor"</code> would match only a file named exactly
+<code>Tutor</code>. Here is another example:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . "*.docx" | Where-Object {$_.Length -ge 17500}
+PS C:\Users\John\Documents> Get-ChildItem . "*.docx" | Where-Object {$_.Length -ge 17500}
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        01/08/2023     16:15          17510 Drafts.docx
+-a---          01/08/2023    16:15          17510 Drafts.docx
 </pre>
-<p>This time, we queried for <em>Microsoft Word</em> documents that are <em>greater than or equal to</em> (which is what <em>-ge</em> stands for) 17500 bytes.</p>
-<p>The <em>-match</em> comparison operator is for regular expressions. We can use it, for example, to select multiple types of files:</p>
+<p>This time, we queried for <em>Microsoft Word</em> documents whose
+size is <em>greater than or equal to</em> (which is what
+<code>-ge</code> stands for) 17500 bytes.</p>
+<p>The <code>-match</code> comparison operator is for regular
+expressions. We can use it, for example, to select multiple types of
+files:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . | Where-Object -Property Extension -match "(docx|html)"
+PS C:\Users\John\Documents> Get-ChildItem . | Where-Object -Property Extension -Match "(docx|html)"
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        01/08/2021     16:15          17510 Drafts.docx
--a----        21/05/2021     10:36          16803 Tutoring.docx
--a----        02/09/2023     16:15           2580 ToC.html
+-a---          01/08/2023    16:15          17510 Drafts.docx
+-a---          02/07/2021    12:24          15872 Proposal.docx
+-a---          02/09/2023    16:15           2580 ToC.html
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 </pre>
-<p>As you might have guessed, we can further narrow down our search by using piping.</p>
+<p>As you might have guessed, we can narrow down our search further by
+piping again. A line that ends with <code>|</code> continues on the next
+line, which PowerShell marks with a <code>&gt;&gt;</code> prompt:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem . |
-    Where-Object -Property Extension -match "(docx|html) |
-    Where-Object -Property LastWriteTime -ge 5/1/2022"
+PS C:\Users\John\Documents> Get-ChildItem . |
+>>     Where-Object -Property Extension -Match "(docx|html)" |
+>>     Where-Object -Property LastWriteTime -GE "2022-05-01"
 
-    Directory: C:\Users\john\Documents
+    Directory: C:\Users\John\Documents
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        02/09/2023     16:15           2580 ToC.html
+-a---          01/08/2023    16:15          17510 Drafts.docx
+-a---          02/09/2023    16:15           2580 ToC.html
+-a---          21/08/2023    10:36          16803 Tutoring.docx
 </pre>
-<p>We have queried for all <em>Microsoft Word</em> documents and HTML files, then we selected only those that were created or updated after May 1, 2022.</p>
-<p>Let’s use variables to streamline our work:</p>
+<p>We have queried for all <em>Microsoft Word</em> documents and HTML
+files, then selected only those whose <code>LastWriteTime</code>, that
+is, the time they were last <em>modified</em>, is on or after May 1,
+2022. Writing the date as <em>yyyy-MM-dd</em> keeps it unambiguous
+whatever your regional settings are.</p>
+<p>Let’s use variables to streamline our work. This time, the variables
+hold <em>script blocks</em>, the filter expressions in curly braces:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>$directories = "Reports", "Minutes"
-C:\Users\John\Documents>$only_word_files = {$_.Extension -match 'docx'}
-C:\Users\John\Documents>$only_newest = {$_.LastWriteTime -ge '1/1/2021'}
+PS C:\Users\John\Documents> $directories = "Reports", "Minutes"
+PS C:\Users\John\Documents> $only_word_files = {$_.Extension -match "docx"}
+PS C:\Users\John\Documents> $only_newest = {$_.LastWriteTime -ge [datetime]"2021-01-01"}
+PS C:\Users\John\Documents> Get-ChildItem $directories | Where-Object $only_word_files | Where-Object $only_newest
 
-C:\Users\John\Documents>Get-ChildItem $directories | Where-Object $only_word_files | Where-Object $only_newest
-
-   Directory: C:\Users\John\Documents\Reports
-
-Mode                 LastWriteTime         Length Name
-----                 -------------         ------ ----
--a----        01/08/2021     16:15          17510 Drafts.docx
-
-   Directory: C:\Users\John\Documents\Minutes
+    Directory: C:\Users\John\Documents\Reports
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        02/05/2021     13:07          14750 Q2-2021.docx
+-a---          15/10/2021    17:32          14212 Q3-2021.docx
+
+    Directory: C:\Users\John\Documents\Minutes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          02/07/2021    13:07          14750 Q2-2021.docx
 </pre>
-<p>Very clean and easy to follow. To further refine our search, we have to query what is inside the files.</p>
+<p>Very clean and easy to follow. To refine our search further, we have
+to query what is inside the files.</p>
 <h2 id="displaying-contents">Displaying Contents</h2>
-<p>Frequently, you may want to have an idea on some random file in case it contains what you are looking for. If the file is in a text format, PowerShell offers a convenient cmdlet named <code>Get-Content</code> to display the contents of the file on the terminal.</p>
-<p>Assuming you know the name of the file whose contents you want to display, the syntax is:</p>
+<p>Frequently, you may want to take a quick look at a file in case it
+contains what you are looking for. If the file is in a text format,
+PowerShell offers a convenient cmdlet named <code>Get-Content</code> to
+display its contents in the terminal.</p>
+<p>Assuming you know the name of the file whose contents you want to
+display, the syntax is:</p>
 <pre id="ebnf-text">
-get-content-statement ::= Get-Content -Path &lt;file-name&gt;
+get-content-statement ::= Get-Content [-Path] &lt;file-name&gt;
 </pre>
-<p>The use of the cmdlet in this form is very simple and straightforward:</p>
+<p>The use of the cmdlet in this form is very simple:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-Content -Path .\Reports\Q1-2020.txt
+PS C:\Users\John\Documents> Get-Content -Path .\Reports\Q1-2020.txt
 2020 QUARTERLY REPORT
 
 This is the report for the 1st quarter of 2020. We will provide
-a brief summary of all the events that have been organized
+a brief summary of all the activities that have been organized
 and carried out.
-...
 </pre>
-<p>However, the cmdlet is much more flexible, and as it can read the so-called standard input you can use it with piping after looking for specific files:</p>
+<p>The cmdlet is more flexible than that, however. Because it accepts
+file objects from the pipeline (it binds the path of each incoming file
+to its own path parameter), you can use it after looking for specific
+files:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem .\Reports | Where-Object {$_.Name -like "*Q1*"} | Get-Content
+PS C:\Users\John\Documents> Get-ChildItem .\Reports | Where-Object {$_.Name -like "*Q1*"} | Get-Content
 2020 QUARTERLY REPORT
 
 This is the report for the 1st quarter of 2020. We will provide
-a brief summary of all the events that have been organized
+a brief summary of all the activities that have been organized
 and carried out.
-...
 </pre>
-<p>If you do not want to manually check the contents of the files, however, there’s an even more powerful cmdlet to find what you are looking for.</p>
+<p>If you do not want to check the contents of the files manually,
+however, there is an even more powerful cmdlet to find what you are
+looking for.</p>
 <h2 id="advanced-text-search">Advanced Text Search</h2>
-<p>If you want to be able to check the files directly to find what you are looking for, the cmdlet you need is <code>Select-String</code>, and it can be used to query the text data inside the files we have discovered in a directory.</p>
-<p>This cmdlet searches for phrases and patterns in text files (although with some extra work it can do that in binary ones, too), and its basic syntax is:</p>
+<p>If you want to search inside the files directly, the cmdlet you need
+is <code>Select-String</code>. It queries the text inside the files we
+have found in a directory.</p>
+<p>This cmdlet searches for phrases and patterns in text files, and its
+basic syntax is:</p>
 <pre id="ebnf-text">
 select-string-statement ::= Select-String
-    -Pattern (&lt;regular-expression&gt; | &lt;plain-expression&gt; -SimpleMatch)
-    -Path &lt;filename&gt;
+    [-Pattern] &lt;pattern&gt; [-SimpleMatch]
+    [-Path] &lt;file-name&gt;
     [-CaseSensitive]
 </pre>
-<p>As can be seen from the syntax, we specify a pattern which is assumed to be a regular expression by default—if we want a verbatim match, we override the default by using the <code>-SimpğleMatch</code> switch— then we enter the path of the file.</p>
-<p>The use of the cmdlet is straightforward:</p>
+<p>As can be seen from the syntax, we specify a pattern, which is
+treated as a regular expression by default (if we want a verbatim match
+instead, we add the <code>-SimpleMatch</code> switch), and then the path
+of the file. The search is case-insensitive unless we add
+<code>-CaseSensitive</code>.</p>
+<p><code>Select-String</code> does not print whole files. For every line
+that matches, it prints the file name, the line number, and the matching
+line, separated by colons:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Select-String -Pattern "QUARTERLY" -SimpleMatch -Path .\Reports\Q1-2020.txt
-2020 QUARTERLY REPORT
+PS C:\Users\John\Documents> Select-String -Pattern "QUARTERLY" -SimpleMatch -Path .\Reports\Q1-2020.txt
 
-This is the report for the 1st quarter of 2020. We will provide
-a brief summary of all the activities that have been organized
-and carried out.
-...
+Reports\Q1-2020.txt:1:2020 QUARTERLY REPORT
 </pre>
-<p>Like <code>Get-Content</code>, this cmdlet also reads the standard input so it can be used with piping.</p>
+<p>Like <code>Get-Content</code>, this cmdlet accepts file objects from
+the pipeline:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem .\Reports | Select-String -Pattern "QUARTERLY"
-2020 QUARTERLY REPORT
+PS C:\Users\John\Documents> Get-ChildItem .\Reports | Select-String -Pattern "QUARTERLY"
 
-This is the report for the 1st quarter of 2020. We will provide
-a brief summary of all the activities that have been organized
-and carried out.
-...
+Reports\Q1-2020.txt:1:2020 QUARTERLY REPORT
 </pre>
-<p>Finally, using the powerful syntax of regular expressions, we can specify multiple pieces of text, and <code>Select-String</code> will spot it for you.</p>
+<p>Finally, using the syntax of regular expressions, we can look for
+several pieces of text at once, and <code>Select-String</code> will spot
+every line that contains any of them:</p>
 <pre id="cmdln-text">
-C:\Users\John\Documents>Get-ChildItem -Path ".\Reports", ".\Minutes" | Select-String -Pattern "(report|events)"
-2020 QUARTERLY REPORT
+PS C:\Users\John\Documents> Get-ChildItem -Path ".\Reports", ".\Minutes" | Select-String -Pattern "(report|events)"
 
-This is the report for the 1st quarter of 2020. We will provide
-a brief summary of all the activites that have been organized
-and carried out.
-...
-
-2021 QUARTERLY MEETING MINUTES
-
-These minutes were recorded to report the results of the events
-that were organized this quarter that were discussed in the
-meeting.
-...
+Reports\Notes.txt:1:Don't forget to write the report for Q1-2022.
+Reports\Q1-2020.txt:1:2020 QUARTERLY REPORT
+Reports\Q1-2020.txt:3:This is the report for the 1st quarter of 2020. We will provide
+Minutes\Q3-2021.txt:3:These minutes were recorded to report the results of the events
 </pre>
-<p>Here, PowerShell found two files, one of them containing ‘<code>report</code>’ the other ‘<code>event</code>’, and printed the files on the screen.</p>
+<p>Here, PowerShell found four matching lines in three files. Because
+the search is case-insensitive, “<code>REPORT</code>” on the first line
+of <code>Q1-2020.txt</code> matched too. The <code>.docx</code> files
+were searched as well, but since Word documents are compressed, their
+text cannot be matched this way.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>The commands we have presented above, when combined imaginatively, should make it very easy to find what you are looking for. Whether it is the directories that are likely to contain the files you are looking for, whether it is properties such as extension, date of creation, or size that is likely to identify the file, or whether it is certain pieces of text that they may contain, PowerShell can spot what you are looking for and enumerate them on the terminal. It all depends on how concise and precise you are in specifying what you are searching for.</p>
-<p>Good luck learning to use these very powerfull cmdlets.</p>
+<p>The cmdlets presented above, when combined imaginatively, make it
+easy to find what you are looking for. Whether it is the directories
+likely to contain the files, properties such as extension, modification
+date, or size that identify them, or pieces of text they contain,
+PowerShell can spot them and list them in the terminal. It all depends
+on how precisely you specify what you are searching for.</p>
+<p>Good luck learning to use these very powerful cmdlets.</p>
 <hr>
 <p><em>Copyright© 2024, John Saysitall</em></p>
 </body>
 </html>
-
-<!-- Compiled by md-to-html.ps1 at 2025-09-10 12:38:33 -->

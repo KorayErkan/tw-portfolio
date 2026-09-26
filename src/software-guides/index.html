@@ -2,79 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Software Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orbitask Documentation</title>
   <link rel="stylesheet" href="./css/custom.css">
 </head>
 <body>
-  <div id="sidebar"></div>
-  <div id="content">
-     <div id="doc"></div>
-     <div id="nav"></div>
-  </div>
+  <nav id="sidebar" aria-label="Documentation pages"></nav>
+  <main id="content">
+    <article id="doc"></article>
+    <nav id="nav" aria-label="Previous and next page"></nav>
+  </main>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script>
+  // Routes look like  #/user-manual.md  or  #/user-manual.md#roles-and-permissions
   let toc = [];
-  let currentIndex = 0;
+  let currentIndex = -1;
+  let loadToken = 0;
 
-  async function loadTOC() {
-    const res = await fetch('toc.json');
-    toc = await res.json();
-    const sidebar = document.getElementById('sidebar');
-
-    toc.forEach((item, pos) => {
-      const link = document.createElement('a');
-      link.textContent = item.title;
-      link.href = '#';
-      link.onclick = (e) => {
-        e.preventDefault();
-        loadFile(pos);
-        document.querySelectorAll('#sidebar a').forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
-      };
-      if (pos === 0) link.classList.add('active');
-      sidebar.appendChild(link);
-    });
-
-    if (toc.length > 0) loadFile(0);
+  function slugify(text) {
+    return text.trim().toLowerCase()
+      .replace(/[^\p{L}\p{N}\s-]/gu, '')
+      .replace(/\s/g, '-');
   }
 
-  async function loadFile(pos) {
-    currentIndex = pos;
+  // marked 12 no longer emits heading ids, so add GitHub-style ones
+  // to make links such as user-manual.md#roles-and-permissions work.
+  function addHeadingIds(container) {
+    const seen = {};
+    container.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(h => {
+      if (h.id) return;
+      const base = slugify(h.textContent);
+      const n = seen[base] || 0;
+      seen[base] = n + 1;
+      h.id = n === 0 ? base : base + '-' + n;
+    });
+  }
+
+  function parseHash() {
+    const raw = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+    const cut = raw.indexOf('#');
+    return cut === -1
+      ? { file: raw, anchor: '' }
+      : { file: raw.slice(0, cut), anchor: raw.slice(cut + 1) };
+  }
+
+  function routeFor(file, anchor) {
+    return '#/' + file + (anchor ? '#' + anchor : '');
+  }
+
+  function highlightSidebar() {
+    document.querySelectorAll('#sidebar a').forEach((a, pos) => {
+      a.classList.toggle('active', pos === currentIndex);
+      if (pos === currentIndex) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
+  function scrollToAnchor(anchor) {
+    const target = anchor && document.getElementById(anchor);
+    if (target) target.scrollIntoView();
+    else document.getElementById('content').scrollTop = 0;
+  }
+
+  async function route() {
+    const { file, anchor } = parseHash();
+    let pos = toc.findIndex(item => item.file === file);
+    if (pos === -1) {
+      history.replaceState(null, '', routeFor(toc[0].file, ''));
+      pos = 0;
+    }
+    if (pos === currentIndex) { scrollToAnchor(anchor); return; }
+
+    const token = ++loadToken;
     const res = await fetch(toc[pos].file);
-    const text = await res.text();
-    document.getElementById('doc').innerHTML = marked.parse(text);
-    document.getElementById('content').scrollTop = 0;   // 👈 reset scroll
+    const text = res.ok ? await res.text() : '# Page not found\n\n`' + toc[pos].file + '` could not be loaded.';
+    if (token !== loadToken) return;   // a newer navigation started meanwhile
+
+    const doc = document.getElementById('doc');
+    doc.innerHTML = marked.parse(text);
+    addHeadingIds(doc);
+    currentIndex = pos;
+    document.title = toc[pos].title + ' | Orbitask Documentation';
+    highlightSidebar();
     renderNav();
+    scrollToAnchor(anchor);
+  }
+
+  function navLink(pos, label) {
+    const a = document.createElement('a');
+    a.href = routeFor(toc[pos].file, '');
+    a.textContent = label;
+    return a;
   }
 
   function renderNav() {
     const nav = document.getElementById('nav');
     nav.innerHTML = '';
-
-    if (currentIndex > 0) {
-      const prev = document.createElement('a');
-      prev.textContent = '← ' + toc[currentIndex - 1].title;
-      prev.href = '#';
-      prev.onclick = (e) => { e.preventDefault(); loadFile(currentIndex - 1); };
-      nav.appendChild(prev);
-    }
-
+    nav.appendChild(currentIndex > 0
+      ? navLink(currentIndex - 1, '← ' + toc[currentIndex - 1].title)
+      : document.createElement('span'));
     if (currentIndex < toc.length - 1) {
-      const next = document.createElement('a');
-      next.textContent = toc[currentIndex + 1].title + ' →';
-      next.href = '#';
-      next.style.float = 'right';
-      next.onclick = (e) => { e.preventDefault(); loadFile(currentIndex + 1); };
-      nav.appendChild(next);
+      nav.appendChild(navLink(currentIndex + 1, toc[currentIndex + 1].title + ' →'));
     }
-
-    nav.style.marginTop = '2em';
-    nav.style.display = 'flex';
-    nav.style.justifyContent = 'space-between';
   }
 
-  loadTOC();
+  // Keep in-document links inside the viewer: page.md, page.md#section, #section.
+  document.getElementById('doc').addEventListener('click', e => {
+    const a = e.target.closest('a');
+    if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+    const href = a.getAttribute('href') || '';
+    if (/^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('//')) return; // external
+
+    const inPage = href.match(/^#(.+)$/);
+    const toPage = href.match(/^(?:\.\/)?([\w.-]+\.md)(?:#(.*))?$/);
+    if (inPage) {
+      e.preventDefault();
+      history.pushState(null, '', routeFor(toc[currentIndex].file, inPage[1]));
+      scrollToAnchor(inPage[1]);
+    } else if (toPage) {
+      e.preventDefault();
+      location.hash = routeFor(toPage[1], toPage[2] || '').slice(1);
+    }
+  });
+
+  async function init() {
+    const res = await fetch('toc.json');
+    toc = await res.json();
+    const sidebar = document.getElementById('sidebar');
+    toc.forEach((item, pos) => sidebar.appendChild(navLink(pos, item.title)));
+    window.addEventListener('hashchange', route);
+    route();
+  }
+
+  init();
 </script>
 
 </body>

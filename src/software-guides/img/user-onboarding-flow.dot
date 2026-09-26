@@ -1,44 +1,23 @@
 digraph G {
-  graph [rankdir=TB, splines=false, bgcolor="transparent", nodesep=1.2, ranksep=1.0];
+  graph [rankdir=TB, bgcolor="transparent", nodesep=0.9, ranksep=0.6, fontname="Calibri", fontsize=13,
+         labelloc=b, label="Typical time: 5–10 minutes"];
   node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14, width=2.0];
-  edge [arrowsize=0.9, penwidth=2, fontname="Calibri", fontsize=14];
+  edge [arrowsize=0.9, penwidth=2, fontname="Calibri", fontsize=13];
 
-  // Start point
-  start [label="User Sign-In", fillcolor="#e3f2fd", shape=ellipse];
-
-  // Core onboarding steps
-  setup_project [label="Create First\nProject", fillcolor="#fff3e0"];
-
-  // Decision point
+  start [label="Sign in", fillcolor="#e3f2fd", shape=ellipse];
+  setup_project [label="Create first\nproject", fillcolor="#fff3e0"];
   team_decision [label="Working with\na team?", fillcolor="#f0f0f0", shape=diamond];
+  invite_users [label="Invite\nteammates", fillcolor="#e8f5e9"];
+  solo_setup [label="Set personal\npreferences", fillcolor="#e8f5e9"];
+  complete_checklist [label="Finish the setup\nchecklist", fillcolor="#fff3e0"];
+  ready [label="Ready to work", fillcolor="#c8e6c9", shape=ellipse];
+  learn_features [label="Explore reports,\nintegrations (optional)", fillcolor="#f3e5f5", style="rounded,dashed,filled"];
 
-  // Conditional steps
-  invite_users [label="Send Team\nInvitations", fillcolor="#e8f5e9"];
-  solo_setup [label="Configure\nPersonal Workspace", fillcolor="#e8f5e9"];
-
-  // Completion steps
-  complete_checklist [label="Complete Setup\nChecklist", fillcolor="#fff3e0"];
-
-  // Success state
-  ready [label="✓ Ready to Use\nPlatform", fillcolor="#c8e6c9", shape=ellipse];
-
-  // Optional enhancement
-  learn_features [label="Explore Advanced\nFeatures (Optional)", fillcolor="#f3e5f5", style=dashed];
-
-  // Flow connections
-  start -> setup_project;
-  setup_project -> team_decision;
-
+  start -> setup_project -> team_decision;
   team_decision -> invite_users [label="Yes"];
   team_decision -> solo_setup [label="No"];
-
   invite_users -> complete_checklist;
   solo_setup -> complete_checklist;
-
   complete_checklist -> ready;
-  ready -> learn_features [style=dashed, label="Optional"];
-
-  // Timeline note
-  timeline [label="⏱ Typical completion time: 5-10 minutes",
-           fillcolor="#f0f0f0", shape=note];
+  ready -> learn_features [style=dashed, label="optional"];
 }

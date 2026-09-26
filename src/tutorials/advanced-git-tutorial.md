@@ -1,8 +1,6 @@
-<link rel="stylesheet" href="../css/common-light.css" type="text/css" />
-
 # Advanced Git Version Control
 
-[_John Saysitall_](mailto:John.saysitall@goodcode.com)
+[_John Saysitall_](mailto:john.saysitall@goodcode.example)
 
 This document explains how advanced Git commands can be used to manage complex project histories, collaborate effectively with teams, and maintain clean, professional codebases.
 
@@ -30,9 +28,7 @@ While basic Git commands like `add`, `commit`, and `push` are sufficient for sim
 
 The difference between a novice and expert Git user often lies not in knowing _more_ commands, but in understanding _when_ and _how_ to use powerful tools like interactive rebasing, cherry-picking, and the reflog. These features can transform chaotic development workflows into clean, traceable histories that tell the story of how your project evolved.
 
-However, with this power comes responsibility. Advanced Git operations can rewrite history, and improper use can complicate collaboration or even lose work entirely. The key is understanding both the capabilities and the appropriate contexts for each tool.
-
-We will explore these advanced features systematically, building from fundamental visualization techniques to sophisticated history manipulation and recovery procedures.
+Several of these operations rewrite history, so for each one we note when it is safe to use.
 
 > <span id="note-byline">This tutorial assumes familiarity with basic Git concepts including repositories, commits, branches, and merging. We focus exclusively on advanced techniques that experienced developers use to manage complex projects.</span>
 
@@ -59,11 +55,11 @@ Before manipulating Git history, you need to understand what that history looks 
 
 <pre id="cmdln-text">
 $ git log --oneline
-a1b2c3d Fix authentication bug in login module
-e4f5g6h Add user profile picture upload feature
-i7j8k9l Refactor database connection pooling
-m0n1o2p Update README with installation instructions
-q3r4s5t Initial project setup
+3f9a2c1 Fix authentication bug in login module
+7b4e8d2 Add user profile picture upload feature
+c2d61a5 Refactor database connection pooling
+9e05b37 Update README with installation instructions
+1a7f4e0 Initial project setup
 </pre>
 
 This format shows the abbreviated commit hash on the left and the commit message on the right, making it easy to quickly scan through project history. The most recent commits appear at the top.
@@ -71,30 +67,29 @@ This format shows the abbreviated commit hash on the left and the commit message
 You can limit the output to see only recent commits by specifying a number:
 
 <pre id="cmdln-text">
-$ git log --oneline -5
-a1b2c3d Fix authentication bug in login module
-e4f5g6h Add user profile picture upload feature
-i7j8k9l Refactor database connection pooling
-m0n1o2p Update README with installation instructions
-q3r4s5t Initial project setup
+$ git log --oneline -3
+3f9a2c1 Fix authentication bug in login module
+7b4e8d2 Add user profile picture upload feature
+c2d61a5 Refactor database connection pooling
 </pre>
 
-For branches with complex histories, adding the `--graph` option reveals the branching structure:
+For branches with complex histories, adding the `--graph` option reveals the branching structure. On the `develop` branch of the same project, for example, the profile-upload work was merged in from a feature branch instead of being committed directly:
 
 <pre id="cmdln-text">
-$ git log --oneline --graph
-* a1b2c3d Fix authentication bug in login module
-*   e4f5g6h Merge branch 'feature/profile-upload'
+$ git log --oneline --graph develop
+*   5d3c9f8 Merge branch 'feature/profile-upload' into develop
 |\
-| * i7j8k9l Add image validation to upload
-| * m0n1o2p Implement profile picture storage
+| * e81b0a6 Add image validation to upload
+| * 46fa2d9 Implement profile picture storage
 |/
-* q3r4s5t Refactor database connection pooling
+* c2d61a5 Refactor database connection pooling
+* 9e05b37 Update README with installation instructions
+* 1a7f4e0 Initial project setup
 </pre>
 
 This visualization becomes invaluable when planning rebase operations or understanding how different branches relate to each other. The commit hashes shown here are what you'll use with commands like `cherry-pick` and interactive rebase.
 
-> <span id="note-byline">Commit hashes in Git are actually 40-character SHA-1 values, but Git allows you to use abbreviated versions (typically 7 characters) as long as they're unique within your repository.</span>
+> <span id="note-byline">Commit hashes in Git are actually 40-character SHA-1 values, but Git allows you to use abbreviated versions (typically the first 7 hexadecimal digits) as long as they're unique within your repository.</span>
 
 ## Interactive Rebasing
 
@@ -106,14 +101,14 @@ The basic syntax for interactive rebase is:
 $ git rebase -i HEAD~3
 </pre>
 
-This opens an editor showing the last 3 commits with options for how to handle each:
+This opens an editor listing the last 3 commits, _oldest first_ (the reverse of `git log`), with options for how to handle each:
 
 <pre id="cmdln-text">
-pick e4f5g6h Add user profile picture upload feature
-pick i7j8k9l Refactor database connection pooling
-pick a1b2c3d Fix authentication bug in login module
+pick c2d61a5 Refactor database connection pooling
+pick 7b4e8d2 Add user profile picture upload feature
+pick 3f9a2c1 Fix authentication bug in login module
 
-# Rebase q3r4s5t..a1b2c3d onto q3r4s5t (3 commands)
+# Rebase 9e05b37..3f9a2c1 onto 9e05b37 (3 commands)
 #
 # Commands:
 # p, pick = use commit
@@ -122,6 +117,7 @@ pick a1b2c3d Fix authentication bug in login module
 # s, squash = use commit, but meld into previous commit
 # f, fixup = like "squash", but discard this commit's log message
 # d, drop = remove commit
+# ...
 </pre>
 
 The most common operations are:
@@ -129,12 +125,12 @@ The most common operations are:
 **Rewording commit messages** using the `reword` command. Change `pick` to `reword` (or just `r`) for any commit whose message you want to improve:
 
 <pre id="cmdln-text">
-r e4f5g6h Add user profile picture upload feature
-pick i7j8k9l Refactor database connection pooling
-pick a1b2c3d Fix authentication bug in login module
+pick c2d61a5 Refactor database connection pooling
+r 7b4e8d2 Add user profile picture upload feature
+pick 3f9a2c1 Fix authentication bug in login module
 </pre>
 
-After saving and closing this file, Git will stop at the specified commit and allow you to edit its message:
+After you save and close this file, Git replays the commits in order and stops at the specified commit and allow you to edit its message:
 
 <pre id="cmdln-text">
 Add comprehensive user profile picture upload feature
@@ -145,12 +141,12 @@ Add comprehensive user profile picture upload feature
 - Integrates with existing user management system
 </pre>
 
-**Squashing multiple commits** combines several related commits into one. This is useful when you've made multiple small commits while developing a feature:
+**Squashing multiple commits** combines several related commits into one. This is useful when you've made multiple small commits while developing a feature. For example, had we run `git rebase -i develop` on the `feature/profile-upload` branch before merging it, we could have folded its three commits into one:
 
 <pre id="cmdln-text">
-pick e4f5g6h Add user profile picture upload feature
-squash i7j8k9l Add image validation to upload
-squash m0n1o2p Fix upload error handling
+pick 46fa2d9 Implement profile picture storage
+squash e81b0a6 Add image validation to upload
+squash 0c9d8e4 Fix upload error handling
 </pre>
 
 Git will combine these commits and prompt you to write a new commit message that represents all the combined changes.
@@ -158,8 +154,6 @@ Git will combine these commits and prompt you to write a new commit message that
 **Reordering commits** is accomplished by simply changing the order of lines in the interactive rebase file. However, be careful that reordered commits don't have dependencies on each other.
 
 > <span id="warning-byline">Never rebase commits that have already been pushed to shared repositories unless you're absolutely certain no one else is working with those commits. Rewriting shared history can create serious problems for collaborators.</span>
-
-The power of interactive rebase lies in its ability to present a clean, logical history that tells the story of your project's development, rather than the messy reality of how the code was actually written.
 
 ## Branch Management Strategies
 
@@ -169,12 +163,14 @@ The key to professional branch management is understanding the relationship betw
 
 <pre id="cmdln-text">
 $ git branch --list
-  main
-  feature/user-authentication
-* feature/payment-integration
-  hotfix/security-patch
   develop
+* feature/payment-integration
+  feature/user-authentication
+  hotfix/security-patch
+  main
 </pre>
+
+Git lists branches alphabetically and marks the one you have checked out with an asterisk.
 
 **Feature branches** should maintain clean, focused histories. Before merging a feature branch, use interactive rebase to ensure commits are logical and well-documented:
 
@@ -197,10 +193,10 @@ The `-d` flag safely deletes branches that have been merged, while `--delete` re
 
 **Branch naming conventions** improve team coordination. Use descriptive prefixes that indicate the branch purpose:
 
-- `feature/` for new functionality
-- `hotfix/` for urgent production fixes
-- `bugfix/` for non-urgent bug repairs
-- `refactor/` for code improvement without functional changes
+* `feature/` for new functionality
+* `hotfix/` for urgent production fixes
+* `bugfix/` for non-urgent bug repairs
+* `refactor/` for code improvement without functional changes
 
 **Fast-forward merges** maintain linear history when possible. If your feature branch is based on the current tip of the target branch, Git can perform a fast-forward merge:
 
@@ -211,13 +207,11 @@ $ git merge --ff-only feature/payment-integration
 
 The `--ff-only` flag ensures the merge will fail if a fast-forward isn't possible, preventing unexpected merge commits.
 
-This disciplined approach to branch management creates repository histories that are easy to understand, bisect, and maintain over time.
-
 ## Stashing Work
 
 The `git stash` command provides a temporary storage mechanism for uncommitted changes, allowing you to quickly switch contexts without making premature commits. This becomes essential when you need to handle urgent tasks while in the middle of developing a feature.
 
-**Basic stashing** saves both staged and unstaged changes:
+**Basic stashing** saves both staged and unstaged changes to tracked files (add `-u` to include untracked files as well):
 
 <pre id="cmdln-text">
 $ git status
@@ -228,7 +222,7 @@ Changes not staged for commit:
   modified:   src/utils.js
 
 $ git stash
-Saved working directory and index state WIP on feature/user-dashboard: e4f5g6h Add dashboard framework
+Saved working directory and index state WIP on feature/user-dashboard: 8c1e5fa Add dashboard framework
 
 $ git status
 On branch feature/user-dashboard
@@ -237,9 +231,12 @@ nothing to commit, working tree clean
 
 Your working directory is now clean, allowing you to switch branches or pull updates without conflicts.
 
-**Managing multiple stashes** requires descriptive messages. Always provide meaningful descriptions for stashes you might need later:
+**Managing multiple stashes** requires descriptive messages. Suppose that, back on the feature branch, you have started restyling the dashboard and have to switch context again. This time, give the stash a meaningful description:
 
 <pre id="cmdln-text">
+$ git status --short
+ M src/dashboard.css
+
 $ git stash push -m "Dashboard styling in progress - responsive grid layout"
 Saved working directory and index state On feature/user-dashboard: Dashboard styling in progress - responsive grid layout
 </pre>
@@ -249,8 +246,8 @@ View your stash list to see all saved work:
 <pre id="cmdln-text">
 $ git stash list
 stash@{0}: On feature/user-dashboard: Dashboard styling in progress - responsive grid layout
-stash@{1}: On feature/user-authentication: WIP login form validation
-stash@{2}: On main: Quick config file updates
+stash@{1}: WIP on feature/user-dashboard: 8c1e5fa Add dashboard framework
+stash@{2}: On feature/user-authentication: Login form validation
 </pre>
 
 **Applying stashed changes** can be done in several ways. To apply the most recent stash and remove it from the stash list:
@@ -259,11 +256,13 @@ stash@{2}: On main: Quick config file updates
 $ git stash pop
 </pre>
 
-To apply a specific stash without removing it from the list:
+Alternatively, to apply a specific stash without removing it from the list:
 
 <pre id="cmdln-text">
 $ git stash apply stash@{1}
 </pre>
+
+Note that the indexes shift down whenever an entry is removed: after a `pop`, the former `stash@{1}` becomes `stash@{0}`.
 
 This is useful when you want to apply the same changes to multiple branches.
 
@@ -284,8 +283,6 @@ $ git stash branch feature/responsive-design stash@{0}
 
 This creates a new branch from the commit where the stash was created and applies the stashed changes, providing a clean starting point for continued development.
 
-Effective stash management keeps your working directory flexible while ensuring no work is ever lost due to context switching.
-
 ## Cherry-picking Commits
 
 Cherry-picking allows you to apply specific commits from one branch to another, providing surgical precision when you need particular changes without merging entire branches. This technique is invaluable for applying hotfixes across multiple release branches or selectively incorporating features.
@@ -294,27 +291,27 @@ Cherry-picking allows you to apply specific commits from one branch to another, 
 
 <pre id="cmdln-text">
 $ git log --oneline feature/security-improvements
-a1b2c3d Add input validation to user forms
-e4f5g6h Implement rate limiting for API endpoints
-i7j8k9l Update password hashing algorithm
-m0n1o2p Fix SQL injection vulnerability
+b6e2f47 Add input validation to user forms
+58ad0c3 Implement rate limiting for API endpoints
+f13c9e8 Update password hashing algorithm
+2d7a4b9 Fix SQL injection vulnerability
 </pre>
 
 To apply just the password hashing improvement to your current branch:
 
 <pre id="cmdln-text">
-$ git cherry-pick i7j8k9l
-[feature/user-auth c4d5e6f] Update password hashing algorithm
+$ git cherry-pick f13c9e8
+[feature/user-auth 6a0d5e2] Update password hashing algorithm
  Date: Wed Oct 15 14:30:22 2023 -0400
  2 files changed, 15 insertions(+), 8 deletions(-)
 </pre>
 
 Git creates a new commit with the same changes but a different hash, since the commit now exists in a different context.
 
-**Cherry-picking multiple commits** can be done in sequence. To apply several specific commits:
+**Cherry-picking multiple commits** can be done in one command. To apply the SQL injection fix and the rate limiting change:
 
 <pre id="cmdln-text">
-$ git cherry-pick m0n1o2p i7j8k9l
+$ git cherry-pick 2d7a4b9 58ad0c3
 </pre>
 
 This applies the commits in the order specified, which may be different from their original chronological order.
@@ -322,21 +319,24 @@ This applies the commits in the order specified, which may be different from the
 **Range cherry-picking** applies a series of consecutive commits:
 
 <pre id="cmdln-text">
-$ git cherry-pick e4f5g6h..a1b2c3d
+$ git cherry-pick 2d7a4b9..58ad0c3
 </pre>
 
-This picks all commits from `e4f5g6h` (exclusive) to `a1b2c3d` (inclusive). Be careful with ranges to ensure you're picking the commits you intend.
+This picks all commits after `2d7a4b9` (exclusive) up to `58ad0c3` (inclusive), that is, `f13c9e8` and `58ad0c3`. To include the first commit as well, write `2d7a4b9^..58ad0c3`. Be careful with ranges to ensure you're picking the commits you intend.
 
 **Handling cherry-pick conflicts** requires the same conflict resolution skills as merging:
 
 <pre id="cmdln-text">
-$ git cherry-pick m0n1o2p
+$ git cherry-pick 2d7a4b9
 Auto-merging src/auth.js
 CONFLICT (content): Merge conflict in src/auth.js
-error: could not apply m0n1o2p... Fix SQL injection vulnerability
-hint: after resolving the conflicts, mark the corrected paths
-hint: with 'git add <paths>' or 'git rm <paths>'
-hint: and commit the result with 'git commit'
+error: could not apply 2d7a4b9... Fix SQL injection vulnerability
+hint: After resolving the conflicts, mark them with
+hint: "git add/rm &lt;pathspec&gt;", then run
+hint: "git cherry-pick --continue".
+hint: You can instead skip this commit with "git cherry-pick --skip".
+hint: To abort and get back to the state before "git cherry-pick",
+hint: run "git cherry-pick --abort".
 </pre>
 
 Resolve conflicts manually, then continue:
@@ -355,7 +355,7 @@ $ git cherry-pick --abort
 **Cherry-picking without committing** allows you to review changes before finalizing them:
 
 <pre id="cmdln-text">
-$ git cherry-pick --no-commit i7j8k9l
+$ git cherry-pick --no-commit f13c9e8
 $ git status
 On branch feature/user-auth
 Changes to be committed:
@@ -365,51 +365,53 @@ Changes to be committed:
 
 This stages the changes but doesn't create a commit, giving you the opportunity to modify or combine the changes before committing.
 
-Cherry-picking is particularly valuable in maintenance workflows where specific fixes need to be applied to multiple versions or branches without bringing along unrelated changes.
-
 ## Recovery and Debugging
 
 Even experienced Git users occasionally make mistakes that seem to lose work or create confusing repository states. Git's reflog and bisect commands provide powerful recovery and debugging capabilities that can save both time and sanity.
 
-**The reflog is Git's safety net.** It records every change to HEAD, including commits, merges, resets, and rebases. Even if commits seem "lost," they're usually recoverable through the reflog:
+**The reflog is Git's safety net.** It records every change to HEAD, including commits, merges, resets, and rebases. Even if commits seem "lost," they're usually recoverable through the reflog. Here is the reflog of `main` after the reword rebase from the [Interactive Rebasing](#interactive-rebasing) section:
 
 <pre id="cmdln-text">
 $ git reflog
-a1b2c3d HEAD@{0}: commit: Fix authentication bug in login module
-e4f5g6h HEAD@{1}: rebase -i (finish): returning to refs/heads/feature/auth
-i7j8k9l HEAD@{2}: rebase -i (reword): Add user profile picture upload feature
-m0n1o2p HEAD@{3}: rebase -i (start): checkout HEAD~3
-q3r4s5t HEAD@{4}: commit: Add user profile picture upload feature
+0e6b7d5 HEAD@{0}: rebase (finish): returning to refs/heads/main
+0e6b7d5 HEAD@{1}: rebase (pick): Fix authentication bug in login module
+a4c19e3 HEAD@{2}: rebase (reword): Add comprehensive user profile picture upload feature
+7b4e8d2 HEAD@{3}: rebase: fast-forward
+c2d61a5 HEAD@{4}: rebase (start): checkout HEAD~3
+3f9a2c1 HEAD@{5}: commit: Fix authentication bug in login module
+7b4e8d2 HEAD@{6}: commit: Add user profile picture upload feature
 </pre>
 
-If you accidentally reset to the wrong commit, you can recover by checking out the reflog entry:
-
-<pre id="cmdln-text">
-$ git reset --hard HEAD@{1}
-</pre>
+The rebase gave the reworded commit and every commit after it new hashes (`a4c19e3` and `0e6b7d5`), but the originals (`7b4e8d2` and `3f9a2c1`) are still listed. Resetting the branch to one of these entries, for example with `git reset --hard HEAD@{5}`, would bring back the pre-rebase history.
 
 **Recovering from hard resets** is a common reflog use case. Suppose you accidentally ran `git reset --hard` and lost recent work:
 
 <pre id="cmdln-text">
-$ git reset --hard HEAD~5
+$ git reset --hard HEAD~4
+HEAD is now at 1a7f4e0 Initial project setup
 $ git log --oneline
-q3r4s5t Initial project setup
+1a7f4e0 Initial project setup
 
 $ git reflog
-q3r4s5t HEAD@{0}: reset: moving to HEAD~5
-a1b2c3d HEAD@{1}: commit: Fix authentication bug in login module
-e4f5g6h HEAD@{2}: commit: Add user profile picture upload feature
+1a7f4e0 HEAD@{0}: reset: moving to HEAD~4
+0e6b7d5 HEAD@{1}: rebase (finish): returning to refs/heads/main
+0e6b7d5 HEAD@{2}: rebase (pick): Fix authentication bug in login module
 </pre>
 
 Your recent commits still exist and can be restored:
 
 <pre id="cmdln-text">
 $ git reset --hard HEAD@{1}
+HEAD is now at 0e6b7d5 Fix authentication bug in login module
 $ git log --oneline
-a1b2c3d Fix authentication bug in login module
-e4f5g6h Add user profile picture upload feature
-i7j8k9l Refactor database connection pooling
+0e6b7d5 Fix authentication bug in login module
+a4c19e3 Add comprehensive user profile picture upload feature
+c2d61a5 Refactor database connection pooling
+9e05b37 Update README with installation instructions
+1a7f4e0 Initial project setup
 </pre>
+
+> <span id="note-byline">The reflog is local to your clone, and its entries expire (by default, entries for commits no longer on any branch after 30 days). Recover lost work promptly.</span>
 
 **Binary search debugging with bisect** helps locate the specific commit that introduced a bug. Start by identifying a known good commit and a known bad commit:
 
@@ -417,8 +419,8 @@ i7j8k9l Refactor database connection pooling
 $ git bisect start
 $ git bisect bad HEAD
 $ git bisect good v2.1.0
-Bisecting: 12 revisions left to test after this (roughly 4 steps)
-[m0n1o2p] Implement caching for database queries
+Bisecting: 6 revisions left to test after this (roughly 3 steps)
+[4f8b1c6e0a93d27f51b8c4e6a2d09f7b3c15e8a4] Implement caching for database queries
 </pre>
 
 Git checks out a commit halfway between good and bad. Test your application, then mark the commit:
@@ -427,8 +429,8 @@ Git checks out a commit halfway between good and bad. Test your application, the
 $ npm test
 # Tests pass
 $ git bisect good
-Bisecting: 6 revisions left to test after this (roughly 3 steps)
-[x7y8z9a] Refactor user authentication flow
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[d93e2a7b5c18f04e6a2d9c7b31f58e0a4c6d2b19] Refactor user authentication flow
 </pre>
 
 Continue testing and marking commits until Git identifies the problematic commit:
@@ -437,19 +439,30 @@ Continue testing and marking commits until Git identifies the problematic commit
 $ npm test
 # Tests fail
 $ git bisect bad
-Bisecting: 2 revisions left to test after this (roughly 1 step)
-[b4c5d6e] Update session handling logic
+Bisecting: 1 revision left to test after this (roughly 1 step)
+[b4c5d6e8a1f23b907c4e5d6a8b2f19c03e7d4a56] Update session handling logic
 
 $ npm test
 # Tests fail
 $ git bisect bad
-b4c5d6e is the first bad commit
-commit b4c5d6e
-Author: Developer <dev@example.com>
-Date: Mon Oct 14 10:15:30 2023 -0400
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[5a2c7f9d3e81b4c60a7f2e9d5b18c34a6e0f7d21] Add session timeout setting
+
+$ npm test
+# Tests pass
+$ git bisect good
+b4c5d6e8a1f23b907c4e5d6a8b2f19c03e7d4a56 is the first bad commit
+commit b4c5d6e8a1f23b907c4e5d6a8b2f19c03e7d4a56
+Author: Jane Developer &lt;jane.developer@goodcode.example&gt;
+Date:   Mon Oct 14 10:15:30 2023 -0400
 
     Update session handling logic
+
+ src/session.js | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 </pre>
+
+Bisect prints full 40-digit hashes; their first 7 digits are the abbreviated hashes you see elsewhere.
 
 End the bisect session and return to your original branch:
 
@@ -463,25 +476,34 @@ $ git bisect reset
 $ git bisect run npm test
 </pre>
 
-This runs the test command at each bisect step, automatically marking commits as good (exit code 0) or bad (non-zero exit code) until the problematic commit is found.
-
-These recovery and debugging tools transform Git from a simple version control system into a comprehensive development safety net and diagnostic toolkit.
+Run `git bisect start`, `git bisect bad`, and `git bisect good` first, as above. Git then runs the test command at each step, marking the commit good if it exits with code 0 and bad if it exits with a code from 1 to 127 (except 125, which means "skip this commit"), until the problematic commit is found.
 
 ## Advanced Merging Techniques
 
 While basic merging handles most scenarios automatically, complex projects often require more sophisticated merge strategies to handle conflicts, preserve history, or integrate changes according to specific project requirements.
 
-**Merge strategies** can be explicitly specified to control how Git combines branches. The most common strategies are:
+**Merge strategies and strategy options** control how Git combines branches. The two are easy to confuse: a _strategy_ (`-s`) selects the merge algorithm, while a _strategy option_ (`-X`) fine-tunes the default algorithm:
 
 <pre id="cmdln-text">
-$ git merge --strategy=recursive feature/payment-system
-$ git merge --strategy=ours hotfix/critical-security-patch
-$ git merge --strategy=octopus feature/auth feature/payments feature/reporting
+$ git merge feature/payment-system
+$ git merge -X ours feature/payment-system
+$ git merge -X theirs feature/payment-system
+$ git merge feature/auth feature/payments feature/reporting
 </pre>
 
-The `recursive` strategy is Git's default for two-branch merges. The `ours` strategy resolves conflicts by always choosing the current branch's version, useful when you want to record that a merge happened but ignore all changes from the other branch.
+* The first command uses the default two-branch strategy, `ort` (Git 2.34 and later; earlier versions use `recursive`).
+* `-X ours` and `-X theirs` still merge every non-conflicting change from both branches. Only where the same lines conflict does Git automatically keep our side or their side, respectively.
+* Merging more than two branches at once uses the `octopus` strategy automatically. It stops if any conflict needs manual resolution.
 
-**Three-way merge conflicts** require understanding the conflict markers and the original common ancestor:
+> <span id="warning-byline">Do not confuse `-X ours` with `-s ours` (`--strategy=ours`). The `ours` _strategy_ discards **everything** from the other branch and records a merge commit with your tree unchanged. Use it only to mark a branch as superseded (for example, `git merge -s ours legacy/old-api`), never to "prefer our side" when merging a branch whose changes you need, such as a security fix.</span>
+
+**Three-way merge conflicts** are easier to resolve when you can also see the original common ancestor. By default, Git shows only the two sides. To include the ancestor, enable the `diff3` conflict style (or `zdiff3`, available since Git 2.35, which also trims lines common to both sides):
+
+<pre id="cmdln-text">
+$ git config --global merge.conflictStyle diff3
+</pre>
+
+A conflict then looks like this:
 
 <pre id="cmdln-text">
 $ git merge feature/api-refactor
@@ -490,34 +512,34 @@ CONFLICT (content): Merge conflict in src/api-client.js
 
 $ cat src/api-client.js
 function makeRequest(url, options) {
-<<<<<<< HEAD
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
     return fetch(url, {
         ...options,
-        timeout: 5000,
-        retry: true
+        signal: AbortSignal.timeout(5000)
     });
-||||||| merged common ancestors
+||||||| 2b7e0c4
     return fetch(url, options);
 =======
-    return axios.get(url, {
-        ...options,
-        validateStatus: false
+    return fetch(url, options).then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response;
     });
->>>>>>> feature/api-refactor
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/api-refactor
 }
 </pre>
 
-The section between `<<<<<<< HEAD` and `|||||||` shows your current branch's version. The section between `|||||||` and `=======` shows the common ancestor, and the section between `=======` and `>>>>>>>` shows the incoming changes.
+The section between `<<<<<<< HEAD` and `|||||||` shows your current branch's version. The section between `|||||||` and `=======` shows the common ancestor (labelled with its abbreviated hash), and the section between `=======` and `>>>>>>>` shows the incoming changes. Comparing each side with the ancestor reveals what each branch intended: yours added a five-second timeout, and theirs added rejection of unsuccessful HTTP responses.
 
-**Resolving complex conflicts** often requires understanding the intent of both sets of changes:
+**Resolving complex conflicts** often requires keeping the intent of both sets of changes:
 
 <pre id="cmdln-text">
 function makeRequest(url, options) {
     return fetch(url, {
         ...options,
-        timeout: 5000,
-        retry: true,
-        validateStatus: false
+        signal: AbortSignal.timeout(5000)
+    }).then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response;
     });
 }
 </pre>
@@ -554,8 +576,6 @@ $ git merge --no-ff feature/user-dashboard
 
 The `--no-ff` flag forces creation of a merge commit even when a fast-forward merge would be possible, preserving the historical context that work was done on a separate branch.
 
-These advanced merging techniques ensure that complex integration scenarios result in clean, understandable repository histories that accurately reflect the development process.
-
 ## Collaborative Workflows
 
 Professional Git usage involves coordinating with team members while maintaining repository quality. Advanced collaborative workflows leverage Git's distributed nature to enable effective teamwork without compromising project stability.
@@ -563,12 +583,12 @@ Professional Git usage involves coordinating with team members while maintaining
 **Upstream repository management** becomes essential when contributing to open source projects or working with forked repositories:
 
 <pre id="cmdln-text">
-$ git remote add upstream https://github.com/original/project.git
+$ git remote add upstream https://git.goodcode.example/original/project.git
 $ git remote -v
-origin    https://github.com/yourfork/project.git (fetch)
-origin    https://github.com/yourfork/project.git (push)
-upstream  https://github.com/original/project.git (fetch)
-upstream  https://github.com/original/project.git (push)
+origin    https://git.goodcode.example/yourfork/project.git (fetch)
+origin    https://git.goodcode.example/yourfork/project.git (push)
+upstream  https://git.goodcode.example/original/project.git (fetch)
+upstream  https://git.goodcode.example/original/project.git (push)
 </pre>
 
 Keep your fork synchronized with the upstream repository:
@@ -592,8 +612,8 @@ If there are conflicts during rebase, resolve them commit by commit:
 
 <pre id="cmdln-text">
 $ git status
-rebase in progress; onto a1b2c3d
-You are currently rebasing branch 'feature/user-notifications' on 'a1b2c3d'.
+rebase in progress; onto 72c4a0f
+You are currently rebasing branch 'feature/user-notifications' on '72c4a0f'.
   (fix conflicts and then run "git rebase --continue")
 
 Unmerged paths:
@@ -604,22 +624,29 @@ $ git add src/notifications.js
 $ git rebase --continue
 </pre>
 
-**Force pushing safely** requires understanding when history rewriting is appropriate. Never force push to shared branches like `main`, but feature branches owned by a single developer can be force pushed after rebasing:
+**Force pushing safely** requires understanding when history rewriting is appropriate. Never force push to shared branches like `main`, but a feature branch owned by a single developer can be force pushed after rebasing.
+
+A plain `--force-with-lease` is safer than `--force`: it refuses the push if the remote branch no longer matches your _remote-tracking_ branch (`origin/feature/user-notifications`). However, that protection disappears as soon as you fetch. The `git fetch origin` above silently updates the remote-tracking branch, so if a teammate had pushed to your feature branch in the meantime, a plain `--force-with-lease` would overwrite their commits without complaint.
+
+To make the lease reliable, record the remote commit you last saw _before_ fetching, and name it explicitly when pushing:
 
 <pre id="cmdln-text">
-$ git push --force-with-lease origin feature/user-notifications
+$ expected=$(git rev-parse origin/feature/user-notifications)
+$ git fetch origin
+$ git rebase origin/main
+$ git push --force-with-lease=feature/user-notifications:$expected origin feature/user-notifications
 </pre>
 
-The `--force-with-lease` option is safer than `--force` because it prevents accidentally overwriting work that others have pushed to the same branch.
+If anyone has pushed to the branch since you recorded `$expected`, Git rejects the push with `(stale info)`, and you can fetch and integrate their work first. (Git 2.30 and later also offer `--force-if-includes`, which adds a similar check automatically.)
 
 **Pull request preparation** involves cleaning up commits and ensuring clear commit messages:
 
 <pre id="cmdln-text">
 $ git log --oneline origin/main..feature/user-notifications
-e4f5g6h Add email notification templates
-i7j8k9l Implement notification delivery service
-m0n1o2p Add user notification preferences
-q3r4s5t Create notification database schema
+6c2e9a1 Add email notification templates
+0b8f3d4 Implement notification delivery service
+a95e7c2 Add user notification preferences
+3d1b6f8 Create notification database schema
 </pre>
 
 This shows all commits that will be included in the pull request. Use interactive rebase to clean up the history if necessary.
@@ -627,7 +654,8 @@ This shows all commits that will be included in the pull request. Use interactiv
 **Handling feedback on pull requests** often requires amending commits or adding new ones. If you need to modify an existing commit after review:
 
 <pre id="cmdln-text">
-$ git commit --fixup i7j8k9l
+$ git add src/delivery-service.js
+$ git commit --fixup 0b8f3d4
 $ git rebase -i --autosquash origin/main
 </pre>
 
@@ -635,19 +663,11 @@ The `--fixup` option creates a commit marked for squashing with an existing comm
 
 **Branch protection and review workflows** integrate with advanced Git techniques. Understanding how your team's branching strategy affects which Git commands you can use is crucial for effective collaboration.
 
-These collaborative patterns ensure that advanced Git features enhance rather than complicate team development workflows.
-
 ## Conclusion
 
-Mastering advanced Git techniques transforms how you approach software development. These tools—interactive rebasing, cherry-picking, stashing, reflog recovery, and sophisticated merging—provide the precision and safety needed for professional development workflows.
+Each of these tools has a clear use. Interactive rebase prepares clean feature branches for integration. Cherry-picking applies specific fixes across branches. The stash handles context switches without premature commits. The reflog recovers work after a bad reset or rebase, and bisect finds the commit that introduced a bug. Merge strategy options and the `diff3` conflict style make complex integrations manageable.
 
-The key to using these features effectively lies in understanding when each tool is appropriate. Interactive rebase shines when preparing clean feature branches for integration. Cherry-picking excels at applying specific fixes across multiple branches. The stash provides flexibility for context switching without premature commits. Reflog serves as a safety net for recovery operations. Advanced merging techniques handle complex integration scenarios with grace.
-
-Remember that with great power comes great responsibility. These commands can rewrite history, and inappropriate use in collaborative environments can create serious problems for your team. Always consider whether you're modifying local or shared history, and establish clear team conventions for when and how to use these advanced features.
-
-The investment in learning these sophisticated Git capabilities pays dividends throughout your career. Projects become more maintainable, collaboration becomes smoother, and you gain confidence to experiment knowing that Git's powerful recovery mechanisms have your back.
-
-Continue practicing these techniques in safe environments, and gradually incorporate them into your professional workflow as you become comfortable with their behavior and implications.
+Before running any history-rewriting command, ask whether the commits involved are local or already shared, and agree with your team on when rebasing and force pushing are acceptable. Practice these commands in a scratch repository first.
 
 <hr>
 

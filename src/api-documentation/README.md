@@ -4,11 +4,13 @@
 **Purpose:** Demonstrate comprehensive API reference documentation with clear examples, detailed parameter descriptions, and practical usage scenarios.
 
 ## What's Inside
-- **Parsing Web Requests - Kozmos** — Complete API reference for request parsing in the imaginary _Kozmos_ language, including syntax examples, parameter validation, and error handling
-- **Parsing Web Requests - JavaScript** — Comprehensive JavaScript API documentation covering HTTP request parsing, middleware integration, and practical implementation patterns
+
+- **[Parsing Web Requests — Kozmos](parsing-web-requests-kozmos.md)** — API reference for the URL-parsing functions of the imaginary _GoodWeb_ API, with examples in the imaginary, C#-like _Kozmos_ language: an EBNF grammar of accepted URLs, result tables, parameter validation, and error handling
+- **[Parsing Web Requests — JavaScript](parsing-web-requests-javascript.md)** — The same imaginary API used from JavaScript, covering URL parsing plus utility functions for the HTTP method, headers, and request body
 
 ## Highlights
+
 - Clear function signatures and parameter specifications
-- Practical code examples with expected outputs
+- Practical code examples, with the expected result of each call noted in the JavaScript reference
 - Error handling and validation guidance
-- Integration patterns and best practices
+- One API documented consistently for two languages

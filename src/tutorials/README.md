@@ -5,8 +5,8 @@
 
 ## What's Inside
 
-- **Command-Line Tutorial** — Comprehensive PowerShell tutorial covering file management, command composition, piping, and advanced text search techniques
-- **Advanced Git Tutorial** — In-depth exploration of sophisticated version control features including interactive rebasing, cherry-picking, and recovery procedures
+- **[Command-Line Tutorial](command-line-tutorial.md)** — PowerShell 7 tutorial covering listing and filtering files, piping, formatting output, variables, and text search, all run against one sample folder
+- **[Advanced Git Tutorial](advanced-git-tutorial.md)** — In-depth exploration of sophisticated version control features including interactive rebasing, cherry-picking, and recovery procedures
 
 ## Highlights
 

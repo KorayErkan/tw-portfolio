@@ -1,67 +1,53 @@
 digraph G {
-  graph [rankdir=TD, splines=false, bgcolor="transparent", nodesep=1.0, ranksep=1.2];
+  graph [rankdir=TB, bgcolor="transparent", nodesep=0.9, ranksep=0.9, fontname="Calibri", fontsize=14];
   node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
-  edge [arrowsize=0.8, penwidth=1.5, fontname="Calibri", fontsize=14];
+  edge [arrowsize=0.8, penwidth=1.5, fontname="Calibri", fontsize=13];
 
-  // Event Sources
+  // Event sources
   subgraph cluster_sources {
-    label="Event Sources";
-    style="rounded,filled";
-    fillcolor="#f0f8ff";
-    fontname="Calibri";
-    fontsize=14;
-    projects [label="Projects\nService", fillcolor="#bbdefb"];
-    reports [label="Reports\nService", fillcolor="#bbdefb"];
-    auth [label="Auth\nService", fillcolor="#bbdefb"];
+    label="Event sources (Orbitask services)";
+    style="rounded,filled"; fillcolor="#f0f8ff";
+    projects [label="Projects and\ntasks service", fillcolor="#bbdefb"];
+    reports  [label="Reporting\nservice", fillcolor="#bbdefb"];
+    identity [label="Identity\nservice", fillcolor="#bbdefb"];
   }
 
-  // Processing Pipeline
+  // Delivery pipeline
   subgraph cluster_pipeline {
-    label="Webhook Pipeline";
-    style="rounded,filled";
-    fillcolor="#f0fff0";
-    fontname="Calibri";
-    fontsize=14;
-
-    eventbus [label="Event Bus\n(Message Routing)", fillcolor="#c8e6c9"];
-    formatter [label="Webhook\nFormatter", fillcolor="#c8e6c9"];
-    delivery [label="Delivery\nService", fillcolor="#c8e6c9"];
+    label="Webhook pipeline";
+    style="rounded,filled"; fillcolor="#f0fff0";
+    eventbus  [label="Message queue\n(events)", fillcolor="#c8e6c9"];
+    formatter [label="Formatter\n(JSON payload + event id)", fillcolor="#c8e6c9"];
+    delivery  [label="Delivery service\n(signs with HMAC-SHA256)", fillcolor="#c8e6c9"];
+    retry_queue [label="Retry queue\n(exponential backoff,\nup to 8 attempts / ~24 h)", fillcolor="#f3e5f5"];
+    dead_letter [label="Failed deliveries\n(redeliver from Admin → Webhooks)", fillcolor="#ffebee"];
   }
 
-  // Destination
+  // Customer endpoints
   subgraph cluster_destinations {
-    label="Customer Endpoints";
-    style="rounded,filled";
-    fillcolor="#fffaf0";
-    fontname="Calibri";
-    fontsize=14;
-
-    endpoint1 [label="Endpoint A\nhooks.example.com", fillcolor="#ffe0b2"];
-    endpoint2 [label="Endpoint B\napi.customer.com", fillcolor="#ffe0b2"];
+    label="Customer endpoints";
+    style="rounded,filled"; fillcolor="#fffaf0";
+    endpoint1 [label="Endpoint A\nhooks.acme.example", fillcolor="#ffe0b2"];
+    endpoint2 [label="Endpoint B\nintegrations.acme.example", fillcolor="#ffe0b2"];
   }
 
-  // Reliability Components
-  retry_queue [label="Retry Queue\n(Exponential Backoff)", fillcolor="#f3e5f5"];
-  dead_letter [label="Dead Letter\nQueue", fillcolor="#ffebee"];
-  monitoring [label="Delivery\nMonitoring", fillcolor="#f0f0f0"];
+  monitoring [label="Delivery log and\nworkspace health", fillcolor="#eeeeee"];
 
-  // Main flow
   projects -> eventbus;
-  reports -> eventbus;
-  auth -> eventbus;
+  reports  -> eventbus;
+  identity -> eventbus;
 
-  eventbus -> formatter [label="Events"];
-  formatter -> delivery [label="JSON + HMAC"];
+  eventbus  -> formatter [label="events"];
+  formatter -> delivery;
 
-  delivery -> endpoint1 [label="HTTPS POST"];
-  delivery -> endpoint2 [label="HTTPS POST"];
+  delivery -> endpoint1 [label="HTTPS POST\nOrbitask-Signature"];
+  delivery -> endpoint2 [label="HTTPS POST\nOrbitask-Signature"];
 
-  // Error handling
-  delivery -> retry_queue [headlabel="Retry Attempts", style=dashed];
-  retry_queue -> delivery  [taillabel="Failed Deliveries", style=dashed];
-  retry_queue -> dead_letter [label="Max Retries\nExceeded", style=dashed];
+  // Error handling: failures go to the retry queue; the queue re-attempts delivery
+  delivery    -> retry_queue [label="non-2xx or\ntimeout (10 s)", style=dashed, color="#c62828", fontcolor="#c62828"];
+  retry_queue -> delivery    [label="retry\nattempt", style=dashed];
+  retry_queue -> dead_letter [label="max attempts\nreached", style=dashed, color="#c62828", fontcolor="#c62828"];
 
-  // Monitoring
-  delivery -> monitoring [label="Metrics"];
-  retry_queue -> monitoring [label="Retry Stats"];
+  delivery    -> monitoring [label="result of\nevery attempt", style=dotted];
+  dead_letter -> monitoring [style=dotted];
 }

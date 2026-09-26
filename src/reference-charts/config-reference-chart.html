@@ -1,36 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-<title>config-reference-chart.md</title>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common-light.css" type="text/css">
-<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Nordvale Server Configuration File Reference</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
 </head>
 <body>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
-          ? 'dark'
-          : 'default'
-    });
-  </script>
-<h1 id="system-configuration-files">System Configuration Files</h1>
-<p>All the configurable parameters of the system are set using <em>system configuration files</em> (<strong>*.scf</strong>). These are plain text files, and they use the following basic syntax—formulated in EBNF:</p>
-<pre id=ebnf-text>
-component ::= "[" identifier ("." identifier)* "]"
-property ::= identifier "=" (constant | "{" option (";" option)* "}")
-option ::= (Default | User)
+<h1 id="nordvale-server-configuration-file-reference">Nordvale Server
+Configuration File Reference</h1>
+<p>All configurable parameters of Nordvale Server are set in <em>system
+configuration files</em> (__*.scf__) in
+<code>C:\Program Files\Nordvale\config\</code>; the seat provisioning
+settings are in <code>prov_config.scf</code> in
+<code>C:\Program Files\Nordvale\users\</code>. These are plain text
+files with the syntax described below.</p>
+<blockquote>
+<p><strong>Note:</strong> Nordvale and all hostnames in this document
+are fictitious. This is a portfolio sample.</p>
+</blockquote>
+<h2 id="grammar">Grammar</h2>
+<p>The grammar uses W3C-style EBNF: <code>::=</code> defines a rule,
+quoted text is literal, <code>[...]</code> is a character class
+(<code>[^...]</code> excludes the listed characters), <code>#x9</code>,
+<code>#xA</code>, and <code>#xD</code> are the tab, line feed, and
+carriage return characters, and <code>?</code>, <code>*</code>, and
+<code>+</code> mean <em>optional</em>, <em>zero or more</em>, and
+<em>one or more</em>. Sequence binds more tightly than alternation
+(<code>|</code>), so <code>a b | c</code> means
+<code>(a b) | c</code>.</p>
+<pre class="text"><code>config-file    ::= (component | comment | blank-line)*
+component      ::= ws* &quot;[&quot; identifier (&quot;.&quot; identifier)* &quot;]&quot; ws* newline
+                   (property | comment | blank-line)*
+property       ::= ws* identifier ws* &quot;=&quot; ws* value ws* newline
 
-Default ::= "DEFAULT" ":" definition
-User ::= "USER" ":" definition
+value          ::= complex-value | simple-value
+complex-value  ::= &quot;{&quot; ws* option (ws* &quot;;&quot; ws* option)* ws* &quot;}&quot;
+option         ::= option-type ws* &quot;:&quot; ws* simple-value
+option-type    ::= &quot;DEFAULT&quot; | &quot;USER&quot; | &quot;ADMIN&quot; | &quot;SYSTEM&quot;
 
-comment ::= "--" text
-</pre>
-<h2 id="typical-uses">Typical Uses</h2>
-<p>System components are identified by square brackets, and the settings of the component properties are specified between braces under that section.</p>
-<p>The following table provides a few typical examples.</p>
+simple-value   ::= boolean | number | host | file-path | constant | string
+boolean        ::= &quot;true&quot; | &quot;false&quot; | &quot;yes&quot; | &quot;no&quot; | &quot;on&quot; | &quot;off&quot;
+number         ::= integer | float | size-value | time-value
+integer        ::= [0-9]+
+float          ::= [0-9]+ &quot;.&quot; [0-9]+
+size-value     ::= integer (&quot;KB&quot; | &quot;MB&quot; | &quot;GB&quot; | &quot;TB&quot;)
+time-value     ::= integer (&quot;ms&quot; | &quot;s&quot; | &quot;m&quot; | &quot;h&quot; | &quot;d&quot;)
+
+host           ::= ip-address | host-name
+ip-address     ::= octet &quot;.&quot; octet &quot;.&quot; octet &quot;.&quot; octet
+octet          ::= [0-9] [0-9]? [0-9]?
+host-name      ::= label (&quot;.&quot; label)*
+label          ::= [A-Za-z0-9] ([A-Za-z0-9-]* [A-Za-z0-9])?
+
+file-path      ::= bare-path | &#39;&quot;&#39; drive &quot;:\&quot; [^&quot;#xA#xD]* &#39;&quot;&#39;
+bare-path      ::= drive &quot;:\&quot; (segment (&quot;\&quot; segment)*)?
+drive          ::= [A-Za-z]
+segment        ::= [^\/:*?&quot;&lt;&gt;| #x9#xA#xD]+
+
+constant       ::= [A-Za-z_] [A-Za-z0-9_.]*
+string         ::= &#39;&quot;&#39; [^&quot;#xA#xD]* &#39;&quot;&#39; | bare-word
+bare-word      ::= [A-Za-z0-9_./+-]+
+
+identifier     ::= [A-Za-z_] [A-Za-z0-9_]*
+comment        ::= ws* &quot;--&quot; [^#xA#xD]* newline
+blank-line     ::= ws* newline
+newline        ::= #xA | #xD #xA
+ws             ::= &quot; &quot; | #x9</code></pre>
+<p>Several alternatives of <code>simple-value</code> can match the same
+text; for example, <code>true</code> is both a <code>boolean</code> and
+a <code>constant</code>, and <code>127.0.0.1</code> is both an
+<code>ip-address</code> and a <code>host-name</code>. The
+<strong>Type</strong> column of the <a
+href="#configuration-reference">configuration reference</a> determines
+how the value of each property is read.</p>
+<p>Quote a string or file path if it contains spaces, for example
+<code>"C:\Program Files\Nordvale\certs\server.crt"</code>. Unquoted
+values end at the first space.</p>
+<h2 id="typical-uses">Typical uses</h2>
+<p>A component header in square brackets starts a component. The
+properties that follow, one per line, belong to that component until the
+next header. Braces are used only for <em>complex values</em>, which set
+a different value for each option type (<code>DEFAULT</code>,
+<code>USER</code>, <code>ADMIN</code>, <code>SYSTEM</code>).</p>
 <table>
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 62%" />
+</colgroup>
 <thead>
 <tr>
 <th>Type</th>
@@ -39,55 +114,64 @@ comment ::= "--" text
 </thead>
 <tbody>
 <tr>
-<td>Component definition</td>
-<td><code>[system]</code></td>
+<td><strong>Component header</strong></td>
+<td><code>[system]</code>, <code>[database]</code>,
+<code>[network]</code>, <code>[security]</code></td>
 </tr>
 <tr>
-<td></td>
-<td><code>[database]</code></td>
+<td><strong>Nested component</strong></td>
+<td><code>[database.tables]</code>, <code>[network.ssl]</code>,
+<code>[security.auth]</code></td>
 </tr>
 <tr>
-<td></td>
-<td><code>[database.tables]</code></td>
+<td><strong>Simple properties</strong></td>
+<td><code>debug_mode = false</code>, <code>port = 8443</code>,
+<code>timeout = 30s</code></td>
 </tr>
 <tr>
-<td>Property definition</td>
-<td><code>block_size = {SYSTEM: 4096; USER: 1024}</code></td>
+<td><strong>Complex property</strong></td>
+<td><code>max_memory = {DEFAULT: 512MB; USER: 1GB; ADMIN: 2GB}</code></td>
 </tr>
 <tr>
-<td></td>
-<td><code>users.count = {USER: 150}</code></td>
+<td><strong>File paths</strong></td>
+<td><code>temp_dir = C:\temp</code>,
+<code>cert_file = "C:\Program Files\Nordvale\certs\server.crt"</code></td>
 </tr>
 <tr>
-<td></td>
-<td><code>aligned = true</code></td>
+<td><strong>Host addresses</strong></td>
+<td><code>bind_address = 127.0.0.1</code>,
+<code>host = db01.corp.example</code></td>
 </tr>
 <tr>
-<td></td>
-<td><code>cloud_use = {DEFAULT: Local}</code></td>
-</tr>
-<tr>
-<td></td>
-<td><code>self_certificate = false</code></td>
+<td><strong>Enumerated constant</strong></td>
+<td><code>protocol = TLS1.3</code>, <code>compression = lz4</code>, or
+qualified with the enumeration name:
+<code>compression = Compression.lz4</code></td>
 </tr>
 </tbody>
 </table>
-<p>Each component or property has to be on a separate line, and line breaks are assumed to terminate the definition.</p>
+<p>Each component header and each property must be on a separate line; a
+line break ends the definition.</p>
 <p>The following is an example of a <strong>valid</strong> layout:</p>
-<pre id="config-text">
+<pre class="text"><code>-- Database settings
 [database]
-table_count = 50
-record_size = {DEFAULT: 1024; USER: 4096}
-</pre>
-<p>The following is an example of an <strong>invalid</strong> layout: a section id and a property name are on the same line, and the settings of the ğroperties are on the next lines.</p>
-<pre id="config-text">
-[disks] block_size
-= 2048
-replicated =
-true
-</pre>
-<p>If a component specified does not exist or the value set for a property is not within a valid range or one of the predefined constants, the definition is ignored.</p>
+max_connections = 50
+timeout = {DEFAULT: 30s; ADMIN: 5m}</code></pre>
+<p>The following is an example of an <strong>invalid</strong> layout: a
+component header and a property name are on the same line, and the
+values of the properties are on the following lines.</p>
+<pre class="text"><code>[database.tables] block_size
+= 8KB
+auto_vacuum =
+true</code></pre>
+<p>If a component does not exist, a property does not exist in its
+component, or a value is not valid for the property’s type, the
+definition is ignored and a warning is written to the system log.</p>
 <table>
+<colgroup>
+<col style="width: 56%" />
+<col style="width: 43%" />
+</colgroup>
 <thead>
 <tr>
 <th>Setting</th>
@@ -97,116 +181,576 @@ true
 <tbody>
 <tr>
 <td><code>[bicycles]</code></td>
-<td>The component doesn't exist</td>
+<td>The component does not exist.</td>
 </tr>
 <tr>
 <td><code>frizzles = {DEFAULT: anything; USER: hunky-dory}</code></td>
-<td>The property doesn't exist, and the settings are not recognized</td>
+<td>The property does not exist.</td>
 </tr>
 <tr>
-<td><code>disk_size = {ADMIN: sys_admin}</code></td>
-<td>The option does not exist</td>
+<td><code>cache_size = {OWNER: 1GB}</code></td>
+<td>The option type <code>OWNER</code> does not exist; valid option
+types are <code>DEFAULT</code>, <code>USER</code>, <code>ADMIN</code>,
+and <code>SYSTEM</code>.</td>
+</tr>
+<tr>
+<td><code>port = 70000</code></td>
+<td>The value is outside the valid range (1–65535).</td>
 </tr>
 </tbody>
 </table>
-<h2 id="configurable-settings">Configurable Settings</h2>
-<p>The following table enumerates the components that exist in the system and their properties along with the setting data types and allowable values. Each property can get a <em>default</em> value which then can be overridden with a <em>user</em> value, as stated in the above EBNF specification for options.</p>
-<table>
+<h2 id="configuration-reference">Configuration reference</h2>
+<p>The following sections list all components and their properties,
+grouped by function. Properties that are not set use the default value
+shown.</p>
+<h3 id="system-core-settings">System core settings</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
 <thead>
 <tr>
 <th>Component</th>
 <th>Property</th>
 <th>Type</th>
-<th>Acceptable Values</th>
+<th>Valid values</th>
+<th>Default</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><em>system</em></td>
-<td><em>id</em></td>
+<td><strong>[system]</strong></td>
+<td><code>id</code></td>
 <td>string</td>
-<td>Any arbitrary identifier assigned by the user</td>
+<td>Letters, digits, <code>_</code>, <code>-</code></td>
+<td>Server host name</td>
+<td>System identifier</td>
 </tr>
 <tr>
 <td></td>
-<td><em>locale</em></td>
+<td><code>locale</code></td>
 <td>string</td>
-<td>Valid locale settings are identical to those of all operating systems, e.g. <em>en-US</em>, <em>fr-FR</em>, <em>it-IT</em>, etc.</td>
+<td><code>en-US</code>, <code>en-GB</code>, <code>fr-FR</code>,
+<code>es-ES</code>, …</td>
+<td><code>en-US</code></td>
+<td>Localization setting</td>
 </tr>
 <tr>
 <td></td>
-<td><em>cloud_use</em></td>
-<td>enumerated</td>
-<td>Specifies whether the system will use cloud as storage. Can be either <em>Local</em> or <em>Global</em>. If <em>Local</em>, cloud access and certificates have to be managed locally. If <em>Global</em>, the system will manage the certificates from a pool</td>
-</tr>
-<tr>
-<td><em>system.databases</em></td>
-<td><em>count</em></td>
-<td>integer</td>
-<td>The number of databases in the system</td>
-</tr>
-<tr>
-<td></td>
-<td><em>backup</em></td>
-<td>boolean</td>
-<td>Whether the system databases will be backed up</td>
-</tr>
-<tr>
-<td></td>
-<td><em>auto_resize</em></td>
-<td>boolean</td>
-<td>Whether the system databases will be resized automatically. If false, then the resize logic has to be specified with the next property</td>
-</tr>
-<tr>
-<td></td>
-<td><em>resize_by</em></td>
-<td>integer</td>
-<td>The resize value. Has to be a multiple of 1024</td>
-</tr>
-<tr>
-<td><em>database</em></td>
-<td><em>id</em></td>
+<td><code>timezone</code></td>
 <td>string</td>
-<td>Any arbitrary identifier assigned by the user. Has to be the name of a specific database</td>
+<td><code>UTC</code>, <code>America/New_York</code>, …</td>
+<td><code>UTC</code></td>
+<td>System time zone</td>
 </tr>
 <tr>
 <td></td>
-<td><em>type</em></td>
-<td>enumerated</td>
-<td>Type of the database. Has to be either <em>Flat</em> or <em>Relational</em>. If <em>Flat</em>, no database keys are maintained by the system</td>
-</tr>
-<tr>
-<td></td>
-<td><em>replicated</em></td>
+<td><code>debug_mode</code></td>
 <td>boolean</td>
-<td>Specifies whether the databases will be replicated on multiple sites</td>
+<td><code>true</code>, <code>false</code></td>
+<td><code>false</code></td>
+<td>Enable debug logging</td>
 </tr>
 <tr>
 <td></td>
-<td><em>user_count</em></td>
-<td>integer</td>
-<td>The number of users that will be accessing the database</td>
-</tr>
-<tr>
-<td><em>database.tables</em></td>
-<td><em>count</em></td>
-<td>integer</td>
-<td>Number of tables in the database</td>
+<td><code>max_memory</code></td>
+<td>size-value</td>
+<td><code>512MB</code> to <code>64GB</code></td>
+<td><code>8GB</code></td>
+<td>Maximum memory allocation</td>
 </tr>
 <tr>
 <td></td>
-<td><em>block_aligned</em></td>
-<td>boolean</td>
-<td>Whether the table will be aligned on the disk for faster access. If <em>true</em> is specificed the next value must also be set</td>
-</tr>
-<tr>
-<td></td>
-<td><em>block_size</em></td>
-<td>integer</td>
-<td>The block size to be used to align the records in the table. Must be a multiple of 1024</td>
+<td><code>temp_dir</code></td>
+<td>file-path</td>
+<td>Any local directory</td>
+<td><code>C:\Windows\Temp</code></td>
+<td>Temporary files directory</td>
 </tr>
 </tbody>
 </table>
-
+<h3 id="database-configuration">Database configuration</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Property</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>[database]</strong></td>
+<td><code>type</code></td>
+<td>constant</td>
+<td><code>postgresql</code>, <code>sqlserver</code></td>
+<td><code>postgresql</code></td>
+<td>Database engine</td>
+</tr>
+<tr>
+<td></td>
+<td><code>host</code></td>
+<td>host</td>
+<td>IP address or host name, for example
+<code>db01.corp.example</code></td>
+<td><code>127.0.0.1</code></td>
+<td>Database server address</td>
+</tr>
+<tr>
+<td></td>
+<td><code>port</code></td>
+<td>integer</td>
+<td>1–65535</td>
+<td><code>5432</code></td>
+<td>Connection port (SQL Server uses <code>1433</code>)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>max_connections</code></td>
+<td>integer</td>
+<td>10–500</td>
+<td><code>50</code></td>
+<td>Connection pool size</td>
+</tr>
+<tr>
+<td></td>
+<td><code>timeout</code></td>
+<td>time-value</td>
+<td><code>1s</code> to <code>1h</code></td>
+<td><code>30s</code></td>
+<td>Query timeout</td>
+</tr>
+<tr>
+<td></td>
+<td><code>ssl_enabled</code></td>
+<td>boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td><code>true</code></td>
+<td>Encrypt database connections</td>
+</tr>
+<tr>
+<td><strong>[database.tables]</strong></td>
+<td><code>block_size</code></td>
+<td>size-value</td>
+<td><code>4KB</code>, <code>8KB</code>, <code>16KB</code>,
+<code>64KB</code></td>
+<td><code>8KB</code></td>
+<td>Storage block size</td>
+</tr>
+<tr>
+<td></td>
+<td><code>auto_vacuum</code></td>
+<td>boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td><code>true</code></td>
+<td>Automatic maintenance</td>
+</tr>
+<tr>
+<td></td>
+<td><code>compression</code></td>
+<td>constant</td>
+<td><code>none</code>, <code>gzip</code>, <code>lz4</code></td>
+<td><code>lz4</code></td>
+<td>Data compression method</td>
+</tr>
+</tbody>
+</table>
+<h3 id="network-configuration">Network configuration</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Property</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>[network]</strong></td>
+<td><code>bind_address</code></td>
+<td>host</td>
+<td>IP address</td>
+<td><code>127.0.0.1</code></td>
+<td>Address of the web service; keep the loopback address when IIS is
+the reverse proxy</td>
+</tr>
+<tr>
+<td></td>
+<td><code>port</code></td>
+<td>integer</td>
+<td>1–65535</td>
+<td><code>8443</code></td>
+<td>Web service port (published on 443 by IIS)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>comms_port</code></td>
+<td>integer</td>
+<td>1–65535</td>
+<td><code>6650</code></td>
+<td>Communications port for build agents and clients</td>
+</tr>
+<tr>
+<td></td>
+<td><code>max_request_size</code></td>
+<td>size-value</td>
+<td><code>1MB</code> to <code>100MB</code></td>
+<td><code>10MB</code></td>
+<td>Maximum request size</td>
+</tr>
+<tr>
+<td></td>
+<td><code>keep_alive</code></td>
+<td>boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td><code>true</code></td>
+<td>Keep connections alive</td>
+</tr>
+<tr>
+<td></td>
+<td><code>timeout</code></td>
+<td>time-value</td>
+<td><code>5s</code> to <code>10m</code></td>
+<td><code>2m</code></td>
+<td>Connection timeout</td>
+</tr>
+<tr>
+<td><strong>[network.ssl]</strong></td>
+<td><code>enabled</code></td>
+<td>boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td><code>true</code></td>
+<td>Enable TLS</td>
+</tr>
+<tr>
+<td></td>
+<td><code>cert_file</code></td>
+<td>file-path</td>
+<td>Path to a <code>.crt</code> file</td>
+<td><code>"C:\Program Files\Nordvale\certs\server.crt"</code></td>
+<td>Server certificate; must match <code>key_file</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>key_file</code></td>
+<td>file-path</td>
+<td>Path to a <code>.key</code> file</td>
+<td><code>"C:\Program Files\Nordvale\certs\server.key"</code></td>
+<td>Private key of <code>cert_file</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>protocol</code></td>
+<td>constant</td>
+<td><code>TLS1.2</code>, <code>TLS1.3</code></td>
+<td><code>TLS1.3</code></td>
+<td>Minimum TLS protocol version</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-settings">Security settings</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Property</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>[security]</strong></td>
+<td><code>auth_method</code></td>
+<td>constant</td>
+<td><code>ldap</code>, <code>saml</code>, <code>oidc</code>,
+<code>local</code></td>
+<td><code>ldap</code></td>
+<td>Authentication method</td>
+</tr>
+<tr>
+<td></td>
+<td><code>session_timeout</code></td>
+<td>time-value</td>
+<td><code>5m</code> to <code>24h</code></td>
+<td><code>1h</code></td>
+<td>User session timeout</td>
+</tr>
+<tr>
+<td></td>
+<td><code>password_policy</code></td>
+<td>constant</td>
+<td><code>medium</code>, <code>strong</code></td>
+<td><code>strong</code></td>
+<td>Password requirements for local accounts</td>
+</tr>
+<tr>
+<td></td>
+<td><code>max_login_attempts</code></td>
+<td>integer</td>
+<td>3–10</td>
+<td><code>5</code></td>
+<td>Failed login limit before lockout</td>
+</tr>
+<tr>
+<td><strong>[security.auth]</strong></td>
+<td><code>ldap_server</code></td>
+<td>host</td>
+<td>IP address or host name, for example
+<code>ldap.corp.example</code></td>
+<td><em>(none)</em></td>
+<td>LDAP server; required when <code>auth_method = ldap</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>ldap_port</code></td>
+<td>integer</td>
+<td><code>389</code>, <code>636</code></td>
+<td><code>636</code></td>
+<td>LDAP port (636 for LDAPS)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>jwt_secret</code></td>
+<td>string</td>
+<td>Quoted base64 string, for example
+<code>"&lt;base64-encoded-secret&gt;"</code></td>
+<td>Generated at installation</td>
+<td>Signing secret for API tokens</td>
+</tr>
+<tr>
+<td></td>
+<td><code>token_expiry</code></td>
+<td>time-value</td>
+<td><code>15m</code> to <code>7d</code></td>
+<td><code>24h</code></td>
+<td>API token lifetime</td>
+</tr>
+</tbody>
+</table>
+<h3 id="performance-tuning">Performance tuning</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Property</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>[performance]</strong></td>
+<td><code>cache_size</code></td>
+<td>size-value</td>
+<td><code>64MB</code> to <code>16GB</code></td>
+<td><code>4096MB</code></td>
+<td>Application cache size</td>
+</tr>
+<tr>
+<td></td>
+<td><code>thread_pool_size</code></td>
+<td>integer</td>
+<td>2–64</td>
+<td><code>8</code></td>
+<td>Worker thread count</td>
+</tr>
+<tr>
+<td></td>
+<td><code>queue_size</code></td>
+<td>integer</td>
+<td>100–10000</td>
+<td><code>1000</code></td>
+<td>Request queue capacity</td>
+</tr>
+<tr>
+<td></td>
+<td><code>gc_threshold</code></td>
+<td>size-value</td>
+<td><code>100MB</code> to <code>4GB</code></td>
+<td><code>512MB</code></td>
+<td>Memory use that triggers garbage collection; must be less than
+<code>max_memory</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="seat-provisioning">Seat provisioning</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Property</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>[provisioning]</strong></td>
+<td><code>max_seats</code></td>
+<td>integer</td>
+<td>10, 25, or 250</td>
+<td>Set from the license</td>
+<td>Maximum number of seats (Standard, Professional, Enterprise);
+read-only, updated when a license is installed</td>
+</tr>
+<tr>
+<td></td>
+<td><code>seat_dir</code></td>
+<td>file-path</td>
+<td>Any local directory</td>
+<td><code>"C:\Program Files\Nordvale\users"</code></td>
+<td>Directory for <code>*.seat</code> files</td>
+</tr>
+</tbody>
+</table>
+<h3 id="logging-and-monitoring">Logging and monitoring</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 9%" />
+<col style="width: 22%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Property</th>
+<th>Type</th>
+<th>Valid values</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>[logging]</strong></td>
+<td><code>level</code></td>
+<td>constant</td>
+<td><code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>,
+<code>ERROR</code></td>
+<td><code>INFO</code></td>
+<td>Log level</td>
+</tr>
+<tr>
+<td></td>
+<td><code>output</code></td>
+<td>constant</td>
+<td><code>file</code>, <code>eventlog</code>, <code>both</code></td>
+<td><code>file</code></td>
+<td>Log destination (<code>eventlog</code> is the Windows Event
+Log)</td>
+</tr>
+<tr>
+<td></td>
+<td><code>file_path</code></td>
+<td>file-path</td>
+<td>Path to a <code>.log</code> file</td>
+<td><code>C:\ProgramData\Nordvale\logs\system.log</code></td>
+<td>Log file location; used when <code>output</code> is
+<code>file</code> or <code>both</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>max_file_size</code></td>
+<td>size-value</td>
+<td><code>10MB</code> to <code>1GB</code></td>
+<td><code>100MB</code></td>
+<td>Log rotation size</td>
+</tr>
+<tr>
+<td></td>
+<td><code>retention_days</code></td>
+<td>integer</td>
+<td>1–365</td>
+<td><code>30</code></td>
+<td>Log retention period</td>
+</tr>
+<tr>
+<td><strong>[monitoring]</strong></td>
+<td><code>metrics_enabled</code></td>
+<td>boolean</td>
+<td><code>true</code>, <code>false</code></td>
+<td><code>true</code></td>
+<td>Enable metrics collection</td>
+</tr>
+<tr>
+<td></td>
+<td><code>health_check_port</code></td>
+<td>integer</td>
+<td>1–65535</td>
+<td><code>8081</code></td>
+<td>Local health check port</td>
+</tr>
+<tr>
+<td></td>
+<td><code>alert_threshold</code></td>
+<td>float</td>
+<td><code>0.5</code> to <code>0.99</code></td>
+<td><code>0.9</code></td>
+<td>Resource usage ratio that triggers an alert</td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>

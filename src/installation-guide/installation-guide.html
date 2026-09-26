@@ -1,161 +1,722 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-<title>installation-guide.md</title>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-<link rel="stylesheet" href="file:///c%3A/Users/john/Freelancing/Technical%20Writing/Portfolio/include/common-light.css" type="text/css">
-<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Nordvale&amp;trade; Server Installation Guide</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
 </head>
 <body>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
-          ? 'dark'
-          : 'default'
-    });
-  </script>
-<h1 id="prosoft%E2%84%A2-installation-guide"><strong>ProSoft</strong>™ Installation Guide</h1>
-<p>This document provides information about the system requirements of ProSoft v8.4.11, as well as the procedure for installing it.</p>
+<h1 id="nordvale-server-installation-guide">Nordvale™ Server
+Installation Guide</h1>
+<p>This document describes the system requirements of Nordvale Server
+8.5.0 and the procedure for installing it.</p>
 <h2 id="disclaimer">Disclaimer</h2>
-<p>NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO THE CONTENTS OF THIS DOCUMENT REGARDING INCLUDING BUT NOT LIMITED TO AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL PROSOFT BE LIABLE FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE USE OF THE INFORMATION IN THIS DOCUMENT.</p>
-<hr>
+<p>NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, IS MADE IN RELATION TO
+THE CONTENTS OF THIS DOCUMENT, INCLUDING BUT NOT LIMITED TO
+AVAILABILITY, ACCURACY, RELIABILITY, NON-INFRINGEMENT, MERCHANTABILITY,
+OR FITNESS FOR A PURPOSE. IN NO EVENT SHALL NORDVALE BE LIABLE FOR ANY
+DAMAGES, INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES, OR DUE TO BUSINESS INTERRUPTION, OR ANY LOSS OF
+PROFIT, REVENUE, BUSINESS OPPORTUNITY, OR DATA THAT MAY ARISE FROM THE
+USE OF THE INFORMATION IN THIS DOCUMENT.</p>
+<hr />
 <h2 id="copyright">Copyright</h2>
-<p><strong>ProSoft</strong> is registered trademark of ProSoft Corporation. Other products mentioned in this document may be trademarks of their respective owners. This document is is subject to change without prior notice.</p>
-<p>© ProSoft 2024.</p>
-<hr>
-<h2 id="table-of-contents">Table of Contents</h2>
+<p><strong>Nordvale</strong> is a registered trademark of Nordvale
+Corporation. Other products mentioned in this document may be trademarks
+of their respective owners.</p>
+<p>This document is subject to change without prior notice.</p>
+<p>© Nordvale Corporation 2026.</p>
+<blockquote>
+<p><strong>Note:</strong> Nordvale, its products, and all hostnames in
+this document are fictitious. This is a portfolio sample.</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of contents</h2>
 <ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#system-requirements">System Requirements</a>
+<li><a href="#system-requirements">System requirements</a>
 <ul>
+<li><a href="#operating-system">Operating system</a></li>
 <li><a href="#hardware">Hardware</a></li>
+<li><a href="#network-ports">Network ports</a></li>
 <li><a href="#dependencies">Dependencies</a></li>
+</ul></li>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#install-with-the-setup-wizard">Install with the setup
+wizard</a></li>
+<li><a href="#install-from-the-command-line">Install from the command
+line</a></li>
+</ul></li>
+<li><a href="#configuration">Configuration</a>
+<ul>
+<li><a href="#install-the-license">Install the license</a></li>
+<li><a href="#install-the-certificates">Install the
+certificates</a></li>
+</ul></li>
+<li><a href="#post-installation-verification">Post-installation
+verification</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#license-terms">License terms</a></li>
 </ul>
-</li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#license-terms">License Terms</a></li>
-</ul>
-<hr>
+<hr />
 <h2 id="introduction">Introduction</h2>
-<p><strong>ProSoft</strong>™ is an engineering solution for managing CI/CD pipeline automation in software development. The system keeps track of the modifications and additions made to the codebase—including acceptance, unit, and integration tests—and the commits to source control, creates an automated pipeline for building release candidates, updates version numbers using <em>semantic versioning</em>, calculates <em>technical debt</em> based on targets, and charts the progress of various aspects of the project to provide a global picture.</p>
-<p>The system is compliant with the requirements and logic of CI/CD as it has been laid out in RFC 3265-A and RFC 3265-B.</p>
-<h2 id="system-requirements">System Requirements</h2>
+<p><strong>Nordvale Server</strong> is an engineering solution for
+managing CI/CD pipeline automation in software development. The system
+keeps track of the modifications and additions made to the
+codebase—including acceptance, unit, and integration tests—and the
+commits to source control, creates an automated pipeline for building
+release candidates, updates version numbers using <em>semantic
+versioning</em>, calculates <em>technical debt</em> against targets, and
+charts the progress of various aspects of the project to provide a
+global picture.</p>
+<h2 id="system-requirements">System requirements</h2>
+<h3 id="operating-system">Operating system</h3>
+<p>Nordvale Server 8.5.0 is distributed as a 64-bit Windows Installer
+package (<code>nordvale_x64.msi</code>) and runs on the following
+operating systems only.</p>
+<table>
+<thead>
+<tr>
+<th>Operating system</th>
+<th>Version</th>
+<th>Architecture</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows Server 2022</td>
+<td>Build 20348 or later</td>
+<td>x64</td>
+</tr>
+<tr>
+<td>Windows Server 2019</td>
+<td>Build 17763 or later</td>
+<td>x64</td>
+</tr>
+</tbody>
+</table>
 <h3 id="hardware">Hardware</h3>
-<p>For an average team of 25 developers, the system requires at least 5 x 2.5GHz quadcore 7i processors, 64GB of RAM, and 1TB of disk space.</p>
-<p>Also, a 1000Base-TX Ethernet network connection is recommended for effective and efficient use.</p>
+<p>Size the server according to your license edition, which determines
+the maximum number of users (seats).</p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 25%" />
+<col style="width: 32%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Standard (up to 10 users)</th>
+<th>Professional (11–25 users)</th>
+<th>Enterprise (26–250 users)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPU</strong></td>
+<td>4 cores, 2.5 GHz or faster</td>
+<td>8 cores, 2.5 GHz or faster</td>
+<td>16 cores, 2.5 GHz or faster</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>16 GB</td>
+<td>32 GB</td>
+<td>64 GB ECC</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>250 GB SSD</td>
+<td>500 GB NVMe SSD</td>
+<td>1 TB NVMe SSD, RAID 1</td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+<td>1 Gigabit Ethernet</td>
+<td>1 Gigabit Ethernet</td>
+<td>10 Gigabit Ethernet</td>
+</tr>
+</tbody>
+</table>
+<p>In addition to the storage listed above, the installer requires 2 GB
+of free space on the system drive.</p>
+<h3 id="network-ports">Network ports</h3>
+<p>The web interface and REST API are published on port 443 by IIS,
+which acts as a reverse proxy on the same server. IIS terminates TLS and
+forwards requests to the Nordvale Web Service, which listens only on the
+loopback address at <code>https://127.0.0.1:8443</code>. Build agents
+connect directly to the communications port, 6650.</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 27%" />
+<col style="width: 30%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Port</th>
+<th>Protocol</th>
+<th>Direction</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>443</td>
+<td>HTTPS</td>
+<td>Inbound</td>
+<td>Web interface and REST API (<code>/api/v1</code>), through the IIS
+reverse proxy</td>
+</tr>
+<tr>
+<td>443</td>
+<td>HTTPS</td>
+<td>Outbound</td>
+<td>License validation and update checks
+(<code>licensing.nordvale.example</code>)</td>
+</tr>
+<tr>
+<td>6650</td>
+<td>TCP (TLS)</td>
+<td>Inbound</td>
+<td>Communications port for build agents and desktop clients</td>
+</tr>
+<tr>
+<td>8443</td>
+<td>HTTPS</td>
+<td>Local only</td>
+<td>Nordvale Web Service (loopback); do not open in the firewall</td>
+</tr>
+<tr>
+<td>5432</td>
+<td>TCP</td>
+<td>Outbound</td>
+<td>PostgreSQL database, if hosted on another server</td>
+</tr>
+<tr>
+<td>1433</td>
+<td>TCP</td>
+<td>Outbound</td>
+<td>Microsoft SQL Server database, if hosted on another server</td>
+</tr>
+</tbody>
+</table>
+<p>The installer creates the inbound firewall rules for ports 443 and
+6650. To create them manually, run the following commands in an elevated
+PowerShell session:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>New-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;Nordvale Web (HTTPS)&quot;</span> <span class="op">-</span>Direction Inbound <span class="op">-</span>Protocol TCP <span class="op">-</span>LocalPort <span class="dv">443</span> <span class="op">-</span>Action Allow</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>New-NetFirewallRule <span class="op">-</span>DisplayName <span class="st">&quot;Nordvale Communications&quot;</span> <span class="op">-</span>Direction Inbound <span class="op">-</span>Protocol TCP <span class="op">-</span>LocalPort <span class="dv">6650</span> <span class="op">-</span>Action Allow</span></code></pre></div>
 <h3 id="dependencies">Dependencies</h3>
-<p>The installer checks the presence of the following components, and in case any of them is not in place it terminates the installation process:</p>
-<ul>
-<li>Microsoft Visual C++ Redistributable: this is required for the MSVC libraries</li>
-<li>An ANSI SQL compliant database server (such as PostgreSQL 14.5 and above, Microsoft SQL Server 2018 and above, Oracle DBMS 2016 and above, etc.): the system keeps significant amounts of data in a relational database</li>
-<li>Microsoft .NET Framework 5 or higher: the system was developed with .NET and the runtime requires the presence of certain libraries</li>
-<li>Microsoft IIS 11.4 or higher: the system requires an internet connection for managing cloud storage and connecting to our servers for patches and updates</li>
-</ul>
-<p>The system locale is <em>en-us</em> by default but can be set to any locale.</p>
+<p>The installer checks for the following components and stops if any
+required component is missing.</p>
+<h4 id="required-components">Required components</h4>
+<table>
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 31%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Microsoft Visual C++ Redistributable (x64)</strong></td>
+<td>2015–2022 (14.29 or later)</td>
+<td>Runtime libraries for native components</td>
+</tr>
+<tr>
+<td><strong>Microsoft .NET Runtime (x64)</strong></td>
+<td>8.0 (LTS)</td>
+<td>Application runtime</td>
+</tr>
+<tr>
+<td><strong>Internet Information Services (IIS)</strong></td>
+<td>10.0, with URL Rewrite 2.1 and Application Request Routing 3.0</td>
+<td>Reverse proxy and TLS termination on port 443</td>
+</tr>
+<tr>
+<td><strong>Database server</strong></td>
+<td>See the next table</td>
+<td>Persistent data storage</td>
+</tr>
+</tbody>
+</table>
+<h4 id="supported-databases">Supported databases</h4>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 54%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th>Database</th>
+<th>Supported versions</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PostgreSQL</strong></td>
+<td>13 to 16</td>
+<td>Recommended for new installations</td>
+</tr>
+<tr>
+<td><strong>Microsoft SQL Server</strong></td>
+<td>2019, 2022</td>
+<td>Standard or Enterprise edition</td>
+</tr>
+</tbody>
+</table>
+<h4 id="optional-components">Optional components</h4>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Redis</strong></td>
+<td>6.2 or later</td>
+<td>Shared cache for the REST API</td>
+</tr>
+<tr>
+<td><strong>Elasticsearch</strong></td>
+<td>8.x</td>
+<td>Full-text search across build logs</td>
+</tr>
+</tbody>
+</table>
+<p>The system locale is <em>en-US</em> by default. You can select any
+other supported locale during installation.</p>
 <h2 id="installation">Installation</h2>
-<p>The following steps are based on the 64-bit version, but they are identical for the 32-bit version. Before you start the installation, check that the above-mentioned prerequisite components are in place.</p>
-<p>Before beginning the installation, from the <strong>ProSoft</strong> <a href="https://www.prosoft.com/downloads">downloads</a> page, download the <code>prosoft_x64.msi</code> file to the <code>C:\Users\&lt;admin-name&gt;\Downloads</code> directory of your server.</p>
-<span id="gui-byline">
-<ul>
-<li>Open <strong>Explorer</strong> and navigate to the <strong>Downloads</strong> folder.</li>
-<li>Double-click the <code>prosoft_x64.msi</code> file to start the installation and follow the on-screen instructions</li>
-<li>By default, the server is installed in the <code>C:\Programs\ProSoft</code> directory. It is strongly recommended that this directory is <em>not</em> changed</li>
-<li>Confirm the settings on the configuration page of the installer. It is recommend that the default values for cache size, disk size, API endpoints, communication ports, and others are left as they are unless you have a good reason to change them</li>
-<li>If you need to change the locale setting, you will be prompted to select one on the next page of the installer</li>
-<li>Finally, click <code>Ok</code> to start the installation process. Because the system creates partitions for more efficient marshalling of data, it may take up to 15 for this stage to complete.</li>
-</ul>
-</span>
-<span id="cli-byline">
-<ul>
-<li>Open a terminal window with elevated (i.e. <strong>admin</strong>) privileges. If you haven't downloaded the installation (i.e. <strong>*.msi</strong>) file, you can do so on the command line by typing</li>
-</ul>
-<pre id="cmdln-text">
-C:\> winget www.prosoft.com/downloads/prosoft_x64.msi
-</pre>
-<ul>
-<li>Navigate (i.e. <code>cd</code>) to the <strong>Downloads</strong> directory of your server by typing:</li>
-</ul>
-<pre id="cmdln-text">
-C:\> cd \Users\<admin-name>\Downloads
-</pre>
-<ul>
-<li>Start the installation by typing <code>prosoft_x64.msi</code>. You must specify the installation directory. By default, this is <code>C:\Programs\ProSoft</code> and It is strongly recommended that this directory is <em>not</em> changed. Follow the on-screen instructions</li>
-</ul>
-<pre id="cmdln-text">
-C:\> prosoft_x64 install --target-dir=C:\Programs\ProSoft
->>> Installing...
-</pre>
-<ul>
-<li>It is recommended that the default values for cache size, disk size, API endpoints, communication ports, and others are <em>not</em> changed unless you have a good reason to do so. To confirm these settings, type <code>Y</code> (for <strong>Yes</strong>) for each when prompted on the command line</li>
-</ul>
-<pre id="cmdln-text">
->>> cache_size=4096KB? [Y/N]: Y
->>> disk_size=50MB? [Y/N]: Y
->>> api_endpoints=prosoft_api_server? [Y/N]: Y
->>> communications_port=6060? [Y/N]: Y
->>> default_user_count=50? [Y/N]: Y
-</pre>
-<ul>
-<li>You will be prompted to confirm or change the locale setting:</li>
-</ul>
-<pre id="cmdln-text">
->>> locale=en_US? [Y/N]: N
-    Please specify the locale: en-GB
-</pre>
-<ul>
-<li>Finally, confirm the settings by typing <code>Y</code> to start the installation process.</li>
-</ul>
-<pre id="cmdln-text">
->>> Please confirm the settings to start the installation [Y/N]:
-</pre>
-<p>Because the system creates partitions for more efficient marshalling of data, it may take up to 15 minutes for this stage to complete.</p>
-</span>
-<h2 id="configuration">Configuration</h2>
-<p>After the installation process is completed, the basic configuration needs to be made, and this has to be done through the command line. The process is as follows:</p>
-<span id="cli-byline">
-<ul>
-<li>Copy the <code>prosoft.lic</code> file sent to you via e-mail to the <code>bin</code> subdirectory of the installation folder. It is advised that you rename this file using the name of your company. Here, we will use <code>company-name</code> for this.</li>
-</ul>
-<pre id="cmdln-text">
-C:\Downloads>mv prosoft.lic company-name.lic
-C:\Downloads>copy company-name.lic \ProSoft\bin
-</pre>
-<ul>
-<li>Navigate to the <code>admin</code> directory of the root, and install the license by running the <code>install_lic.ps</code> script</li>
-</ul>
-<pre id="cmdln-text">
-C:\Downloads>cd \ProSoft\admin
-C:\ProSoft\admin>install_lic.ps --license-file=company-name.lic
->>> Installing license ...
->>> Done
-</pre>
+<p>Before you start the installation:</p>
+<ol type="1">
+<li>Check that the <a href="#required-components">required
+components</a> are installed.</li>
+<li>From the Nordvale <a
+href="https://www.nordvale.example/downloads">downloads</a> page,
+download the <code>nordvale_x64.msi</code> file to the
+<code>Downloads</code> folder of the administrator account on the
+server.</li>
+</ol>
+<p>By default, Nordvale Server is installed in
+<code>C:\Program Files\Nordvale</code>. It is strongly recommended that
+you do <em>not</em> change this directory.</p>
+<h3 id="install-with-the-setup-wizard">Install with the setup
+wizard</h3>
+<p><strong>Using the GUI</strong></p>
+<ol type="1">
+<li>Open <strong>File Explorer</strong> and navigate to the
+<strong>Downloads</strong> folder.</li>
+<li>Double-click the <code>nordvale_x64.msi</code> file to start the
+setup wizard. If User Account Control prompts you, click
+<strong>Yes</strong>.</li>
+<li>Accept the license agreement and keep the default installation
+directory, <code>C:\Program Files\Nordvale</code>.</li>
+<li>On the <strong>Configuration</strong> page, review the settings.
+Leave the default values for cache size, data disk size, and
+communications port (6650) unless you have a good reason to change
+them.</li>
+<li>On the <strong>Locale</strong> page, keep <em>en-US</em> or select
+another locale.</li>
+<li>Click <strong>Install</strong> to start the installation. Because
+the system creates data partitions during this stage, it may take up to
+15 minutes to complete.</li>
+<li>Click <strong>Finish</strong>.</li>
+</ol>
+<h3 id="install-from-the-command-line">Install from the command
+line</h3>
+<p><strong>Using the CLI</strong></p>
+<ol type="1">
+<li><p>Open PowerShell as an administrator (right-click <strong>Windows
+PowerShell</strong> and select <strong>Run as
+administrator</strong>).</p></li>
+<li><p>If you have not downloaded the installation package yet, download
+it and change to the <code>Downloads</code> folder:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;</span><span class="va">$env</span><span class="op">:</span><span class="va">USERPROFILE</span><span class="st">\Downloads&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Invoke-WebRequest</span> <span class="op">-</span>Uri <span class="st">&quot;https://www.nordvale.example/downloads/nordvale_x64.msi&quot;</span> <span class="op">-</span>OutFile <span class="st">&quot;nordvale_x64.msi&quot;</span></span></code></pre></div></li>
+<li><p>Run the installer silently with the default settings, writing a
+verbose log to the current folder:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Start-Process</span> msiexec<span class="op">.</span><span class="fu">exe</span> <span class="op">-</span>Wait <span class="op">-</span>ArgumentList <span class="st">&#39;/i nordvale_x64.msi INSTALLDIR=&quot;C:\Program Files\Nordvale&quot; /qn /l*v nordvale_install.log&#39;</span></span></code></pre></div>
+<p>To override a default, add the corresponding property to the argument
+list, for example <code>LOCALE=en-GB</code>. The following properties
+are available:</p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 28%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INSTALLDIR</code></td>
+<td><code>C:\Program Files\Nordvale</code></td>
+<td>Installation directory</td>
+</tr>
+<tr>
+<td><code>CACHE_SIZE</code></td>
+<td><code>4096MB</code></td>
+<td>Application cache size</td>
+</tr>
+<tr>
+<td><code>DATA_DISK_SIZE</code></td>
+<td><code>50GB</code></td>
+<td>Initial size of the data partition</td>
+</tr>
+<tr>
+<td><code>COMMS_PORT</code></td>
+<td><code>6650</code></td>
+<td>Communications port for build agents and clients</td>
+</tr>
+<tr>
+<td><code>WEB_PORT</code></td>
+<td><code>8443</code></td>
+<td>Local port of the Nordvale Web Service (behind IIS)</td>
+</tr>
+<tr>
+<td><code>LOCALE</code></td>
+<td><code>en-US</code></td>
+<td>System locale</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Wait for the command to return. Because the system creates data
+partitions during this stage, it may take up to 15 minutes. A return
+code of 0 in the log file means that the installation
+succeeded.</p></li>
+</ol>
 <blockquote>
-<p><span id="note-byline">If you do not introduce the license through the command line, you will be prompted the first time you launch the program to point to this file for activation.<br>
-</span></p>
+<p><strong>Note:</strong> The <code>msiexec</code> arguments are wrapped
+in single quotes so that PowerShell passes the quoted
+<code>INSTALLDIR</code> path to the installer unchanged. If you use
+Command Prompt instead, run
+<code>msiexec /i nordvale_x64.msi INSTALLDIR="C:\Program Files\Nordvale" /qn /l*v nordvale_install.log</code>.</p>
 </blockquote>
-<ul>
-<li>Copy the security certificates (which we will call in our example <code>company-cert</code>) the system needs to the <code>cert</code> directory of the root, and instaşll them by running the <code>install_cert.ps</code> script:</li>
-</ul>
-<pre id="cmdln-text">
-C:\ProSoft\admin>copy \Users\&lt;admin-name&gt;\company-cert-1.ca company-cert-2.ca ..\cert
-C:\ProSoft\admin>install_cert.ps --install-dir=..\cert --certificates=..\cert\*.ca
->>> Installing certificates ...
->>> Done
-</pre>
-<ul>
-<li>
-<p>Make sure that your proxy server, if any, is configured to allow traffic at ProSoft's default communication ports: 4096 and 6650</p>
-</li>
-<li>
-<p>Check the security settings of the server before starting to add users that will have access to the system. The users should have <em>Read</em>, <em>Write</em>, and <em>Execute</em> privileges</p>
-</li>
-</ul>
-</span>
-<hr>
-<h2 id="license-terms">License Terms</h2>
-<p>This software is valid for one major upgrade amd all the minor upgrades in between. The number of seats is limited to 25 for the <em>Professional</em> and 50 for the <em>Enterprise</em> versions. In order to renew licenses or add more seats, please visit our <a href="https://www.profost.com/licensing">licensing page</a>.</p>
-
+<h2 id="configuration">Configuration</h2>
+<p>After the installation is complete, install the license and the
+certificates. Both tasks are performed from an elevated PowerShell
+session with the scripts in the <code>admin</code> subdirectory of the
+installation directory. The scripts are signed, so they run under the
+default <code>RemoteSigned</code> execution policy of Windows
+Server.</p>
+<h3 id="install-the-license">Install the license</h3>
+<p><strong>Using the CLI</strong></p>
+<ol type="1">
+<li><p>Copy the <code>nordvale.lic</code> file that you received by
+e-mail to the <code>license</code> subdirectory of the installation
+directory:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Copy-Item</span> <span class="op">-</span>Path <span class="st">&quot;</span><span class="va">$env</span><span class="op">:</span><span class="va">USERPROFILE</span><span class="st">\Downloads\nordvale.lic&quot;</span> <span class="op">-</span>Destination <span class="st">&quot;C:\Program Files\Nordvale\license\&quot;</span></span></code></pre></div></li>
+<li><p>Change to the <code>admin</code> directory and run the
+<code>install_lic.ps1</code> script:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;C:\Program Files\Nordvale\admin&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\install_lic<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>LicenseFile <span class="st">&quot;C:\Program Files\Nordvale\license\nordvale.lic&quot;</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Installing license...
+License installed: Professional, 25 seats
+Done</code></pre></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> If you skip this step, Nordvale Server prompts
+you for the license file the first time you open the web interface.</p>
+</blockquote>
+<h3 id="install-the-certificates">Install the certificates</h3>
+<p>Nordvale Server needs a server certificate, its private key, and the
+certificate chain of the issuing certificate authority (CA). In this
+example, the files are <code>server.crt</code>, <code>server.key</code>,
+<code>intermediate.crt</code>, and <code>root.crt</code>.</p>
+<p><strong>Using the CLI</strong></p>
+<ol type="1">
+<li><p>Copy the certificate files to the <code>certs</code> subdirectory
+of the installation directory:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Copy-Item</span> <span class="op">-</span>Path <span class="st">&quot;</span><span class="va">$env</span><span class="op">:</span><span class="va">USERPROFILE</span><span class="st">\Downloads\*.crt&quot;</span><span class="op">,</span> <span class="st">&quot;</span><span class="va">$env</span><span class="op">:</span><span class="va">USERPROFILE</span><span class="st">\Downloads\server.key&quot;</span> <span class="op">-</span>Destination <span class="st">&quot;C:\Program Files\Nordvale\certs\&quot;</span></span></code></pre></div></li>
+<li><p>From the <code>admin</code> directory, run the
+<code>install_cert.ps1</code> script. The script validates the chain,
+imports the server certificate into the <code>LocalMachine\My</code>
+store, and binds it to the IIS site on port 443 and to the
+communications port:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\install_cert<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>CertDir <span class="st">&quot;C:\Program Files\Nordvale\certs&quot;</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Installing certificates...
+Certificate chain: valid (server.crt -&gt; intermediate.crt -&gt; root.crt)
+IIS binding on port 443: updated
+Done</code></pre></li>
+<li><p>If a proxy or firewall sits between the build agents and the
+server, allow traffic to port 6650.</p></li>
+<li><p>Before you add users, check that the Nordvale service account has
+<em>Read</em>, <em>Write</em>, and <em>Execute</em> permissions on
+<code>C:\Program Files\Nordvale</code> and
+<code>C:\ProgramData\Nordvale</code>.</p></li>
+</ol>
+<h2 id="post-installation-verification">Post-installation
+verification</h2>
+<p>After you complete the installation and configuration, verify that
+Nordvale Server is operating correctly.</p>
+<h3 id="check-the-service-status">Check the service status</h3>
+<p>Run the following command from the <code>admin</code> directory:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\nordvalectl<span class="op">.</span><span class="fu">exe</span> status</span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Nordvale Core Service:     RUNNING (PID 1234)
+Nordvale Web Service:      RUNNING (PID 1235, https://127.0.0.1:8443)
+Communications listener:   RUNNING (port 6650)
+Database connection:       CONNECTED (PostgreSQL 16.4)
+License status:            VALID (Professional, 25 seats, expires 2027-12-31)</code></pre>
+<h3 id="test-the-web-interface">Test the web interface</h3>
+<ol type="1">
+<li>Open a web browser and navigate to
+<code>https://nordvale.corp.example</code> (replace this with the host
+name of your server).</li>
+<li>Log in as <code>nvadmin</code>. The one-time initial password is
+stored in
+<code>C:\ProgramData\Nordvale\initial-admin-password.txt</code>, and you
+must change it when you first log in.</li>
+<li>Verify that the dashboard loads and displays system statistics.</li>
+</ol>
+<h3 id="test-the-rest-api">Test the REST API</h3>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Invoke-RestMethod</span> <span class="op">-</span>Uri <span class="st">&quot;https://nordvale.corp.example/api/v1/health&quot;</span> <span class="op">-</span>Headers @<span class="op">{</span> Authorization <span class="op">=</span> <span class="st">&quot;Bearer &lt;api-key&gt;&quot;</span> <span class="op">}</span></span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>status  version uptime   database
+------  ------- ------   --------
+healthy 8.5.0   00:05:23 connected</code></pre>
+<h3 id="run-a-performance-baseline">Run a performance baseline</h3>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\nordvalectl<span class="op">.</span><span class="fu">exe</span> benchmark <span class="op">--</span>quick</span></code></pre></div>
+<p>Expected output:</p>
+<pre class="text"><code>Running performance baseline...
+Build processing:   450 builds/hour (target: &gt; 400)
+API response time:  85 ms average (target: &lt; 100 ms)
+Database query:     12 ms average (target: &lt; 50 ms)
+Memory usage:       2.1 GB (limit for this edition: 8 GB)
+RESULT: All benchmarks PASSED</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-installation-issues">Common installation issues</h3>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 34%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Symptoms</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insufficient permissions</strong></td>
+<td>Installation fails with “Access Denied”</td>
+<td>Run the installer from an elevated prompt (<strong>Run as
+administrator</strong>)</td>
+</tr>
+<tr>
+<td><strong>Port conflicts</strong></td>
+<td>A service fails to start with a port binding error</td>
+<td>Check whether ports 443, 6650, and 8443 are in use:
+<code>Get-NetTCPConnection -LocalPort 443,6650,8443</code></td>
+</tr>
+<tr>
+<td><strong>Database connection failed</strong></td>
+<td>Setup cannot connect to the database</td>
+<td>Verify that the database server is running and that the credentials
+are correct</td>
+</tr>
+<tr>
+<td><strong>License validation failed</strong></td>
+<td>“Invalid license” error on startup</td>
+<td>Check outbound HTTPS access to
+<code>licensing.nordvale.example</code>; verify that
+<code>nordvale.lic</code> is intact</td>
+</tr>
+<tr>
+<td><strong>Insufficient disk space</strong></td>
+<td>Installation stops at 75%</td>
+<td>Free up space; the installer needs 2 GB on the system drive in
+addition to the data storage</td>
+</tr>
+</tbody>
+</table>
+<h3 id="log-file-locations">Log file locations</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr>
+<th>Log</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Installer log (command-line installation)</td>
+<td>The file passed to <code>/l*v</code>, for example
+<code>nordvale_install.log</code> in the current folder</td>
+</tr>
+<tr>
+<td>Installer log (setup wizard)</td>
+<td><code>%TEMP%\MSI*.log</code></td>
+</tr>
+<tr>
+<td>Service logs</td>
+<td><code>C:\ProgramData\Nordvale\logs\</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="service-management-commands">Service management commands</h3>
+<p>Run these commands from <code>C:\Program Files\Nordvale\admin</code>
+in an elevated PowerShell session.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start the services</td>
+<td><code>.\nordvalectl.exe start</code></td>
+</tr>
+<tr>
+<td>Stop the services</td>
+<td><code>.\nordvalectl.exe stop</code></td>
+</tr>
+<tr>
+<td>Restart the services</td>
+<td><code>.\nordvalectl.exe restart</code></td>
+</tr>
+<tr>
+<td>View live logs</td>
+<td><code>.\nordvalectl.exe logs --follow</code></td>
+</tr>
+<tr>
+<td>Validate the configuration</td>
+<td><code>.\nordvalectl.exe config --validate</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="license-terms">License terms</h2>
+<p>Each license is valid for the licensed major version, all minor and
+patch releases of that version, and one major upgrade. The number of
+seats is limited to 10 for the <em>Standard</em>, 25 for the
+<em>Professional</em>, and 250 for the <em>Enterprise</em> edition. To
+renew licenses or add more seats, visit the <a
+href="https://www.nordvale.example/licensing">licensing page</a>.</p>
 </body>
 </html>

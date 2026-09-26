@@ -14,18 +14,11 @@ A curated collection of technical writing samples across software and non‑soft
 8. [User Assistance](./user-assistance/)
 9. [User Manuals](./user-manuals/)
 
-> **Styling**: Asciidoc samples use a readable dark theme (`css/common-dark.css`). Markdown → HTML exports may use `css/common-md-dark.css` (optional) or `css/common-light.css`.
-
 ## How to View
 
-To view the samples, download the bundle and unzip it to a local folder. Then, to have the source files rendered:
-
-- **Markdown**/**Asciidoc** files: install a Markdown/Asciidoc viewer extension in your browser, and then directly open the file
-- **HTML** files: directly open the file in your browser
-
-If you do not wish to use those, however, just download the following:
-
-- **PDF** files: use **Adobe Acrobat** or a similar viewer
+- **On the website** (<https://korayerkan.github.io/tw-portfolio/>): every sample opens as a formatted HTML page; manuals also have a PDF.
+- **On GitHub:** GitHub renders the Markdown (`.md`), AsciiDoc (`.adoc`) and PDF files directly. The `.html` files show as source code there; use the website for those.
+- **Locally:** clone the repository and open any `.html` or `.pdf` file. The Software Guides viewer needs a local web server (see its README).
 
 ## Notes and Credits
 

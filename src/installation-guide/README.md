@@ -4,11 +4,13 @@
 **Purpose:** Provide comprehensive, reproducible installation procedures with thorough verification steps and troubleshooting guidance.
 
 ## What's Inside
-- **Installation Guide** — Complete end-to-end installation procedures covering system requirements, dependency management, configuration steps, and post-installation verification
+
+- **[Installation Guide](installation-guide.md)** — End-to-end installation procedure for a fictitious Windows server product (Nordvale Server), covering system requirements, dependencies, GUI and command-line installation, license and certificate setup, and post-installation verification
 
 ## Highlights
-- Detailed system requirements and compatibility matrix
-- Step-by-step commands with expected outputs and verification checks
-- Comprehensive troubleshooting section for common installation issues
-- Network configuration and security considerations
-- Performance optimization recommendations
+
+- System requirements by license edition, with operating system and database compatibility tables
+- Numbered procedures with copy-pasteable PowerShell commands and separate expected output
+- Troubleshooting table for common installation issues, with log locations
+- Network port and firewall configuration
+- Post-installation verification, including a performance baseline check

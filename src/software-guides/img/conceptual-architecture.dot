@@ -1,67 +1,81 @@
 digraph G {
-  graph [rankdir=TB, splines=false, bgcolor="transparent", nodesep=0.8, ranksep=1.2];
+  graph [rankdir=TB, bgcolor="transparent", nodesep=0.5, ranksep=0.8,
+         fontname="Calibri", fontsize=14];
   node [shape=box, style="rounded,filled", fontname="Calibri", fontsize=14];
-  edge [arrowsize=0.8, penwidth=1.5, fontname="Calibri", fontsize=14];
+  edge [arrowsize=0.8, penwidth=1.5, fontname="Calibri", fontsize=12];
 
-  // Presentation Layer
-  subgraph cluster_presentation {
-    label="Presentation Layer";
-    style="rounded,filled";
-    fillcolor="#f0f8ff";
-    fontname="Calibri";
-    fontsize=14;
-    webapp [label="Web Application", fillcolor="#bbdefb"];
-    mobile [label="Mobile App", fillcolor="#bbdefb"];
-    cli [label="CLI/SDK Tools", fillcolor="#bbdefb"];
+  // Outside Orbitask
+  subgraph cluster_clients {
+    label="Clients";
+    style="rounded,filled"; fillcolor="#f0f8ff";
+    webapp [label="Web app\n(browser)", fillcolor="#bbdefb"];
+    cli    [label="CLI / SDK", fillcolor="#bbdefb"];
   }
 
-  // API Gateway Layer
-  subgraph cluster_gateway {
-    label="API Gateway";
-    style="rounded,filled";
-    fillcolor="#f0fff0";
-    fontname="Calibri";
-    fontsize=14;
-    gateway [label="API Gateway\n(Routing & Auth)", fillcolor="#c8e6c9"];
+  subgraph cluster_customer {
+    label="Customer network";
+    style="rounded,filled"; fillcolor="#f1f8e9";
+    agent  [label="Self-hosted agent", fillcolor="#dcedc8"];
+    onprem [label="On-premises systems\n(file shares, object stores)", fillcolor="#dcedc8"];
   }
 
-  // Business Services Layer
-  subgraph cluster_services {
-    label="Business Services";
-    style="rounded,filled";
-    fillcolor="#fffaf0";
-    fontname="Calibri";
-    fontsize=14;
-    auth [label="Authentication\nService", fillcolor="#ffe0b2"];
-    projects [label="Projects\nService", fillcolor="#ffe0b2"];
-    reporting [label="Reporting\nService", fillcolor="#ffe0b2"];
-    webhooks [label="Webhooks\nService", fillcolor="#ffe0b2"];
+  idp [label="Customer identity provider\n(SAML / OIDC, SCIM)", fillcolor="#e8f5e9"];
+
+  // Orbitask cloud
+  subgraph cluster_cloud {
+    label="Orbitask cloud";
+    style="rounded,filled"; fillcolor="#fafafa";
+
+    edge_gw [label="Edge and API gateway\n(TLS, WAF, rate limits, routing)", fillcolor="#c8e6c9"];
+
+    subgraph cluster_services {
+      label="Services";
+      style="rounded,filled"; fillcolor="#fffaf0";
+      identity  [label="Identity service\n(SSO, sessions, SCIM, roles)", fillcolor="#ffe0b2"];
+      projects  [label="Projects and\ntasks service", fillcolor="#ffe0b2"];
+      reporting [label="Reporting\nservice", fillcolor="#ffe0b2"];
+      webhooks  [label="Webhooks\nservice", fillcolor="#ffe0b2"];
+      connectors[label="Agent\nconnector service", fillcolor="#ffe0b2"];
+    }
+
+    subgraph cluster_data {
+      label="Data";
+      style="rounded,filled"; fillcolor="#f9f5ff";
+      database [label="Primary\ndatabase", fillcolor="#e1bee7", shape=cylinder];
+      cache    [label="Redis\ncache", fillcolor="#e1bee7", shape=cylinder];
+      queue    [label="Message\nqueue", fillcolor="#e1bee7", shape=component];
+      objects  [label="Object storage\n(files, exports)", fillcolor="#e1bee7", shape=folder];
+    }
   }
 
-  // Data Layer
-  subgraph cluster_data {
-    label="Data Layer";
-    style="rounded,filled";
-    fillcolor="#f9f5ff";
-    fontname="Calibri";
-    fontsize=14;
-    database [label="Primary\nDatabase", fillcolor="#e1bee7", shape=cylinder];
-    queues [label="Message\nQueues", fillcolor="#e1bee7", shape=component];
-  }
+  endpoints [label="Customer webhook\nendpoints", fillcolor="#ffe0b2"];
 
-  // Connections - Clean top-to-bottom flow
-  webapp -> gateway;
-  mobile -> gateway;
-  cli -> gateway;
 
-  gateway -> auth;
-  gateway -> projects;
-  gateway -> reporting;
-  gateway -> webhooks;
+  // Requests into Orbitask
+  webapp -> edge_gw [label="HTTPS"];
+  cli    -> edge_gw [label="HTTPS"];
+  agent  -> edge_gw [label="outbound\nHTTPS only"];
+  agent -> onprem [style=dashed, label="reads", constraint=false];
 
-  auth -> database;
-  projects -> database;
-  reporting -> database;
-  reporting -> queues;
-  webhooks -> queues;
+  // Identity
+  idp -> edge_gw [label="SSO responses,\nSCIM provisioning"];
+
+  // Gateway to services
+  edge_gw -> identity;
+  edge_gw -> projects;
+  edge_gw -> reporting;
+  edge_gw -> connectors;
+
+  // Services to data
+  identity  -> database;
+  identity  -> cache;
+  projects  -> database;
+  projects  -> cache;
+  projects  -> queue [label="events"];
+  reporting -> queue [label="jobs"];
+  reporting -> objects;
+  connectors -> objects;
+  edge_gw -> webhooks [style=invis];
+  webhooks -> queue [label="consumes\nevents"];
+  webhooks -> endpoints [label="signed\nHTTPS POST"];
 }
