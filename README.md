@@ -1,4 +1,4 @@
-# Technical Writing Portfolio — Koray Erkan
+# Technical Writing Portfolio
 
 Writing samples across software and non-software documentation: API references, installation and configuration guides, release notes, tutorials, a multi-page SaaS doc set, end-user help, and illustrated appliance and industrial manuals.
 
