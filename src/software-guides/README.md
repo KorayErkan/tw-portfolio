@@ -18,7 +18,7 @@ The pages, in reading order (the same order as the viewer's sidebar):
 - **Security & Compliance** — Shared responsibilities, access control, encryption, data retention, and incident notification
 - **Release Notes** — Changes in 1.8.0 and the 1.7.x releases, including the API v1 deprecation
 
-Diagrams are Graphviz sources (`img/*.dot`) rendered to SVG (`img/*.svg`).
+Diagrams are SVG files (`img/*.svg`) with a built-in dark-mode palette, so they stay readable in light and dark themes.
 
 ## How to view this documentation
 

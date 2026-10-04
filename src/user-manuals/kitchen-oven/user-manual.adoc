@@ -499,7 +499,8 @@ Anything that requires removing panels or measuring voltages is listed in <<tech
 |—
 |===
 
-image::oven-troubleshooting.svg[Troubleshooting diagnostic flowchart, width=70%]
+.Troubleshooting flowchart (user checks)
+image::oven-troubleshooting.svg[Flowchart that routes power, error-code, oven, fan, door and hob problems to user checks, then to Done or Call service, width=100%]
 
 [[technician-checks]]
 === Service Technician Only
