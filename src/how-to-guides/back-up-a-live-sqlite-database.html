@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>How to back up a live SQLite database</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/common-light.css" />
+</head>
+<body>
+<h1 id="how-to-back-up-a-live-sqlite-database">How to back up a live
+SQLite database</h1>
+<p><a href="mailto:john.saysitall@goodcode.example"><em>John
+Saysitall</em></a></p>
+<p>The order system at Quillmont Coffee keeps every order in one SQLite
+file, <code>orders.db</code>, and writes to it all day. Copying that
+file while the application runs looks like a backup, but the copy can be
+incomplete or even corrupt. This guide shows two safe ways to back up a
+database that is in use, how to check the result, and how to restore
+it.</p>
+<hr />
+<h2 id="table-of-contents">Table of contents</h2>
+<ul>
+<li><a href="#before-you-begin">Before you begin</a></li>
+<li><a href="#why-a-file-copy-isnt-a-backup">Why a file copy isn’t a
+backup</a></li>
+<li><a href="#choose-a-method">Choose a method</a></li>
+<li><a href="#back-up-from-the-shell">Back up from the shell</a></li>
+<li><a href="#back-up-with-sql">Back up with SQL</a></li>
+<li><a href="#verify-the-backup">Verify the backup</a></li>
+<li><a href="#restore-a-backup">Restore a backup</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#appendix-a-sample-database">Appendix: a sample
+database</a></li>
+</ul>
+<hr />
+<h2 id="before-you-begin">Before you begin</h2>
+<p>You need:</p>
+<ul>
+<li>The <code>sqlite3</code> command-line shell, version 3.27.0 or
+later, because <code>VACUUM INTO</code> first appeared in 3.27.0. Run
+<code>sqlite3 --version</code> to check.</li>
+<li>Read access to the database folder and write access to a backup
+folder.</li>
+<li>Free disk space at least the size of the database.</li>
+</ul>
+<p>All commands run from the folder that holds <code>orders.db</code>
+and write to a <code>backups</code> subfolder. To practice on a
+throwaway database first, build one with the script in the <a
+href="#appendix-a-sample-database">appendix</a>.</p>
+<h2 id="why-a-file-copy-isnt-a-backup">Why a file copy isn’t a
+backup</h2>
+<p>Most applications that read and write at the same time run SQLite in
+<em>WAL mode</em> (write-ahead logging). New transactions go to a second
+file, <code>orders.db-wal</code>, and move into <code>orders.db</code>
+only later, at a <em>checkpoint</em>. Until then, the main file doesn’t
+contain them.</p>
+<p>Here is what a plain copy produced while the application was taking
+orders:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Orders</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Live database (<code>orders.db</code> plus its WAL file)</td>
+<td>5,037</td>
+</tr>
+<tr>
+<td>A copy of <code>orders.db</code> alone</td>
+<td>5,000</td>
+</tr>
+</tbody>
+</table>
+<p>The copy missed every order placed since the last checkpoint, and
+nothing warned about it. In the older <em>rollback journal</em> mode,
+the risk is worse: a copy taken in the middle of a write can capture
+half of a transaction, which leaves a corrupt file.</p>
+<p>The copy didn’t fail. It just quietly left out the newest orders.</p>
+<h2 id="choose-a-method">Choose a method</h2>
+<p>Both methods read the database inside a single read transaction, so
+the backup is a consistent snapshot of one moment. In WAL mode, the
+application keeps writing while the backup runs.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th><code>.backup</code></th>
+<th><code>VACUUM INTO</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What it is</td>
+<td>A command of the <code>sqlite3</code> shell</td>
+<td>An SQL statement, so it also runs from application code</td>
+</tr>
+<tr>
+<td>Output file</td>
+<td>A page-by-page copy</td>
+<td>A rebuilt copy without free pages, often smaller</td>
+</tr>
+<tr>
+<td>Journal mode of the copy</td>
+<td>Same as the source (WAL here)</td>
+<td>Rollback journal (<code>delete</code>)</td>
+</tr>
+<tr>
+<td>If the target file exists</td>
+<td>Overwrites it without warning</td>
+<td>Refuses: <code>output file already exists</code></td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Scheduled backups from a script</td>
+<td>Backups started by the application, compact archive copies</td>
+</tr>
+</tbody>
+</table>
+<h2 id="back-up-from-the-shell">Back up from the shell</h2>
+<ol type="1">
+<li><p>Run <code>.backup</code> with a date in the file name, so today’s
+backup doesn’t overwrite yesterday’s.</p>
+<p>In PowerShell:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sqlite3 orders<span class="op">.</span><span class="fu">db</span> <span class="st">&quot;.backup &#39;backups/orders-</span><span class="op">$(</span><span class="fu">Get-Date</span> <span class="op">-</span>Format yyyy-MM-dd<span class="op">)</span><span class="st">.db&#39;&quot;</span></span></code></pre></div>
+<p>In Bash:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> orders.db <span class="st">&quot;.backup &#39;backups/orders-</span><span class="va">$(</span><span class="fu">date</span> +%F<span class="va">)</span><span class="st">.db&#39;&quot;</span></span></code></pre></div></li>
+<li><p><a href="#verify-the-backup">Verify the backup</a>.</p></li>
+</ol>
+<blockquote>
+<p><strong>Warning:</strong> <code>.backup</code> replaces an existing
+file of the same name without asking. A fixed name such as
+<code>backups/orders.db</code> keeps only the latest backup, including a
+bad one.</p>
+</blockquote>
+<h2 id="back-up-with-sql">Back up with SQL</h2>
+<ol type="1">
+<li><p>Run the statement with a target file that doesn’t exist yet:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> orders.db <span class="st">&quot;VACUUM INTO &#39;backups/orders-2026-10-09-compact.db&#39;;&quot;</span></span></code></pre></div></li>
+<li><p><a href="#verify-the-backup">Verify the backup</a>.</p></li>
+</ol>
+<p>To back up from application code, run the same
+<code>VACUUM INTO</code> statement through the application’s own
+database connection.</p>
+<h2 id="verify-the-backup">Verify the backup</h2>
+<p>A backup that nobody has opened is a hope, not a backup. Check every
+new file before you rely on it.</p>
+<ol type="1">
+<li><p>Check the file’s internal structure:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> backups/orders-2026-10-09.db <span class="st">&quot;PRAGMA integrity_check;&quot;</span></span></code></pre></div>
+<p>The only acceptable output is <code>ok</code>.</p></li>
+<li><p>Compare the row counts of the backup and the live database:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> backups/orders-2026-10-09.db <span class="st">&quot;SELECT count(*) FROM orders;&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> orders.db <span class="st">&quot;SELECT count(*) FROM orders;&quot;</span></span></code></pre></div>
+<p>The backup can have fewer rows than the live database, because orders
+keep arriving after the backup is taken. It shouldn’t have
+<em>more</em>.</p></li>
+</ol>
+<h2 id="restore-a-backup">Restore a backup</h2>
+<p>Restoring replaces the whole database, so every order placed after
+the backup is lost. Save the current state first, even if you think it’s
+broken.</p>
+<ol type="1">
+<li><p>Stop the application, so that nothing writes to
+<code>orders.db</code> during the restore.</p></li>
+<li><p>Back up the current database:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> orders.db <span class="st">&quot;.backup &#39;backups/orders-before-restore.db&#39;&quot;</span></span></code></pre></div></li>
+<li><p>Restore the backup into the live database:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> orders.db <span class="st">&quot;.restore &#39;backups/orders-2026-10-09.db&#39;&quot;</span></span></code></pre></div></li>
+<li><p>Run <code>PRAGMA integrity_check;</code> on
+<code>orders.db</code> and compare its row count with the backup’s, as
+in <a href="#verify-the-backup">Verify the backup</a>.</p></li>
+<li><p>Start the application.</p></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> Use <code>.restore</code> instead of copying
+the backup file over <code>orders.db</code>. A copied file can end up
+next to an old <code>orders.db-wal</code>, and SQLite then pairs the
+restored database with a log file from a different one. SQLite’s own
+documentation lists this as a way to corrupt a database.</p>
+</blockquote>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Error: database is locked</code></td>
+<td>Another connection holds a write lock; this happens in rollback
+journal mode. Make the shell wait for it:
+<code>sqlite3 orders.db ".timeout 10000" ".backup 'backups/orders-2026-10-09.db'"</code></td>
+</tr>
+<tr>
+<td><code>output file already exists</code></td>
+<td><code>VACUUM INTO</code> doesn’t overwrite. Choose a new file name,
+or delete the old file if you no longer need it.</td>
+</tr>
+<tr>
+<td>The backup has fewer rows than the live database</td>
+<td>Expected: these are orders placed after the backup. To confirm,
+compare <code>SELECT max(placed) FROM orders;</code> in both files.</td>
+</tr>
+<tr>
+<td><code>PRAGMA integrity_check</code> returns anything but
+<code>ok</code></td>
+<td>Don’t keep the file. Take a new backup and check it. If the live
+database fails the check too, restore the last backup that passed.</td>
+</tr>
+<tr>
+<td><code>sqlite3</code> is not recognized as a command</td>
+<td>The shell isn’t installed or isn’t on your <code>PATH</code>.
+Install it from your package manager, and open a new terminal.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix-a-sample-database">Appendix: a sample database</h2>
+<p>This script creates an <code>orders.db</code> in WAL mode with 5,000
+sample orders. Save it as <code>create-sample.sql</code>, then run
+<code>sqlite3 orders.db &lt; create-sample.sql</code> in Bash.
+PowerShell has no <code>&lt;</code> redirection; there, run
+<code>Get-Content create-sample.sql | sqlite3 orders.db</code>.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>PRAGMA journal_mode <span class="op">=</span> WAL;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> orders (</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">id</span>       <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  customer TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  product  TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  qty      <span class="dt">INTEGER</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  placed   TEXT <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> (datetime(<span class="st">&#39;now&#39;</span>))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> RECURSIVE n(i) <span class="kw">AS</span> (<span class="kw">SELECT</span> <span class="dv">1</span> <span class="kw">UNION</span> <span class="kw">ALL</span> <span class="kw">SELECT</span> i <span class="op">+</span> <span class="dv">1</span> <span class="kw">FROM</span> n <span class="kw">WHERE</span> i <span class="op">&lt;</span> <span class="dv">5000</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> orders (customer, product, qty)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="st">&#39;Customer &#39;</span> <span class="op">||</span> (i % <span class="dv">250</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>       <span class="cf">CASE</span> i % <span class="dv">3</span> <span class="cf">WHEN</span> <span class="dv">0</span> <span class="cf">THEN</span> <span class="st">&#39;Espresso blend 1 kg&#39;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">WHEN</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="st">&#39;Filter blend 500 g&#39;</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">ELSE</span> <span class="st">&#39;Decaf 250 g&#39;</span> <span class="cf">END</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>       <span class="dv">1</span> <span class="op">+</span> i % <span class="dv">4</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> n;</span></code></pre></div>
+<p>The script prints <code>wal</code> once, confirming the journal mode.
+<code>SELECT count(*) FROM orders;</code> then returns
+<code>5000</code>.</p>
+</body>
+</html>
