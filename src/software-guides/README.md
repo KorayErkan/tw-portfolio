@@ -1,7 +1,7 @@
 # Software Guides (Portfolio Sample)
 
-**Audience:** Workspace administrators, IT staff, developers, and end users
-**Purpose:** Show how a small, cross-linked documentation set for one software product fits together.
+- **Audience:** Workspace administrators, IT staff, developers, and end users
+- **Purpose:** Show how a small, cross-linked documentation set for one software product fits together.
 
 ## What's inside
 

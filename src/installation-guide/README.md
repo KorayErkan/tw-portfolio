@@ -1,7 +1,7 @@
 # Installation Guide (Portfolio Sample)
 
-**Audience:** System administrators, DevOps engineers, and IT professionals
-**Purpose:** Provide comprehensive, reproducible installation procedures with thorough verification steps and troubleshooting guidance.
+- **Audience:** System administrators, DevOps engineers, and IT professionals
+- **Purpose:** Provide comprehensive, reproducible installation procedures with thorough verification steps and troubleshooting guidance.
 
 ## What's Inside
 

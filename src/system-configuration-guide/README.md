@@ -1,7 +1,7 @@
 # System Configuration Guide (Portfolio Sample)
 
-**Audience:** System administrators, network engineers, and IT professionals
-**Purpose:** Provide comprehensive system setup guidance covering server sizing, networking, certificates, and licensing requirements.
+- **Audience:** System administrators, network engineers, and IT professionals
+- **Purpose:** Provide comprehensive system setup guidance covering server sizing, networking, certificates, and licensing requirements.
 
 ## What's Inside
 

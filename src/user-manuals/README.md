@@ -1,7 +1,7 @@
 # Appliance and Industrial Manuals (Portfolio Samples)
 
-**Audience:** Consumers, appliance installers, industrial operators, and maintenance personnel
-**Purpose:** Demonstrate non-software technical writing capabilities for physical products, emphasizing safety, usability, and compliance requirements across different complexity levels.
+- **Audience:** Consumers, appliance installers, industrial operators, and maintenance personnel
+- **Purpose:** Demonstrate non-software technical writing capabilities for physical products, emphasizing safety, usability, and compliance requirements across different complexity levels.
 
 ## What's Inside
 

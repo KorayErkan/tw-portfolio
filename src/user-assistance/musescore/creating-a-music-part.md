@@ -9,7 +9,7 @@ In this topic, you enter an electric bass part with the mouse and computer keybo
 To keep the screenshots simple, this topic uses a separate single-staff score called "Bass Line". It contains only an Electric Bass staff. You can download both sample scores:
 
 - [Bass_Line.mscz](Bass_Line.mscz): the single-staff score used in this topic, with the first measures already entered
-- [Love_Song.mscz](Love_Song.mscz): the blank three-instrument score created in [Creating a score file](creating-a-score-file.md)
+- [Love_Song.mscz](Love_Song.mscz): the three-instrument score from [Creating a score file](creating-a-score-file.md), with the first four measures filled in for piano, electric bass, and drums
 
 The steps are the same for the Electric Bass staff in Love Song.
 
@@ -24,18 +24,18 @@ The steps are the same for the Electric Bass staff in Love Song.
 
 3. Press <kbd>N</kbd>, or click the **Note input** button at the left end of the note input toolbar (the button with the *N* symbol).
 
-   ![Note input button and its list of input modes](pictures/note-entry-button.png)
+   ![Note input button and the arrow that opens the input modes](pictures/note-entry-button.png)
 
    The arrow next to the button opens a list of input modes. The default mode, **Step-Time**, is the one used in this topic.
 
-   A blue vertical bar appears at the start of the measure. It marks where the next note will go:
+   A blue cursor appears on the first beat of the measure. It marks where the next note will go:
 
    ![Note input cursor on the first beat](pictures/activate-note-entry.png)
 
 4. Choose a duration by clicking it on the note input toolbar, or by pressing a number key: for example, <kbd>4</kbd> for an eighth note or <kbd>5</kbd> for a quarter note. The quarter note is selected by default.
 5. Type the letter name of the pitch, <kbd>A</kbd> to <kbd>G</kbd>.
 
-   MuseScore enters that note, following the key signature, in the octave closest to the previous note. The bar moves on to the next beat.
+   MuseScore enters that note, following the key signature, in the octave closest to the previous note. The cursor moves on to the next beat.
 
    To correct the pitch of the note you just entered, press <kbd>Up</kbd> or <kbd>Down</kbd> to move it by a semitone, or <kbd>Ctrl</kbd>+<kbd>Up</kbd> or <kbd>Ctrl</kbd>+<kbd>Down</kbd> to move it by an octave.
 

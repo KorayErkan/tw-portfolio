@@ -2,7 +2,7 @@
 
 *Applies to MuseScore 3.6.2. The menus in MuseScore 4 are different.*
 
-In this topic, you create a blank score for a small band (piano, electric bass, and drums) with the New Score wizard. The finished score is available as a sample: [Love_Song.mscz](Love_Song.mscz).
+In this topic, you create a blank score for a small band (piano, electric bass, and drums) with the New Score wizard. A copy of the score, with the first four measures filled in, is available as a sample: [Love_Song.mscz](Love_Song.mscz).
 
 Before you start, download and install MuseScore 3.6.2 (see [MuseScore Music Notation App](introduction.md)).
 
@@ -26,7 +26,7 @@ Before you start, download and install MuseScore 3.6.2 (see [MuseScore Music Not
 
    Piano appears in the right pane.
 
-6. Add **Electric Bass** and **Drumset** the same way.
+6. Add **Electric Bass** and **Drumset**. They aren't in the **Common** list, so type each name in the search box above the list (for example, *Drumset*), select it, and click **Add to score**.
 
    The right pane now lists all three instruments:
 

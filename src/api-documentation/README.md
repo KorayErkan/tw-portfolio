@@ -1,7 +1,7 @@
 # API Documentation (Portfolio Samples)
 
-**Audience:** Developers and software engineers
-**Purpose:** Demonstrate comprehensive API reference documentation with clear examples, detailed parameter descriptions, and practical usage scenarios.
+- **Audience:** Developers and software engineers
+- **Purpose:** Demonstrate comprehensive API reference documentation with clear examples, detailed parameter descriptions, and practical usage scenarios.
 
 ## What's Inside
 
