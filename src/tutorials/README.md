@@ -1,7 +1,7 @@
 # Tutorials (Portfolio Samples)
 
-**Audience:** Developers, power users, and technical learners
-**Purpose:** Provide progressive, hands-on learning experiences that build understanding through practical examples and structured exercises.
+- **Audience:** Developers, power users, and technical learners
+- **Purpose:** Provide progressive, hands-on learning experiences that build understanding through practical examples and structured exercises.
 
 ## What's Inside
 

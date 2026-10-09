@@ -1,7 +1,7 @@
 # Reference Charts (Portfolio Samples)
 
-**Audience:** Developers, system operators, and technical users
-**Purpose:** Provide quick-reference materials for configuration parameters, language syntax, and technical specifications in easily scannable formats.
+- **Audience:** Developers, system operators, and technical users
+- **Purpose:** Provide quick-reference materials for configuration parameters, language syntax, and technical specifications in easily scannable formats.
 
 ## What's Inside
 

@@ -1,7 +1,7 @@
 # Release Notes (Portfolio Sample)
 
-**Audience:** Product managers, engineering teams, end users, and stakeholders
-**Purpose:** Communicate software changes, compatibility impacts, and upgrade procedures in a clear, organized format that serves both technical and non-technical audiences.
+- **Audience:** Product managers, engineering teams, end users, and stakeholders
+- **Purpose:** Communicate software changes, compatibility impacts, and upgrade procedures in a clear, organized format that serves both technical and non-technical audiences.
 
 ## What's Inside
 
