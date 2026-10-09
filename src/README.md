@@ -5,14 +5,15 @@ A curated collection of technical writing samples across software and non‑soft
 ## Sections
 
 1. [API Documentation](./api-documentation/)
-2. [Installation Guide](./installation-guide/)
-3. [Reference Charts](./reference-charts/)
-4. [Release Notes](./release-notes/)
-5. [Software Guides](./software-guides/)
-6. [System Configuration Guide](./system-configuration-guide/)
-7. [Tutorials](./tutorials/)
-8. [User Assistance](./user-assistance/)
-9. [User Manuals](./user-manuals/)
+2. [How-To Guides](./how-to-guides/)
+3. [Installation Guide](./installation-guide/)
+4. [Reference Charts](./reference-charts/)
+5. [Release Notes](./release-notes/)
+6. [Software Guides](./software-guides/)
+7. [System Configuration Guide](./system-configuration-guide/)
+8. [Tutorials](./tutorials/)
+9. [User Assistance](./user-assistance/)
+10. [User Manuals](./user-manuals/)
 
 ## How to View
 
