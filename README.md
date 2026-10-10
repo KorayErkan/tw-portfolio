@@ -3,7 +3,8 @@
 Writing samples across software and non-software documentation: API references, installation and configuration guides, release notes, tutorials, a multi-page SaaS doc set, end-user help, and illustrated appliance and industrial manuals.
 
 - **Read it as a website:** <https://korayerkan.github.io/tw-portfolio/>
-- **Browse the sources here:** start at [`src/README.md`](src/README.md). GitHub renders the Markdown, AsciiDoc and PDF files directly.
+- **Browse the sources here:** start at [`src/README.md`](src/README.md). GitHub renders the Markdown, AsciiDoc and PDF files directly, but shows the `.html` files as source; use the website for those.
+- **Read it locally:** clone the repository and open any `.html` or `.pdf` file. The Software Guides viewer needs a local web server (see [its README](src/software-guides/README.md)).
 
 All companies, products, people and contact details in the samples are fictional.
 
