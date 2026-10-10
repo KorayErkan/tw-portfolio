@@ -1,32 +1,42 @@
 # Technical Writing Portfolio
 
-A curated collection of technical writing samples across software and non‑software domains. Each section focuses on a different audience and deliverable type (developers, sysadmins, end users, technicians, and executives). Most samples are Markdown or Asciidoc with compiled HTML/PDF for quick viewing.
+Writing samples for developers, sysadmins, end users, technicians, and executives, across software and physical products. Each sample opens as a web page, and the longer manuals also have a PDF.
 
-## Sections
+## Start here
 
-1. [API Documentation](./api-documentation/)
-2. [How-To Guides](./how-to-guides/)
-3. [Installation Guide](./installation-guide/)
-4. [Reference Charts](./reference-charts/)
-5. [Release Notes](./release-notes/)
-6. [Software Guides](./software-guides/)
-7. [System Configuration Guide](./system-configuration-guide/)
-8. [Tutorials](./tutorials/)
-9. [User Assistance](./user-assistance/)
-10. [User Manuals](./user-manuals/)
+Four samples that show the range in a few minutes:
 
-## How to View
+- **[Orbitask documentation set](./software-guides/)**: eight cross-linked pages for one cloud product, from architecture to release notes, with one set of facts on every page. Readers: workspace admins, IT staff, and end users.
+- **[How to back up a live SQLite database](./how-to-guides/back-up-a-live-sqlite-database.md)** ([PDF](./how-to-guides/back-up-a-live-sqlite-database.pdf)): why copying the file loses data, and two safe methods compared. Every command was checked against a sample database, built by a script in the guide's appendix.
+- **[Kitchen oven installation and user manual](./user-manuals/kitchen-oven/user-manual.adoc)** ([PDF](./user-manuals/kitchen-oven/user-manual.pdf)): one manual, three readers (gas and electrical installers, household users, and service technicians), with gas and tip-over safety messages and troubleshooting split into user checks and technician-only procedures.
+- **[MuseScore task guides](./user-assistance/)**: short visual guides for a real open-source program, with every screenshot taken in the version documented.
 
-- **On the website** (<https://korayerkan.github.io/tw-portfolio/>): every sample opens as a formatted HTML page; manuals also have a PDF.
-- **On GitHub:** GitHub renders the Markdown (`.md`), AsciiDoc (`.adoc`) and PDF files directly. The `.html` files show as source code there; use the website for those.
-- **Locally:** clone the repository and open any `.html` or `.pdf` file. The Software Guides viewer needs a local web server (see its README).
+## All samples
 
-## Notes and Credits
+| Sample | Readers | What it shows |
+|---|---|---|
+| [API documentation](./api-documentation/) | Developers | One fictional API documented for two languages, with an EBNF grammar of accepted URLs, parameter validation, and error handling |
+| [How-to guides](./how-to-guides/) | Practitioners | One goal per guide, from a stated goal to a verified result, with trade-offs in a comparison table |
+| [Installation guide](./installation-guide/) | Sysadmins, DevOps | GUI and PowerShell installation of a Windows server product, with expected output and a troubleshooting table |
+| [Reference charts](./reference-charts/) | Developers, operators | A configuration file and a programming language, each condensed into scannable tables with a formal grammar |
+| [Release notes](./release-notes/) | PMs, engineers, users | A feature release: upgrade steps, security fixes with severity, deprecations with removal versions, and known issues |
+| [Software guides](./software-guides/) | Admins, IT staff, users | The Orbitask documentation set, viewed in a sidebar viewer, with SVG diagrams that work in light and dark themes |
+| [System configuration guide](./system-configuration-guide/) | Sysadmins, network engineers | Server sizing, reverse proxy, certificates and licensing, through to an ordered decommissioning procedure |
+| [Tutorials](./tutorials/) | Developers, learners | A PowerShell tutorial run against one sample folder, and an advanced Git tutorial on rebasing, cherry-picking, and recovery |
+| [User assistance](./user-assistance/) | End users | MuseScore 3.6 task guides with highlighted screenshots and the expected result after each step |
+| [User manuals](./user-manuals/) | Consumers, installers, technicians | A coffee machine, a cordless drill, a kitchen oven, and an industrial machine, with safety, lockout/tagout, and compliance content |
 
-Each of these document types is used for a specific purpose, and the samples were edited with those purposes, and the layout each entails, in mind.
+## How these samples are built
 
-The material is available as **Markdown** (\*.md), **Asciidoc** (\*.adoc), **Hypertext Markup Language** (\*.html), and **Portable Document Format** (\*.pdf) files. The Markdown and Asciidoc files allowed basic editing and layout, the HTML files allowed using stylesheets for Web presentation, and the PDF files allowed pagination and indexing. The text-based files were edited and developed with **Visual Studio Code**, and the PDFs were generated with various widely used command line tools.
+The portfolio is maintained as docs-as-code, the way a product's documentation should be:
 
-All software entities, products, and services referred to in the texts are intended to be imaginary, and any similarities with real life instances should be considered coincidental. The mail addresses, phone numbers, etc. are also meant to be fake.
+- **Sources in plain text:** Markdown and AsciiDoc, versioned in Git and changed through pull requests.
+- **Generated outputs:** HTML and PDF are built from the same source with Pandoc (XeLaTeX) and Asciidoctor PDF, so the two formats never drift apart.
+- **Continuous publishing:** a GitHub Actions workflow publishes the site on every merge and rewrites source links to the generated pages.
+- **Diagrams and screenshots as code:** diagrams are SVG files generated from Python scripts, with a dark-mode palette built in. Screenshot crops, highlights, and callouts are applied by script, so screenshots can be retaken for a new version without manual editing.
 
-Finally, I'm indebted to [Ugur Akinci](https://technicalcommunicationcenter.com/) for mentoring me on the fundamentals of technical writing, as well as informing me on the structure, components, and layout of the documents here, and I'd like to express my gratitude to him.
+## Notes and credits
+
+All companies, products, people, and contact details in the samples are fictional, and any resemblance to real ones is coincidental. The exception is MuseScore, a real open-source program, documented as it is.
+
+I'm indebted to [Ugur Akinci](https://technicalcommunicationcenter.com/) for mentoring me on the fundamentals of technical writing, and on the structure, components, and layout of the documents here.
