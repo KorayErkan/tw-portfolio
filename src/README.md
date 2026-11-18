@@ -16,6 +16,7 @@ Four samples that show the range in a few minutes:
 | Sample | Readers | What it shows |
 |---|---|---|
 | [API documentation](./api-documentation/) | Developers | One fictional API documented for two languages, with an EBNF grammar of accepted URLs, parameter validation, and error handling |
+| [Datasheets](./datasheets/) | Buyers, pre-sales engineers | A one-page datasheet for an on-premises AI product: buyer requirements mapped to features, hardware sizing tiers, and a compliance claim that states its limits |
 | [How-to guides](./how-to-guides/) | Practitioners | One goal per guide, from a stated goal to a verified result, with trade-offs in a comparison table |
 | [Installation guide](./installation-guide/) | Sysadmins, DevOps | GUI and PowerShell installation of a Windows server product, with expected output and a troubleshooting table |
 | [Reference charts](./reference-charts/) | Developers, operators | A configuration file and a programming language, each condensed into scannable tables with a formal grammar |
