@@ -8,6 +8,8 @@ and its numbering system.
 **Status:** pilot in progress. 14 of the 17 pilot data modules are written, covering the whole unit,
 the reservoir, and the return filter; 52 data modules are planned in all.
 
+**[Read the maintenance manual](html/index.html)**, rendered from the XML source.
+
 ## How it's built
 
 Each step's output is the next step's input, so a change to the BOM flows through to the list of
@@ -20,8 +22,9 @@ data modules that need writing or review.
 | 3. Data management list | BOM, SNS, map | [`tools/make_dml.py`](tools/make_dml.py) | [`dml/VH15-DML.md`](dml/VH15-DML.md), [`dml/coverage.md`](dml/coverage.md) |
 | 4. Business rules | SNS, information code list | [`tools/make_brex.py`](tools/make_brex.py) | Project BREX data module (information code 022) |
 | 5. Data modules | DML | written by hand in ASD-STE100 style; shells from `s1kd-newdm` | [`csdb/`](csdb/) |
-| 6. Checks | Data modules | [`tools/check.sh`](tools/check.sh) | Pass or fail |
-| 7. Rendering | Data modules | [`tools/render_html.py`](tools/render_html.py) | HTML (in progress) |
+| 6. Publication module | Data modules | [`tools/make_pm.py`](tools/make_pm.py) | The manual's structure: one section per system, descriptions before tasks |
+| 7. Checks | Data modules, publication module | [`tools/check.sh`](tools/check.sh) | Pass or fail |
+| 8. Rendering | Publication module, data modules | [`tools/render_site.py`](tools/render_site.py) | [`html/`](html/index.html): a contents page and one page per data module, styled with the portfolio CSS |
 
 ## What the checks catch
 
@@ -41,10 +44,11 @@ The coverage report lists 11 undecided parts on purpose: it shows the check doin
 | `bom/` | The BOM export |
 | `sns/` | Project SNS and the part-to-SNS map |
 | `dml/` | Generated data management list and coverage report (don't edit) |
-| `csdb/` | The data modules, plus the CSDB settings written by `s1kd-defaults` |
+| `csdb/` | The data modules and the publication module, plus the CSDB settings written by `s1kd-defaults` |
+| `html/` | The rendered manual (generated; don't edit) |
 | `tools/` | Generators, checks, renderer, and the XML catalog for offline validation |
 
-## Run the checks
+## Build and check
 
 Requirements: [s1kd-tools](https://github.com/kibook/s1kd-tools) 6.x, Python 3, and the Issue 7
 flat schemas in `etc/s1000d-schemas/` at the repository root. The schemas aren't included; download
@@ -53,7 +57,9 @@ the Issue 7 package from the S1000D website.
 ```sh
 python tools/make_dml.py    # rebuild the DML and coverage report
 python tools/make_brex.py   # rebuild the project BREX
+python tools/make_pm.py     # rebuild the publication module
 sh tools/check.sh           # schema, BREX and SNS checks
+python tools/render_site.py # render the manual to html/
 ```
 
 Open `hydraulic-power-unit.code-workspace` in VS Code with the Red Hat XML extension to get

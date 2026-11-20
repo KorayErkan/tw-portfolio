@@ -1,0 +1,118 @@
+/* Extension of common-light.css for S1000D publications (technical-publications/).
+   Load it after common-light.css. Colors follow the portfolio palette:
+   #1566A8 accent, #F0F0F0 panels, #7F7F7F borders. */
+
+.pub-nav {
+	display: flex;
+	justify-content: space-between;
+	gap: 1em;
+	flex-wrap: wrap;
+	font-size: 0.85em;
+	padding: 0.6em 0;
+	border-bottom: 1px solid #7F7F7F;
+}
+
+.pub-nav.bottom {
+	border-top: 1px solid #7F7F7F;
+	border-bottom: none;
+	margin-top: 2.5em;
+}
+
+.dm-header {
+	border-bottom: 3px solid #1566A8;
+	margin: 1.2em 0 1em;
+	padding-bottom: 0.4em;
+}
+
+.dm-header h1 {
+	margin: 0.15em 0;
+}
+
+.dm-header .info-name {
+	display: block;
+	font-size: 0.6em;
+	font-weight: normal;
+}
+
+.dmc, .dm-meta {
+	font-family: Consolas, Menlo, Monaco, monospace;
+	font-size: 13px;
+	color: #555555;
+}
+
+/* Safety notices: S1000D order (warning before caution), boxed so they can't be skimmed past. */
+.warning, .caution {
+	border: 2px solid;
+	margin: 0.8em 0 0.8em 50px;
+	padding: 0.4em 1em;
+}
+
+.warning {
+	border-color: #B00020;
+	background-color: #FFF1F1;
+}
+
+.caution {
+	border-color: #B36B00;
+	background-color: #FFF8E6;
+}
+
+.warning .notice-label, .caution .notice-label {
+	display: block;
+	text-align: center;
+	font-weight: bold;
+	letter-spacing: 0.12em;
+}
+
+.warning .notice-label { color: #B00020; }
+.caution .notice-label { color: #B36B00; }
+
+ol.steps {
+	margin-left: 50px;
+	padding-left: 1.2em;
+}
+
+ol.steps > li {
+	margin: 0.4em 0;
+}
+
+ol.steps ol.steps {
+	margin-left: 0;
+	list-style-type: lower-alpha;
+}
+
+.step-title {
+	font-weight: bold;
+	color: #1566A8;
+}
+
+.conditions {
+	margin-left: 50px;
+}
+
+.none {
+	margin-left: 50px;
+	font-style: italic;
+}
+
+.planned {
+	color: #555555;
+	font-style: italic;
+}
+
+.toc ul {
+	list-style: none;
+	padding-left: 50px;
+}
+
+.toc li {
+	margin: 0.35em 0;
+}
+
+.toc .dmc {
+	display: block;
+}
+
+@media (max-width: 700px) {
+	.warning, .caution, ol.steps, .conditions, .none, .toc ul { margin-left: 0; padding-left: 1.2em; }
+}

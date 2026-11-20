@@ -14,8 +14,8 @@ cd "$(dirname "$0")/../csdb" || exit 2
 BREX_DIR="${S1KD_BREX_DIR:-$HOME/s1kd-tools/tools/s1kd-brexcheck/brex}"
 LOG=$(mktemp)
 
-s1kd-validate --xml-catalog ../tools/catalog.xml DMC-*.XML >"$LOG" 2>&1
-s1kd-brexcheck -I "$BREX_DIR" -l -c -S -s DMC-*.XML >>"$LOG" 2>&1
+s1kd-validate --xml-catalog ../tools/catalog.xml DMC-*.XML PMC-*.XML >"$LOG" 2>&1
+s1kd-brexcheck -I "$BREX_DIR" -l -c -S -s DMC-*.XML PMC-*.XML >>"$LOG" 2>&1
 
 if grep -q "ERROR" "$LOG"; then
     grep "ERROR" "$LOG"
@@ -24,4 +24,4 @@ if grep -q "ERROR" "$LOG"; then
     exit 1
 fi
 rm -f "$LOG"
-echo "OK: $(ls DMC-*.XML | wc -l) data modules pass schema, BREX and SNS checks"
+echo "OK: $(ls DMC-*.XML | wc -l) data modules and $(ls PMC-*.XML | wc -l) publication module pass schema, BREX and SNS checks"

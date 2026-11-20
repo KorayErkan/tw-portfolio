@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pm>
+<pm xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/pm.xsd">
+  <identAndStatusSection>
+    <pmAddress>
+      <pmIdent>
+        <pmCode modelIdentCode="VH15" pmIssuer="VH000" pmNumber="00001" pmVolume="00"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </pmIdent>
+      <pmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <pmTitle>Varnholt VH-15 hydraulic power unit maintenance manual</pmTitle>
+      <shortPmTitle>Maintenance manual</shortPmTitle></pmAddressItems>
+    </pmAddress>
+    <pmStatus>
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+    </pmStatus>
+  </identAndStatusSection>
+  <content>
+<pmEntry><pmEntryTitle>Hydraulic power unit</pmEntryTitle>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="040" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Hydraulic power unit</techName><infoName>Description</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="042" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Hydraulic power unit</techName><infoName>Description of function</infoName></dmTitle></dmRefAddressItems></dmRef>
+</pmEntry>
+<pmEntry><pmEntryTitle>Reservoir</pmEntryTitle>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="040" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Reservoir</techName><infoName>Description</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="241" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Reservoir</techName><infoName>Oil</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="04" disassyCodeVariant="A" infoCode="520" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Filler-breather cap</techName><infoName>Remove procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="04" disassyCodeVariant="A" infoCode="720" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Filler-breather cap</techName><infoName>Install procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="05" disassyCodeVariant="A" infoCode="520" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Level-temperature gauge</techName><infoName>Remove procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="05" disassyCodeVariant="A" infoCode="720" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Level-temperature gauge</techName><infoName>Install procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="07" disassyCodeVariant="A" infoCode="520" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Suction strainer</techName><infoName>Remove procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="07" disassyCodeVariant="A" infoCode="720" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Suction strainer</techName><infoName>Install procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+</pmEntry>
+<pmEntry><pmEntryTitle>Return filter</pmEntryTitle>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="040" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Return filter</techName><infoName>Description</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="02" disassyCodeVariant="A" infoCode="520" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Return filter element</techName><infoName>Remove procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+<dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="02" disassyCodeVariant="A" infoCode="720" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent><dmRefAddressItems><dmTitle><techName>Return filter element</techName><infoName>Install procedure</infoName></dmTitle></dmRefAddressItems></dmRef>
+</pmEntry>
+</content>
+</pm>
