@@ -42,6 +42,28 @@
     </dmStatus>
   </identAndStatusSection>
   <content>
-    <description/>
-  </content>
+<description>
+<levelledPara>
+<title>General</title>
+<para>The return filter removes particles from the hydraulic oil before the oil goes back into the reservoir. Clean oil decreases wear in the pump and the valves.</para>
+<para>The return filter is installed on the reservoir cover. The return hose from the manifold connects to the inlet port of the filter housing.</para>
+</levelledPara>
+<levelledPara>
+<title>Components</title>
+<para>The return filter has these components:</para>
+<para><randomList>
+<listItem><para>Filter housing (VH15-4001). The housing has an integral bypass valve that opens at a differential pressure of 1.7 bar.</para></listItem>
+<listItem><para>Filter element (VH15-4002). The element holds particles of 10 micrometers and larger.</para></listItem>
+<listItem><para>Clogging indicator (VH15-4003). The indicator shows the condition of the filter element.</para></listItem>
+</randomList></para>
+<para>For the part numbers and quantities, refer to the illustrated parts data: <dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="941" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef>.</para>
+</levelledPara>
+<levelledPara>
+<title>Operation</title>
+<para>Oil flows into the filter housing through the inlet port. The oil goes through the filter element from the outer side to the inner side, and then flows down into the reservoir.</para>
+<para>When particles collect in the filter element, the differential pressure across the element increases. At 1.2 bar, the clogging indicator changes from green to red. Replace the filter element when the indicator is red.</para>
+<para>If the element is not replaced, the differential pressure continues to increase. At 1.7 bar, the bypass valve opens, and unfiltered oil flows into the reservoir.</para>
+</levelledPara>
+</description>
+</content>
 </dmodule>
