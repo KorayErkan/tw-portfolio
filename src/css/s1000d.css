@@ -113,6 +113,33 @@ ol.steps ol.steps {
 	display: block;
 }
 
+.dm-figure {
+	margin: 1em 0 1.2em 50px;
+	border: 1px solid #7F7F7F;
+	padding: 10px;
+	display: inline-block;
+	max-width: calc(100% - 72px);
+}
+
+.dm-figure img {
+	display: block;
+}
+
+.dm-figure figcaption {
+	font-weight: bold;
+	color: #1566A8;
+	margin-top: 0.4em;
+}
+
+.dm-figure figcaption .dmc {
+	display: block;
+	font-weight: normal;
+}
+
+table.ipd td.indent-1 { padding-left: 1.5em; }
+table.ipd td.indent-2 { padding-left: 3em; }
+
 @media (max-width: 700px) {
 	.warning, .caution, ol.steps, .conditions, .none, .toc ul { margin-left: 0; padding-left: 1.2em; }
+	.dm-figure { margin-left: 0; max-width: 100%; }
 }

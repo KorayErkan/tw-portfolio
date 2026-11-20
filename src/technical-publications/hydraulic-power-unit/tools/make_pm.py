@@ -38,9 +38,13 @@ def main():
 
     out = ["<content>"]
     for system in sorted(entries):
-        dms = sorted(entries[system], key=lambda e: (ORDER.index(e[1].get("infoCode")) if e[1].get("infoCode") in ("040", "042", "241") else 3,
-                                                     e[1].get("subSystemCode"), e[1].get("disassyCode"),
-                                                     ORDER.index(e[1].get("infoCode"))))
+        def rank(e):
+            info = e[1].get("infoCode")
+            group = 0 if info in ("040", "042", "241") else 2 if info == "941" else 1
+            return (group, ORDER.index(info) if group == 0 else 0,
+                    e[1].get("subSystemCode"), e[1].get("disassyCode"), ORDER.index(info))
+
+        dms = sorted(entries[system], key=rank)
         out.append(f"<pmEntry><pmEntryTitle>{escape(titles[system])}</pmEntryTitle>")
         for _, code, tech, info in dms:
             attrs = " ".join(f'{k}="{v}"' for k, v in code.attrib.items())

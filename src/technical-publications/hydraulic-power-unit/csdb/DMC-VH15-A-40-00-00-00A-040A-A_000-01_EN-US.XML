@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE dmodule>
+<!DOCTYPE dmodule [<!NOTATION svg SYSTEM "image/svg+xml"><!ENTITY ICN-VH000-HPU4001-001-01 SYSTEM "ICN-VH000-HPU4001-001-01.SVG" NDATA svg>]>
 <dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/descript.xsd">
   <identAndStatusSection>
     <dmAddress>
@@ -49,12 +49,12 @@
 <para>The return filter is installed on the top of the reservoir. The return hose from the manifold connects to the inlet port of the filter housing.</para>
 </levelledPara>
 <levelledPara>
-<title>Components</title>
+<title>Components</title><para>The figure shows the components. The item numbers refer to the figure.</para><figure id="fig-0001"><title>Return filter</title><graphic infoEntityIdent="ICN-VH000-HPU4001-001-01"/></figure>
 <para>The return filter has these components:</para>
 <para><randomList>
-<listItem><para>Filter housing (VH15-4001). The housing has an integral bypass valve that opens at a differential pressure of 1.7 bar.</para></listItem>
-<listItem><para>Filter element (VH15-4002). The element holds particles of 10 micrometers and larger.</para></listItem>
-<listItem><para>Clogging indicator (VH15-4003). The indicator shows the condition of the filter element.</para></listItem>
+<listItem><para>Filter housing (item 1, VH15-4001). The housing has an integral bypass valve that opens at a differential pressure of 1.7 bar.</para></listItem>
+<listItem><para>Filter element (item 2, VH15-4002). The element holds particles of 10 micrometers and larger.</para></listItem>
+<listItem><para>Clogging indicator (item 3, VH15-4003). The indicator shows the condition of the filter element.</para></listItem>
 </randomList></para>
 <para>For the part numbers and quantities, refer to the illustrated parts data: <dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="941" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef>.</para>
 </levelledPara>

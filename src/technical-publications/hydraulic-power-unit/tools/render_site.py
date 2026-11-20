@@ -99,13 +99,37 @@ class Renderer:
             lis.append(f"<li>{title}{body}{self.steps(s)}</li>")
         return f'<ol class="steps">{"".join(lis)}</ol>' if lis else ""
 
+    def figure(self, fig):
+        icn = fig.find("graphic").get("infoEntityIdent")
+        title = escape(fig.findtext("title", ""))
+        return (f'<figure class="dm-figure"><img src="figures/{icn}.svg" alt="{title}">'
+                f'<figcaption>Figure 1. {title}<span class="dmc">{icn}</span></figcaption></figure>')
+
     def levelled(self, parent, level=2):
         html = []
         for lp in parent.findall("levelledPara"):
             html.append(f"<h{level}>{escape(lp.findtext('title', ''))}</h{level}>")
-            html += [f"<p>{self.inline(p)}</p>" for p in lp.findall("para")]
-            html.append(self.levelled(lp, level + 1))
+            for child in lp:
+                if child.tag == "para":
+                    html.append(f"<p>{self.inline(child)}</p>")
+                elif child.tag == "figure":
+                    html.append(self.figure(child))
+                elif child.tag == "levelledPara":
+                    html.append(self.levelled(_Wrap(child), level + 1))
         return "".join(html)
+
+    def ipd(self, cat):
+        rows = []
+        for c in cat.findall("catalogSeqNumber"):
+            isn = c.find("itemSeqNumber")
+            indent = int(c.get("indenture")) - 1
+            descr = escape(isn.findtext(".//descrForPart", ""))
+            rows.append(f'<tr><td>{int(c.get("item"))}</td><td><code>{escape(isn.find("partRef").get("partNumberValue"))}</code></td>'
+                        f'<td class="indent-{indent}">{descr}</td><td>{escape(isn.findtext("quantityPerNextHigherAssy", ""))}</td></tr>')
+        return (self.figure(cat.find("figure"))
+                + '<table class="ipd"><tr><th>Item</th><th>Part number</th><th>Description</th><th>Quantity</th></tr>'
+                + "".join(rows) + "</table>"
+                + '<p class="dm-meta">Item 0 is the assembly itself (REF). Indented items are parts of the item above them.</p>')
 
     def body(self, root):
         proc = root.find(".//content/procedure")
@@ -120,8 +144,20 @@ class Renderer:
                 "<h2>Procedure</h2>", self.steps(proc.find("mainProcedure")),
                 "<h2>Requirements after job completion</h2>", self.conditions(proc.find("closeRqmts/reqCondGroup")),
             ])
+        cat = root.find(".//content/illustratedPartsCatalog")
+        if cat is not None:
+            return self.ipd(cat)
         desc = root.find(".//content/description")
         return self.levelled(desc) if desc is not None else ""
+
+
+class _Wrap:
+    """Lets levelled() treat one nested levelledPara like a container of levelledParas."""
+    def __init__(self, el):
+        self.el = el
+
+    def findall(self, tag):
+        return [self.el] if tag == "levelledPara" else []
 
 
 def page(title, body):
@@ -156,6 +192,10 @@ def main():
     OUT.mkdir(exist_ok=True)
     for old in OUT.glob("*.html"):
         old.unlink()
+    # Figures: copied with a lowercase .svg extension so web servers send the right MIME type
+    (OUT / "figures").mkdir(exist_ok=True)
+    for svg in CSDB.glob("ICN-*.SVG"):
+        (OUT / "figures" / f"{svg.stem}.svg").write_bytes(svg.read_bytes())
 
     toc = "".join(
         f"<h2>{escape(title)}</h2><ul>"

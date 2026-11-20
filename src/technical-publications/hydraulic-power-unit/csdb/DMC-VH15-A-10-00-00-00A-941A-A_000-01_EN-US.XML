@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule [<!NOTATION svg SYSTEM "image/svg+xml"><!ENTITY ICN-VH000-HPU1001-001-01 SYSTEM "ICN-VH000-HPU1001-001-01.SVG" NDATA svg>]>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/ipd.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="941" infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Reservoir</techName>
+          <infoName>Illustrated parts data</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<illustratedPartsCatalog>
+<figure id="fig-0001"><title>Reservoir</title><graphic infoEntityIdent="ICN-VH000-HPU1001-001-01"/></figure>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="000" indenture="1"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="0"/><quantityPerNextHigherAssy>REF</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1000"/><partSegment><itemIdentData><descrForPart>RESERVOIR ASSY, 60 L</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="001" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1001"/><partSegment><itemIdentData><descrForPart>TANK, RESERVOIR, 60 L, WELDED</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="002" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1002"/><partSegment><itemIdentData><descrForPart>PLATE, RESERVOIR COVER</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="003" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1003"/><partSegment><itemIdentData><descrForPart>GASKET, RESERVOIR COVER</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="004" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1004"/><partSegment><itemIdentData><descrForPart>CAP, FILLER-BREATHER, 10 MICRON</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="005" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1005"/><partSegment><itemIdentData><descrForPart>GAUGE, LEVEL-TEMPERATURE, 127 MM</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="006" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1006"/><partSegment><itemIdentData><descrForPart>PLUG, DRAIN, MAGNETIC, G 3/4</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="007" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-1007"/><partSegment><itemIdentData><descrForPart>STRAINER, SUCTION, 125 MICRON, G 1</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="008" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>12</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="ISO 4017 M8x20"/><partSegment><itemIdentData><descrForPart>SCREW, HEX HEAD, M8 X 20, 8.8</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="009" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>12</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="ISO 7089 8"/><partSegment><itemIdentData><descrForPart>WASHER, PLAIN, 8</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+</illustratedPartsCatalog>
+</content>
+</dmodule>
