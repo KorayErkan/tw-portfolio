@@ -1,0 +1,9 @@
+SYSTEM,SUBSYSTEM,SUBSUBSYSTEM,ASSEMBLY,TITLE,BOM ITEM
+00,0,0,00,Hydraulic power unit (general),-
+10,0,0,00,Reservoir,1
+20,0,0,00,Motor-pump group,2
+20,4,0,00,Flexible coupling,2.4
+30,0,0,00,Manifold and valves,3
+40,0,0,00,Return filter,4
+50,0,0,00,Hoses and fittings,5
+60,0,0,00,Electrical,6
