@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule [<!NOTATION svg SYSTEM "image/svg+xml"><!ENTITY ICN-VH000-HPU4001-001-01 SYSTEM "ICN-VH000-HPU4001-001-01.SVG" NDATA svg>]>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/ipd.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="941" infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Return filter</techName>
+          <infoName>Illustrated parts data</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<illustratedPartsCatalog>
+<figure id="fig-0001"><title>Return filter</title><graphic infoEntityIdent="ICN-VH000-HPU4001-001-01"/></figure>
+<catalogSeqNumber systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="000" indenture="1"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="0"/><quantityPerNextHigherAssy>REF</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-4000"/><partSegment><itemIdentData><descrForPart>RETURN FILTER ASSY</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="001" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-4001"/><partSegment><itemIdentData><descrForPart>HOUSING, RETURN FILTER, TANK TOP</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="002" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-4002"/><partSegment><itemIdentData><descrForPart>ELEMENT, FILTER, 10 MICRON</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+<catalogSeqNumber systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" figureNumber="01" figureNumberVariant="A" item="003" indenture="2"><itemSeqNumber itemSeqNumberValue="00A"><reasonForSelection reasonForSelectionValue="1"/><quantityPerNextHigherAssy>1</quantityPerNextHigherAssy><partRef manufacturerCodeValue="VH000" partNumberValue="VH15-4003"/><partSegment><itemIdentData><descrForPart>INDICATOR, CLOGGING, VISUAL</descrForPart></itemIdentData></partSegment></itemSeqNumber></catalogSeqNumber>
+</illustratedPartsCatalog>
+</content>
+</dmodule>

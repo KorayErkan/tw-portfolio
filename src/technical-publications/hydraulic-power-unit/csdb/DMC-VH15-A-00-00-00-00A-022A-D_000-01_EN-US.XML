@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/brex.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Hydraulic power unit</techName>
+          <infoName>Business rules exchange</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef><dmRef><dmRefIdent><dmCode modelIdentCode="S1000D" systemDiffCode="J" systemCode="04" subSystemCode="1" subSubSystemCode="0" assyCode="0301" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/></dmRefIdent></dmRef></brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<brex>
+<commonInfo><para>Business rules for the Varnholt VH-15 hydraulic power unit, a fictional product used as a portfolio sample. This BREX narrows the S1000D Issue 7 default BREX: it defines the project SNS and restricts codes and values to those the project uses.</para></commonInfo>
+<snsRules>
+<snsDescr>
+<snsSystem><snsCode>00</snsCode><snsTitle>Hydraulic power unit</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Hydraulic power unit</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Hydraulic power unit</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Hydraulic power unit</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+</snsSystem>
+<snsSystem><snsCode>10</snsCode><snsTitle>Reservoir</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Reservoir</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Reservoir</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Reservoir</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+</snsSystem>
+<snsSystem><snsCode>20</snsCode><snsTitle>Motor-pump group</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Motor-pump group</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Motor-pump group</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Motor-pump group</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+<snsSubSystem><snsCode>4</snsCode><snsTitle>Flexible coupling</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Flexible coupling</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Flexible coupling</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+</snsSystem>
+<snsSystem><snsCode>30</snsCode><snsTitle>Manifold and valves</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Manifold and valves</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Manifold and valves</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Manifold and valves</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+</snsSystem>
+<snsSystem><snsCode>40</snsCode><snsTitle>Return filter</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Return filter</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Return filter</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Return filter</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+</snsSystem>
+<snsSystem><snsCode>50</snsCode><snsTitle>Hoses and fittings</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Hoses and fittings</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Hoses and fittings</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Hoses and fittings</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+</snsSystem>
+<snsSystem><snsCode>60</snsCode><snsTitle>Electrical</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Electrical</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Electrical</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Electrical</snsTitle></snsAssy>
+</snsSubSubSystem></snsSubSystem>
+</snsSystem>
+</snsDescr>
+</snsRules>
+<contextRules>
+<structureObjectRuleGroup>
+<structureObjectRule><objectPath allowedObjectFlag="2">//dmIdent/dmCode/@modelIdentCode</objectPath><objectUse>The model identification code is VH15 (fictional; not registered with NSPA).</objectUse><objectValue valueForm="single" valueAllowed="VH15">Varnholt VH-15 hydraulic power unit</objectValue></structureObjectRule>
+<structureObjectRule><objectPath allowedObjectFlag="2">//dmIdent/dmCode/@infoCode</objectPath><objectUse>Only the information codes in the project DML are allowed.</objectUse><objectValue valueForm="single" valueAllowed="00W">Applicability Cross-reference Table (ACT)</objectValue><objectValue valueForm="single" valueAllowed="022">Business rules exchange</objectValue><objectValue valueForm="single" valueAllowed="040">Description</objectValue><objectValue valueForm="single" valueAllowed="042">Description of function</objectValue><objectValue valueForm="single" valueAllowed="241">Oil</objectValue><objectValue valueForm="single" valueAllowed="270">Adjust, align and calibrate</objectValue><objectValue valueForm="single" valueAllowed="340">Function test</objectValue><objectValue valueForm="single" valueAllowed="520">Remove procedure</objectValue><objectValue valueForm="single" valueAllowed="720">Install procedure</objectValue><objectValue valueForm="single" valueAllowed="941">Illustrated parts data</objectValue></structureObjectRule>
+<structureObjectRule><objectPath allowedObjectFlag="2">//dmIdent/dmCode/@itemLocationCode</objectPath><objectUse>Item location codes A, C and D only. Training content (T) is out of scope.</objectUse><objectValue valueForm="single" valueAllowed="A">Information related to items installed on the product</objectValue><objectValue valueForm="single" valueAllowed="C">Information related to items on the bench</objectValue><objectValue valueForm="single" valueAllowed="D">Information related to items installed on the product, on a removed major assembly, and on the bench</objectValue></structureObjectRule>
+<structureObjectRule><objectPath allowedObjectFlag="2">//security/@securityClassification</objectPath><objectUse>All data modules are unclassified.</objectUse><objectValue valueForm="single" valueAllowed="01">Unclassified</objectValue></structureObjectRule>
+<structureObjectRule><objectPath allowedObjectFlag="2">//language/@languageIsoCode</objectPath><objectUse>Data modules are written in English only, to ASD-STE100.</objectUse><objectValue valueForm="single" valueAllowed="en">English</objectValue></structureObjectRule>
+</structureObjectRuleGroup>
+</contextRules>
+</brex>
+</content>
+</dmodule>

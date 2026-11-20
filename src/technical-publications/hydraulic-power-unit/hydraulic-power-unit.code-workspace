@@ -1,0 +1,27 @@
+{
+  "folders": [
+    { "path": "." }
+  ],
+  "settings": {
+    "files.associations": {
+      "*.XML": "xml",
+      ".defaults": "plaintext",
+      ".dmtypes": "plaintext",
+      ".fmtypes": "plaintext"
+    },
+    "files.exclude": {
+      "**/__pycache__": true
+    },
+    "files.eol": "\n",
+    "editor.wordWrap": "on",
+    "xml.catalogs": ["tools/catalog.xml"],
+    "xml.validation.resolveExternalEntities": false,
+    "xml.format.maxLineWidth": 0
+  },
+  "extensions": {
+    "recommendations": [
+      "redhat.vscode-xml",
+      "mechatroner.rainbow-csv"
+    ]
+  }
+}

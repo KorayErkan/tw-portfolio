@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/proced.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="05" disassyCodeVariant="A" infoCode="520" infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Level-temperature gauge</techName>
+          <infoName>Remove procedure</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<procedure><preliminaryRqmts><reqCondGroup><reqCondNoRef><reqCond>The hydraulic power unit is stopped and electrically isolated.</reqCond></reqCondNoRef><reqCondDm><reqCond>The oil level is below the lower mounting bolt of the level gauge. To drain the oil, refer to the oil servicing procedure.</reqCond><dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="241" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef></reqCondDm></reqCondGroup><reqSupportEquips><supportEquipDescrGroup><supportEquipDescr id="seq-0001"><name>Socket wrench, 17 mm</name><toolRef toolNumber="WRENCH-17"/><reqQuantity>1</reqQuantity></supportEquipDescr></supportEquipDescrGroup></reqSupportEquips><reqSupplies><supplyDescrGroup><supplyDescr id="sup-0001"><name>Lint-free cloth</name><supplyRef supplyNumber="LINT-FREE-CLOTH" supplyNumberType="sp05"/><reqQuantity>As required</reqQuantity></supplyDescr></supplyDescrGroup></reqSupplies><reqSpares><noSpares/></reqSpares><reqSafety><safetyRqmts><warning><warningAndCautionPara>Hydraulic oil can be hot. Let the unit become cool to less than 40 °C before you start this procedure. Hot oil can cause burns.</warningAndCautionPara></warning><warning><warningAndCautionPara>Make sure that the system pressure is 0 bar. Oil under pressure can cause serious injury.</warningAndCautionPara></warning></safetyRqmts></reqSafety></preliminaryRqmts><mainProcedure><proceduralStep><para>Hold the level-temperature gauge and remove the two hollow bolts.</para></proceduralStep><proceduralStep><para>Remove the gauge and its two seals from the tank wall. Discard the seals.</para></proceduralStep><proceduralStep><para>Clean the sealing faces on the tank wall with a lint-free cloth.</para></proceduralStep></mainProcedure><closeRqmts><reqCondGroup><reqCondDm><reqCond>Install a new level-temperature gauge.</reqCond><dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="05" disassyCodeVariant="A" infoCode="720" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef></reqCondDm></reqCondGroup></closeRqmts></procedure>
+</content>
+</dmodule>

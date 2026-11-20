@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/proced.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="241" infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Reservoir</techName>
+          <infoName>Oil</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<procedure><preliminaryRqmts><reqCondGroup><reqCondNoRef><reqCond>The hydraulic power unit is stopped and electrically isolated.</reqCond></reqCondNoRef></reqCondGroup><reqSupportEquips><supportEquipDescrGroup><supportEquipDescr id="seq-0001"><name>Container, oil, 60 L minimum</name><toolRef toolNumber="OIL-CONTAINER-60L"/><reqQuantity>1</reqQuantity></supportEquipDescr><supportEquipDescr id="seq-0002"><name>Filter transfer unit, 10 micrometers</name><toolRef toolNumber="FILTER-CART-10UM"/><reqQuantity>1</reqQuantity></supportEquipDescr></supportEquipDescrGroup></reqSupportEquips><reqSupplies><supplyDescrGroup><supplyDescr id="sup-0001"><name>Lint-free cloth</name><supplyRef supplyNumber="LINT-FREE-CLOTH" supplyNumberType="sp05"/><reqQuantity>As required</reqQuantity></supplyDescr><supplyDescr id="sup-0002"><name>Hydraulic oil, HLP 46</name><supplyRef supplyNumber="DIN 51524-2 HLP 46" supplyNumberType="sp02"/><reqQuantity>50 L</reqQuantity></supplyDescr></supplyDescrGroup></reqSupplies><reqSpares><noSpares/></reqSpares><reqSafety><safetyRqmts><warning><warningAndCautionPara>Hydraulic oil can be hot. Let the unit become cool to less than 40 °C before you start this procedure. Hot oil can cause burns.</warningAndCautionPara></warning><warning><warningAndCautionPara>Make sure that the system pressure is 0 bar. Oil under pressure can cause serious injury.</warningAndCautionPara></warning><caution><warningAndCautionPara>Do not let dirt into the reservoir. Dirt in the hydraulic oil can cause damage to the pump and the valves.</warningAndCautionPara></caution></safetyRqmts></reqSafety></preliminaryRqmts><mainProcedure><proceduralStep><title>Drain the oil</title><proceduralStep><para>Put the oil container below the drain plug.</para></proceduralStep><proceduralStep><para>Remove the drain plug. Let all the oil drain into the container.</para></proceduralStep><proceduralStep><para>Clean the magnet of the drain plug with a lint-free cloth. If you find many metal particles, stop and tell your supervisor.</para></proceduralStep><proceduralStep><para>Install the drain plug. Tighten it to 50 N·m.</para></proceduralStep></proceduralStep><proceduralStep><title>Fill the oil</title><proceduralStep><para>Clean the filler-breather cap and the area around it with a lint-free cloth.</para></proceduralStep><proceduralStep><para>Turn the filler-breather cap counterclockwise and remove it.</para></proceduralStep><proceduralStep><para>Connect the outlet hose of the filter transfer unit to the filler opening.</para></proceduralStep><proceduralStep><para>Fill the reservoir with new oil through the filter transfer unit until the oil level is at the maximum mark on the level gauge.</para></proceduralStep><proceduralStep><para>Disconnect the filter transfer unit. Install the filler-breather cap and turn it clockwise until it is tight by hand.</para></proceduralStep></proceduralStep><proceduralStep><title>Bleed and check</title><proceduralStep><para>Start the unit. Operate the actuator through 5 full strokes to bleed air from the system.</para></proceduralStep><proceduralStep><para>Stop the unit. Examine the oil level on the level gauge. If the level is less than the maximum mark, add oil.</para></proceduralStep><proceduralStep><para>Examine the drain plug for leaks.</para></proceduralStep></proceduralStep></mainProcedure><closeRqmts><reqCondGroup><reqCondNoRef><reqCond>The oil level is at the maximum mark, and there are no leaks.</reqCond></reqCondNoRef></reqCondGroup></closeRqmts></procedure>
+</content>
+</dmodule>

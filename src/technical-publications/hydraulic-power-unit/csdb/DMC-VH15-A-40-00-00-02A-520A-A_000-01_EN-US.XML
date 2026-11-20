@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/proced.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="02" disassyCodeVariant="A" infoCode="520" infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Return filter element</techName>
+          <infoName>Remove procedure</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<procedure>
+<preliminaryRqmts>
+<reqCondGroup>
+<reqCondNoRef><reqCond>The hydraulic power unit is stopped and electrically isolated.</reqCond></reqCondNoRef>
+</reqCondGroup>
+<reqSupportEquips><supportEquipDescrGroup>
+<supportEquipDescr id="seq-0001"><name>Container, oil, 5 L minimum</name><toolRef toolNumber="OIL-CONTAINER-5L"/><reqQuantity>1</reqQuantity></supportEquipDescr>
+</supportEquipDescrGroup></reqSupportEquips>
+<reqSupplies><supplyDescrGroup><supplyDescr id="sup-0001"><name>Lint-free cloth</name><supplyRef supplyNumber="LINT-FREE-CLOTH" supplyNumberType="sp05"/><reqQuantity>As required</reqQuantity></supplyDescr></supplyDescrGroup></reqSupplies>
+<reqSpares><noSpares/></reqSpares>
+<reqSafety><safetyRqmts>
+<warning><warningAndCautionPara>Hydraulic oil can be hot. Let the unit become cool to less than 40 °C before you start this procedure. Hot oil can cause burns.</warningAndCautionPara></warning>
+<warning><warningAndCautionPara>Make sure that the system pressure is 0 bar. Oil under pressure can cause serious injury.</warningAndCautionPara></warning>
+<caution><warningAndCautionPara>Do not let dirt into the filter housing. Dirt in the hydraulic oil can cause damage to the pump and the valves.</warningAndCautionPara></caution>
+</safetyRqmts></reqSafety>
+</preliminaryRqmts>
+<mainProcedure>
+<proceduralStep><para>Make sure that the pressure gauge on the manifold shows 0 bar.</para></proceduralStep>
+<proceduralStep><para>Clean the filter cover and the area around it with a lint-free cloth.</para></proceduralStep>
+<proceduralStep><para>Put lint-free cloths around the filter housing to catch drops of oil.</para></proceduralStep>
+<proceduralStep><para>Turn the filter cover counterclockwise and remove it.</para></proceduralStep>
+<proceduralStep><para>Pull the filter element up out of the housing slowly. Let the oil drain from the element into the housing.</para></proceduralStep>
+<proceduralStep><para>Put the filter element in the oil container.</para></proceduralStep>
+<proceduralStep><para>Examine the inner side of the filter housing for metal particles. If you find metal particles, stop and tell your supervisor. Metal particles can show wear in the pump.</para></proceduralStep>
+<proceduralStep><para>Discard the filter element in accordance with local regulations.</para></proceduralStep>
+</mainProcedure>
+<closeRqmts><reqCondGroup>
+<reqCondDm><reqCond>Install a new filter element.</reqCond><dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="02" disassyCodeVariant="A" infoCode="720" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef></reqCondDm>
+</reqCondGroup></closeRqmts>
+</procedure>
+</content>
+</dmodule>

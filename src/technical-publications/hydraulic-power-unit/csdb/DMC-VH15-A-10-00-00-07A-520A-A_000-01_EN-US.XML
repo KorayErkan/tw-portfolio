@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/proced.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="07" disassyCodeVariant="A" infoCode="520" infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Suction strainer</techName>
+          <infoName>Remove procedure</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<procedure><preliminaryRqmts><reqCondGroup><reqCondNoRef><reqCond>The hydraulic power unit is stopped and electrically isolated.</reqCond></reqCondNoRef><reqCondDm><reqCond>The reservoir is drained.</reqCond><dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="241" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef></reqCondDm></reqCondGroup><reqSupportEquips><supportEquipDescrGroup><supportEquipDescr id="seq-0001"><name>Socket wrench, 13 mm</name><toolRef toolNumber="WRENCH-13"/><reqQuantity>1</reqQuantity></supportEquipDescr><supportEquipDescr id="seq-0002"><name>Strap wrench</name><toolRef toolNumber="STRAP-WRENCH"/><reqQuantity>1</reqQuantity></supportEquipDescr></supportEquipDescrGroup></reqSupportEquips><reqSupplies><supplyDescrGroup><supplyDescr id="sup-0001"><name>Lint-free cloth</name><supplyRef supplyNumber="LINT-FREE-CLOTH" supplyNumberType="sp05"/><reqQuantity>As required</reqQuantity></supplyDescr></supplyDescrGroup></reqSupplies><reqSpares><noSpares/></reqSpares><reqSafety><safetyRqmts><warning><warningAndCautionPara>Hydraulic oil can be hot. Let the unit become cool to less than 40 °C before you start this procedure. Hot oil can cause burns.</warningAndCautionPara></warning><warning><warningAndCautionPara>Make sure that the system pressure is 0 bar. Oil under pressure can cause serious injury.</warningAndCautionPara></warning><caution><warningAndCautionPara>Do not let dirt into the reservoir. Dirt in the hydraulic oil can cause damage to the pump and the valves.</warningAndCautionPara></caution></safetyRqmts></reqSafety></preliminaryRqmts><mainProcedure><proceduralStep><para>Remove the 12 screws and washers from the clean-out cover.</para></proceduralStep><proceduralStep><para>Remove the clean-out cover and the gasket. Discard the gasket.</para></proceduralStep><proceduralStep><para>Turn the suction strainer counterclockwise with the strap wrench and remove it from the suction port.</para></proceduralStep><proceduralStep><para>Examine the strainer and the bottom of the tank for dirt and particles. If you find metal particles, stop and tell your supervisor.</para></proceduralStep><proceduralStep><para>Clean the inside of the tank with lint-free cloths.</para></proceduralStep></mainProcedure><closeRqmts><reqCondGroup><reqCondDm><reqCond>Install a new suction strainer.</reqCond><dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="10" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="07" disassyCodeVariant="A" infoCode="720" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef></reqCondDm></reqCondGroup></closeRqmts></procedure>
+</content>
+</dmodule>

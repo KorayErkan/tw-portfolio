@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- Maps the S1000D Issue 7 schema URLs to a local copy, so s1kd-validate works offline:
+       s1kd-validate -\-xml-catalog ../tools/catalog.xml DMC-*.XML     (run from csdb/)
+     The schemas are not committed: put the Issue 7 flat schemas in etc/s1000d-schemas/ at the repository root (gitignored). -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <rewriteURI uriStartString="http://www.s1000d.org/S1000D_7/xml_schema_flat/"
+              rewritePrefix="../../../../etc/s1000d-schemas/"/>
+  <rewriteSystem systemIdStartString="http://www.s1000d.org/S1000D_7/xml_schema_flat/"
+                 rewritePrefix="../../../../etc/s1000d-schemas/"/>
+</catalog>
