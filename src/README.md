@@ -23,6 +23,7 @@ Four samples that show the range in a few minutes:
 | [Release notes](./release-notes/) | PMs, engineers, users | A feature release: upgrade steps, security fixes with severity, deprecations with removal versions, and known issues |
 | [Software guides](./software-guides/) | Admins, IT staff, users | The Orbitask documentation set, viewed in a sidebar viewer, with SVG diagrams that work in light and dark themes |
 | [System configuration guide](./system-configuration-guide/) | Sysadmins, network engineers | Server sizing, reverse proxy, certificates and licensing, through to an ordered decommissioning procedure |
+| [Technical publications](./technical-publications/) | Maintenance technicians, tech pubs teams | Maintenance data for a hydraulic power unit, written to S1000D Issue 7: the data module list is derived from the bill of materials, and every module is checked against the schema, business rules, and numbering system |
 | [Tutorials](./tutorials/) | Developers, learners | A PowerShell tutorial run against one sample folder, and an advanced Git tutorial on rebasing, cherry-picking, and recovery |
 | [User assistance](./user-assistance/) | End users | MuseScore 3.6 task guides with highlighted screenshots and the expected result after each step |
 | [User manuals](./user-manuals/) | Consumers, installers, technicians | A coffee machine, a cordless drill, a kitchen oven, and an industrial machine, with safety, lockout/tagout, and compliance content |

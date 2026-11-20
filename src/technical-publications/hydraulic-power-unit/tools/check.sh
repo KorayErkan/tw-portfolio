@@ -4,7 +4,7 @@
 # failure (and s1kd-validate prints SUCCESS when it can't load a schema), so the output
 # is scanned for ERROR lines instead of trusting their exit codes.
 #
-# Needs s1kd-tools, the Issue 7 flat schemas in Portfolio/etc/s1000d-schemas/, and the
+# Needs s1kd-tools, the Issue 7 flat schemas in etc/s1000d-schemas/ at the repository root, and the
 # Issue 7 default BREX from the s1kd-tools source (S1KD_BREX_DIR).
 #
 # Usage: sh tools/check.sh   (from the sample root)
