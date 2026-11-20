@@ -25,18 +25,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MI, SDC = "VH15", "A"
 
-INFO_NAMES = {
-    "00W": "Applicability cross-reference table",
-    "022": "Business rules exchange",
-    "040": "Description",
-    "042": "Description of function",
-    "241": "Fluid servicing",
-    "270": "Adjustment",
-    "340": "Function test",
-    "520": "Remove procedure",
-    "720": "Install procedure",
-    "941": "Illustrated parts data",
-}
+# The information codes this project uses. Their names come from the CSDB's .dmtypes file
+# (written by `s1kd-defaults -i`), so they match the S1000D Issue 7 standard names.
+PROJECT_CODES = ["00W", "022", "040", "042", "241", "270", "340", "520", "720", "941"]
+
+
+def load_info_names():
+    names = {}
+    for line in (ROOT / "csdb/.dmtypes").read_text(encoding="utf-8").splitlines():
+        parts = line.split(None, 2)
+        if len(parts) == 3 and parts[0] in PROJECT_CODES:
+            names[parts[0]] = parts[2]
+    return names
+
+
+INFO_NAMES = load_info_names()
 
 # Whole-unit data modules: (information code, item location code)
 GENERAL = [("022", "D"), ("00W", "D"), ("040", "A"), ("042", "A")]
