@@ -136,6 +136,19 @@ ol.steps ol.steps {
 	font-weight: normal;
 }
 
+/* Applicability label: content that applies to one product variant only */
+.applic {
+	display: inline-block;
+	font-size: 0.75em;
+	font-weight: bold;
+	color: #1566A8;
+	border: 1px solid #1566A8;
+	border-radius: 3px;
+	padding: 0 0.4em;
+	margin-right: 0.3em;
+	vertical-align: 0.1em;
+}
+
 table.ipd td.indent-1 { padding-left: 1.5em; }
 table.ipd td.indent-2 { padding-left: 3em; }
 

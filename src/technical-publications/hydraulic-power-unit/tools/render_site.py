@@ -37,7 +37,7 @@ def planned_titles():
 
 class Renderer:
     def __init__(self, pages, planned):
-        self.pages, self.planned = pages, planned  # pages: DMC -> (title)
+        self.pages, self.planned, self.applics = pages, planned, {}
 
     def ref(self, dmref):
         c = code_str(dmref.find(".//dmCode"))
@@ -45,13 +45,18 @@ class Renderer:
             return f'<a href="{c}.html">{escape(self.pages[c])}</a>'
         return f'<span class="planned">{escape(self.planned.get(c, c))} (planned)</span>'
 
+    def applic(self, el):
+        """Label for content that applies to one variant only."""
+        rid = el.get("applicRefId")
+        return f'<span class="applic">{escape(self.applics[rid])}</span> ' if rid in self.applics else ""
+
     def inline(self, el):
-        out = [escape(el.text or "")]
+        out = [self.applic(el) + escape(el.text or "")]
         for child in el:
             if child.tag == "dmRef":
                 out.append(self.ref(child))
             elif child.tag == "randomList":
-                out.append("<ul>" + "".join(f"<li>{self.inline(li.find('para'))}</li>"
+                out.append("<ul>" + "".join(f"<li>{self.applic(li)}{self.inline(li.find('para'))}</li>"
                                             for li in child.findall("listItem")) + "</ul>")
             else:
                 out.append(self.inline(child))
@@ -132,6 +137,8 @@ class Renderer:
                 + '<p class="dm-meta">Item 0 is the assembly itself (REF). Indented items are parts of the item above them.</p>')
 
     def body(self, root):
+        self.applics = {a.get("id"): a.findtext(".//displayText/simplePara", "")
+                        for a in root.findall(".//content/referencedApplicGroup/applic")}
         proc = root.find(".//content/procedure")
         if proc is not None:
             pre = proc.find("preliminaryRqmts")
