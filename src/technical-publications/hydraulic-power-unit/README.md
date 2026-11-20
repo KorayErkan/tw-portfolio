@@ -5,8 +5,8 @@ written to **S1000D Issue 7**. The data module list is derived from the product'
 and every data module is checked automatically against the schema, the project's business rules,
 and its numbering system.
 
-**Status:** pilot in progress. The return filter data modules are written; 52 data modules are
-planned, 17 of them in the pilot.
+**Status:** pilot in progress. 14 of the 17 pilot data modules are written, covering the whole unit,
+the reservoir, and the return filter; 52 data modules are planned in all.
 
 ## How it's built
 

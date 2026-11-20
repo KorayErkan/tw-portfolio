@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/descript.xsd">
+  <identAndStatusSection>
+    <dmAddress>
+      <dmIdent>
+        <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="042" infoCodeVariant="A" itemLocationCode="A"/>
+        <language languageIsoCode="en" countryIsoCode="US"/>
+        <issueInfo issueNumber="000" inWork="01"/>
+      </dmIdent>
+      <dmAddressItems>
+        <issueDate year="2026" month="11" day="20"/>
+        <dmTitle>
+          <techName>Hydraulic power unit</techName>
+          <infoName>Description of function</infoName>
+          
+        </dmTitle>
+      </dmAddressItems>
+    </dmAddress>
+    <dmStatus issueType="new">
+      <security securityClassification="01"/>
+      <responsiblePartnerCompany><enterpriseName>Varnholt Hydraulics</enterpriseName></responsiblePartnerCompany>
+      <originator><enterpriseName>Varnholt Hydraulics</enterpriseName></originator>
+      
+      <applic>
+        <displayText>
+          <simplePara>All</simplePara>
+        </displayText>
+      </applic>
+      <brexDmRef>
+        <dmRef>
+          <dmRefIdent>
+            <dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="00" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="022" infoCodeVariant="A" itemLocationCode="D"/>
+          </dmRefIdent>
+        </dmRef>
+      </brexDmRef>
+      <qualityAssurance>
+        <unverified/>
+      </qualityAssurance>
+      
+      
+    </dmStatus>
+  </identAndStatusSection>
+  <content>
+<description><levelledPara><title>Pressure supply</title><para>The electric motor turns the gear pump through a flexible coupling in the bell housing. The pump pulls oil from the reservoir through the suction strainer.</para><para>The pump sends the oil to the manifold. The check valve in the manifold prevents a flow of oil back to the pump when the motor stops.</para></levelledPara><levelledPara><title>Pressure control</title><para>The pressure relief valve limits the system pressure. When the pressure increases to the set value, the valve opens and sends oil back to the reservoir. The pressure gauge on the manifold shows the system pressure. The gauge isolator valve protects the gauge from pressure pulses when it is closed.</para></levelledPara><levelledPara><title>Direction control</title><para>The 4/3 directional valve sends the oil to port A or port B of the manifold, and the actuator extends or retracts. When neither solenoid is energized, the valve goes to the center position, and the actuator stops.</para></levelledPara><levelledPara><title>Return and filtration</title><para>Oil from the actuator goes back through the directional valve to the return filter, and then into the reservoir. For the return filter, refer to <dmRef><dmRefIdent><dmCode modelIdentCode="VH15" systemDiffCode="A" systemCode="40" subSystemCode="0" subSubSystemCode="0" assyCode="00" disassyCode="00" disassyCodeVariant="A" infoCode="040" infoCodeVariant="A" itemLocationCode="A"/></dmRefIdent></dmRef>.</para></levelledPara><levelledPara><title>Monitoring</title><para>Three switches send signals to the control system of the machine:</para><para><randomList><listItem><para>The pressure switch signals when the system pressure is in the set range.</para></listItem><listItem><para>The level switch signals when the oil level in the reservoir is too low.</para></listItem><listItem><para>The temperature switch signals when the oil temperature is more than 60 °C.</para></listItem></randomList></para><para>The control system must stop the motor when the level switch or the temperature switch signals.</para></levelledPara></description>
+</content>
+</dmodule>

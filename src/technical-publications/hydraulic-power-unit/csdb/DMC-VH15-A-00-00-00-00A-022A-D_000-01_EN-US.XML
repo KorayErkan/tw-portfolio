@@ -40,10 +40,10 @@
 <commonInfo><para>Business rules for the Varnholt VH-15 hydraulic power unit, a fictional product used as a portfolio sample. This BREX narrows the S1000D Issue 7 default BREX: it defines the project SNS and restricts codes and values to those the project uses.</para></commonInfo>
 <snsRules>
 <snsDescr>
-<snsSystem><snsCode>00</snsCode><snsTitle>Hydraulic power unit (general)</snsTitle>
-<snsSubSystem><snsCode>0</snsCode><snsTitle>Hydraulic power unit (general)</snsTitle>
-<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Hydraulic power unit (general)</snsTitle>
-<snsAssy><snsCode>00</snsCode><snsTitle>Hydraulic power unit (general)</snsTitle></snsAssy>
+<snsSystem><snsCode>00</snsCode><snsTitle>Hydraulic power unit</snsTitle>
+<snsSubSystem><snsCode>0</snsCode><snsTitle>Hydraulic power unit</snsTitle>
+<snsSubSubSystem><snsCode>0</snsCode><snsTitle>Hydraulic power unit</snsTitle>
+<snsAssy><snsCode>00</snsCode><snsTitle>Hydraulic power unit</snsTitle></snsAssy>
 </snsSubSubSystem></snsSubSystem>
 </snsSystem>
 <snsSystem><snsCode>10</snsCode><snsTitle>Reservoir</snsTitle>
